@@ -85,17 +85,16 @@
     }
 
     .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, rgba(0, 210, 184, 0.16), rgba(14, 165, 233, 0.18));
+      border: 1px solid rgba(0, 210, 184, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      color: #04101f;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 14px rgba(0, 210, 184, 0.3);
+      box-shadow: 0 4px 16px rgba(0, 210, 184, 0.25);
+      overflow: hidden;
     }
 
     .brand-title {
@@ -415,7 +414,6 @@
       color: #ffffff;
     }
 
-    /* Tableau style fiche d'appel multi-dates */
     .sheet-scroll {
       overflow-x: auto;
       border: 1px solid var(--border);
@@ -707,11 +705,20 @@
   <header>
     <div class="header-inner">
       <!-- Clic = ouvre la fenêtre code Admin Général (Chico899), Double-clic = ferme -->
-      <div class="brand-box" id="brandAdminTrigger" title="Accès réservé">
-        <div class="brand-logo">EA</div>
+      <div class="brand-box" id="brandAdminTrigger" title="Accès Admin Général">
+        <div class="brand-logo" aria-label="Logo EduAppel">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="8" width="40" height="48" rx="8" fill="#071529" stroke="#00d2b8" stroke-width="3.5"/>
+            <line x1="15" y1="21" x2="35" y2="21" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="15" y1="31" x2="33" y2="31" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="15" y1="41" x2="29" y2="41" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="45" cy="43" r="13" fill="#00d2b8" stroke="#060f1d" stroke-width="3"/>
+            <path d="M39.5 43.5L43.5 47.5L51 39.5" stroke="#04101f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <div>
           <div class="brand-title">EduAppel</div>
-          <div class="brand-sub" id="syncStatusLabel">Équipe CBK • Registre Intelligent</div>
+          <div class="brand-sub" id="syncStatusLabel">Équipe CBK • Temps Réel Firebase</div>
         </div>
       </div>
 
@@ -727,10 +734,10 @@
   </header>
 
   <div class="container">
-    <!-- Menu Cours par cours (visible une fois connecté) -->
+    <!-- Menu Cours par cours (uniquement réservé à l'Admin Général) -->
     <div class="drawer-panel" id="coursesDrawer">
       <div class="card-title">
-        <span>📚 Tous les Cours & Cahiers d'Appel</span>
+        <span>📚 Tous les Cours & Cahiers d'Appel (Admin Général)</span>
         <button class="btn btn-secondary btn-sm" onclick="closeDrawers()">Fermer ✕</button>
       </div>
       <div id="coursesMenuGrid" class="courses-menu-grid"></div>
@@ -759,7 +766,7 @@
           <div class="hero-badge">🎓 Registre Académique • Équipe CBK</div>
           <h1 class="hero-title">EduAppel — Cahier d'Appel par Cours</h1>
           <p class="hero-desc">
-            Chaque cours dispose de son propre cahier d'appel, de ses informations, de ses dates modifiables et du suivi des présences en pourcentage (%) ainsi que des retardataires.
+            Chaque professeur accède uniquement à son propre cours et aux informations de son cours. L'Admin Général supervise l'ensemble des cours en temps réel.
           </p>
 
           <div class="credits-box">
@@ -805,19 +812,19 @@
         <div class="student-row">
           <div>
             <div class="student-name">1. Comment fonctionne le cahier d'appel de chaque cours ?</div>
-            <div class="student-meta">Après connexion, vous accédez à votre cours, ses informations, la liste des étudiants ajoutés au cahier, les dates modifiables, les cases PRÉSENT / ABSENT (+ colonnes supplémentaires) et les % de présence.</div>
+            <div class="student-meta">Après connexion, vous accédez uniquement à votre cours, à ses informations, aux étudiants de votre cours, aux dates modifiables, aux cases PRÉSENT / ABSENT et aux % de présence.</div>
           </div>
         </div>
         <div class="student-row">
           <div>
-            <div class="student-name">2. Comment ajouter des étudiants à un cahier d'appel ?</div>
-            <div class="student-meta">Enregistrez vos étudiants dans l'onglet <strong>Étudiants</strong> (un ou plusieurs), puis dans le cahier de votre cours, cliquez sur <strong>+ Ajouter au cahier</strong> pour cocher <strong>Tout sélectionner</strong> ou choisir un par un.</div>
+            <div class="student-name">2. Comment ajouter des étudiants à mon cours ?</div>
+            <div class="student-meta">Dans l'onglet <strong>Étudiants</strong> ou via <strong>+ Ajouter au cahier</strong>, vous gérez les étudiants de votre cours et les marquez PRÉSENT ou ABSENT en direct.</div>
           </div>
         </div>
         <div class="student-row">
           <div>
-            <div class="student-name">3. Puis-je modifier les dates et exporter mes données ?</div>
-            <div class="student-meta">Oui, chaque date d'appel sur le cahier est modifiable directement, vous pouvez ajouter d'autres colonnes/cases, exporter en CSV/PDF ou faire une sauvegarde JSON complète.</div>
+            <div class="student-name">3. Comment fonctionne la synchronisation en direct ?</div>
+            <div class="student-meta">Chaque validation d'appel ou modification de date est envoyée automatiquement sur Firebase Realtime Database et apparaît en temps réel sur l'écran de suivi.</div>
           </div>
         </div>
       </div>
@@ -837,8 +844,8 @@
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
         <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier du Cours</button>
-        <button class="nav-tab" data-tab="tab-cours">📚 Cours par Cours</button>
-        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
+        <button class="nav-tab hidden" id="navTabCours" data-tab="tab-cours">📚 Tous les Cours</button>
+        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants du Cours</button>
         <button class="nav-tab" data-tab="tab-evolution">📈 Évolution & %</button>
         <button class="nav-tab" data-tab="tab-sauvegarde">💾 Sauvegarde & Réglages</button>
         <button class="nav-tab hidden" id="navTabAdmin" data-tab="tab-admin">🛡️ Admin Général</button>
@@ -906,19 +913,19 @@
         </div>
       </div>
 
-      <!-- ONGLET 2 : COURS PAR COURS -->
+      <!-- ONGLET 2 : COURS PAR COURS (ADMIN GÉNÉRAL UNIQUEMENT) -->
       <div id="tab-cours" class="tab-panel hidden">
         <div class="card">
-          <div class="card-title"><span>📚 Liste de Tous les Cours & Informations</span></div>
+          <div class="card-title"><span>📚 Liste de Tous les Cours & Informations (Admin Général)</span></div>
           <div id="allCoursesCardsContainer"></div>
         </div>
       </div>
 
-      <!-- ONGLET 3 : ÉTUDIANTS (AJOUT INDIVIDUEL + GROUPÉ + RECADRAGE PHOTO) -->
+      <!-- ONGLET 3 : ÉTUDIANTS (ISOLÉS PAR COURS POUR LES PROFESSEURS) -->
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
-            <span id="studentFormTitle">➕ Ajouter un Étudiant</span>
+            <span id="studentFormTitle">➕ Ajouter un Étudiant à ce Cours</span>
             <button type="button" class="btn btn-secondary btn-sm hidden" id="btnCancelStudentEdit">Annuler</button>
           </div>
           <form id="studentForm">
@@ -969,7 +976,7 @@
 
         <div class="card">
           <div class="card-title">
-            <span>👨‍🎓 Tous les Étudiants Enregistrés</span>
+            <span id="rosterSectionTitle">👨‍🎓 Étudiants du Cours</span>
             <input type="text" id="rosterSearchInput" placeholder="Rechercher..." style="max-width:220px; padding:7px 11px; font-size:0.84rem;" />
           </div>
           <div id="rosterContainer"></div>
@@ -1016,25 +1023,6 @@
             <button type="button" class="btn btn-secondary" id="btnExportCsvSettings">📊 Exporter CSV</button>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-title"><span>☁️ Cloud Supabase (Optionnel)</span></div>
-          <div class="two-col">
-            <div class="form-group">
-              <label for="sbUrlInput">URL Supabase</label>
-              <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
-            </div>
-            <div class="form-group">
-              <label for="sbKeyInput">Clé API (anon)</label>
-              <input type="password" id="sbKeyInput" placeholder="eyJ..." />
-            </div>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-secondary" id="btnSaveCloud">💾 Sauver config</button>
-            <button type="button" class="btn btn-primary" id="btnPushCloud">☁️ Envoyer Cloud</button>
-            <button type="button" class="btn btn-secondary" id="btnPullCloud">⬇️ Récupérer Cloud</button>
-          </div>
-        </div>
       </div>
 
       <!-- ONGLET 6 : ADMIN GÉNÉRAL (CHICO899) -->
@@ -1056,7 +1044,7 @@
     </div>
   </div>
 
-  <!-- MODAL : AJOUTER DES ÉTUDIANTS DEPUIS LA LISTE ENREGISTRÉE AU CAHIER DU COURS -->
+  <!-- MODAL : AJOUTER DES ÉTUDIANTS DEPUIS LA LISTE DU COURS VERS LE CAHIER -->
   <div class="modal-backdrop" id="enrollModal">
     <div class="modal-box">
       <div class="card-title">
@@ -1124,7 +1112,7 @@
 
   <script>
     const ADMIN_GENERAL_CODE = "Chico899";
-    const STORAGE_KEY = "eduappel_cbk_courses_v1";
+    const STORAGE_KEY = "eduappel_cbk_courses_v2";
 
     const DEFAULT_COURSES = [
       { id: "c_win", course: "Système d'Exploitation Windows", teacher: "Ass Nembalemba", loginName: "Ass Nembalemba", password: "CBK-WIN-101" },
@@ -1167,11 +1155,8 @@
 
     function createEmptyCourseNotebook(dateStr) {
       return {
-        // dates : liste ordonnée des dates / colonnes de la fiche (modifiables directement)
         dates: [dateStr || todayISO()],
-        // enrolledIds : étudiants sélectionnés dans ce cahier
         enrolledIds: [],
-        // marks[colIndex][studentId] = { before: 'present'|'absent'|'', after: 'present'|'absent'|'' }
         marks: {}
       };
     }
@@ -1189,9 +1174,10 @@
           courseId: DEFAULT_COURSES[0].id
         },
         courses: DEFAULT_COURSES.map((c) => ({ ...c })),
+        // Chaque étudiant a un courseId pour qu'un professeur ne voie que les étudiants de son propre cours
         students: [],
         notebooks,
-        cloud: { url: "", key: "", recordId: "eduappel_cbk_global" }
+        updatedAt: Date.now()
       };
     }
 
@@ -1199,6 +1185,11 @@
     let activeCourseId = state.session.courseId || DEFAULT_COURSES[0].id;
     let activeSlot = "before"; // 'before' | 'after'
     let draftPhoto = makeDefaultAvatar();
+    let isApplyingRemoteSnapshot = false;
+
+    function isAdminGeneral() {
+      return Boolean(state.session.loggedIn && state.session.role === "admin");
+    }
 
     function loadState() {
       try {
@@ -1220,24 +1211,39 @@
           };
         });
 
+        const normalizedStudents = (Array.isArray(parsed.students) ? parsed.students : []).map((st) => ({
+          ...st,
+          courseId: st.courseId || mergedCourses[0].id
+        }));
+
         return {
           ...init,
           ...parsed,
           session: { ...init.session, ...(parsed.session || {}) },
           courses: mergedCourses,
-          students: Array.isArray(parsed.students) ? parsed.students : [],
+          students: normalizedStudents,
           notebooks: mergedNotebooks,
-          cloud: { ...init.cloud, ...(parsed.cloud || {}) }
+          updatedAt: parsed.updatedAt || Date.now()
         };
       } catch {
         return createInitialState();
       }
     }
 
-    function saveState() {
+    function saveState(pushToFirebase = true) {
       state.session.courseId = activeCourseId;
+      state.updatedAt = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Enregistré localement";
+      document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchronisé";
+
+      if (pushToFirebase && !isApplyingRemoteSnapshot && typeof window.envoyerDonneesEduAppel === "function") {
+        window.envoyerDonneesEduAppel("global_state", {
+          courses: state.courses,
+          students: state.students,
+          notebooks: state.notebooks,
+          activeCourseId: activeCourseId
+        }).catch(() => {});
+      }
     }
 
     function showToast(msg) {
@@ -1278,7 +1284,12 @@
       return state.notebooks[activeCourseId];
     }
 
-    // Remplir le sélecteur de connexion professeur
+    // Étudiants visibles pour la session courante (isolés par cours pour un professeur)
+    function getScopedStudents() {
+      if (isAdminGeneral()) return state.students;
+      return state.students.filter((s) => s.courseId === activeCourseId);
+    }
+
     function populateTeacherLoginSelect() {
       const sel = document.getElementById("teacherSelectInput");
       sel.innerHTML = state.courses
@@ -1296,16 +1307,16 @@
       if (pwd === courseObj.password) {
         activeCourseId = courseObj.id;
         state.session = { loggedIn: true, role: "teacher", courseId: courseObj.id };
-        saveState();
+        saveState(false);
         document.getElementById("teacherPasswordInput").value = "";
-        showToast(`Connecté : ${courseObj.teacher} (${courseObj.course})`);
+        showToast(`Connecté sur votre cours : ${courseObj.course}`);
         renderSessionView();
       } else {
         showToast("Mot de passe incorrect pour ce cours.");
       }
     });
 
-    // Accès Admin Général sur le nom de l'application (clic ouvre, double-clic ferme)
+    // Accès Admin Général sur le logo/titre (clic ouvre, double-clic ferme)
     const adminModal = document.getElementById("adminCodeModal");
     document.getElementById("brandAdminTrigger").addEventListener("click", () => {
       adminModal.classList.add("open");
@@ -1326,7 +1337,7 @@
       if (code === ADMIN_GENERAL_CODE) {
         state.session.loggedIn = true;
         state.session.role = "admin";
-        saveState();
+        saveState(false);
         document.getElementById("adminCodeInput").value = "";
         adminModal.classList.remove("open");
         showToast("Accès Admin Général activé.");
@@ -1340,13 +1351,14 @@
     document.getElementById("btnLockApp").addEventListener("click", () => {
       state.session.loggedIn = false;
       state.session.role = "teacher";
-      saveState();
+      saveState(false);
       closeDrawers();
       renderSessionView();
       showToast("Déconnecté.");
     });
 
     document.getElementById("btnToggleCoursesDrawer").addEventListener("click", () => {
+      if (!isAdminGeneral()) return;
       document.getElementById("infoDrawer").classList.remove("open");
       document.getElementById("coursesDrawer").classList.toggle("open");
       renderCoursesDrawer();
@@ -1358,6 +1370,9 @@
     });
 
     function openTab(tabId) {
+      if ((tabId === "tab-admin" || tabId === "tab-cours") && !isAdminGeneral()) {
+        tabId = "tab-cahier";
+      }
       document.querySelectorAll(".nav-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === tabId));
       document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("hidden", p.id !== tabId));
       if (tabId === "tab-cahier") renderCahierTab();
@@ -1373,32 +1388,51 @@
 
     function renderSessionView() {
       const logged = Boolean(state.session.loggedIn);
+      const admin = isAdminGeneral();
+
       document.getElementById("publicView").classList.toggle("hidden", logged);
       document.getElementById("appView").classList.toggle("hidden", !logged);
       document.getElementById("btnLockApp").classList.toggle("hidden", !logged);
-      document.getElementById("btnToggleCoursesDrawer").classList.toggle("hidden", !logged);
-      document.getElementById("navTabAdmin").classList.toggle("hidden", !(logged && state.session.role === "admin"));
+
+      // Seul l'Admin Général voit tous les cours et l'onglet Admin Général
+      document.getElementById("btnToggleCoursesDrawer").classList.toggle("hidden", !admin);
+      document.getElementById("navTabCours").classList.toggle("hidden", !admin);
+      document.getElementById("navTabAdmin").classList.toggle("hidden", !admin);
+
+      if (!admin) {
+        document.getElementById("coursesDrawer").classList.remove("open");
+        const activeTabEl = document.querySelector(".nav-tab.active");
+        if (activeTabEl && (activeTabEl.dataset.tab === "tab-admin" || activeTabEl.dataset.tab === "tab-cours")) {
+          openTab("tab-cahier");
+        }
+      }
 
       if (logged) {
         document.getElementById("stuPhotoPreview").src = draftPhoto;
-        document.getElementById("sbUrlInput").value = state.cloud.url || "";
-        document.getElementById("sbKeyInput").value = state.cloud.key || "";
-        renderCoursesDrawer();
+        document.getElementById("rosterSectionTitle").textContent = admin
+          ? "👨‍🎓 Tous les Étudiants (Admin Général)"
+          : `👨‍🎓 Étudiants de votre cours (${getCurrentCourse().course})`;
+        if (admin) renderCoursesDrawer();
         renderCahierTab();
       }
     }
 
     function selectCourse(courseId) {
+      if (!isAdminGeneral() && courseId !== state.session.courseId) {
+        showToast("Accès limité à votre propre cours.");
+        return;
+      }
       activeCourseId = courseId;
-      saveState();
+      saveState(false);
       closeDrawers();
-      renderCoursesDrawer();
+      if (isAdminGeneral()) renderCoursesDrawer();
       openTab("tab-cahier");
       const c = getCurrentCourse();
       showToast(`Cahier ouvert : ${c.course}`);
     }
 
     function renderCoursesDrawer() {
+      if (!isAdminGeneral()) return;
       const grid = document.getElementById("coursesMenuGrid");
       grid.innerHTML = state.courses.map((c) => {
         const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
@@ -1412,6 +1446,7 @@
     }
 
     function renderCoursesTab() {
+      if (!isAdminGeneral()) return;
       const container = document.getElementById("allCoursesCardsContainer");
       container.innerHTML = state.courses.map((c) => {
         const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
@@ -1428,7 +1463,6 @@
       }).join("");
     }
 
-    // Calculs présence (%) et retardataires sur un cours
     function getCell(nb, colIdx, studentId) {
       if (!nb.marks[colIdx]) nb.marks[colIdx] = {};
       if (!nb.marks[colIdx][studentId]) nb.marks[colIdx][studentId] = { before: "", after: "" };
@@ -1462,7 +1496,7 @@
       const nb = getCurrentNotebook();
       const cell = getCell(nb, colIdx, studentId);
       cell[activeSlot] = cell[activeSlot] === status ? "" : status;
-      saveState();
+      saveState(true);
       renderCahierTab();
     }
 
@@ -1470,7 +1504,7 @@
       if (!newDateVal) return;
       const nb = getCurrentNotebook();
       nb.dates[colIdx] = newDateVal;
-      saveState();
+      saveState(true);
       renderCahierTab();
       showToast("Date mise à jour sur le cahier.");
     }
@@ -1482,7 +1516,7 @@
       next.setDate(next.getDate() + 1);
       const isoNext = Number.isNaN(next.getTime()) ? todayISO() : next.toISOString().slice(0, 10);
       nb.dates.push(isoNext);
-      saveState();
+      saveState(true);
       renderCahierTab();
       showToast("Nouvelle colonne/date ajoutée au cahier.");
     });
@@ -1507,7 +1541,7 @@
       nb.enrolledIds.forEach((sid) => {
         getCell(nb, colIdx, sid)[activeSlot] = "present";
       });
-      saveState();
+      saveState(true);
       renderCahierTab();
       showToast("Tous marqués PRÉSENT sur la dernière date.");
     });
@@ -1518,7 +1552,7 @@
       nb.enrolledIds.forEach((sid) => {
         getCell(nb, colIdx, sid)[activeSlot] = "absent";
       });
-      saveState();
+      saveState(true);
       renderCahierTab();
       showToast("Tous marqués ABSENT sur la dernière date.");
     });
@@ -1531,10 +1565,11 @@
 
       document.getElementById("activeCourseTitle").textContent = course.course;
       document.getElementById("activeCourseInfo").textContent =
-        `Professeur : ${course.teacher} • Compte : ${course.loginName} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
+        `Professeur : ${course.teacher} • Cours isolé • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
 
+      const scopedPool = getScopedStudents();
       const enrolledStudents = nb.enrolledIds
-        .map((id) => state.students.find((s) => s.id === id))
+        .map((id) => scopedPool.find((s) => s.id === id))
         .filter(Boolean);
 
       const q = (document.getElementById("cahierSearchInput").value || "").trim().toLowerCase();
@@ -1542,7 +1577,6 @@
         !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q)
       );
 
-      // Stats du cours
       let lateCount = 0;
       let sumPct = 0;
       enrolledStudents.forEach((s) => {
@@ -1558,7 +1592,6 @@
       document.getElementById("statCoursePct").textContent = `${avgPct}%`;
       document.getElementById("statLateTotal").textContent = lateCount;
 
-      // En-tête tableau : PHOTO | NOM | N° MATRICULE | [Dates modifiables avec PRÉSENT / ABSENT] | %
       const thead = document.getElementById("appelSheetHead");
       let topRow = `<tr>
         <th rowspan="2" class="main-col">PHOTO</th>
@@ -1577,12 +1610,11 @@
       subRow += `</tr>`;
       thead.innerHTML = topRow + subRow;
 
-      // Corps du tableau
       const tbody = document.getElementById("appelSheetBody");
       if (visibleStudents.length === 0) {
         const colSpan = 4 + nb.dates.length * 2;
         tbody.innerHTML = `<tr><td colspan="${colSpan}" style="padding:18px; color:#94a3b8;">
-          Aucun étudiant dans ce cahier. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants.
+          Aucun étudiant dans le cahier de ce cours. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants.
         </td></tr>`;
       } else {
         tbody.innerHTML = visibleStudents.map((st) => {
@@ -1613,7 +1645,6 @@
         }).join("");
       }
 
-      // Liste des retardataires du cours
       const lateEl = document.getElementById("cahierLateList");
       const lateItems = [];
       enrolledStudents.forEach((st) => {
@@ -1641,7 +1672,7 @@
       }
     }
 
-    // Modal sélection des étudiants enregistrés vers le cahier d'appel
+    // Modal sélection des étudiants de ce cours vers le cahier
     const enrollModal = document.getElementById("enrollModal");
     document.getElementById("btnOpenEnrollModal").addEventListener("click", () => {
       renderEnrollChecklist();
@@ -1660,12 +1691,14 @@
     function renderEnrollChecklist() {
       const nb = getCurrentNotebook();
       const box = document.getElementById("enrollChecklistContainer");
-      if (state.students.length === 0) {
-        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré dans le répertoire. Ajoutez-en d'abord dans l'onglet <strong>Étudiants</strong>.</p>`;
+      const pool = getScopedStudents();
+
+      if (pool.length === 0) {
+        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours. Ajoutez-en d'abord dans l'onglet <strong>Étudiants du Cours</strong>.</p>`;
         return;
       }
 
-      box.innerHTML = state.students.map((st) => {
+      box.innerHTML = pool.map((st) => {
         const checked = nb.enrolledIds.includes(st.id) ? "checked" : "";
         return `
           <label class="student-row" style="cursor:pointer;">
@@ -1694,13 +1727,13 @@
       const nb = getCurrentNotebook();
       const selected = [...document.querySelectorAll(".enroll-checkbox:checked")].map((cb) => cb.value);
       nb.enrolledIds = selected;
-      saveState();
+      saveState(true);
       enrollModal.classList.remove("open");
       renderCahierTab();
       showToast(`${selected.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
-    // Gestion des étudiants (individuel + rapide groupé)
+    // Gestion des étudiants liés au cours actif
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const editId = document.getElementById("editingStudentId").value;
@@ -1716,17 +1749,23 @@
         }
         showToast("Étudiant modifié.");
       } else {
+        const newId = "stu_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6);
         state.students.push({
-          id: "stu_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+          id: newId,
+          courseId: activeCourseId,
           name,
           matricule,
           promotion,
           photo: draftPhoto
         });
-        showToast("Étudiant enregistré.");
+        const nb = getCurrentNotebook();
+        if (!nb.enrolledIds.includes(newId)) {
+          nb.enrolledIds.push(newId);
+        }
+        showToast("Étudiant enregistré dans votre cours.");
       }
 
-      saveState();
+      saveState(true);
       resetStudentForm();
       renderStudentsTab();
       renderCahierTab();
@@ -1734,6 +1773,7 @@
 
     document.getElementById("btnImportBulkStudents").addEventListener("click", () => {
       const rawLines = document.getElementById("bulkStudentsTextarea").value.split(/\r?\n/);
+      const nb = getCurrentNotebook();
       let added = 0;
       rawLines.forEach((line) => {
         const clean = line.trim();
@@ -1743,28 +1783,34 @@
         if (!name) return;
         const matricule = parts[1] || `MAT-${String(state.students.length + added + 1).padStart(3, "0")}`;
         const promotion = parts[2] || "Général";
+        const newId = "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 5);
         state.students.push({
-          id: "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 5),
+          id: newId,
+          courseId: activeCourseId,
           name,
           matricule,
           promotion,
           photo: makeDefaultAvatar()
         });
+        if (!nb.enrolledIds.includes(newId)) {
+          nb.enrolledIds.push(newId);
+        }
         added++;
       });
 
       if (added > 0) {
         document.getElementById("bulkStudentsTextarea").value = "";
-        saveState();
+        saveState(true);
         renderStudentsTab();
-        showToast(`${added} étudiant(s) ajouté(s).`);
+        renderCahierTab();
+        showToast(`${added} étudiant(s) ajouté(s) à votre cours.`);
       } else {
         showToast("Aucune ligne valide détectée.");
       }
     });
 
     function editStudent(id) {
-      const st = state.students.find((s) => s.id === id);
+      const st = getScopedStudents().find((s) => s.id === id);
       if (!st) return;
       document.getElementById("editingStudentId").value = st.id;
       document.getElementById("stuNameInput").value = st.name;
@@ -1782,7 +1828,7 @@
       Object.keys(state.notebooks).forEach((cid) => {
         state.notebooks[cid].enrolledIds = (state.notebooks[cid].enrolledIds || []).filter((x) => x !== id);
       });
-      saveState();
+      saveState(true);
       renderStudentsTab();
       renderCahierTab();
       showToast("Étudiant supprimé.");
@@ -1793,7 +1839,7 @@
       document.getElementById("studentForm").reset();
       draftPhoto = makeDefaultAvatar();
       document.getElementById("stuPhotoPreview").src = draftPhoto;
-      document.getElementById("studentFormTitle").textContent = "➕ Ajouter un Étudiant";
+      document.getElementById("studentFormTitle").textContent = "➕ Ajouter un Étudiant à ce Cours";
       document.getElementById("btnCancelStudentEdit").classList.add("hidden");
     }
 
@@ -1803,12 +1849,12 @@
     function renderStudentsTab() {
       const container = document.getElementById("rosterContainer");
       const q = (document.getElementById("rosterSearchInput").value || "").trim().toLowerCase();
-      const list = state.students.filter((s) =>
+      const list = getScopedStudents().filter((s) =>
         !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q) || (s.promotion || "").toLowerCase().includes(q)
       );
 
       if (list.length === 0) {
-        container.innerHTML = `<p class="student-meta">Aucun étudiant enregistré.</p>`;
+        container.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours.</p>`;
         return;
       }
 
@@ -1927,10 +1973,10 @@
       showToast("Photo recadrée et compressée.");
     });
 
-    // Évolution & % sur le cours
     function renderEvolutionTab() {
       const nb = getCurrentNotebook();
-      const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+      const pool = getScopedStudents();
+      const enrolled = nb.enrolledIds.map((id) => pool.find((s) => s.id === id)).filter(Boolean);
       const ranked = enrolled
         .map((st) => ({ st, pct: computeStudentCoursePct(nb, st.id) }))
         .sort((a, b) => b.pct - a.pct);
@@ -1973,14 +2019,13 @@
       }).join("");
     }
 
-    // Mot de passe professeur, JSON, CSV et Cloud
     document.getElementById("changeTeacherPwdForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const nextPwd = document.getElementById("newTeacherPwdInput").value.trim();
       if (!nextPwd) return;
       const c = getCurrentCourse();
       c.password = nextPwd;
-      saveState();
+      saveState(true);
       document.getElementById("newTeacherPwdInput").value = "";
       showToast("Mot de passe mis à jour.");
     });
@@ -1988,7 +2033,8 @@
     function exportCourseCsv() {
       const course = getCurrentCourse();
       const nb = getCurrentNotebook();
-      const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+      const pool = getScopedStudents();
+      const enrolled = nb.enrolledIds.map((id) => pool.find((s) => s.id === id)).filter(Boolean);
       const header = ["Cours", "Professeur", "N° Matricule", "Nom"];
       nb.dates.forEach((d) => {
         header.push(`${d} (Avant)`, `${d} (Après)`);
@@ -2021,19 +2067,20 @@
     document.getElementById("btnExportCsvSettings").addEventListener("click", exportCourseCsv);
 
     document.getElementById("btnExportJson").addEventListener("click", () => {
+      const isAdmin = isAdminGeneral();
       const payload = {
         app: "EduAppel",
         team: "Équipe CBK",
         exportedAt: new Date().toISOString(),
-        courses: state.courses,
-        students: state.students,
-        notebooks: state.notebooks
+        courses: isAdmin ? state.courses : [getCurrentCourse()],
+        students: getScopedStudents(),
+        notebooks: isAdmin ? state.notebooks : { [activeCourseId]: getCurrentNotebook() }
       };
       const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `EduAppel_Complet_${todayISO()}.json`;
+      a.download = `EduAppel_${isAdmin ? "Complet" : getCurrentCourse().id}_${todayISO()}.json`;
       a.click();
       URL.revokeObjectURL(url);
       showToast("Sauvegarde JSON exportée.");
@@ -2047,10 +2094,21 @@
         try {
           const d = JSON.parse(ev.target.result);
           if (!Array.isArray(d.students) || typeof d.notebooks !== "object") throw new Error("Invalide");
-          state.students = d.students;
-          state.notebooks = d.notebooks;
-          if (Array.isArray(d.courses) && d.courses.length) state.courses = d.courses;
-          saveState();
+          if (isAdminGeneral()) {
+            state.students = d.students.map((s) => ({ ...s, courseId: s.courseId || activeCourseId }));
+            state.notebooks = { ...state.notebooks, ...d.notebooks };
+            if (Array.isArray(d.courses) && d.courses.length) state.courses = d.courses;
+          } else {
+            const scopedImported = d.students
+              .filter((s) => !s.courseId || s.courseId === activeCourseId)
+              .map((s) => ({ ...s, courseId: activeCourseId }));
+            const others = state.students.filter((s) => s.courseId !== activeCourseId);
+            state.students = [...others, ...scopedImported];
+            if (d.notebooks[activeCourseId]) {
+              state.notebooks[activeCourseId] = d.notebooks[activeCourseId];
+            }
+          }
+          saveState(true);
           renderSessionView();
           showToast("Sauvegarde JSON restaurée.");
         } catch {
@@ -2061,91 +2119,19 @@
       e.target.value = "";
     });
 
-    document.getElementById("btnSaveCloud").addEventListener("click", () => {
-      state.cloud.url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
-      state.cloud.key = document.getElementById("sbKeyInput").value.trim();
-      saveState();
-      showToast("Configuration Cloud enregistrée.");
-    });
-
-    async function pushCloudNow() {
-      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "") || state.cloud.url;
-      const key = document.getElementById("sbKeyInput").value.trim() || state.cloud.key;
-      if (!url || !key) {
-        showToast("Renseignez URL et clé API Supabase.");
-        return;
-      }
-      state.cloud.url = url;
-      state.cloud.key = key;
-      saveState();
-      try {
-        const res = await fetch(`${url}/rest/v1/eduappel_sync`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": key,
-            "Authorization": `Bearer ${key}`,
-            "Prefer": "resolution=merge-duplicates"
-          },
-          body: JSON.stringify({
-            id: state.cloud.recordId,
-            payload: {
-              courses: state.courses,
-              students: state.students,
-              notebooks: state.notebooks,
-              updatedAt: new Date().toISOString()
-            }
-          })
-        });
-        if (!res.ok) throw new Error("Erreur");
-        showToast("Synchronisation Cloud réussie.");
-      } catch {
-        showToast("Échec de synchro Cloud.");
-      }
-    }
-
-    document.getElementById("btnPushCloud").addEventListener("click", pushCloudNow);
     document.getElementById("btnAdminSyncNow").addEventListener("click", () => {
-      saveState();
+      saveState(true);
       renderAdminTab();
       showToast("Données synchronisées en temps réel.");
     });
 
-    document.getElementById("btnPullCloud").addEventListener("click", async () => {
-      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "") || state.cloud.url;
-      const key = document.getElementById("sbKeyInput").value.trim() || state.cloud.key;
-      if (!url || !key) {
-        showToast("Renseignez URL et clé API Supabase.");
-        return;
-      }
-      try {
-        const res = await fetch(`${url}/rest/v1/eduappel_sync?id=eq.${encodeURIComponent(state.cloud.recordId)}&select=payload`, {
-          headers: { "apikey": key, "Authorization": `Bearer ${key}` }
-        });
-        if (!res.ok) throw new Error("Erreur");
-        const rows = await res.json();
-        if (rows?.[0]?.payload) {
-          const p = rows[0].payload;
-          if (Array.isArray(p.courses)) state.courses = p.courses;
-          if (Array.isArray(p.students)) state.students = p.students;
-          if (p.notebooks) state.notebooks = p.notebooks;
-          saveState();
-          renderSessionView();
-          showToast("Données récupérées depuis le Cloud.");
-        } else {
-          showToast("Aucune donnée distante.");
-        }
-      } catch {
-        showToast("Erreur de récupération Cloud.");
-      }
-    });
-
-    // Vue Admin Général : tous les cours, points de chaque étudiant par cours et mots de passe
     function renderAdminTab() {
+      if (!isAdminGeneral()) return;
       const container = document.getElementById("adminGlobalContainer");
       container.innerHTML = state.courses.map((c) => {
         const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
-        const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+        const courseStudents = state.students.filter((s) => s.courseId === c.id);
+        const enrolled = nb.enrolledIds.map((id) => courseStudents.find((s) => s.id === id)).filter(Boolean);
 
         const rowsHtml = enrolled.length === 0
           ? `<p class="student-meta">Aucun étudiant inscrit dans ce cahier.</p>`
@@ -2184,9 +2170,64 @@
       }).join("");
     }
 
-    // Démarrage
+    // Démarrage initial
     populateTeacherLoginSelect();
     renderSessionView();
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const app = initializeApp({
+      databaseURL: "https://eduappel-live-default-rtdb.firebaseio.com/"
+    });
+    const db = getDatabase(app);
+
+    window.envoyerDonneesEduAppel = function(classeId, donnees) {
+      return set(ref(db, `eduappel/${classeId}`), {
+        ...donnees,
+        updatedAt: Date.now()
+      });
+    };
+
+    window.ecouterEduAppelEnDirect = function(callback) {
+      return onValue(ref(db, "eduappel"), (snapshot) => {
+        callback(snapshot.val() || {});
+      });
+    };
+
+    // Connexion automatique en temps réel entre Firebase et l'interface EduAppel
+    window.ecouterEduAppelEnDirect((remoteData) => {
+      const globalPayload = remoteData?.global_state;
+      if (!globalPayload || typeof globalPayload !== "object") return;
+
+      const remoteUpdatedAt = Number(globalPayload.updatedAt || 0);
+      const localUpdatedAt = Number(state.updatedAt || 0);
+
+      if (remoteUpdatedAt > localUpdatedAt) {
+        isApplyingRemoteSnapshot = true;
+        if (Array.isArray(globalPayload.courses) && globalPayload.courses.length) {
+          state.courses = globalPayload.courses;
+        }
+        if (Array.isArray(globalPayload.students)) {
+          state.students = globalPayload.students;
+        }
+        if (globalPayload.notebooks && typeof globalPayload.notebooks === "object") {
+          state.notebooks = globalPayload.notebooks;
+        }
+        state.updatedAt = remoteUpdatedAt;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+        if (state.session.loggedIn) {
+          renderSessionView();
+          const activeTab = document.querySelector(".nav-tab.active")?.dataset?.tab || "tab-cahier";
+          openTab(activeTab);
+        }
+        document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Live Firebase actif";
+        isApplyingRemoteSnapshot = false;
+      }
+    });
   </script>
 </body>
 </html>
