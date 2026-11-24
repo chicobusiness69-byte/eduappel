@@ -150,6 +150,11 @@
       transform: scale(0.97);
     }
 
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), #059669);
       color: #041318;
@@ -170,6 +175,12 @@
       background: rgba(239, 68, 68, 0.16);
       color: #fca5a5;
       border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .btn-danger-solid {
+      background: #dc2626;
+      color: #ffffff;
+      border: 1px solid #ef4444;
     }
 
     .btn-warning {
@@ -845,13 +856,17 @@
       display: flex;
     }
 
+    #confirmDeleteModal {
+      z-index: 140;
+    }
+
     .modal-box {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 18px;
       width: 100%;
-      max-width: 550px;
+      max-width: 560px;
       max-height: 88vh;
       overflow-y: auto;
       box-shadow: var(--shadow);
@@ -963,6 +978,7 @@
       </div>
 
       <div class="header-actions">
+        <button class="btn btn-primary btn-sm hidden" id="btnHeaderSyncNow" onclick="manualSyncNow()">🔄 Synchroniser</button>
         <button class="btn btn-primary btn-sm hidden" id="btnInstallPwaHeader">📲 Installer l'app</button>
         <button class="btn btn-secondary btn-sm hidden" id="btnHeaderNotif" onclick="openTabFromMenu('tab-notifications')">
           🔔 <span class="notif-pill" id="headerNotifBadge">0</span>
@@ -1106,7 +1122,7 @@
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
         <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier</button>
-        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
+        <button class="nav-tab" id="navTabEtudiants" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
         <button class="nav-tab" data-tab="tab-annonces">📢 Annonces</button>
         <button class="nav-tab" data-tab="tab-messages">✉️ Messages</button>
         <button class="nav-tab" data-tab="tab-notifications">🔔 Notifications <span class="notif-pill" id="tabNotifBadge">0</span></button>
@@ -1144,6 +1160,7 @@
             </div>
             <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
               <button class="btn btn-primary btn-sm" id="btnOpenEnrollModal">+ Ajouter au cahier</button>
+              <button class="btn btn-primary btn-sm" id="btnCahierSyncNow" onclick="manualSyncNow()">🔄 Synchroniser</button>
               <button class="btn btn-secondary btn-sm" id="btnAddDateCol">+ Ajouter date</button>
               <button class="btn btn-whatsapp btn-sm" id="btnCopyWhatsappSummary">📲 Résumé WhatsApp</button>
               <button class="btn btn-secondary btn-sm" id="btnExportCourseCsv">📊 CSV</button>
@@ -1181,7 +1198,7 @@
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
-            <span id="studentFormTitle">➕ Ajouter un Étudiant à ce Cours</span>
+            <span id="studentFormTitle">➕ Ajouter un Étudiant à la Liste Globale</span>
             <button type="button" class="btn btn-secondary btn-sm hidden" id="btnCancelStudentEdit">Annuler</button>
           </div>
           <form id="studentForm">
@@ -1189,11 +1206,11 @@
             <div class="two-col">
               <div class="form-group">
                 <label for="stuNameInput">Nom & Post-nom / Prénom *</label>
-                <input type="text" id="stuNameInput" placeholder="Ex: Kevin NGA" required />
+                <input type="text" id="stuNameInput" placeholder="Ex: ABATA LEKUMI ROGER" required />
               </div>
               <div class="form-group">
                 <label for="stuMatriculeInput">N° Matricule *</label>
-                <input type="text" id="stuMatriculeInput" placeholder="Ex: ISIPA/2025/001" required />
+                <input type="text" id="stuMatriculeInput" placeholder="Ex: MAT-001" required />
               </div>
             </div>
             <div class="form-group">
@@ -1220,20 +1237,24 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span>⚡ Ajout Rapide de Plusieurs Étudiants</span></div>
+          <div class="card-title"><span>⚡ Ajout Rapide Illimité de Plusieurs Étudiants</span></div>
           <p class="student-meta" style="margin-bottom:8px;">
-            Un étudiant par ligne au format : <code>Nom complet ; N° Matricule ; Promotion</code>
+            Nombre illimité d'étudiants. Un étudiant par ligne au format : <code>Nom complet ; N° Matricule ; Promotion</code> (ou <code>001 / NOM / MAT-001</code>)
           </p>
-          <textarea id="bulkStudentsTextarea" placeholder="Marie KABAMBA ; ISIPA/2025/002 ; L1 RTM&#10;Jean-Luc MPUTU ; ISIPA/2025/003 ; L1 RTM"></textarea>
-          <div style="margin-top:10px;">
+          <textarea id="bulkStudentsTextarea" placeholder="KABAMBA MARIE ; MAT-400 ; L1 RTM&#10;MPUTU JEAN-LUC ; MAT-401 ; L1 RTM"></textarea>
+          <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
             <button type="button" class="btn btn-secondary" id="btnImportBulkStudents">📥 Ajouter tous ces étudiants</button>
+            <button type="button" class="btn btn-primary" onclick="manualSyncNow()">🔄 Synchroniser maintenant</button>
           </div>
         </div>
 
         <div class="card">
           <div class="card-title">
-            <span id="rosterSectionTitle">👨‍🎓 Étudiants du Cours</span>
-            <input type="text" id="rosterSearchInput" placeholder="Rechercher..." style="max-width:220px; padding:7px 11px; font-size:0.84rem;" />
+            <span id="rosterSectionTitle">👨‍🎓 Liste Globale des Étudiants</span>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <select id="rosterPromoFilter" style="max-width:190px; padding:7px 11px; font-size:0.84rem;"></select>
+              <input type="text" id="rosterSearchInput" placeholder="Rechercher nom ou matricule..." style="max-width:230px; padding:7px 11px; font-size:0.84rem;" />
+            </div>
           </div>
           <div id="rosterContainer"></div>
         </div>
@@ -1367,6 +1388,7 @@
         <div class="card">
           <div class="card-title"><span>💾 Sauvegarde JSON, Export CSV & Application</span></div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary" onclick="manualSyncNow()">🔄 Synchroniser maintenant</button>
             <button type="button" class="btn btn-primary" id="btnExportJson">⬇️ Exporter sauvegarde (.json)</button>
             <label class="btn btn-secondary" style="cursor:pointer; margin:0;">
               ⬆️ Importer sauvegarde (.json)
@@ -1520,19 +1542,24 @@
     </div>
   </div>
 
-  <!-- MODAL : AJOUTER DES ÉTUDIANTS DEPUIS LA LISTE DU COURS VERS LE CAHIER -->
+  <!-- MODAL : AJOUTER DES ÉTUDIANTS DEPUIS LA LISTE GLOBALE VERS LE CAHIER -->
   <div class="modal-backdrop" id="enrollModal">
     <div class="modal-box">
       <div class="card-title">
         <span>📋 Ajouter des étudiants au cahier du cours</span>
         <button type="button" class="btn btn-secondary btn-sm" id="btnCloseEnrollModal">✕</button>
       </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+      <div class="two-col" style="margin-bottom:10px;">
+        <input type="text" id="enrollSearchInput" placeholder="🔎 Rechercher nom ou matricule..." />
+        <select id="enrollPromoFilter"></select>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;">
         <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAllEnroll">☑️ Tout sélectionner</button>
         <button type="button" class="btn btn-secondary btn-sm" id="btnUnselectAllEnroll">⬜ Tout décocher</button>
-        <button type="button" class="btn btn-primary btn-sm" onclick="closeEnrollAndGoStudents()">+ Nouvel étudiant</button>
+        <span class="badge badge-pct" id="enrollSelectedCountBadge">0 sélectionné(s)</span>
+        <button type="button" class="btn btn-primary btn-sm hidden" id="btnEnrollGoStudents" onclick="closeEnrollAndGoStudents()">+ Nouvel étudiant</button>
       </div>
-      <div id="enrollChecklistContainer"></div>
+      <div id="enrollChecklistContainer" style="max-height:360px; overflow-y:auto;"></div>
       <div style="margin-top:14px;">
         <button type="button" class="btn btn-primary" id="btnConfirmEnroll" style="width:100%;">
           ✅ Valider dans le cahier d'appel
@@ -1558,6 +1585,24 @@
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;">Valider</button>
       </form>
+    </div>
+  </div>
+
+  <!-- MODAL : BOÎTE DE DIALOGUE CONFIRMATION SUPPRESSION -->
+  <div class="modal-backdrop" id="confirmDeleteModal">
+    <div class="modal-box" style="max-width:430px;">
+      <div class="card-title">
+        <span>⚠️ Confirmer la suppression</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseConfirmDelete">✕</button>
+      </div>
+      <p style="font-size:0.95rem; font-weight:700; color:#f8fafc; margin-bottom:8px;" id="confirmDeleteQuestion">
+        Voulez-vous vraiment supprimer cet élément ?
+      </p>
+      <p class="student-meta" id="confirmDeleteDetail" style="margin-bottom:16px;"></p>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button type="button" class="btn btn-secondary" id="btnCancelConfirmDelete">Annuler</button>
+        <button type="button" class="btn btn-danger-solid" id="btnAcceptConfirmDelete">🗑️ Oui, supprimer</button>
+      </div>
     </div>
   </div>
 
@@ -1590,6 +1635,7 @@
     const ADMIN_GENERAL_CODE = "Chico899";
     const ADMIN_ACCOUNT_ID = "admin_general";
     const STORAGE_KEY = "eduappel_cbk_courses_v2";
+    const SAFETY_BACKUP_KEY = "eduappel_cbk_safety_backup_v1";
 
     const DEFAULT_PROMOTIONS = ["L1 RTM", "L2 RTM", "L1 Informatique de Gestion", "Général"];
 
@@ -1606,6 +1652,373 @@
       { id: "c_rch_pal", course: "Introduction à la recherche", teacher: "Ct Paluku", loginName: "Ct Paluku", password: "CBK-RCH-110" },
       { id: "c_inf_kat", course: "Informatique Générale", teacher: "Ct Katsongo", loginName: "Ct Katsongo", password: "CBK-INF-111" }
     ];
+
+    const INITIAL_L1_RTM_STUDENTS = [
+      "001 / ABATA LEKUMI ROGER / MAT-001",
+      "002 / ACACIA SAKILA MATONDO / MAT-002",
+      "003 / AFONDOKO NGOY MERDY / MAT-003",
+      "004 / AHUMBIHO ZOAKPAMBINA CARLOS / MAT-004",
+      "005 / ALENGBIA NKOY BENAJA / MAT-005",
+      "006 / ALUBATI ZUYA CELESTIN / MAT-006",
+      "007 / AMBALU ALEMBI REBECCA / MAT-007",
+      "008 / AMISI SELEMANI SELEMANI / MAT-008",
+      "009 / AMURI SIALA NATHAN / MAT-009",
+      "010 / ANGODO MAHOMBA FELLY / MAT-010",
+      "011 / ANKAY MUSAFIRI SAGESSE / MAT-011",
+      "012 / APANGAPANGA EJIWA JEAN DE DIEU / MAT-012",
+      "013 / APUA MANGONDO SOPHIE / MAT-013",
+      "014 / ARUNA MWANAMPUNGA PATRICK / MAT-014",
+      "015 / ASSANI MULOBA JOSUE / MAT-015",
+      "016 / ATENDE OSAKANA / MAT-016",
+      "017 / ATOU KIBUILA AGREABLE / MAT-017",
+      "018 / ATUNGULU TSHUTSHU FORTUNATISE / MAT-018",
+      "019 / BAKAMBANA NANGA LAMBERT / MAT-019",
+      "020 / BAKILA KOLE JOEL / MAT-020",
+      "021 / BAKULA EKOFO GEORGES / MAT-021",
+      "022 / BALEJA NGOY JOYCE / MAT-022",
+      "023 / BALELI NDOMBE HENOCK / MAT-023",
+      "024 / BANONGA YAMBE GLOIRE / MAT-024",
+      "025 / BANVURA BINGA PAMPHILLE / MAT-025",
+      "026 / BANZA MULANGA THIRTSA / MAT-026",
+      "027 / BASOLULA NGANDU EMMANUEL / MAT-027",
+      "028 / BATUZOLELE MABANZA DJODJO / MAT-028",
+      "029 / BAVUEZA MVIBUDULU MANASSE / MAT-029",
+      "030 / BIKUNDU MBAKATA FAUSTIN / MAT-030",
+      "031 / BINGANA BITABA MBUTA / MAT-031",
+      "032 / BITUMBA NDEBA DANIEL / MAT-032",
+      "033 / BOBO MAMBU DOXA / MAT-033",
+      "034 / BOFOSA BOKOKOMA RUDY / MAT-034",
+      "035 / BOKELE IMENGA PATRICK / MAT-035",
+      "036 / BOKUNGU BOSENGE MERDI / MAT-036",
+      "037 / BOLANKISAKO VERITE / MAT-037",
+      "038 / BOMPENDA LOBIOKO NARCISSE / MAT-038",
+      "039 / BONDIEMBO BOMPAMBO CALAB / MAT-039",
+      "040 / BONDO TSHAMALA X / MAT-040",
+      "041 / BOOTO BONKOLI JOHN / MAT-041",
+      "042 / BOSENGE TSHIYOYO PROSPER / MAT-042",
+      "043 / BOSOMI MAGAGA GLODY / MAT-043",
+      "044 / BOSSOKU EKAKASENDE DAVE / MAT-044",
+      "045 / BOSUKA BOLEKO PHOENIX / MAT-045",
+      "046 / BOTAKA KALHO ALLEGRESSE / MAT-046",
+      "047 / BOYIBANDA DOCTEUR EMMANUEL / MAT-047",
+      "048 / BUA LEUNE GRADY / MAT-048",
+      "049 / BUATAKALA NZOMOSI DANIEL / MAT-049",
+      "050 / BULANTURU BOLBANDA KING / MAT-050",
+      "051 / BULUEMBO MALEMBI BILL-HAPPINESS / MAT-051",
+      "052 / BWANGO MOLEMO EMERAUDE / MAT-052",
+      "053 / CELINE KIVULIVWA CELINE / MAT-053",
+      "054 / CHIRAGA NABINTU JENNIFER / MAT-054",
+      "055 / CIBANGU MAKANDA DIRCHEL / MAT-055",
+      "056 / CILUMBU KALENGA CHRISTIAN / MAT-056",
+      "057 / CIMANGA LUFULUABU JEHU / MAT-057",
+      "058 / CIPINDA MWAMBA NARCISSE / MAT-058",
+      "059 / DENDA BUWENGE DANIEL / MAT-059",
+      "060 / DIAWAKU LUNTADILA EMMANUEL / MAT-060",
+      "061 / DIBA KAZADI BIENHEUREUSE / MAT-061",
+      "062 / DIMBI DIMBI CHERUBIN / MAT-062",
+      "063 / DIMBUENE LOMBO JAKIM / MAT-063",
+      "064 / EGUNGE MOTINGEA MOISE / MAT-064",
+      "065 / EKAKANGA TAPALE ALAN / MAT-065",
+      "066 / EKBONDU EMALELE DANIEL / MAT-066",
+      "067 / ELENGA EONGA SEPHORA / MAT-067",
+      "068 / EPIEWELE NZALI GEDEON / MAT-068",
+      "069 / EWUKU BILA CHADRACK / MAT-069",
+      "070 / FETHE KIMBANGU GRACE / MAT-070",
+      "071 / FUNDI SALEH ALEXIS / MAT-071",
+      "072 / FWAMBATA LUPINI MERDI / MAT-072",
+      "073 / GAMALONGA MOLOLIA SAMUEL / MAT-073",
+      "074 / GBALINZEME TOMEKA FABRICE / MAT-074",
+      "075 / GOGYA TARA JOYCE / MAT-075",
+      "076 / GOZA CARROLO WINNER / MAT-076",
+      "077 / HANDJILA KABALA DONDI / MAT-077",
+      "078 / HUNDA TARA EMMANUEL / MAT-078",
+      "079 / IDAKO SINGA CARLOS / MAT-079",
+      "080 / IFISI YOME EXAUCE / MAT-080",
+      "081 / IKWETINA LUYALU BENJAMIN / MAT-081",
+      "082 / ILONKIENE IKPISHON EVARISTE / MAT-082",
+      "083 / ILUNGA ILUNGA SAMUEL / MAT-083",
+      "084 / ILUNGA KANGU ALFRED / MAT-084",
+      "085 / IMBAKANA NGALIMA OLIVER / MAT-085",
+      "086 / INIKI NGAVANDE EPHRAIM / MAT-086",
+      "087 / ITAKA MBO MBO / MAT-087",
+      "088 / IYUMA ISEKOFANDE PRINCE / MAT-088",
+      "089 / IZOLA NDUNZA ANUARITE / MAT-089",
+      "090 / KABALA KAMESA ALBERTO / MAT-090",
+      "091 / KABAMBI DJANGALA ALTESSE / MAT-091",
+      "092 / KABEDI MUANZA HELENE / MAT-092",
+      "093 / KABONGO KALOMBO BIEN / MAT-093",
+      "094 / KABONGO MAKOSA DANNY / MAT-094",
+      "095 / KABONGO NZEMBELE SAMUEL / MAT-095",
+      "096 / KABULO ANACLET DANNY / MAT-096",
+      "097 / KADIMA LUKUSA EXAUCE / MAT-097",
+      "098 / KAFUA HIONDA BATISTA / MAT-098",
+      "099 / KAGUFA KULIMUSHI GLET / MAT-099",
+      "100 / KAKIESE KISWAHILA LIONEL / MAT-100",
+      "101 / KAKUDJI MOMA ABEL PAUL / MAT-101",
+      "102 / KALAMBAY KASENDA LEON / MAT-102",
+      "103 / KALAMBAYI KINDUNDU JEREMY / MAT-103",
+      "104 / KALENGA MWADIANVITA JOYCE / MAT-104",
+      "105 / KALOMBO KALALA HERBI / MAT-105",
+      "106 / KALOMBOLA USENI ADGEE / MAT-106",
+      "107 / KALONZU MBUYAMBA BENEDICTE / MAT-107",
+      "108 / KALULA PACHECO JUDITH / MAT-108",
+      "109 / KAMENI KIESSE MANASSE / MAT-109",
+      "110 / KAMULETA OLOLO / MAT-110",
+      "111 / KAMWANGA KAKEZA ELIE / MAT-111",
+      "112 / KANKONDE MUAYUMA EMMANUELLA AS / MAT-112",
+      "113 / KANYINDA KABALA JULES / MAT-113",
+      "114 / KASEREKA NDALIKO SALOMON / MAT-114",
+      "115 / KASHALA KALOMBO MANASSE / MAT-115",
+      "116 / KASONGA KASONGA WARREN / MAT-116",
+      "117 / KASONGO NGOYI JOSUE / MAT-117",
+      "118 / KASONGO NSAHUA NASTANY / MAT-118",
+      "119 / KASOTA LUZOLO MANASSE / MAT-119",
+      "120 / KASSA MPUTU ANDREA / MAT-120",
+      "121 / KAULU MUBANJI PETER / MAT-121",
+      "122 / KAYAKA MUYUKU EPHRAIM / MAT-122",
+      "123 / KAYUMBI KAYEMBE THOMAS / MAT-123",
+      "124 / KAZADI MUKEBA EMMANUEL / MAT-124",
+      "125 / KEDA KOLONZI OTIS / MAT-125",
+      "126 / KENA TSHIBUALUA DANIELLE / MAT-126",
+      "127 / KENAYA MBUYI BROGLY / MAT-127",
+      "128 / KIAME LUTETE DAVID / MAT-128",
+      "129 / KIBAKA MOKE X / MAT-129",
+      "130 / KIBOBO FANAO ALVINE / MAT-130",
+      "131 / KIBUTI MUKWESASA CLOVIS / MAT-131",
+      "132 / KIDUGAFILA LUSASI STEVEN / MAT-132",
+      "133 / KILINDA BOMUNE PRINCILIA / MAT-133",
+      "134 / KIMBAMBA MATADI JURE / MAT-134",
+      "135 / KIMBULU KANDOLO JOYCE / MAT-135",
+      "136 / KINGOLO LUZOLO GOLDY / MAT-136",
+      "137 / KIPEYA NGAKADI MICHAEL / MAT-137",
+      "138 / KITOKO CHAKAY DANIEL / MAT-138",
+      "139 / KIZABI MULILO JUNIOR / MAT-139",
+      "140 / KIZIGU NDAMBU GRADI / MAT-140",
+      "141 / KOKO GIOVANI BENIE / MAT-141",
+      "142 / KOLOWA SELIPA ANGELA / MAT-142",
+      "143 / KONZI KUSU RUTH / MAT-143",
+      "144 / KUNIEMA NGANGU BIENVENU / MAT-144",
+      "145 / KUPA NTUMBA ANGE / MAT-145",
+      "146 / KUTA DIMAMBU PENIEL / MAT-146",
+      "147 / KUTUKIDI MIPUKUSU PERCY / MAT-147",
+      "148 / LEKULA MUTIERE VERDI / MAT-148",
+      "149 / LEMBA DIKANI MIGLAIR / MAT-149",
+      "150 / LEMBA NGANDU PERSEDI / MAT-150",
+      "151 / LEMBONGO ZOZAKE DAVID / MAT-151",
+      "152 / LIKINDA LIKINDA HENRI / MAT-152",
+      "153 / LINONGA LOKANDO HENRY / MAT-153",
+      "154 / LISASI KUBELUA HENOCK / MAT-154",
+      "155 / LITONGO MATENA CAMILLE / MAT-155",
+      "156 / LOKANGO NGOMA ISRAEL / MAT-156",
+      "157 / LOKISO LOBEYE LUCIEN / MAT-157",
+      "158 / LONDILA BOWUWANDA CHRIS / MAT-158",
+      "159 / LONGBO ALINE MOISE / MAT-159",
+      "160 / LONYAMA NDJONDO MARCONI / MAT-160",
+      "161 / LUKASI NESTOR CLIVERT / MAT-161",
+      "162 / LUKOKI MBALA JUCLE / MAT-162",
+      "163 / LUMOO BIREO MOISE / MAT-163",
+      "164 / LUSAMBULU MATONDO SAGESSE / MAT-164",
+      "165 / LUSATA NGWAYI CHRISTINE / MAT-165",
+      "166 / LUTONADIO YOLANDE DIVINE / MAT-166",
+      "167 / LUZAKA MULUWAY GORETTE / MAT-167",
+      "168 / MABENZE MONGBANGA OBED / MAT-168",
+      "169 / MABU LESEKUTA MERVEDI / MAT-169",
+      "170 / MADOKI TAMBWE ISRAEL / MAT-170",
+      "171 / MAGALA AHUMBU HENRY / MAT-171",
+      "172 / MAHUNGU DIEVI HORCE / MAT-172",
+      "173 / MAKANDA KIPULU SIMPLICE / MAT-173",
+      "174 / MAKANDELO LIWANGA BOSWORTH / MAT-174",
+      "175 / MAKEDIKA BAZINGA BLESSON / MAT-175",
+      "176 / MAKIONA MBELOLO JEANCY / MAT-176",
+      "177 / MALALA MWAMBA JONATHAN / MAT-177",
+      "178 / MALAMBA MABESI JOHNSON / MAT-178",
+      "179 / MALUNGWA KIBUNDA EMERAUDE / MAT-179",
+      "180 / MAMBA LUFU / MAT-180",
+      "181 / MANINGI NGELE GRACE / MAT-181",
+      "182 / MANZANZA NZUSI KERENE / MAT-182",
+      "183 / MAPHANA NYIMI CLEVER / MAT-183",
+      "184 / MASENGU GHISLAINE GHISLAINE / MAT-184",
+      "185 / MASISA WA NZAMBI SHILO / MAT-185",
+      "186 / MASIVI MABANZA GAEL / MAT-186",
+      "187 / MASIWA BIENVENU BIENVENU / MAT-187",
+      "188 / MASSAMBA NSINGI SATHYA / MAT-188",
+      "189 / MASSIALA MAVUNGU BAULIN / MAT-189",
+      "190 / MASWA LOLWA RAYMOND / MAT-190",
+      "191 / MATAIDOMA KUTENI JULES / MAT-191",
+      "192 / MATAMBUKU BUTSILA FELLY / MAT-192",
+      "193 / MATITILA KUMBI JEMIMA / MAT-193",
+      "194 / MATOMBE MAKOSO ANTONY / MAT-194",
+      "195 / MATONDO BATOMENE WINNER / MAT-195",
+      "196 / MATONDO WAMBELA COEL / MAT-196",
+      "197 / MAVAMBU MFUMU ARIEL / MAT-197",
+      "198 / MAVATA KASONGO DJEMSY / MAT-198",
+      "199 / MAVUNGU MUNSI GRADI / MAT-199",
+      "200 / MAVUNGU TSASA WINNER / MAT-200",
+      "201 / MAYALA BANITI PRECIOUS / MAT-201",
+      "202 / MAYEMBA KUBUTA PRINCE / MAT-202",
+      "203 / MAYILA RICHARD RICHARD / MAT-203",
+      "204 / MAZANGA KILEBA MICHEL / MAT-204",
+      "205 / MBALA MINGIEDI OBED / MAT-205",
+      "206 / MBALIKWAMA MBALI EXAUCE / MAT-206",
+      "207 / MBAMAYI SIMBI NESTOR / MAT-207",
+      "208 / MBARUKU MASUDI MEDARD / MAT-208",
+      "209 / MBENZA KASOMA EXAUCE / MAT-209",
+      "210 / MBO KALUIBA ELIEZER / MAT-210",
+      "211 / MBO MISSANO MARDOCHE / MAT-211",
+      "212 / MBOKOSO MUSUMISA JENOVIC / MAT-212",
+      "213 / MBOMA AWUK ORADI / MAT-213",
+      "214 / MBOMA NAKWETI STAEL / MAT-214",
+      "215 / MBOMBA MPIM VARDY / MAT-215",
+      "216 / MBOMBE LETONGO NOELLY / MAT-216",
+      "217 / MBOMBO MULUMBA JEMIMA / MAT-217",
+      "218 / MBONGO GNAGONGANGA GERTIE / MAT-218",
+      "219 / MBONGO MPAKI MAURICIN / MAT-219",
+      "220 / MBULA MULEMBUE DANIEL / MAT-220",
+      "221 / MBWASE PELEWE FRANCIS / MAT-221",
+      "222 / METUAZOLA LULENDO DIVIN / MAT-222",
+      "223 / MIHIDIE MBOLIFUKO MICHEL / MAT-223",
+      "224 / MOBIMBA LONGO WILLIAM / MAT-224",
+      "225 / MOFONGA MOLINGO CHEKINAH / MAT-225",
+      "226 / MOKE NGALI EPHRAIM / MAT-226",
+      "227 / MOKOLO ATOPUNDA JEDIDJA / MAT-227",
+      "228 / MOKUMBO EKPOKOLO JEAN LOUIS / MAT-228",
+      "229 / MONDO ZIHINDULA GLODY / MAT-229",
+      "230 / MONENE GWELAWA NIELSEN / MAT-230",
+      "231 / MOPOSA BOSWA DAVID / MAT-231",
+      "232 / MOSAKAMBO LENKOY EXAUCE / MAT-232",
+      "233 / MOYILA MFUTI SETHIA / MAT-233",
+      "234 / MPAKA NSIALA EDEN / MAT-234",
+      "235 / MPALA TSHILOMBO RUSSEL / MAT-235",
+      "236 / MPANZU LUMBAYI GAEL / MAT-236",
+      "237 / MPONDA ILAKA / MAT-237",
+      "238 / MPOYI ADIYO JOYCE / MAT-238",
+      "239 / MUBIALA KAMBAMBA JACKSON / MAT-239",
+      "240 / MUENGA NGANGA CHRISTOPHER / MAT-240",
+      "241 / MUFUTA BUKASA FULGENCE / MAT-241",
+      "242 / MUINI MAPUATA JEAN / MAT-242",
+      "243 / MUJINGA MUKUNDA YOCHWA / MAT-243",
+      "244 / MUKE LISAMBA EPHRAIM / MAT-244",
+      "245 / MUKUNA MUNZENZEKA EXAUCE / MAT-245",
+      "246 / MULAMBA NYEMBO JEANNOT / MAT-246",
+      "247 / MULEFUA POYA ERICK / MAT-247",
+      "248 / MULEGWA KAJANJU EMMANUEL / MAT-248",
+      "249 / MULIMBI MUTUALE HERVE / MAT-249",
+      "250 / MUMBALA NSA CHRISTEVIE / MAT-250",
+      "251 / MUMBWISI OLUBA YOAN / MAT-251",
+      "252 / MUNDELE MAMBU DEBORAH / MAT-252",
+      "253 / MUNENE PENGI ALBERT / MAT-253",
+      "254 / MUNZANZA KAPANGA ISAAC / MAT-254",
+      "255 / MUNZENGA MASUMBU ROSALIE / MAT-255",
+      "256 / MUSAFIRI RUGINA PLACIDE / MAT-256",
+      "257 / MUSANJI ISILU BAYON / MAT-257",
+      "258 / MUSINGA NDONGO EMMANUEL / MAT-258",
+      "259 / MUTEBA SELEKITA MARDOCHEE / MAT-259",
+      "260 / MUTOMBO KATANDAYI GUILLAUME / MAT-260",
+      "261 / MUTOMBO KETSIA X / MAT-261",
+      "262 / MUTOMBO NGALAMULUME EMMANUEL / MAT-262",
+      "263 / MUTSHAUDI MANDE BERNARD / MAT-263",
+      "264 / MUYEMBI SWANA EXAUCE / MAT-264",
+      "265 / MVUMA WOLO MERDY / MAT-265",
+      "266 / MWAKA MBUNGU CHRISTIAN / MAT-266",
+      "267 / MWANGA NGANGULA JOVANIE / MAT-267",
+      "268 / MWATA KPALAKA MERVEILLE / MAT-268",
+      "269 / MWUKA MUNDENDI PLAMEDIE / MAT-269",
+      "270 / NABUKU KOLA WINNER / MAT-270",
+      "271 / NDALANZONI GOY DIEUBENI / MAT-271",
+      "272 / NDATA BAYE NATHAN / MAT-272",
+      "273 / NDAYA MUKEBA ARMEL / MAT-273",
+      "274 / NDIBU KALENGA HUBERT / MAT-274",
+      "275 / NDINGA MENABO ADEODAT / MAT-275",
+      "276 / NDJORE KIMPILE DANIEL / MAT-276",
+      "277 / NDOMBE BANZA EXAUCE / MAT-277",
+      "278 / NDONGO MOBONGO ISRAEL / MAT-278",
+      "279 / NDOOLE NTUMBA GUY / MAT-279",
+      "280 / NDUNGILA MPAKI BIENVEILLANCE / MAT-280",
+      "281 / NGANA SUNGA / MAT-281",
+      "282 / NGANDU GIZEKEMENO JOSUE / MAT-282",
+      "283 / NGANIANGA MOLENA MANASSE / MAT-283",
+      "284 / NGOMA MAKAYA DAVE / MAT-284",
+      "285 / NGOY KABUYA LIVINS / MAT-285",
+      "286 / NGOYI SUDILA CHRISTINA / MAT-286",
+      "287 / NGWALA MBUMBA CREDO / MAT-287",
+      "288 / NGWAMAH PEMBA HELENA / MAT-288",
+      "289 / NGWANGELE LIGOPI JENOV / MAT-289",
+      "290 / NIUK NDJOCTAH JORDANI / MAT-290",
+      "291 / NKABA NKIRIBWE TONY / MAT-291",
+      "292 / NKAYILU MIA-NZAMBI BLISS / MAT-292",
+      "293 / NKIERY NDOYA VIDI / MAT-293",
+      "294 / NKULU LUKELA CHRIS / MAT-294",
+      "295 / NKWETI MPATI DAVID / MAT-295",
+      "296 / NSAFU KUKODILA JEAN / MAT-296",
+      "297 / NSEKELE LUKANU RACHIDI / MAT-297",
+      "298 / NSEYA LUTUMBA ROSE / MAT-298",
+      "299 / NSINGI NKUNGA DASYLVA / MAT-299",
+      "300 / NSOMUE NGOY GUELORD / MAT-300",
+      "301 / NSUASANI FILEMA MOISE / MAT-301",
+      "302 / NSUNGU MUKOKO X / MAT-302",
+      "303 / NTUMBA DINGENGI BEVERLY / MAT-303",
+      "304 / NTUMBA WA TUMBA EMMANUEL / MAT-304",
+      "305 / NYAEKE MOKOBELE ANNETTE / MAT-305",
+      "306 / NYEMBO UMBA FREUD / MAT-306",
+      "307 / NYEMWE KAYOMBO CHRISTIAN / MAT-307",
+      "308 / NZAMA BANZI RACHETE / MAT-308",
+      "309 / NZENGI BOKOYO BENJAMIN / MAT-309",
+      "310 / NZITA TAMBA GLORY / MAT-310",
+      "311 / NZUZI LUZOLO ADONIS / MAT-311",
+      "312 / OKATSHA OMATOKO JOSEPH / MAT-312",
+      "313 / OKEDI LOKOKA JOSEPH / MAT-313",
+      "314 / OKOTO NSIALA PRECIEUX / MAT-314",
+      "315 / OLELA OTSHUDI OPHIR / MAT-315",
+      "316 / ONOKOKO TSHUNGE DIEU MERCI / MAT-316",
+      "317 / OSANGO LUTSHAKA FAUSTIN / MAT-317",
+      "318 / OSOBI MUSETE SAGEDI / MAT-318",
+      "319 / OSODI OKITO JESMIRA / MAT-319",
+      "320 / PUNGA LOFUMBWA DANIELLA / MAT-320",
+      "321 / RADJABU USENI RADJA / MAT-321",
+      "322 / RAMAZANI MUSSA GLOIRE / MAT-322",
+      "323 / SABITI OMARI JUSTIN / MAT-323",
+      "324 / SAKATA TANZEY ROMAIN / MAT-324",
+      "325 / SAMBA MANITU DAVID / MAT-325",
+      "326 / SANGANA MUYEMBE MIRADI / MAT-326",
+      "327 / SANGOLO LUKALA HENOCK / MAT-327",
+      "328 / SENGA FAMBA PLAMEDI / MAT-328",
+      "329 / SHAKO MAPENDO JEAN CLAUDE / MAT-329",
+      "330 / SILAGEA LOMBANGI KESTER / MAT-330",
+      "331 / SONGHU KAYUMBA SAMUEL / MAT-331",
+      "332 / SUKAMI KIVUVU ESPERANT / MAT-332",
+      "333 / SWEDI FAMBA BLESSING / MAT-333",
+      "334 / TAKWINDJA BUHENDWA ANITHA / MAT-334",
+      "335 / TANDA KOI WALE ABRAHAM / MAT-335",
+      "336 / THOKA KUMBI KUMBI GINA / MAT-336",
+      "337 / TIAKO FIDEL FIDEL / MAT-337",
+      "338 / TONY NDUALA ISAAC / MAT-338",
+      "339 / TSHIBASU KUSEKELEDI EZECHIEL / MAT-339",
+      "340 / TSHIBUABA MATAMBA JACOB / MAT-340",
+      "341 / TSHIBUABUA KAYEMBE RUTH / MAT-341",
+      "342 / TSHIBWABWA KALONJI CORNEILLE / MAT-342",
+      "343 / TSHIKADI TSHIDINGI OBAMA / MAT-343",
+      "344 / TSHIMANGA KOLELA JORDI / MAT-344",
+      "345 / TSHINKOBO KATAMBWE WINNER / MAT-345",
+      "346 / UMIRAMBE UNEGA ISAAC / MAT-346",
+      "347 / VANGU SADI ELDIE / MAT-347",
+      "348 / VINGUA NTIMA EMMANUEL / MAT-348",
+      "349 / VUNGBO LOLEKO JACQUES / MAT-349",
+      "350 / WAGBELE KALAMBIO DANIEL / MAT-350",
+      "351 / WALO NDIATE WALI / MAT-351",
+      "352 / WAYI MAKITI JESSY / MAT-352",
+      "353 / WAZEKWA MANGANGU FELIX / MAT-353",
+      "354 / WEMBI MUDIANDAMBU ARISTOTE / MAT-354",
+      "355 / WEMBOLUA KETOKA NATHAN / MAT-355",
+      "356 / YEMBA SALUMU FIDELE / MAT-356",
+      "357 / YEWA KOMANYA JEFF / MAT-357",
+      "358 / YOHE LONGA JUNIOR / MAT-358",
+      "359 / YUDONAGO PELEDIAMO OBED / MAT-359",
+      "360 / YUSUFU BIBUKA ANDERSON / MAT-360",
+      "361 / YUTU MAWANGA ORLY / MAT-361",
+      "362 / ZAINA AMISI NOEMIE / MAT-362"
+    ];
+
+    const LIGHT_DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><rect width='80' height='80' rx='40' fill='%2313294b'/><circle cx='40' cy='31' r='14' fill='%2300d2b8'/><ellipse cx='40' cy='64' rx='23' ry='14' fill='%2300d2b8'/></svg>";
 
     function normalizeTeacherVumisa(coursesList) {
       if (!Array.isArray(coursesList)) return [...DEFAULT_COURSES];
@@ -1631,20 +2044,7 @@
     }
 
     function makeDefaultAvatar() {
-      const c = document.createElement("canvas");
-      c.width = 160;
-      c.height = 160;
-      const ctx = c.getContext("2d");
-      ctx.fillStyle = "#13294b";
-      ctx.fillRect(0, 0, 160, 160);
-      ctx.fillStyle = "#00d2b8";
-      ctx.beginPath();
-      ctx.arc(80, 62, 28, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.ellipse(80, 128, 46, 28, 0, 0, Math.PI * 2);
-      ctx.fill();
-      return c.toDataURL("image/jpeg", 0.72);
+      return LIGHT_DEFAULT_AVATAR;
     }
 
     function createEmptyCourseNotebook(dateStr) {
@@ -1656,7 +2056,6 @@
       };
     }
 
-    // Normalisation sécurisée des cahiers (Firebase supprime les tableaux vides [])
     function normalizeSingleNotebook(nb) {
       const safeNb = nb && typeof nb === "object" ? nb : {};
       const dates = Array.isArray(safeNb.dates) && safeNb.dates.length
@@ -1668,7 +2067,7 @@
       return {
         dates: dates.length ? dates : [todayISO()],
         maskedCols: safeNb.maskedCols && typeof safeNb.maskedCols === "object" ? safeNb.maskedCols : {},
-        enrolledIds: enrolledIds.filter(Boolean),
+        enrolledIds: [...new Set(enrolledIds.filter(Boolean))],
         marks: safeNb.marks && typeof safeNb.marks === "object" ? safeNb.marks : {}
       };
     }
@@ -1691,6 +2090,39 @@
       if (Array.isArray(val)) return val;
       if (val && typeof val === "object") return Object.values(val);
       return fallback;
+    }
+
+    function buildSeedStudents(defaultCourseId = DEFAULT_COURSES[0].id) {
+      return INITIAL_L1_RTM_STUDENTS.map((line, idx) => {
+        const parts = line.split("/").map((p) => p.trim());
+        const name = parts[1] || parts[0] || `Étudiant ${idx + 1}`;
+        const matricule = parts[2] || `MAT-${String(idx + 1).padStart(3, "0")}`;
+        return {
+          id: "stu_seed_" + String(idx + 1).padStart(3, "0"),
+          courseId: defaultCourseId,
+          name,
+          matricule,
+          promotion: "L1 RTM",
+          photo: LIGHT_DEFAULT_AVATAR
+        };
+      });
+    }
+
+    function mergeSeedStudentsIntoList(existingStudents, defaultCourseId = DEFAULT_COURSES[0].id) {
+      const current = Array.isArray(existingStudents) ? [...existingStudents] : [];
+      const seeds = buildSeedStudents(defaultCourseId);
+      const existingByMat = new Set(current.map((s) => String(s.matricule || "").trim().toLowerCase()));
+      const existingById = new Set(current.map((s) => String(s.id || "")));
+
+      seeds.forEach((seed) => {
+        const matKey = seed.matricule.toLowerCase();
+        if (!existingById.has(seed.id) && !existingByMat.has(matKey)) {
+          current.push(seed);
+          existingById.add(seed.id);
+          existingByMat.add(matKey);
+        }
+      });
+      return current;
     }
 
     function createInitialState() {
@@ -1726,7 +2158,7 @@
         announcements: [],
         messages: [],
         notifications: [],
-        students: [],
+        students: buildSeedStudents(DEFAULT_COURSES[0].id),
         notebooks,
         updatedAt: 0
       };
@@ -1743,6 +2175,40 @@
     let replyContext = null;
     let activeJustifTarget = null;
     let deferredInstallPrompt = null;
+    let pendingDeleteCallback = null;
+
+    function openDeleteConfirm(question, detail, onConfirm) {
+      pendingDeleteCallback = onConfirm;
+      document.getElementById("confirmDeleteQuestion").textContent =
+        question || "Voulez-vous vraiment supprimer cet élément ?";
+      document.getElementById("confirmDeleteDetail").textContent =
+        detail || "Cette action supprimera définitivement l'élément sélectionné.";
+      document.getElementById("confirmDeleteModal").classList.add("open");
+    }
+
+    function closeDeleteConfirm() {
+      document.getElementById("confirmDeleteModal").classList.remove("open");
+      pendingDeleteCallback = null;
+    }
+
+    document.getElementById("btnCloseConfirmDelete").addEventListener("click", closeDeleteConfirm);
+    document.getElementById("btnCancelConfirmDelete").addEventListener("click", closeDeleteConfirm);
+    document.getElementById("btnAcceptConfirmDelete").addEventListener("click", () => {
+      const fn = pendingDeleteCallback;
+      closeDeleteConfirm();
+      if (typeof fn === "function") fn();
+    });
+
+    function saveSafetyBackup(reason = "auto") {
+      try {
+        localStorage.setItem(SAFETY_BACKUP_KEY, JSON.stringify({
+          reason,
+          savedAt: Date.now(),
+          studentsCount: Array.isArray(state.students) ? state.students.length : 0,
+          snapshot: state
+        }));
+      } catch {}
+    }
 
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
@@ -1803,12 +2269,18 @@
 
         const mergedNotebooks = normalizeNotebooksMap(parsed.notebooks, mergedCourses);
 
-        const normalizedStudents = toArraySafe(parsed.students, []).map((st) => ({
+        const parsedStudents = toArraySafe(parsed.students, []).map((st) => ({
           ...st,
-          courseId: st.courseId || mergedCourses[0].id
+          courseId: st.courseId || mergedCourses[0].id,
+          photo: st.photo || LIGHT_DEFAULT_AVATAR
         }));
 
+        const finalStudents = parsedStudents.length > 0
+          ? mergeSeedStudentsIntoList(parsedStudents, mergedCourses[0].id)
+          : init.students;
+
         const promos = toArraySafe(parsed.promotions, [...DEFAULT_PROMOTIONS]);
+        if (!promos.includes("L1 RTM")) promos.unshift("L1 RTM");
 
         return {
           ...init,
@@ -1820,7 +2292,7 @@
           announcements: toArraySafe(parsed.announcements, []),
           messages: toArraySafe(parsed.messages, []),
           notifications: toArraySafe(parsed.notifications, []),
-          students: normalizedStudents,
+          students: finalStudents,
           notebooks: mergedNotebooks,
           updatedAt: Number(parsed.updatedAt || 0)
         };
@@ -1834,12 +2306,17 @@
       if (pushToFirebase) {
         state.updatedAt = Date.now();
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        console.error("Erreur stockage local:", err);
+      }
       document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchronisé";
       applyPublicBranding();
       updateNotificationBadges();
 
       if (pushToFirebase && !isApplyingRemoteSnapshot && typeof window.envoyerDonneesEduAppel === "function") {
+        document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchro en cours...";
         window.envoyerDonneesEduAppel("global_state", {
           courses: state.courses,
           promotions: state.promotions,
@@ -1849,9 +2326,22 @@
           notifications: state.notifications,
           students: state.students,
           notebooks: state.notebooks,
-          activeCourseId: activeCourseId
-        }).catch(() => {});
+          activeCourseId: activeCourseId,
+          updatedAt: state.updatedAt
+        }).then((ok) => {
+          document.getElementById("syncStatusLabel").textContent = ok
+            ? "Équipe CBK • Synchronisé Live"
+            : "Équipe CBK • Local OK (Erreur Live)";
+        }).catch(() => {
+          document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Local OK";
+        });
       }
+    }
+
+    function manualSyncNow() {
+      state.updatedAt = Date.now();
+      saveState(true);
+      showToast("🔄 Synchronisation effectuée (" + state.students.length + " étudiant(s) en base).");
     }
 
     function showToast(msg) {
@@ -1859,7 +2349,7 @@
       el.textContent = msg;
       el.classList.add("show");
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2700);
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2800);
     }
 
     function escapeHtml(str) {
@@ -1981,6 +2471,7 @@
         box.innerHTML = `
           <div class="menu-section-title">Administration Générale</div>
           <div class="menu-list">
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-etudiants')">👨‍🎓 Base Étudiants (${state.students.length})</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-annonces')">📢 Publier une Annonce</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Ajouter / Bloquer / Supprimer)</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-promos')">🎓 Gérer les Promotions</button>
@@ -1989,6 +2480,7 @@
           </div>
           <div class="menu-section-title">Communication & Cahiers</div>
           <div class="menu-list">
+            <button class="menu-item-btn" onclick="manualSyncNow()">🔄 Synchroniser maintenant</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-cours')">📚 Tous les Cours</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-cahier')">📒 Cahier d'appel actif</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">💬 Fil d'Annonces & Réponses</button>
@@ -2010,7 +2502,7 @@
         <div class="menu-section-title">Services du Cours</div>
         <div class="menu-list">
           <button class="menu-item-btn" onclick="openTabFromMenu('tab-cahier')">📒 Cahier d'Appel du Cours</button>
-          <button class="menu-item-btn" onclick="openTabFromMenu('tab-etudiants')">👨‍🎓 Étudiants du Cours</button>
+          <button class="menu-item-btn" onclick="manualSyncNow()">🔄 Synchroniser mes modifications</button>
           <button class="menu-item-btn" onclick="openTabFromMenu('tab-evolution')">📈 Évolution & Assiduité (%)</button>
         </div>
         <div class="menu-section-title">Communication & Compte</div>
@@ -2045,10 +2537,9 @@
       return state.notebooks[activeCourseId];
     }
 
+    // La base globale contient tous les étudiants (modifiable/ajoutable/supprimable via Admin Général)
     function getScopedStudents() {
-      const all = Array.isArray(state.students) ? state.students : [];
-      if (isAdminGeneral()) return all;
-      return all.filter((s) => s.courseId === activeCourseId);
+      return Array.isArray(state.students) ? state.students : [];
     }
 
     function populateTeacherLoginSelect() {
@@ -2061,12 +2552,31 @@
     }
 
     function populatePromotionSelect() {
-      const sel = document.getElementById("stuPromotionInput");
-      if (!sel) return;
       const promos = Array.isArray(state.promotions) && state.promotions.length ? state.promotions : DEFAULT_PROMOTIONS;
-      sel.innerHTML = promos
-        .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
-        .join("");
+      const sel = document.getElementById("stuPromotionInput");
+      if (sel) {
+        sel.innerHTML = promos
+          .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
+          .join("");
+      }
+
+      const rosterFilter = document.getElementById("rosterPromoFilter");
+      if (rosterFilter) {
+        const curVal = rosterFilter.value || "ALL";
+        rosterFilter.innerHTML = `<option value="ALL">Toutes promotions</option>` + promos
+          .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
+          .join("");
+        rosterFilter.value = curVal;
+      }
+
+      const enrollFilter = document.getElementById("enrollPromoFilter");
+      if (enrollFilter) {
+        const curEnrollVal = enrollFilter.value || "ALL";
+        enrollFilter.innerHTML = `<option value="ALL">Toutes promotions</option>` + promos
+          .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
+          .join("");
+        enrollFilter.value = curEnrollVal;
+      }
     }
 
     document.getElementById("teacherLoginForm").addEventListener("submit", (e) => {
@@ -2139,7 +2649,7 @@
     });
 
     function openTab(tabId) {
-      if ((tabId === "tab-admin" || tabId === "tab-cours") && !isAdminGeneral()) {
+      if ((tabId === "tab-admin" || tabId === "tab-cours" || tabId === "tab-etudiants") && !isAdminGeneral()) {
         tabId = "tab-cahier";
       }
       document.querySelectorAll(".nav-tabs > .nav-tab[data-tab]").forEach((t) => {
@@ -2183,9 +2693,12 @@
       document.getElementById("publicView").classList.toggle("hidden", logged);
       document.getElementById("appView").classList.toggle("hidden", !logged);
       document.getElementById("btnLockApp").classList.toggle("hidden", !logged);
+      document.getElementById("btnHeaderSyncNow").classList.toggle("hidden", !logged);
       document.getElementById("btnHeaderNotif").classList.toggle("hidden", !logged);
       document.getElementById("btnHeaderMsg").classList.toggle("hidden", !logged);
 
+      document.getElementById("navTabEtudiants").classList.toggle("hidden", !admin);
+      document.getElementById("btnEnrollGoStudents").classList.toggle("hidden", !admin);
       document.getElementById("btnToggleCoursesDrawer").classList.toggle("hidden", !admin);
       document.getElementById("navTabCours").classList.toggle("hidden", !admin);
       document.getElementById("navTabAdmin").classList.toggle("hidden", !admin);
@@ -2198,16 +2711,20 @@
       if (!admin) {
         document.getElementById("coursesDrawer").classList.remove("open");
         const activeTabEl = document.querySelector(".nav-tabs > .nav-tab.active");
-        if (activeTabEl && (activeTabEl.dataset.tab === "tab-admin" || activeTabEl.dataset.tab === "tab-cours")) {
+        if (
+          activeTabEl &&
+          (activeTabEl.dataset.tab === "tab-admin" ||
+            activeTabEl.dataset.tab === "tab-cours" ||
+            activeTabEl.dataset.tab === "tab-etudiants")
+        ) {
           openTab("tab-cahier");
         }
       }
 
       if (logged) {
         document.getElementById("stuPhotoPreview").src = draftPhoto;
-        document.getElementById("rosterSectionTitle").textContent = admin
-          ? "👨‍🎓 Tous les Étudiants (Admin Général)"
-          : `👨‍🎓 Étudiants de votre cours (${getCurrentCourse().course})`;
+        document.getElementById("rosterSectionTitle").textContent =
+          `👨‍🎓 Liste Globale des Étudiants (${state.students.length} inscrits)`;
         if (admin) renderCoursesDrawer();
         renderCahierTab();
       }
@@ -2366,13 +2883,19 @@
 
     document.getElementById("btnClearJustif").addEventListener("click", () => {
       if (!activeJustifTarget) return;
-      const nb = getCurrentNotebook();
-      const cell = getCell(nb, activeJustifTarget.colIdx, activeJustifTarget.studentId);
-      cell.justif = "";
-      saveState(true);
-      closeJustifModal();
-      renderCahierTab();
-      showToast("Justification effacée.");
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer cette justification ?",
+        "La note ou le motif associé à cette case sera effacé.",
+        () => {
+          const nb = getCurrentNotebook();
+          const cell = getCell(nb, activeJustifTarget.colIdx, activeJustifTarget.studentId);
+          cell.justif = "";
+          saveState(true);
+          closeJustifModal();
+          renderCahierTab();
+          showToast("Justification supprimée.");
+        }
+      );
     });
 
     document.getElementById("btnAddDateCol").addEventListener("click", () => {
@@ -2532,7 +3055,7 @@
       if (visibleStudents.length === 0) {
         const colSpan = 4 + nb.dates.length * 2;
         tbody.innerHTML = `<tr><td colspan="${colSpan}" style="padding:18px; color:#94a3b8;">
-          Aucun étudiant affiché. Cliquez sur <strong>+ Ajouter au cahier</strong> pour inscrire vos étudiants.
+          Aucun étudiant affiché dans ce cahier. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants (un par un ou Tout sélectionner).
         </td></tr>`;
       } else {
         tbody.innerHTML = visibleStudents.map((st) => {
@@ -2607,36 +3130,60 @@
       }
     }
 
+    // ============ MODAL AJOUTER AU CAHIER (PROFESSEUR & ADMIN) ============
     const enrollModal = document.getElementById("enrollModal");
+    let draftEnrollSet = new Set();
+
+    function updateEnrollCounterBadge() {
+      const badge = document.getElementById("enrollSelectedCountBadge");
+      if (badge) badge.textContent = `${draftEnrollSet.size} sélectionné(s)`;
+    }
+
     document.getElementById("btnOpenEnrollModal").addEventListener("click", () => {
+      const nb = getCurrentNotebook();
+      draftEnrollSet = new Set(nb.enrolledIds || []);
+      document.getElementById("enrollSearchInput").value = "";
+      populatePromotionSelect();
+      document.getElementById("enrollPromoFilter").value = "ALL";
       renderEnrollChecklist();
       enrollModal.classList.add("open");
     });
+
     document.getElementById("btnCloseEnrollModal").addEventListener("click", () => {
       enrollModal.classList.remove("open");
     });
 
     function closeEnrollAndGoStudents() {
+      if (!isAdminGeneral()) return;
       enrollModal.classList.remove("open");
       openTab("tab-etudiants");
     }
 
     function renderEnrollChecklist() {
-      const nb = getCurrentNotebook();
       const box = document.getElementById("enrollChecklistContainer");
       const pool = getScopedStudents();
+      const q = (document.getElementById("enrollSearchInput")?.value || "").trim().toLowerCase();
+      const promoVal = document.getElementById("enrollPromoFilter")?.value || "ALL";
 
-      if (pool.length === 0) {
-        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours. Ajoutez-en d'abord dans l'onglet <strong>Étudiants</strong>.</p>`;
+      const filtered = pool.filter((st) => {
+        const matchPromo = promoVal === "ALL" || (st.promotion || "") === promoVal;
+        const matchText = !q || st.name.toLowerCase().includes(q) || st.matricule.toLowerCase().includes(q);
+        return matchPromo && matchText;
+      });
+
+      updateEnrollCounterBadge();
+
+      if (filtered.length === 0) {
+        box.innerHTML = `<p class="student-meta">Aucun étudiant correspondant trouvé.</p>`;
         return;
       }
 
-      box.innerHTML = pool.map((st) => {
-        const checked = nb.enrolledIds.includes(st.id) ? "checked" : "";
+      box.innerHTML = filtered.map((st) => {
+        const checked = draftEnrollSet.has(st.id) ? "checked" : "";
         return `
-          <label class="student-row" style="cursor:pointer;">
+          <label class="student-row" style="cursor:pointer; margin-bottom:7px;">
             <div class="student-info">
-              <input type="checkbox" class="enroll-checkbox" value="${st.id}" ${checked} style="width:auto;" />
+              <input type="checkbox" class="enroll-checkbox" value="${st.id}" ${checked} style="width:18px; height:18px; cursor:pointer;" onchange="toggleEnrollDraft('${st.id}', this.checked)" />
               <img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" />
               <div>
                 <div class="student-name">${escapeHtml(st.name)}</div>
@@ -2648,37 +3195,75 @@
       }).join("");
     }
 
+    function toggleEnrollDraft(studentId, isChecked) {
+      if (isChecked) draftEnrollSet.add(studentId);
+      else draftEnrollSet.delete(studentId);
+      updateEnrollCounterBadge();
+    }
+
+    document.getElementById("enrollSearchInput").addEventListener("input", renderEnrollChecklist);
+    document.getElementById("enrollPromoFilter").addEventListener("change", renderEnrollChecklist);
+
     document.getElementById("btnSelectAllEnroll").addEventListener("click", () => {
-      document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = true));
+      const pool = getScopedStudents();
+      const q = (document.getElementById("enrollSearchInput")?.value || "").trim().toLowerCase();
+      const promoVal = document.getElementById("enrollPromoFilter")?.value || "ALL";
+      pool.forEach((st) => {
+        const matchPromo = promoVal === "ALL" || (st.promotion || "") === promoVal;
+        const matchText = !q || st.name.toLowerCase().includes(q) || st.matricule.toLowerCase().includes(q);
+        if (matchPromo && matchText) draftEnrollSet.add(st.id);
+      });
+      renderEnrollChecklist();
     });
+
     document.getElementById("btnUnselectAllEnroll").addEventListener("click", () => {
-      document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = false));
+      const pool = getScopedStudents();
+      const q = (document.getElementById("enrollSearchInput")?.value || "").trim().toLowerCase();
+      const promoVal = document.getElementById("enrollPromoFilter")?.value || "ALL";
+      pool.forEach((st) => {
+        const matchPromo = promoVal === "ALL" || (st.promotion || "") === promoVal;
+        const matchText = !q || st.name.toLowerCase().includes(q) || st.matricule.toLowerCase().includes(q);
+        if (matchPromo && matchText) draftEnrollSet.delete(st.id);
+      });
+      renderEnrollChecklist();
     });
 
     document.getElementById("btnConfirmEnroll").addEventListener("click", () => {
       const nb = getCurrentNotebook();
-      const selected = [...document.querySelectorAll(".enroll-checkbox:checked")].map((cb) => cb.value);
-      nb.enrolledIds = selected;
+      nb.enrolledIds = [...draftEnrollSet];
       saveState(true);
       enrollModal.classList.remove("open");
       renderCahierTab();
-      showToast(`${selected.length} étudiant(s) enregistré(s) dans le cahier.`);
+      showToast(`${nb.enrolledIds.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
+    // ============ GESTION GLOBALE DES ÉTUDIANTS (ADMIN GÉNÉRAL) ============
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
+      if (!isAdminGeneral()) {
+        showToast("Seul l'Admin Général peut ajouter ou modifier la liste globale des étudiants.");
+        return;
+      }
       const editId = document.getElementById("editingStudentId").value;
       const name = document.getElementById("stuNameInput").value.trim();
       const matricule = document.getElementById("stuMatriculeInput").value.trim();
-      const promotion = document.getElementById("stuPromotionInput").value || "Général";
+      const promotion = document.getElementById("stuPromotionInput").value || "L1 RTM";
       if (!name || !matricule) return;
+
+      const duplicate = state.students.find(
+        (s) => s.id !== editId && String(s.matricule || "").trim().toLowerCase() === matricule.toLowerCase()
+      );
+      if (duplicate) {
+        showToast(`Attention : le matricule « ${matricule} » est déjà attribué à ${duplicate.name}.`);
+        return;
+      }
 
       if (editId) {
         const idx = state.students.findIndex((s) => s.id === editId);
         if (idx !== -1) {
-          state.students[idx] = { ...state.students[idx], name, matricule, promotion, photo: draftPhoto };
+          state.students[idx] = { ...state.students[idx], name, matricule, promotion, photo: draftPhoto || LIGHT_DEFAULT_AVATAR };
         }
-        showToast("Étudiant modifié.");
+        showToast("Étudiant modifié dans la base globale.");
       } else {
         const newId = "stu_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6);
         state.students.push({
@@ -2687,13 +3272,9 @@
           name,
           matricule,
           promotion,
-          photo: draftPhoto
+          photo: draftPhoto || LIGHT_DEFAULT_AVATAR
         });
-        const nb = getCurrentNotebook();
-        if (!nb.enrolledIds.includes(newId)) {
-          nb.enrolledIds.push(newId);
-        }
-        showToast("Étudiant enregistré dans votre cours.");
+        showToast("Étudiant ajouté à la base globale.");
       }
 
       saveState(true);
@@ -2703,29 +3284,55 @@
     });
 
     document.getElementById("btnImportBulkStudents").addEventListener("click", () => {
+      if (!isAdminGeneral()) {
+        showToast("Seul l'Admin Général peut importer en masse dans la base globale.");
+        return;
+      }
       const rawLines = document.getElementById("bulkStudentsTextarea").value.split(/\r?\n/);
-      const nb = getCurrentNotebook();
+      const seenMats = new Set(state.students.map((s) => String(s.matricule || "").trim().toLowerCase()));
       let added = 0;
+      let skippedDup = 0;
+
       rawLines.forEach((line) => {
         const clean = line.trim();
         if (!clean) return;
-        const parts = clean.split(/[;|]/).map((p) => p.trim());
-        const name = parts[0] || "";
+        const parts = clean.split(/[;|/]/).map((p) => p.trim());
+
+        // Supporte aussi "001 / NOM / MAT-001"
+        let name = "";
+        let matricule = "";
+        let promotion = "";
+        if (/^\d+$/.test(parts[0]) && parts.length >= 3) {
+          name = parts[1];
+          matricule = parts[2];
+          promotion = parts[3] || "L1 RTM";
+        } else {
+          name = parts[0] || "";
+          matricule = parts[1] || "";
+          promotion = parts[2] || state.promotions[0] || "L1 RTM";
+        }
+
         if (!name) return;
-        const matricule = parts[1] || `MAT-${String(state.students.length + added + 1).padStart(3, "0")}`;
-        const promotion = parts[2] || state.promotions[0] || "Général";
-        const newId = "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 5);
+        if (!matricule) {
+          matricule = `MAT-${String(state.students.length + added + 1).padStart(3, "0")}`;
+        }
+
+        const matKey = matricule.toLowerCase();
+        if (seenMats.has(matKey)) {
+          skippedDup++;
+          return;
+        }
+        seenMats.add(matKey);
+
+        const newId = "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 6);
         state.students.push({
           id: newId,
           courseId: activeCourseId,
           name,
           matricule,
           promotion,
-          photo: makeDefaultAvatar()
+          photo: LIGHT_DEFAULT_AVATAR
         });
-        if (!nb.enrolledIds.includes(newId)) {
-          nb.enrolledIds.push(newId);
-        }
         added++;
       });
 
@@ -2734,37 +3341,47 @@
         saveState(true);
         renderStudentsTab();
         renderCahierTab();
-        showToast(`${added} étudiant(s) ajouté(s) à votre cours.`);
+        showToast(`${added} étudiant(s) ajouté(s)${skippedDup ? ` (${skippedDup} doublon(s) ignoré(s))` : ""}.`);
       } else {
-        showToast("Aucune ligne valide détectée.");
+        showToast(skippedDup ? "Aucun nouvel étudiant (doublons ignorés)." : "Aucune ligne valide détectée.");
       }
     });
 
     function editStudent(id) {
+      if (!isAdminGeneral()) return;
       const st = getScopedStudents().find((s) => s.id === id);
       if (!st) return;
       document.getElementById("editingStudentId").value = st.id;
       document.getElementById("stuNameInput").value = st.name;
       document.getElementById("stuMatriculeInput").value = st.matricule;
-      document.getElementById("stuPromotionInput").value = st.promotion || state.promotions[0];
-      draftPhoto = st.photo || makeDefaultAvatar();
+      document.getElementById("stuPromotionInput").value = st.promotion || "L1 RTM";
+      draftPhoto = st.photo || LIGHT_DEFAULT_AVATAR;
       document.getElementById("stuPhotoPreview").src = draftPhoto;
       document.getElementById("studentFormTitle").textContent = "✏️ Modifier l'Étudiant";
       document.getElementById("btnCancelStudentEdit").classList.remove("hidden");
+      scrollToEl("studentForm");
     }
 
     function deleteStudent(id) {
-      if (!confirm("Supprimer cet étudiant ?")) return;
-      state.students = state.students.filter((s) => s.id !== id);
-      Object.keys(state.notebooks).forEach((cid) => {
-        const nb = normalizeSingleNotebook(state.notebooks[cid]);
-        nb.enrolledIds = nb.enrolledIds.filter((x) => x !== id);
-        state.notebooks[cid] = nb;
-      });
-      saveState(true);
-      renderStudentsTab();
-      renderCahierTab();
-      showToast("Étudiant supprimé.");
+      if (!isAdminGeneral()) return;
+      const st = state.students.find((s) => s.id === id);
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer cet étudiant ?",
+        st ? `${st.name} (${st.matricule}) sera retiré de la base globale et des cahiers.` : "",
+        () => {
+          saveSafetyBackup("before_delete_student");
+          state.students = state.students.filter((s) => s.id !== id);
+          Object.keys(state.notebooks).forEach((cid) => {
+            const nb = normalizeSingleNotebook(state.notebooks[cid]);
+            nb.enrolledIds = nb.enrolledIds.filter((x) => x !== id);
+            state.notebooks[cid] = nb;
+          });
+          saveState(true);
+          renderStudentsTab();
+          renderCahierTab();
+          showToast("Étudiant supprimé.");
+        }
+      );
     }
 
     function resetStudentForm() {
@@ -2772,22 +3389,30 @@
       document.getElementById("studentForm").reset();
       draftPhoto = makeDefaultAvatar();
       document.getElementById("stuPhotoPreview").src = draftPhoto;
-      document.getElementById("studentFormTitle").textContent = "➕ Ajouter un Étudiant à ce Cours";
+      document.getElementById("studentFormTitle").textContent = "➕ Ajouter un Étudiant à la Liste Globale";
       document.getElementById("btnCancelStudentEdit").classList.add("hidden");
     }
 
     document.getElementById("btnCancelStudentEdit").addEventListener("click", resetStudentForm);
     document.getElementById("rosterSearchInput").addEventListener("input", renderStudentsTab);
+    document.getElementById("rosterPromoFilter").addEventListener("change", renderStudentsTab);
 
     function renderStudentsTab() {
       const container = document.getElementById("rosterContainer");
       const q = (document.getElementById("rosterSearchInput").value || "").trim().toLowerCase();
-      const list = getScopedStudents().filter((s) =>
-        !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q) || (s.promotion || "").toLowerCase().includes(q)
-      );
+      const promoVal = document.getElementById("rosterPromoFilter")?.value || "ALL";
+
+      document.getElementById("rosterSectionTitle").textContent =
+        `👨‍🎓 Liste Globale des Étudiants (${state.students.length} inscrits)`;
+
+      const list = getScopedStudents().filter((s) => {
+        const matchPromo = promoVal === "ALL" || (s.promotion || "") === promoVal;
+        const matchText = !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q) || (s.promotion || "").toLowerCase().includes(q);
+        return matchPromo && matchText;
+      });
 
       if (list.length === 0) {
-        container.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours.</p>`;
+        container.innerHTML = `<p class="student-meta">Aucun étudiant trouvé.</p>`;
         return;
       }
 
@@ -2797,12 +3422,12 @@
             <img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" />
             <div>
               <div class="student-name">${escapeHtml(st.name)}</div>
-              <div class="student-meta">Matricule : <strong>${escapeHtml(st.matricule)}</strong> • ${escapeHtml(st.promotion || "")}</div>
+              <div class="student-meta">Matricule : <strong>${escapeHtml(st.matricule)}</strong> • ${escapeHtml(st.promotion || "L1 RTM")}</div>
             </div>
           </div>
           <div style="display:flex; gap:6px;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="editStudent('${st.id}')">✏️</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteStudent('${st.id}')">🗑️</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="editStudent('${st.id}')" title="Modifier">✏️</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteStudent('${st.id}')" title="Supprimer">🗑️</button>
           </div>
         </div>
       `).join("");
@@ -3066,24 +3691,37 @@
           </div>
           <div style="display:flex; gap:6px;">
             <button type="button" class="btn btn-secondary btn-sm" onclick="openTab('${escapeHtml(n.targetTab || "tab-annonces")}')">Ouvrir</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteOneNotification('${n.id}')">✕</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteOneNotification('${n.id}')">🗑️</button>
           </div>
         </div>
       `).join("");
     }
 
     function deleteOneNotification(id) {
-      state.notifications = state.notifications.filter((n) => n.id !== id);
-      saveState(true);
-      renderNotificationsTab();
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer cette notification ?",
+        "Cette notification sera retirée de votre liste.",
+        () => {
+          state.notifications = state.notifications.filter((n) => n.id !== id);
+          saveState(true);
+          renderNotificationsTab();
+          showToast("Notification supprimée.");
+        }
+      );
     }
 
     document.getElementById("btnClearAllNotifications").addEventListener("click", () => {
-      const me = getCurrentActorId();
-      state.notifications = state.notifications.filter((n) => n.targetId !== me && n.targetId !== "ALL");
-      saveState(true);
-      renderNotificationsTab();
-      showToast("Toutes les notifications ont été supprimées.");
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer toutes les notifications ?",
+        "Toutes les notifications affichées pour votre compte seront effacées.",
+        () => {
+          const me = getCurrentActorId();
+          state.notifications = state.notifications.filter((n) => n.targetId !== me && n.targetId !== "ALL");
+          saveState(true);
+          renderNotificationsTab();
+          showToast("Toutes les notifications ont été supprimées.");
+        }
+      );
     });
 
     function renderProfileTab() {
@@ -3391,11 +4029,6 @@
             if (d.branding) state.branding = { ...state.branding, ...d.branding };
             if (Array.isArray(d.announcements)) state.announcements = d.announcements;
           } else {
-            const scopedImported = d.students
-              .filter((s) => !s.courseId || s.courseId === activeCourseId)
-              .map((s) => ({ ...s, courseId: activeCourseId }));
-            const others = state.students.filter((s) => s.courseId !== activeCourseId);
-            state.students = [...others, ...scopedImported];
             if (d.notebooks[activeCourseId]) {
               state.notebooks[activeCourseId] = normalizeSingleNotebook(d.notebooks[activeCourseId]);
             }
@@ -3412,11 +4045,7 @@
     });
 
     // ============ FONCTIONS ADMIN GÉNÉRAL ============
-    document.getElementById("btnAdminSyncNow").addEventListener("click", () => {
-      saveState(true);
-      renderAdminTab();
-      showToast("Données synchronisées en temps réel.");
-    });
+    document.getElementById("btnAdminSyncNow").addEventListener("click", manualSyncNow);
 
     document.getElementById("adminPublishAnnouncementForm").addEventListener("submit", (e) => {
       e.preventDefault();
@@ -3444,11 +4073,18 @@
 
     function deleteAnnouncement(annId) {
       if (!isAdminGeneral()) return;
-      if (!confirm("Supprimer cette annonce ?")) return;
-      state.announcements = state.announcements.filter((a) => a.id !== annId);
-      saveState(true);
-      renderAdminTab();
-      showToast("Annonce supprimée.");
+      const ann = state.announcements.find((a) => a.id === annId);
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer cette annonce ?",
+        ann ? `Annonce : « ${ann.title} »` : "",
+        () => {
+          saveSafetyBackup("before_delete_announcement");
+          state.announcements = state.announcements.filter((a) => a.id !== annId);
+          saveState(true);
+          renderAdminTab();
+          showToast("Annonce supprimée.");
+        }
+      );
     }
 
     document.getElementById("adminAddCourseTeacherForm").addEventListener("submit", (e) => {
@@ -3499,17 +4135,23 @@
         showToast("Impossible de supprimer le dernier cours.");
         return;
       }
-      if (!confirm("Supprimer définitivement ce professeur et son cours ?")) return;
-      state.courses = state.courses.filter((x) => x.id !== courseId);
-      delete state.notebooks[courseId];
-      state.students = state.students.filter((s) => s.courseId !== courseId);
-      if (activeCourseId === courseId) {
-        activeCourseId = state.courses[0].id;
-      }
-      populateTeacherLoginSelect();
-      saveState(true);
-      renderAdminTab();
-      showToast("Professeur et cours supprimés.");
+      const target = state.courses.find((x) => x.id === courseId);
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer ce professeur et son cours ?",
+        target ? `${target.teacher} — ${target.course} (ainsi que son cahier d'appel).` : "",
+        () => {
+          saveSafetyBackup("before_delete_course");
+          state.courses = state.courses.filter((x) => x.id !== courseId);
+          delete state.notebooks[courseId];
+          if (activeCourseId === courseId) {
+            activeCourseId = state.courses[0].id;
+          }
+          populateTeacherLoginSelect();
+          saveState(true);
+          renderAdminTab();
+          showToast("Professeur et cours supprimés.");
+        }
+      );
     }
 
     document.getElementById("adminAddPromotionForm").addEventListener("submit", (e) => {
@@ -3533,10 +4175,19 @@
     function deletePromotion(idx) {
       if (!isAdminGeneral()) return;
       if (!Array.isArray(state.promotions)) return;
-      state.promotions.splice(idx, 1);
-      saveState(true);
-      populatePromotionSelect();
-      renderAdminTab();
+      const promoName = state.promotions[idx];
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer cette promotion ?",
+        promoName ? `Promotion : « ${promoName} »` : "",
+        () => {
+          saveSafetyBackup("before_delete_promotion");
+          state.promotions.splice(idx, 1);
+          saveState(true);
+          populatePromotionSelect();
+          renderAdminTab();
+          showToast("Promotion supprimée.");
+        }
+      );
     }
 
     function applyBrandingUrl(key) {
@@ -3552,10 +4203,16 @@
 
     function clearBrandingSlot(key) {
       if (!isAdminGeneral()) return;
-      state.branding[key] = "";
-      saveState(true);
-      renderAdminBrandingSlots();
-      showToast("Visuel retiré.");
+      openDeleteConfirm(
+        "Voulez-vous vraiment retirer ce visuel ?",
+        "L'image actuelle sera supprimée de cet emplacement.",
+        () => {
+          state.branding[key] = "";
+          saveState(true);
+          renderAdminBrandingSlots();
+          showToast("Visuel retiré.");
+        }
+      );
     }
 
     function renderAdminBrandingSlots() {
@@ -3659,8 +4316,7 @@
       const container = document.getElementById("adminGlobalContainer");
       container.innerHTML = courses.map((c) => {
         const nb = normalizeSingleNotebook(state.notebooks[c.id]);
-        const courseStudents = allStudents.filter((s) => s.courseId === c.id);
-        const enrolled = nb.enrolledIds.map((id) => courseStudents.find((s) => s.id === id)).filter(Boolean);
+        const enrolled = nb.enrolledIds.map((id) => allStudents.find((s) => s.id === id)).filter(Boolean);
 
         const rowsHtml = enrolled.length === 0
           ? `<p class="student-meta">Aucun étudiant inscrit dans ce cahier.</p>`
@@ -3721,11 +4377,17 @@
     });
     const db = getDatabase(app);
 
-    window.envoyerDonneesEduAppel = function(classeId, donnees) {
-      return set(ref(db, `eduappel/${classeId}`), {
-        ...donnees,
-        updatedAt: Date.now()
-      });
+    window.envoyerDonneesEduAppel = async function(classeId, donnees) {
+      try {
+        await set(ref(db, `eduappel/${classeId}`), {
+          ...donnees,
+          updatedAt: Number(donnees?.updatedAt || Date.now())
+        });
+        return true;
+      } catch (err) {
+        console.error("Erreur synchro Firebase:", err);
+        return false;
+      }
     };
 
     window.ecouterEduAppelEnDirect = function(callback) {
@@ -3741,7 +4403,8 @@
       const remoteUpdatedAt = Number(globalPayload.updatedAt || 0);
       const localUpdatedAt = Number(state.updatedAt || 0);
 
-      if (!hasInitialFirebaseSync || remoteUpdatedAt >= localUpdatedAt) {
+      // ">" strict après le premier chargement pour ne pas écraser une modification locale en cours
+      if (!hasInitialFirebaseSync || remoteUpdatedAt > localUpdatedAt) {
         hasInitialFirebaseSync = true;
         isApplyingRemoteSnapshot = true;
 
@@ -3775,7 +4438,12 @@
 
         state.messages = toArraySafe(globalPayload.messages, []);
         state.notifications = toArraySafe(globalPayload.notifications, []);
-        state.students = toArraySafe(globalPayload.students, []);
+
+        const remoteStudents = toArraySafe(globalPayload.students, []);
+        state.students = remoteStudents.length > 0
+          ? mergeSeedStudentsIntoList(remoteStudents, state.courses[0]?.id || DEFAULT_COURSES[0].id)
+          : mergeSeedStudentsIntoList(state.students, state.courses[0]?.id || DEFAULT_COURSES[0].id);
+
         state.notebooks = normalizeNotebooksMap(globalPayload.notebooks, state.courses);
 
         if (remoteUpdatedAt > 0) {
