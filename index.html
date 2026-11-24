@@ -46,7 +46,6 @@
       padding-bottom: 40px;
     }
 
-    /* Barre tricolore style CBK */
     .flag-bar {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -57,7 +56,6 @@
     .flag-bar span:nth-child(2) { background: var(--rdc-yellow); }
     .flag-bar span:nth-child(3) { background: var(--rdc-red); }
 
-    /* Header style CBK */
     header {
       position: sticky;
       top: 0;
@@ -123,7 +121,6 @@
       padding: 18px 16px;
     }
 
-    /* Boutons */
     .btn {
       border: none;
       border-radius: 12px;
@@ -183,7 +180,6 @@
       border-radius: 10px;
     }
 
-    /* Cartes */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -204,7 +200,6 @@
       flex-wrap: wrap;
     }
 
-    /* Page d'accueil / Connexion */
     .hero-grid {
       display: grid;
       grid-template-columns: 1.25fr 1fr;
@@ -258,7 +253,6 @@
       color: #ffffff;
     }
 
-    /* Champs formulaire */
     .form-group {
       margin-bottom: 12px;
     }
@@ -292,7 +286,6 @@
       border-color: var(--accent);
     }
 
-    /* Menu rubriques dépliable */
     .rubriques-drawer {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -313,7 +306,6 @@
       margin-top: 10px;
     }
 
-    /* FAQ & À propos */
     .accordion-item {
       background: var(--bg-card-2);
       border: 1px solid rgba(148, 163, 184, 0.14);
@@ -334,7 +326,6 @@
       color: var(--text-muted);
     }
 
-    /* Navigation interne app */
     .nav-tabs {
       display: flex;
       gap: 8px;
@@ -347,10 +338,10 @@
       background: var(--bg-card);
       color: var(--text-muted);
       border: 1px solid var(--border);
-      padding: 9px 14px;
+      padding: 10px 14px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -361,7 +352,6 @@
       border-color: transparent;
     }
 
-    /* KPI / Stats */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -387,7 +377,6 @@
       color: var(--text-muted);
     }
 
-    /* Sélecteur créneau Avant / Après */
     .slot-switch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -412,7 +401,6 @@
       color: #ffffff;
     }
 
-    /* Liste étudiants */
     .student-row {
       background: var(--bg-card-2);
       border: 1px solid rgba(148, 163, 184, 0.14);
@@ -508,7 +496,6 @@
       border-color: var(--warning);
     }
 
-    /* Calendrier */
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
@@ -546,7 +533,6 @@
       color: var(--text-muted);
     }
 
-    /* Modal recadrage photo */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -591,7 +577,6 @@
       display: block;
     }
 
-    /* Toast notification */
     .toast {
       position: fixed;
       bottom: 20px;
@@ -663,6 +648,9 @@
       </div>
 
       <div class="header-actions">
+        <button class="btn btn-primary btn-sm hidden" id="btnQuickAddStudent" onclick="goToTab('tab-etudiants')">
+          ➕ Étudiants
+        </button>
         <button class="btn btn-secondary btn-sm" id="btnToggleRubriques">☰ Rubriques</button>
         <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
           💬 Joindre l'équipe CBK
@@ -673,23 +661,22 @@
   </header>
 
   <div class="container">
-    <!-- Menu Rubriques (FAQ, À propos, Développeur, Installation) -->
     <div class="rubriques-drawer" id="rubriquesDrawer">
       <div class="card-title">
         <span>Rubriques d'EduAppel</span>
         <button class="btn btn-secondary btn-sm" id="btnCloseRubriques">Fermer ✕</button>
       </div>
       <div class="rubriques-grid">
-        <button class="btn btn-secondary" onclick="scrollToSection('section-auth')">🔐 Connexion & Code</button>
-        <button class="btn btn-secondary" onclick="scrollToSection('section-faq')">❓ FAQ</button>
-        <button class="btn btn-secondary" onclick="scrollToSection('section-about')">ℹ️ À propos & Développeur</button>
+        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-appel', 'section-auth')">📋 Appel & Connexion</button>
+        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-etudiants', 'section-auth')">👨‍🎓 Étudiants</button>
+        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-calendrier', 'section-faq')">📅 Calendrier & FAQ</button>
+        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-sauvegarde', 'section-about')">💾 Sauvegarde & À propos</button>
         <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
           📲 Contacter Équipe CBK
         </a>
       </div>
     </div>
 
-    <!-- ================= VUE PUBLIQUE / ACCUEIL & CONNEXION ================= -->
     <div id="publicView">
       <div class="hero-grid" id="section-auth">
         <div class="card">
@@ -744,7 +731,6 @@
         </div>
       </div>
 
-      <!-- FAQ sur la page d'accueil -->
       <div class="card" id="section-faq">
         <div class="card-title"><span>❓ Foire Aux Questions (FAQ)</span></div>
 
@@ -777,7 +763,6 @@
         </div>
       </div>
 
-      <!-- À propos sur la page d'accueil -->
       <div class="card" id="section-about">
         <div class="card-title"><span>ℹ️ À propos d'EduAppel</span></div>
         <p style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">
@@ -795,7 +780,6 @@
       </div>
     </div>
 
-    <!-- ================= VUE CONNECTÉE (APPLICATION COMPLÈTE) ================= -->
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
         <button class="nav-tab active" data-tab="tab-appel">📋 Appel & Retardataires</button>
@@ -804,7 +788,6 @@
         <button class="nav-tab" data-tab="tab-sauvegarde">💾 Sauvegarde & Réglages</button>
       </div>
 
-      <!-- Statistiques globales -->
       <div class="stats-grid">
         <div class="stat-box">
           <div class="stat-val" id="statStudentsCount">0</div>
@@ -824,7 +807,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 1 : APPEL DU JOUR + LISTE DES RETARDATAIRES EN DESSOUS -->
       <div id="tab-appel" class="tab-panel">
         <div class="card">
           <div class="card-title">
@@ -872,7 +854,6 @@
           <div id="attendanceListContainer"></div>
         </div>
 
-        <!-- Liste dédiée des retardataires en dessous -->
         <div class="card" id="lateSectionCard">
           <div class="card-title">
             <span>⏰ Liste des Retardataires</span>
@@ -888,7 +869,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 2 : CALENDRIER EN % -->
       <div id="tab-calendrier" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -899,7 +879,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 3 : GESTION DES ÉTUDIANTS -->
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -956,7 +935,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 4 : SÉCURITÉ, SAUVEGARDE, CLOUD & RÉGLAGES -->
       <div id="tab-sauvegarde" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>🔑 Modifier le Code d'Accès</span></div>
@@ -1012,7 +990,6 @@
     </div>
   </div>
 
-  <!-- ================= MODAL AJUSTEMENT / RECADRAGE & COMPRESSION PHOTO ================= -->
   <div class="modal-backdrop" id="cropModal">
     <div class="modal-box">
       <div class="card-title">
@@ -1080,7 +1057,6 @@
         pin: DEFAULT_PIN,
         unlocked: false,
         students: [],
-        // attendance[date][studentId] = { before: 'present'|'absent'|'late'|'', after: 'present'|'absent'|'late'|'' }
         attendance: {},
         cloud: {
           url: "",
@@ -1092,11 +1068,10 @@
 
     let state = loadState();
     let currentDate = todayISO();
-    let currentSlot = "before"; // 'before' | 'after'
+    let currentSlot = "before";
     let currentCourseFilter = "ALL";
     let draftStudentPhoto = defaultAvatarDataUrl();
 
-    // État du recadrage photo
     let cropImg = new Image();
     let cropScale = 1;
     let cropOffsetX = 0;
@@ -1114,6 +1089,8 @@
         return {
           ...createInitialState(),
           ...parsed,
+          students: Array.isArray(parsed.students) ? parsed.students : [],
+          attendance: parsed.attendance && typeof parsed.attendance === "object" ? parsed.attendance : {},
           cloud: { ...createInitialState().cloud, ...(parsed.cloud || {}) }
         };
       } catch (e) {
@@ -1139,6 +1116,23 @@
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    function goToTab(tabId) {
+      const targetTab = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+      if (targetTab) {
+        targetTab.click();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function handleRubriqueNav(tabId, fallbackSectionId) {
+      document.getElementById("rubriquesDrawer").classList.remove("open");
+      if (state.unlocked) {
+        goToTab(tabId);
+      } else {
+        scrollToSection(fallbackSectionId);
+      }
+    }
+
     function escapeHtml(str) {
       return String(str || "")
         .replace(/&/g, "&amp;")
@@ -1147,21 +1141,23 @@
         .replace(/"/g, "&quot;");
     }
 
-    // Authentification & persistance session
     function renderAuthView() {
       const publicView = document.getElementById("publicView");
       const appView = document.getElementById("appView");
       const btnLock = document.getElementById("btnLockApp");
+      const btnQuickAdd = document.getElementById("btnQuickAddStudent");
 
       if (state.unlocked) {
         publicView.classList.add("hidden");
         appView.classList.remove("hidden");
         btnLock.classList.remove("hidden");
+        btnQuickAdd.classList.remove("hidden");
         refreshAllAppUI();
       } else {
         publicView.classList.remove("hidden");
         appView.classList.add("hidden");
         btnLock.classList.add("hidden");
+        btnQuickAdd.classList.add("hidden");
       }
     }
 
@@ -1195,7 +1191,6 @@
       document.getElementById("rubriquesDrawer").classList.remove("open");
     });
 
-    // Onglets internes
     document.querySelectorAll(".nav-tab").forEach((tab) => {
       tab.addEventListener("click", () => {
         document.querySelectorAll(".nav-tab").forEach((t) => t.classList.remove("active"));
@@ -1207,7 +1202,6 @@
       });
     });
 
-    // Logique double appel & retardataires
     function getRecord(dateStr, studentId) {
       if (!state.attendance[dateStr]) state.attendance[dateStr] = {};
       if (!state.attendance[dateStr][studentId]) {
@@ -1220,7 +1214,6 @@
       const rec = state.attendance[dateStr]?.[studentId];
       if (!rec) return false;
       if (rec.before === "late" || rec.after === "late") return true;
-      // Absent ou non présent avant le cours, mais présent après le cours => retardataire
       if (rec.before !== "present" && rec.after === "present") return true;
       return false;
     }
@@ -1312,7 +1305,16 @@
       const list = getFilteredStudents();
 
       if (list.length === 0) {
-        container.innerHTML = `<p class="student-meta">Aucun étudiant trouvé. Ajoutez des étudiants dans l'onglet <strong>Étudiants</strong>.</p>`;
+        container.innerHTML = `
+          <div style="padding:12px 0;">
+            <p class="student-meta" style="margin-bottom:10px;">
+              Aucun étudiant trouvé. Ajoutez des étudiants dans l'onglet <strong>Étudiants</strong>.
+            </p>
+            <button type="button" class="btn btn-primary btn-sm" onclick="goToTab('tab-etudiants')">
+              ➕ Aller à l'onglet Étudiants
+            </button>
+          </div>
+        `;
         return;
       }
 
@@ -1416,7 +1418,7 @@
     function selectDateFromCalendar(dStr) {
       currentDate = dStr;
       document.getElementById("callDateInput").value = dStr;
-      document.querySelector('[data-tab="tab-appel"]').click();
+      goToTab("tab-appel");
       refreshAttendanceAndStats();
       showToast(`Appel du ${dStr} ouvert.`);
     }
@@ -1475,7 +1477,6 @@
       refreshAttendanceAndStats();
     }
 
-    // Événements date, créneau et actions groupées
     document.getElementById("callDateInput").addEventListener("change", (e) => {
       if (e.target.value) {
         currentDate = e.target.value;
@@ -1526,7 +1527,6 @@
       showToast("Tous les étudiants filtrés marqués Absents.");
     });
 
-    // Gestion des étudiants (Ajout, Modification, Suppression)
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const editId = document.getElementById("editingStudentId").value;
@@ -1601,7 +1601,6 @@
 
     document.getElementById("btnCancelEditStudent").addEventListener("click", resetStudentForm);
 
-    // Recadrage & Compression directe de photo
     const cropModal = document.getElementById("cropModal");
     const cropCanvas = document.getElementById("cropCanvas");
     const cropCtx = cropCanvas.getContext("2d");
@@ -1702,7 +1701,6 @@
     });
 
     document.getElementById("btnConfirmCrop").addEventListener("click", () => {
-      // Compression directe en 200x200 JPEG léger pour ne pas alourdir l'app / APK
       const outCanvas = document.createElement("canvas");
       const outSize = 200;
       outCanvas.width = outSize;
@@ -1731,7 +1729,6 @@
       showToast("Photo ajustée et compressée.");
     });
 
-    // Modification du code d'accès
     document.getElementById("changePinForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const val = document.getElementById("newPinInput").value.trim();
@@ -1748,7 +1745,6 @@
       showToast(`Code réinitialisé sur ${DEFAULT_PIN}`);
     });
 
-    // Export CSV & Sauvegarde JSON
     function exportAttendanceCsv() {
       const rows = [["Date", "Cours", "Compte/Matricule", "Nom complet", "Avant le cours", "Après le cours", "Retardataire", "Taux global (%)"]];
       const dates = Object.keys(state.attendance).sort();
@@ -1831,7 +1827,6 @@
       e.target.value = "";
     });
 
-    // Synchronisation Cloud Supabase optionnelle
     document.getElementById("btnSaveCloudConfig").addEventListener("click", () => {
       state.cloud.url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
       state.cloud.key = document.getElementById("sbKeyInput").value.trim();
@@ -1913,7 +1908,6 @@
       }
     });
 
-    // Démarrage
     renderAuthView();
   </script>
 </body>
