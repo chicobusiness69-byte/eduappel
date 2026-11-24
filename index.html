@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#071324" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="EduAppel" />
+  <link rel="manifest" href="manifest.json" />
+  <title>EduAppel — Équipe CBK</title>
+  <style>
+    :root {
+      --bg-main: #060f1d;
+      --bg-card: #0c1b33;
+      --bg-card-2: #112442;
+      --bg-input: #081529;
+      --border: rgba(56, 189, 248, 0.18);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #00d2b8;
+      --accent-2: #0ea5e9;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --rdc-blue: #007fff;
+      --rdc-yellow: #fcd116;
+      --rdc-red: #ce1126;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #0e294d 0%, var(--bg-main) 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    /* Barre tricolore style CBK */
+    .flag-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      height: 5px;
+      width: 100%;
+    }
+    .flag-bar span:nth-child(1) { background: var(--rdc-blue); }
+    .flag-bar span:nth-child(2) { background: var(--rdc-yellow); }
+    .flag-bar span:nth-child(3) { background: var(--rdc-red); }
+
+    /* Header style CBK */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(6, 15, 29, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #04101f;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(0, 210, 184, 0.3);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px;
+    }
+
+    /* Boutons */
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 15px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: transform 0.14s ease, opacity 0.14s ease, background 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #059669);
+      color: #041318;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card-2);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-whatsapp {
+      background: #16a34a;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.16);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .btn-warning {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .btn-success-soft {
+      background: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 0.8rem;
+      border-radius: 10px;
+    }
+
+    /* Cartes */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Page d'accueil / Connexion */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 210, 184, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0, 210, 184, 0.3);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-bottom: 16px;
+    }
+
+    .credits-box {
+      background: var(--bg-card-2);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+    }
+
+    .credits-box strong {
+      color: #ffffff;
+    }
+
+    /* Champs formulaire */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    input[type="url"],
+    input[type="range"],
+    select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: var(--text-main);
+      border-radius: 11px;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Menu rubriques dépliable */
+    .rubriques-drawer {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      display: none;
+    }
+
+    .rubriques-drawer.open {
+      display: block;
+    }
+
+    .rubriques-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* FAQ & À propos */
+    .accordion-item {
+      background: var(--bg-card-2);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .accordion-q {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .accordion-a {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* Navigation interne app */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+
+    .nav-tab {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: #04101f;
+      border-color: transparent;
+    }
+
+    /* KPI / Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Sélecteur créneau Avant / Après */
+    .slot-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .slot-btn {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-card-2);
+      color: var(--text-main);
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .slot-btn.active {
+      background: rgba(0, 210, 184, 0.18);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Liste étudiants */
+    .student-row {
+      background: var(--bg-card-2);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 210px;
+      flex: 1;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      background: #071426;
+      flex-shrink: 0;
+    }
+
+    .student-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .student-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .badge-pct {
+      background: rgba(14, 165, 233, 0.18);
+      color: #7dd3fc;
+    }
+
+    .badge-late {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .status-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .status-btn {
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .status-btn.active-present {
+      background: rgba(16, 185, 129, 0.25);
+      color: #6ee7b7;
+      border-color: var(--success);
+    }
+
+    .status-btn.active-absent {
+      background: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      border-color: var(--danger);
+    }
+
+    .status-btn.active-late {
+      background: rgba(245, 158, 11, 0.25);
+      color: #fcd34d;
+      border-color: var(--warning);
+    }
+
+    /* Calendrier */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .cal-day-card {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .cal-day-card:hover {
+      border-color: var(--accent);
+    }
+
+    .cal-date {
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .cal-pct {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 3px 0;
+    }
+
+    .cal-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal recadrage photo */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 14, 0.84);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow);
+    }
+
+    .crop-stage {
+      width: 240px;
+      height: 240px;
+      margin: 12px auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      background: #040b16;
+      position: relative;
+      touch-action: none;
+    }
+
+    .crop-stage canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f294a;
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      z-index: 200;
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      header, .nav-tabs, .no-print, .rubriques-drawer {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+      .card, .student-row, .stat-box, .cal-day-card {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #cbd5e1;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="flag-bar"><span></span><span></span><span></span></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand-box">
+        <div class="brand-logo">EA</div>
+        <div>
+          <div class="brand-title">EduAppel</div>
+          <div class="brand-sub">Équipe CBK • Registre Intelligent</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btnToggleRubriques">☰ Rubriques</button>
+        <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
+          💬 Joindre l'équipe CBK
+        </a>
+        <button class="btn btn-danger btn-sm hidden" id="btnLockApp">🔒 Déconnexion</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Menu Rubriques (FAQ, À propos, Développeur, Installation) -->
+    <div class="rubriques-drawer" id="rubriquesDrawer">
+      <div class="card-title">
+        <span>Rubriques d'EduAppel</span>
+        <button class="btn btn-secondary btn-sm" id="btnCloseRubriques">Fermer ✕</button>
+      </div>
+      <div class="rubriques-grid">
+        <button class="btn btn-secondary" onclick="scrollToSection('section-auth')">🔐 Connexion & Code</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('section-faq')">❓ FAQ</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('section-about')">ℹ️ À propos & Développeur</button>
+        <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
+          📲 Contacter Équipe CBK
+        </a>
+      </div>
+    </div>
+
+    <!-- ================= VUE PUBLIQUE / ACCUEIL & CONNEXION ================= -->
+    <div id="publicView">
+      <div class="hero-grid" id="section-auth">
+        <div class="card">
+          <div class="hero-badge">🎓 Cadeau Académique • Double Appel (+100 Jours)</div>
+          <h1 class="hero-title">EduAppel — Registre d'appel complet & sécurisé</h1>
+          <p class="hero-desc">
+            Application conçue pour le suivi rigoureux des présences en classe avec double contrôle
+            (<strong>Avant le cours</strong> et <strong>Après le cours</strong>), détection automatique des retardataires,
+            calendrier en pourcentages (%), photos recadrées et compressées, et persistance des données.
+          </p>
+
+          <div class="credits-box">
+            <div><strong>Créé par :</strong> l’équipe CBK</div>
+            <div><strong>Développeur :</strong> CHEKINAT MOFONGA</div>
+            <div><strong>Code d’accès par défaut :</strong> <code>CT VUMISA 69@</code> (modifiable après connexion)</div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;" class="no-print">
+            <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
+              💬 Joindre l'équipe CBK
+            </a>
+            <button class="btn btn-secondary" onclick="scrollToSection('section-faq')">Voir la FAQ</button>
+            <button class="btn btn-secondary" onclick="scrollToSection('section-about')">À propos</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>🔐 Accès au Registre</span>
+          </div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Entrez le code d'accès pour ouvrir le registre. Toutes vos modifications restent enregistrées même après déconnexion.
+          </p>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="accessCodeInput">Code d'accès</label>
+              <input
+                type="password"
+                id="accessCodeInput"
+                placeholder="Ex: CT VUMISA 69@"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+              🔓 Déverrouiller EduAppel
+            </button>
+          </form>
+          <p class="student-meta" style="margin-top:10px;">
+            Astuce : Si vous avez oublié un code personnalisé, saisissez <strong>CT VUMISA 69@</strong> ou réinitialisez-le dans les réglages après connexion.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ sur la page d'accueil -->
+      <div class="card" id="section-faq">
+        <div class="card-title"><span>❓ Foire Aux Questions (FAQ)</span></div>
+
+        <div class="accordion-item">
+          <div class="accordion-q">1. Comment fonctionne le double appel « Avant le cours » et « Après le cours » ?</div>
+          <div class="accordion-a">
+            Chaque journée d'appel possède deux moments : <strong>Avant le cours</strong> et <strong>Après le cours</strong>. Si un étudiant est Absent (ou non présent) avant le cours mais Présent après le cours, il est automatiquement repéré comme <strong>Retardataire</strong> et affiché dans la liste des retardataires.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-q">2. Les données restent-elles après déconnexion et sur plus de 100 jours ?</div>
+          <div class="accordion-a">
+            Oui. La déconnexion verrouille uniquement l'écran. Les étudiants, photos compressées, dates, pourcentages (%) et listes de retardataires restent enregistrés sans limite bloquée à 50 ou 100 jours, avec export CSV, sauvegarde JSON et synchronisation Cloud optionnelle.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-q">3. Comment fonctionne la photo de profil et la compression ?</div>
+          <div class="accordion-a">
+            Vous pouvez prendre une photo directement avec la caméra ou importer depuis la galerie, ajuster/zoomer/centrer le cadrage, puis valider : l'application compresse automatiquement l'image pour garder l'application rapide et légère.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-q">4. Comment installer EduAppel sur Android ?</div>
+          <div class="accordion-a">
+            Ouvrez la page dans Chrome sur Android puis choisissez <strong>Installer l'application</strong> / <strong>Ajouter à l'écran d'accueil</strong> (PWA), ou générez un fichier <code>.apk</code> via un outil d'empaquetage web une fois l'application hébergée en ligne.
+          </div>
+        </div>
+      </div>
+
+      <!-- À propos sur la page d'accueil -->
+      <div class="card" id="section-about">
+        <div class="card-title"><span>ℹ️ À propos d'EduAppel</span></div>
+        <p style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">
+          <strong>EduAppel</strong> est une application web progressive (PWA) dédiée à la gestion académique des présences,
+          pensée pour offrir rapidité, fiabilité et clarté au quotidien.
+        </p>
+        <ul style="margin-left:18px; color:var(--text-muted); font-size:0.88rem; margin-bottom:14px;">
+          <li><strong>Créé par :</strong> l’équipe CBK</li>
+          <li><strong>Développeur :</strong> CHEKINAT MOFONGA</li>
+          <li><strong>Contact officiel :</strong> <a href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener" style="color:var(--accent);">https://wa.me/message/2DFDG7JRKVQQL1</a></li>
+        </ul>
+        <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
+          💬 Joindre le développeur / l'équipe CBK
+        </a>
+      </div>
+    </div>
+
+    <!-- ================= VUE CONNECTÉE (APPLICATION COMPLÈTE) ================= -->
+    <div id="appView" class="hidden">
+      <div class="nav-tabs no-print">
+        <button class="nav-tab active" data-tab="tab-appel">📋 Appel & Retardataires</button>
+        <button class="nav-tab" data-tab="tab-calendrier">📅 Calendrier (%)</button>
+        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
+        <button class="nav-tab" data-tab="tab-sauvegarde">💾 Sauvegarde & Réglages</button>
+      </div>
+
+      <!-- Statistiques globales -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="statStudentsCount">0</div>
+          <div class="stat-lbl">Étudiants enregistrés</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statDaysCount">0</div>
+          <div class="stat-lbl">Jours d'appel enregistrés</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statDayPct">0%</div>
+          <div class="stat-lbl">Présence du jour (%)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statLateCount" style="color:var(--warning);">0</div>
+          <div class="stat-lbl">Retardataires (jour / total)</div>
+        </div>
+      </div>
+
+      <!-- ONGLET 1 : APPEL DU JOUR + LISTE DES RETARDATAIRES EN DESSOUS -->
+      <div id="tab-appel" class="tab-panel">
+        <div class="card">
+          <div class="card-title">
+            <span>📋 Prise d'Appel Quotidienne</span>
+            <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" id="btnExportCsv">📊 Export CSV / Excel</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="form-group">
+              <label for="callDateInput">Date de l'appel</label>
+              <input type="date" id="callDateInput" />
+            </div>
+            <div class="form-group">
+              <label for="callCourseFilter">Cours / Promotion</label>
+              <select id="callCourseFilter">
+                <option value="ALL">Tous les cours / promotions</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="slot-switch no-print">
+            <button type="button" class="slot-btn active" id="slotBeforeBtn" data-slot="before">
+              🌅 1. Appel AVANT le cours
+            </button>
+            <button type="button" class="slot-btn" id="slotAfterBtn" data-slot="after">
+              🌇 2. Appel APRÈS le cours
+            </button>
+          </div>
+
+          <div class="two-col no-print" style="margin-bottom:12px;">
+            <input type="text" id="searchAttendanceInput" placeholder="🔎 Rechercher par nom ou compte/matricule..." />
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn btn-success-soft btn-sm" id="btnMarkAllPresent" style="flex:1;">
+                ✅ Tous Présents (créneau)
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" id="btnMarkAllAbsent" style="flex:1;">
+                🚫 Tous Absents (créneau)
+              </button>
+            </div>
+          </div>
+
+          <div id="attendanceListContainer"></div>
+        </div>
+
+        <!-- Liste dédiée des retardataires en dessous -->
+        <div class="card" id="lateSectionCard">
+          <div class="card-title">
+            <span>⏰ Liste des Retardataires</span>
+            <select id="lateScopeSelect" style="width:auto; padding:6px 10px; font-size:0.82rem;">
+              <option value="day">Date sélectionnée</option>
+              <option value="all">Tout l'historique</option>
+            </select>
+          </div>
+          <p class="student-meta" style="margin-bottom:10px;">
+            Inclut les étudiants marqués <strong>Retard</strong> ou détectés automatiquement (Absent/non présent <strong>Avant le cours</strong> puis Présent <strong>Après le cours</strong>).
+          </p>
+          <div id="lateListContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : CALENDRIER EN % -->
+      <div id="tab-calendrier" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title">
+            <span>📅 Calendrier des Jours d'Appel & Pourcentages (%)</span>
+            <span class="student-meta">Cliquez sur un jour pour ouvrir son appel</span>
+          </div>
+          <div id="calendarGridContainer" class="calendar-grid"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : GESTION DES ÉTUDIANTS -->
+      <div id="tab-etudiants" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title">
+            <span id="studentFormTitle">➕ Ajouter / Modifier un Étudiant</span>
+            <button type="button" class="btn btn-secondary btn-sm hidden" id="btnCancelEditStudent">Annuler édition</button>
+          </div>
+
+          <form id="studentForm">
+            <input type="hidden" id="editingStudentId" />
+            <div class="two-col">
+              <div class="form-group">
+                <label for="studentNameInput">Nom complet *</label>
+                <input type="text" id="studentNameInput" placeholder="Ex: Kabeya Jean" required />
+              </div>
+              <div class="form-group">
+                <label for="studentAccountInput">Numéro de compte / Matricule *</label>
+                <input type="text" id="studentAccountInput" placeholder="Ex: MAT-2026-014" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentCourseInput">Cours / Promotion *</label>
+              <input type="text" id="studentCourseInput" placeholder="Ex: L1 Informatique / Python" required />
+            </div>
+
+            <div class="form-group">
+              <label>Photo de profil (Capture directe ou Galerie + Ajustement & Compression auto)</label>
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <img id="studentPreviewImg" class="avatar" src="" alt="Aperçu photo" />
+                <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
+                  📷 Caméra directe
+                  <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" />
+                </label>
+                <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
+                  🖼️ Importer galerie
+                  <input type="file" id="galleryInput" accept="image/*" class="hidden" />
+                </label>
+                <button type="button" class="btn btn-warning btn-sm hidden" id="btnReCropCurrent">✂️ Réajuster photo</button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSaveStudent">
+              💾 Enregistrer l'étudiant
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>👨‍🎓 Répertoire des Étudiants & Taux de Présence (%)</span>
+            <input type="text" id="searchRosterInput" placeholder="Filtrer..." style="max-width:220px; padding:7px 11px; font-size:0.84rem;" />
+          </div>
+          <div id="rosterListContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 4 : SÉCURITÉ, SAUVEGARDE, CLOUD & RÉGLAGES -->
+      <div id="tab-sauvegarde" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>🔑 Modifier le Code d'Accès</span></div>
+          <form id="changePinForm" class="two-col" style="align-items:end;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="newPinInput">Nouveau code d'accès</label>
+              <input type="text" id="newPinInput" placeholder="Entrez un nouveau code" required />
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="submit" class="btn btn-primary" style="flex:1;">Mettre à jour le code</button>
+              <button type="button" class="btn btn-secondary" id="btnResetDefaultPin">Défaut</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>💾 Sauvegarde Locale, Export & Transfert (Nouveau Téléphone)</span></div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Téléchargez une sauvegarde complète (JSON) pour l'envoyer sur WhatsApp/Drive et la restaurer sur un autre téléphone, ou exportez en CSV/Excel.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary" id="btnDownloadJson">⬇️ Télécharger sauvegarde (.json)</button>
+            <label class="btn btn-secondary" style="cursor:pointer; margin:0;">
+              ⬆️ Restaurer une sauvegarde (.json)
+              <input type="file" id="importJsonInput" accept="application/json,.json" class="hidden" />
+            </label>
+            <button type="button" class="btn btn-secondary" id="btnExportCsv2">📊 Exporter présences (CSV)</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>☁️ Synchronisation Cloud (Supabase — Optionnel)</span></div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Si vous configurez une table <code>eduappel_sync</code> (colonnes <code>id</code> texte primaire et <code>payload</code> jsonb) dans votre projet Supabase, vos données peuvent aussi être poussées ou récupérées à distance.
+          </p>
+          <div class="two-col">
+            <div class="form-group">
+              <label for="sbUrlInput">URL Supabase</label>
+              <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
+            </div>
+            <div class="form-group">
+              <label for="sbKeyInput">Clé API (anon public)</label>
+              <input type="password" id="sbKeyInput" placeholder="eyJ..." />
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary" id="btnSaveCloudConfig">💾 Enregistrer config Cloud</button>
+            <button type="button" class="btn btn-primary" id="btnPushCloud">☁️ Envoyer vers le Cloud</button>
+            <button type="button" class="btn btn-secondary" id="btnPullCloud">⬇️ Récupérer depuis le Cloud</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL AJUSTEMENT / RECADRAGE & COMPRESSION PHOTO ================= -->
+  <div class="modal-backdrop" id="cropModal">
+    <div class="modal-box">
+      <div class="card-title">
+        <span>✂️ Ajuster la photo de profil</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseCrop">✕</button>
+      </div>
+      <p class="student-meta" style="text-align:center;">
+        Glissez l'image pour centrer le visage, ajustez le zoom ou la rotation.
+      </p>
+
+      <div class="crop-stage">
+        <canvas id="cropCanvas" width="240" height="240"></canvas>
+      </div>
+
+      <div class="form-group">
+        <label for="cropZoomRange">Zoom : <span id="cropZoomVal">100%</span></label>
+        <input type="range" id="cropZoomRange" min="1" max="3" step="0.05" value="1" />
+      </div>
+
+      <div style="display:flex; gap:8px; margin-bottom:12px;">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnRotateLeft" style="flex:1;">↺ -90°</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnRotateRight" style="flex:1;">↻ +90°</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnResetCrop" style="flex:1;">Réinitialiser</button>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="btnConfirmCrop" style="width:100%;">
+        ✅ Valider & Compresser la photo
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toastBox"></div>
+
+  <script>
+    const DEFAULT_PIN = "CT VUMISA 69@";
+    const STORAGE_KEY = "eduappel_cbk_data_v1";
+
+    function todayISO() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    function defaultAvatarDataUrl() {
+      const c = document.createElement("canvas");
+      c.width = 160;
+      c.height = 160;
+      const ctx = c.getContext("2d");
+      ctx.fillStyle = "#13294b";
+      ctx.fillRect(0, 0, 160, 160);
+      ctx.fillStyle = "#00d2b8";
+      ctx.beginPath();
+      ctx.arc(80, 62, 28, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(80, 128, 46, 28, 0, 0, Math.PI * 2);
+      ctx.fill();
+      return c.toDataURL("image/jpeg", 0.72);
+    }
+
+    function createInitialState() {
+      return {
+        pin: DEFAULT_PIN,
+        unlocked: false,
+        students: [],
+        // attendance[date][studentId] = { before: 'present'|'absent'|'late'|'', after: 'present'|'absent'|'late'|'' }
+        attendance: {},
+        cloud: {
+          url: "",
+          key: "",
+          recordId: "prof_principal"
+        }
+      };
+    }
+
+    let state = loadState();
+    let currentDate = todayISO();
+    let currentSlot = "before"; // 'before' | 'after'
+    let currentCourseFilter = "ALL";
+    let draftStudentPhoto = defaultAvatarDataUrl();
+
+    // État du recadrage photo
+    let cropImg = new Image();
+    let cropScale = 1;
+    let cropOffsetX = 0;
+    let cropOffsetY = 0;
+    let cropRotation = 0;
+    let isDraggingCrop = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return createInitialState();
+        const parsed = JSON.parse(raw);
+        return {
+          ...createInitialState(),
+          ...parsed,
+          cloud: { ...createInitialState().cloud, ...(parsed.cloud || {}) }
+        };
+      } catch (e) {
+        return createInitialState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toastBox");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2800);
+    }
+
+    function scrollToSection(id) {
+      document.getElementById("rubriquesDrawer").classList.remove("open");
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // Authentification & persistance session
+    function renderAuthView() {
+      const publicView = document.getElementById("publicView");
+      const appView = document.getElementById("appView");
+      const btnLock = document.getElementById("btnLockApp");
+
+      if (state.unlocked) {
+        publicView.classList.add("hidden");
+        appView.classList.remove("hidden");
+        btnLock.classList.remove("hidden");
+        refreshAllAppUI();
+      } else {
+        publicView.classList.remove("hidden");
+        appView.classList.add("hidden");
+        btnLock.classList.add("hidden");
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const entered = document.getElementById("accessCodeInput").value.trim();
+      const validPin = state.pin || DEFAULT_PIN;
+      if (entered === validPin || entered === DEFAULT_PIN) {
+        state.unlocked = true;
+        saveState();
+        document.getElementById("accessCodeInput").value = "";
+        showToast("Bienvenue sur EduAppel !");
+        renderAuthView();
+      } else {
+        showToast("Code d'accès incorrect.");
+      }
+    });
+
+    document.getElementById("btnLockApp").addEventListener("click", () => {
+      state.unlocked = false;
+      saveState();
+      showToast("Session verrouillée. Données conservées.");
+      renderAuthView();
+    });
+
+    document.getElementById("btnToggleRubriques").addEventListener("click", () => {
+      document.getElementById("rubriquesDrawer").classList.toggle("open");
+    });
+
+    document.getElementById("btnCloseRubriques").addEventListener("click", () => {
+      document.getElementById("rubriquesDrawer").classList.remove("open");
+    });
+
+    // Onglets internes
+    document.querySelectorAll(".nav-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".nav-tab").forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        const targetId = tab.getAttribute("data-tab");
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.classList.toggle("hidden", panel.id !== targetId);
+        });
+      });
+    });
+
+    // Logique double appel & retardataires
+    function getRecord(dateStr, studentId) {
+      if (!state.attendance[dateStr]) state.attendance[dateStr] = {};
+      if (!state.attendance[dateStr][studentId]) {
+        state.attendance[dateStr][studentId] = { before: "", after: "" };
+      }
+      return state.attendance[dateStr][studentId];
+    }
+
+    function isLateOnDate(dateStr, studentId) {
+      const rec = state.attendance[dateStr]?.[studentId];
+      if (!rec) return false;
+      if (rec.before === "late" || rec.after === "late") return true;
+      // Absent ou non présent avant le cours, mais présent après le cours => retardataire
+      if (rec.before !== "present" && rec.after === "present") return true;
+      return false;
+    }
+
+    function computeStudentAttendancePct(studentId) {
+      let totalSlots = 0;
+      let earned = 0;
+
+      Object.keys(state.attendance).forEach((dateStr) => {
+        const rec = state.attendance[dateStr]?.[studentId];
+        if (!rec) return;
+        if (rec.before) {
+          totalSlots += 1;
+          if (rec.before === "present") earned += 1;
+          else if (rec.before === "late") earned += 0.5;
+        }
+        if (rec.after) {
+          totalSlots += 1;
+          if (rec.after === "present") earned += 1;
+          else if (rec.after === "late") earned += 0.5;
+        }
+      });
+
+      if (totalSlots === 0) return 0;
+      return Math.round((earned / totalSlots) * 100);
+    }
+
+    function computeDateAttendancePct(dateStr, filteredStudentIds) {
+      const dayData = state.attendance[dateStr];
+      if (!dayData || filteredStudentIds.length === 0) return 0;
+
+      let totalSlots = 0;
+      let earned = 0;
+
+      filteredStudentIds.forEach((sid) => {
+        const rec = dayData[sid];
+        if (!rec) return;
+        if (rec.before) {
+          totalSlots += 1;
+          if (rec.before === "present") earned += 1;
+          else if (rec.before === "late") earned += 0.5;
+        }
+        if (rec.after) {
+          totalSlots += 1;
+          if (rec.after === "present") earned += 1;
+          else if (rec.after === "late") earned += 0.5;
+        }
+      });
+
+      if (totalSlots === 0) return 0;
+      return Math.round((earned / totalSlots) * 100);
+    }
+
+    function getFilteredStudents() {
+      const query = (document.getElementById("searchAttendanceInput").value || "").trim().toLowerCase();
+      return state.students.filter((st) => {
+        const matchCourse = currentCourseFilter === "ALL" || st.course === currentCourseFilter;
+        const matchQuery =
+          !query ||
+          st.name.toLowerCase().includes(query) ||
+          st.account.toLowerCase().includes(query) ||
+          st.course.toLowerCase().includes(query);
+        return matchCourse && matchQuery;
+      });
+    }
+
+    function setStudentStatus(studentId, status) {
+      const rec = getRecord(currentDate, studentId);
+      rec[currentSlot] = rec[currentSlot] === status ? "" : status;
+      saveState();
+      refreshAttendanceAndStats();
+    }
+
+    function renderCourseFilterOptions() {
+      const sel = document.getElementById("callCourseFilter");
+      const courses = [...new Set(state.students.map((s) => s.course).filter(Boolean))];
+      sel.innerHTML = `<option value="ALL">Tous les cours / promotions</option>` +
+        courses.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+      if (courses.includes(currentCourseFilter)) {
+        sel.value = currentCourseFilter;
+      } else {
+        currentCourseFilter = "ALL";
+        sel.value = "ALL";
+      }
+    }
+
+    function renderAttendanceList() {
+      const container = document.getElementById("attendanceListContainer");
+      const list = getFilteredStudents();
+
+      if (list.length === 0) {
+        container.innerHTML = `<p class="student-meta">Aucun étudiant trouvé. Ajoutez des étudiants dans l'onglet <strong>Étudiants</strong>.</p>`;
+        return;
+      }
+
+      container.innerHTML = list.map((st) => {
+        const rec = getRecord(currentDate, st.id);
+        const activeVal = rec[currentSlot] || "";
+        const pct = computeStudentAttendancePct(st.id);
+        const lateNow = isLateOnDate(currentDate, st.id);
+
+        return `
+          <div class="student-row">
+            <div class="student-info">
+              <img class="avatar" src="${st.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(st.name)}" />
+              <div>
+                <div class="student-name">${escapeHtml(st.name)}</div>
+                <div class="student-meta">Compte : <strong>${escapeHtml(st.account)}</strong> • ${escapeHtml(st.course)}</div>
+                <div class="student-meta">Avant: <strong>${rec.before || "—"}</strong> | Après: <strong>${rec.after || "—"}</strong></div>
+                <span class="badge badge-pct">Présence : ${pct}%</span>
+                ${lateNow ? `<span class="badge badge-late">⏰ Retardataire</span>` : ""}
+              </div>
+            </div>
+            <div class="status-actions no-print">
+              <button type="button" class="status-btn ${activeVal === "present" ? "active-present" : ""}" onclick="setStudentStatus('${st.id}', 'present')">✅ Présent</button>
+              <button type="button" class="status-btn ${activeVal === "absent" ? "active-absent" : ""}" onclick="setStudentStatus('${st.id}', 'absent')">🚫 Absent</button>
+              <button type="button" class="status-btn ${activeVal === "late" ? "active-late" : ""}" onclick="setStudentStatus('${st.id}', 'late')">⏰ Retard</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderLateList() {
+      const container = document.getElementById("lateListContainer");
+      const scope = document.getElementById("lateScopeSelect").value;
+      const dates = scope === "day" ? [currentDate] : Object.keys(state.attendance).sort().reverse();
+
+      const items = [];
+      dates.forEach((dStr) => {
+        state.students.forEach((st) => {
+          if (currentCourseFilter !== "ALL" && st.course !== currentCourseFilter) return;
+          if (isLateOnDate(dStr, st.id)) {
+            const rec = state.attendance[dStr]?.[st.id] || {};
+            let reason = "Retard signalé";
+            if (rec.before !== "present" && rec.after === "present") {
+              reason = "Absent/non présent Avant cours → Présent Après cours";
+            } else if (rec.before === "late") {
+              reason = "Retard Avant le cours";
+            } else if (rec.after === "late") {
+              reason = "Retard Après le cours";
+            }
+            items.push({ date: dStr, student: st, reason });
+          }
+        });
+      });
+
+      document.getElementById("statLateCount").textContent = items.length;
+
+      if (items.length === 0) {
+        container.innerHTML = `<p class="student-meta">Aucun retardataire enregistré pour cette sélection.</p>`;
+        return;
+      }
+
+      container.innerHTML = items.map((item) => `
+        <div class="student-row">
+          <div class="student-info">
+            <img class="avatar" src="${item.student.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(item.student.name)}" />
+            <div>
+              <div class="student-name">${escapeHtml(item.student.name)} <span class="badge badge-late">⏰ Retardataire</span></div>
+              <div class="student-meta">Compte : <strong>${escapeHtml(item.student.account)}</strong> • Date : <strong>${item.date}</strong></div>
+              <div class="student-meta">${escapeHtml(item.reason)} • Taux global : <strong>${computeStudentAttendancePct(item.student.id)}%</strong></div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById("calendarGridContainer");
+      const datesSet = new Set(Object.keys(state.attendance));
+      datesSet.add(currentDate);
+      const sortedDates = [...datesSet].sort().reverse();
+
+      const studentIds = state.students
+        .filter((s) => currentCourseFilter === "ALL" || s.course === currentCourseFilter)
+        .map((s) => s.id);
+
+      grid.innerHTML = sortedDates.map((dStr) => {
+        const pct = computeDateAttendancePct(dStr, studentIds);
+        const dayObj = state.attendance[dStr] || {};
+        const countRecorded = Object.keys(dayObj).length;
+        return `
+          <div class="cal-day-card" onclick="selectDateFromCalendar('${dStr}')">
+            <div class="cal-date">${dStr}</div>
+            <div class="cal-pct">${pct}%</div>
+            <div class="cal-sub">${countRecorded} fiche(s) pointée(s)</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function selectDateFromCalendar(dStr) {
+      currentDate = dStr;
+      document.getElementById("callDateInput").value = dStr;
+      document.querySelector('[data-tab="tab-appel"]').click();
+      refreshAttendanceAndStats();
+      showToast(`Appel du ${dStr} ouvert.`);
+    }
+
+    function renderRoster() {
+      const container = document.getElementById("rosterListContainer");
+      const q = (document.getElementById("searchRosterInput").value || "").trim().toLowerCase();
+      const filtered = state.students.filter((s) =>
+        !q || s.name.toLowerCase().includes(q) || s.account.toLowerCase().includes(q) || s.course.toLowerCase().includes(q)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p class="student-meta">Aucun étudiant dans le répertoire.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map((st) => `
+        <div class="student-row">
+          <div class="student-info">
+            <img class="avatar" src="${st.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(st.name)}" />
+            <div>
+              <div class="student-name">${escapeHtml(st.name)}</div>
+              <div class="student-meta">Compte : <strong>${escapeHtml(st.account)}</strong> • ${escapeHtml(st.course)}</div>
+              <span class="badge badge-pct">Présence globale : ${computeStudentAttendancePct(st.id)}%</span>
+            </div>
+          </div>
+          <div class="status-actions">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="editStudent('${st.id}')">✏️ Modifier</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteStudent('${st.id}')">🗑️ Supprimer</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function refreshAttendanceAndStats() {
+      const studentIds = state.students
+        .filter((s) => currentCourseFilter === "ALL" || s.course === currentCourseFilter)
+        .map((s) => s.id);
+
+      document.getElementById("statStudentsCount").textContent = state.students.length;
+      document.getElementById("statDaysCount").textContent = Object.keys(state.attendance).length;
+      document.getElementById("statDayPct").textContent = `${computeDateAttendancePct(currentDate, studentIds)}%`;
+
+      renderAttendanceList();
+      renderLateList();
+      renderCalendar();
+      renderRoster();
+    }
+
+    function refreshAllAppUI() {
+      document.getElementById("callDateInput").value = currentDate;
+      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
+      document.getElementById("sbUrlInput").value = state.cloud.url || "";
+      document.getElementById("sbKeyInput").value = state.cloud.key || "";
+      renderCourseFilterOptions();
+      refreshAttendanceAndStats();
+    }
+
+    // Événements date, créneau et actions groupées
+    document.getElementById("callDateInput").addEventListener("change", (e) => {
+      if (e.target.value) {
+        currentDate = e.target.value;
+        refreshAttendanceAndStats();
+      }
+    });
+
+    document.getElementById("callCourseFilter").addEventListener("change", (e) => {
+      currentCourseFilter = e.target.value;
+      refreshAttendanceAndStats();
+    });
+
+    document.getElementById("slotBeforeBtn").addEventListener("click", () => {
+      currentSlot = "before";
+      document.getElementById("slotBeforeBtn").classList.add("active");
+      document.getElementById("slotAfterBtn").classList.remove("active");
+      renderAttendanceList();
+    });
+
+    document.getElementById("slotAfterBtn").addEventListener("click", () => {
+      currentSlot = "after";
+      document.getElementById("slotAfterBtn").classList.add("active");
+      document.getElementById("slotBeforeBtn").classList.remove("active");
+      renderAttendanceList();
+    });
+
+    document.getElementById("searchAttendanceInput").addEventListener("input", renderAttendanceList);
+    document.getElementById("searchRosterInput").addEventListener("input", renderRoster);
+    document.getElementById("lateScopeSelect").addEventListener("change", renderLateList);
+
+    document.getElementById("btnMarkAllPresent").addEventListener("click", () => {
+      getFilteredStudents().forEach((st) => {
+        const rec = getRecord(currentDate, st.id);
+        rec[currentSlot] = "present";
+      });
+      saveState();
+      refreshAttendanceAndStats();
+      showToast("Tous les étudiants filtrés marqués Présents.");
+    });
+
+    document.getElementById("btnMarkAllAbsent").addEventListener("click", () => {
+      getFilteredStudents().forEach((st) => {
+        const rec = getRecord(currentDate, st.id);
+        rec[currentSlot] = "absent";
+      });
+      saveState();
+      refreshAttendanceAndStats();
+      showToast("Tous les étudiants filtrés marqués Absents.");
+    });
+
+    // Gestion des étudiants (Ajout, Modification, Suppression)
+    document.getElementById("studentForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const editId = document.getElementById("editingStudentId").value;
+      const name = document.getElementById("studentNameInput").value.trim();
+      const account = document.getElementById("studentAccountInput").value.trim();
+      const course = document.getElementById("studentCourseInput").value.trim();
+
+      if (!name || !account || !course) return;
+
+      if (editId) {
+        const idx = state.students.findIndex((s) => s.id === editId);
+        if (idx !== -1) {
+          state.students[idx] = {
+            ...state.students[idx],
+            name,
+            account,
+            course,
+            photo: draftStudentPhoto
+          };
+        }
+        showToast("Étudiant modifié.");
+      } else {
+        state.students.push({
+          id: "stu_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+          name,
+          account,
+          course,
+          photo: draftStudentPhoto
+        });
+        showToast("Étudiant enregistré.");
+      }
+
+      saveState();
+      resetStudentForm();
+      renderCourseFilterOptions();
+      refreshAttendanceAndStats();
+    });
+
+    function editStudent(id) {
+      const st = state.students.find((s) => s.id === id);
+      if (!st) return;
+      document.getElementById("editingStudentId").value = st.id;
+      document.getElementById("studentNameInput").value = st.name;
+      document.getElementById("studentAccountInput").value = st.account;
+      document.getElementById("studentCourseInput").value = st.course;
+      draftStudentPhoto = st.photo || defaultAvatarDataUrl();
+      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
+      document.getElementById("studentFormTitle").textContent = "✏️ Modifier l'Étudiant";
+      document.getElementById("btnCancelEditStudent").classList.remove("hidden");
+      document.getElementById("btnReCropCurrent").classList.remove("hidden");
+      document.getElementById("studentForm").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function deleteStudent(id) {
+      if (!confirm("Supprimer cet étudiant du répertoire ?")) return;
+      state.students = state.students.filter((s) => s.id !== id);
+      saveState();
+      renderCourseFilterOptions();
+      refreshAttendanceAndStats();
+      showToast("Étudiant supprimé.");
+    }
+
+    function resetStudentForm() {
+      document.getElementById("editingStudentId").value = "";
+      document.getElementById("studentForm").reset();
+      draftStudentPhoto = defaultAvatarDataUrl();
+      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
+      document.getElementById("studentFormTitle").textContent = "➕ Ajouter / Modifier un Étudiant";
+      document.getElementById("btnCancelEditStudent").classList.add("hidden");
+      document.getElementById("btnReCropCurrent").classList.add("hidden");
+    }
+
+    document.getElementById("btnCancelEditStudent").addEventListener("click", resetStudentForm);
+
+    // Recadrage & Compression directe de photo
+    const cropModal = document.getElementById("cropModal");
+    const cropCanvas = document.getElementById("cropCanvas");
+    const cropCtx = cropCanvas.getContext("2d");
+
+    function openCropModalWithSrc(src) {
+      cropImg = new Image();
+      cropImg.onload = () => {
+        cropScale = 1;
+        cropOffsetX = 0;
+        cropOffsetY = 0;
+        cropRotation = 0;
+        document.getElementById("cropZoomRange").value = 1;
+        document.getElementById("cropZoomVal").textContent = "100%";
+        drawCropPreview();
+        cropModal.classList.add("open");
+      };
+      cropImg.src = src;
+    }
+
+    function drawCropPreview() {
+      const size = cropCanvas.width;
+      cropCtx.clearRect(0, 0, size, size);
+      cropCtx.fillStyle = "#040b16";
+      cropCtx.fillRect(0, 0, size, size);
+
+      cropCtx.save();
+      cropCtx.translate(size / 2 + cropOffsetX, size / 2 + cropOffsetY);
+      cropCtx.rotate((cropRotation * Math.PI) / 180);
+
+      const baseScale = Math.max(size / cropImg.width, size / cropImg.height);
+      const finalW = cropImg.width * baseScale * cropScale;
+      const finalH = cropImg.height * baseScale * cropScale;
+
+      cropCtx.drawImage(cropImg, -finalW / 2, -finalH / 2, finalW, finalH);
+      cropCtx.restore();
+    }
+
+    function handleImageFileSelected(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => openCropModalWithSrc(ev.target.result);
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    }
+
+    document.getElementById("cameraInput").addEventListener("change", handleImageFileSelected);
+    document.getElementById("galleryInput").addEventListener("change", handleImageFileSelected);
+    document.getElementById("btnReCropCurrent").addEventListener("click", () => {
+      openCropModalWithSrc(draftStudentPhoto);
+    });
+
+    cropCanvas.addEventListener("pointerdown", (e) => {
+      isDraggingCrop = true;
+      dragStartX = e.clientX - cropOffsetX;
+      dragStartY = e.clientY - cropOffsetY;
+    });
+
+    window.addEventListener("pointermove", (e) => {
+      if (!isDraggingCrop) return;
+      cropOffsetX = e.clientX - dragStartX;
+      cropOffsetY = e.clientY - dragStartY;
+      drawCropPreview();
+    });
+
+    window.addEventListener("pointerup", () => {
+      isDraggingCrop = false;
+    });
+
+    document.getElementById("cropZoomRange").addEventListener("input", (e) => {
+      cropScale = parseFloat(e.target.value);
+      document.getElementById("cropZoomVal").textContent = `${Math.round(cropScale * 100)}%`;
+      drawCropPreview();
+    });
+
+    document.getElementById("btnRotateLeft").addEventListener("click", () => {
+      cropRotation = (cropRotation - 90) % 360;
+      drawCropPreview();
+    });
+
+    document.getElementById("btnRotateRight").addEventListener("click", () => {
+      cropRotation = (cropRotation + 90) % 360;
+      drawCropPreview();
+    });
+
+    document.getElementById("btnResetCrop").addEventListener("click", () => {
+      cropScale = 1;
+      cropOffsetX = 0;
+      cropOffsetY = 0;
+      cropRotation = 0;
+      document.getElementById("cropZoomRange").value = 1;
+      document.getElementById("cropZoomVal").textContent = "100%";
+      drawCropPreview();
+    });
+
+    document.getElementById("btnCloseCrop").addEventListener("click", () => {
+      cropModal.classList.remove("open");
+    });
+
+    document.getElementById("btnConfirmCrop").addEventListener("click", () => {
+      // Compression directe en 200x200 JPEG léger pour ne pas alourdir l'app / APK
+      const outCanvas = document.createElement("canvas");
+      const outSize = 200;
+      outCanvas.width = outSize;
+      outCanvas.height = outSize;
+      const outCtx = outCanvas.getContext("2d");
+
+      const ratio = outSize / cropCanvas.width;
+      outCtx.fillStyle = "#081529";
+      outCtx.fillRect(0, 0, outSize, outSize);
+
+      outCtx.save();
+      outCtx.translate(outSize / 2 + cropOffsetX * ratio, outSize / 2 + cropOffsetY * ratio);
+      outCtx.rotate((cropRotation * Math.PI) / 180);
+
+      const baseScale = Math.max(outSize / cropImg.width, outSize / cropImg.height);
+      const finalW = cropImg.width * baseScale * cropScale;
+      const finalH = cropImg.height * baseScale * cropScale;
+
+      outCtx.drawImage(cropImg, -finalW / 2, -finalH / 2, finalW, finalH);
+      outCtx.restore();
+
+      draftStudentPhoto = outCanvas.toDataURL("image/jpeg", 0.65);
+      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
+      document.getElementById("btnReCropCurrent").classList.remove("hidden");
+      cropModal.classList.remove("open");
+      showToast("Photo ajustée et compressée.");
+    });
+
+    // Modification du code d'accès
+    document.getElementById("changePinForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = document.getElementById("newPinInput").value.trim();
+      if (!val) return;
+      state.pin = val;
+      saveState();
+      document.getElementById("newPinInput").value = "";
+      showToast("Nouveau code d'accès enregistré.");
+    });
+
+    document.getElementById("btnResetDefaultPin").addEventListener("click", () => {
+      state.pin = DEFAULT_PIN;
+      saveState();
+      showToast(`Code réinitialisé sur ${DEFAULT_PIN}`);
+    });
+
+    // Export CSV & Sauvegarde JSON
+    function exportAttendanceCsv() {
+      const rows = [["Date", "Cours", "Compte/Matricule", "Nom complet", "Avant le cours", "Après le cours", "Retardataire", "Taux global (%)"]];
+      const dates = Object.keys(state.attendance).sort();
+
+      dates.forEach((dStr) => {
+        state.students.forEach((st) => {
+          const rec = state.attendance[dStr]?.[st.id];
+          if (!rec) return;
+          rows.push([
+            dStr,
+            st.course,
+            st.account,
+            st.name,
+            rec.before || "",
+            rec.after || "",
+            isLateOnDate(dStr, st.id) ? "Oui" : "Non",
+            computeStudentAttendancePct(st.id) + "%"
+          ]);
+        });
+      });
+
+      const csvContent = "\uFEFF" + rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `EduAppel_Registre_${todayISO()}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Export CSV / Excel généré.");
+    }
+
+    document.getElementById("btnExportCsv").addEventListener("click", exportAttendanceCsv);
+    document.getElementById("btnExportCsv2").addEventListener("click", exportAttendanceCsv);
+
+    document.getElementById("btnDownloadJson").addEventListener("click", () => {
+      const backupObj = {
+        app: "EduAppel",
+        author: "CHEKINAT MOFONGA - Équipe CBK",
+        exportedAt: new Date().toISOString(),
+        data: {
+          pin: state.pin,
+          students: state.students,
+          attendance: state.attendance
+        }
+      };
+      const blob = new Blob([JSON.stringify(backupObj)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `EduAppel_Sauvegarde_${todayISO()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Sauvegarde JSON téléchargée.");
+    });
+
+    document.getElementById("importJsonInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          const payload = parsed.data || parsed;
+          if (!Array.isArray(payload.students) || typeof payload.attendance !== "object") {
+            throw new Error("Format invalide");
+          }
+          state.students = payload.students;
+          state.attendance = payload.attendance;
+          if (payload.pin) state.pin = payload.pin;
+          saveState();
+          renderCourseFilterOptions();
+          refreshAttendanceAndStats();
+          showToast("Sauvegarde restaurée avec succès !");
+        } catch (err) {
+          showToast("Fichier de sauvegarde invalide.");
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = "";
+    });
+
+    // Synchronisation Cloud Supabase optionnelle
+    document.getElementById("btnSaveCloudConfig").addEventListener("click", () => {
+      state.cloud.url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
+      state.cloud.key = document.getElementById("sbKeyInput").value.trim();
+      saveState();
+      showToast("Configuration Cloud enregistrée.");
+    });
+
+    document.getElementById("btnPushCloud").addEventListener("click", async () => {
+      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
+      const key = document.getElementById("sbKeyInput").value.trim();
+      if (!url || !key) {
+        showToast("Renseignez l'URL et la clé API Supabase.");
+        return;
+      }
+      state.cloud.url = url;
+      state.cloud.key = key;
+      saveState();
+
+      try {
+        const res = await fetch(`${url}/rest/v1/eduappel_sync`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": key,
+            "Authorization": `Bearer ${key}`,
+            "Prefer": "resolution=merge-duplicates"
+          },
+          body: JSON.stringify({
+            id: state.cloud.recordId,
+            payload: {
+              pin: state.pin,
+              students: state.students,
+              attendance: state.attendance,
+              updatedAt: new Date().toISOString()
+            }
+          })
+        });
+        if (!res.ok) throw new Error("Erreur HTTP");
+        showToast("Données synchronisées sur Supabase !");
+      } catch (e) {
+        showToast("Échec de l'envoi Cloud (vérifiez la table eduappel_sync).");
+      }
+    });
+
+    document.getElementById("btnPullCloud").addEventListener("click", async () => {
+      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
+      const key = document.getElementById("sbKeyInput").value.trim();
+      if (!url || !key) {
+        showToast("Renseignez l'URL et la clé API Supabase.");
+        return;
+      }
+      state.cloud.url = url;
+      state.cloud.key = key;
+      saveState();
+
+      try {
+        const res = await fetch(`${url}/rest/v1/eduappel_sync?id=eq.${encodeURIComponent(state.cloud.recordId)}&select=payload`, {
+          headers: {
+            "apikey": key,
+            "Authorization": `Bearer ${key}`
+          }
+        });
+        if (!res.ok) throw new Error("Erreur HTTP");
+        const rows = await res.json();
+        if (rows && rows[0] && rows[0].payload) {
+          const p = rows[0].payload;
+          state.students = Array.isArray(p.students) ? p.students : state.students;
+          state.attendance = p.attendance || state.attendance;
+          if (p.pin) state.pin = p.pin;
+          saveState();
+          renderCourseFilterOptions();
+          refreshAttendanceAndStats();
+          showToast("Données récupérées depuis le Cloud !");
+        } else {
+          showToast("Aucune donnée trouvée sur le Cloud.");
+        }
+      } catch (e) {
+        showToast("Impossible de récupérer les données Cloud.");
+      }
+    });
+
+    // Démarrage
+    renderAuthView();
+  </script>
+</body>
+</html>
