@@ -43,7 +43,7 @@
       color: var(--text-main);
       min-height: 100vh;
       line-height: 1.45;
-      padding-bottom: 44px;
+      padding-bottom: 48px;
     }
 
     .flag-bar {
@@ -59,14 +59,14 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 45;
-      background: rgba(6, 15, 29, 0.94);
+      z-index: 50;
+      background: rgba(6, 15, 29, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
-      max-width: 1220px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 12px 16px;
       display: flex;
@@ -95,6 +95,13 @@
       justify-content: center;
       box-shadow: 0 4px 16px rgba(0, 210, 184, 0.25);
       overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .brand-title {
@@ -117,7 +124,7 @@
     }
 
     .container {
-      max-width: 1220px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 18px 16px;
     }
@@ -127,7 +134,7 @@
       border-radius: 12px;
       padding: 10px 14px;
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -135,6 +142,7 @@
       gap: 7px;
       transition: transform 0.14s ease, opacity 0.14s ease, background 0.15s ease;
       text-decoration: none;
+      position: relative;
     }
 
     .btn:active {
@@ -181,6 +189,15 @@
       border-radius: 10px;
     }
 
+    .notif-pill {
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -203,12 +220,12 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1.25fr 1fr;
       gap: 18px;
       align-items: start;
     }
 
-    @media (max-width: 840px) {
+    @media (max-width: 860px) {
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -229,7 +246,7 @@
     }
 
     .hero-title {
-      font-size: 1.7rem;
+      font-size: 1.68rem;
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 10px;
@@ -239,6 +256,16 @@
       color: var(--text-muted);
       font-size: 0.92rem;
       margin-bottom: 14px;
+    }
+
+    .section-banner-img {
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      display: block;
     }
 
     .credits-box {
@@ -266,6 +293,8 @@
     input[type="password"],
     input[type="date"],
     input[type="url"],
+    input[type="email"],
+    input[type="tel"],
     input[type="range"],
     select,
     textarea {
@@ -280,7 +309,7 @@
     }
 
     textarea {
-      min-height: 92px;
+      min-height: 86px;
       resize: vertical;
     }
 
@@ -288,6 +317,75 @@
     select:focus,
     textarea:focus {
       border-color: var(--accent);
+    }
+
+    /* MENU LATÉRAL / TIROIR DE NAVIGATION RAPIDE (ZÉRO DÉFILEMENT FATIGANT) */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 14, 0.72);
+      backdrop-filter: blur(4px);
+      z-index: 80;
+      display: none;
+    }
+    .drawer-overlay.open {
+      display: block;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(370px, 92vw);
+      height: 100vh;
+      background: #09172c;
+      border-left: 1px solid var(--border);
+      z-index: 90;
+      padding: 18px 16px;
+      overflow-y: auto;
+      transform: translateX(105%);
+      transition: transform 0.22s ease;
+      box-shadow: -12px 0 35px rgba(0, 0, 0, 0.6);
+    }
+    .side-menu.open {
+      transform: translateX(0);
+    }
+
+    .menu-section-title {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 800;
+      margin: 14px 0 8px;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .menu-item-btn {
+      width: 100%;
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 0.87rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      text-decoration: none;
+    }
+    .menu-item-btn:hover,
+    .menu-item-btn.active {
+      border-color: var(--accent);
+      background: rgba(0, 210, 184, 0.14);
     }
 
     .drawer-panel {
@@ -298,7 +396,6 @@
       margin-bottom: 18px;
       display: none;
     }
-
     .drawer-panel.open {
       display: block;
     }
@@ -319,7 +416,6 @@
       cursor: pointer;
       color: var(--text-main);
     }
-
     .course-menu-item:hover,
     .course-menu-item.active {
       border-color: var(--accent);
@@ -341,9 +437,12 @@
       padding: 10px 14px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       cursor: pointer;
       white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .nav-tab.active {
@@ -424,7 +523,7 @@
     table.appel-table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 780px;
+      min-width: 820px;
       font-size: 0.84rem;
     }
 
@@ -448,10 +547,33 @@
       font-weight: 800;
     }
 
+    table.appel-table thead th.date-col-masked {
+      background: #1e3a5f;
+      color: #e0f2fe;
+      font-weight: 800;
+    }
+
     table.appel-table thead th.sub-col {
       background: #0f294a;
       color: #e2e8f0;
       font-size: 0.74rem;
+    }
+
+    /* Colonne masquée : clair, lisible, pas noir */
+    td.masked-cell-box {
+      background: rgba(56, 189, 248, 0.10);
+      color: #bae6fd;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.3px;
+      user-select: none;
+    }
+
+    .date-header-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
     }
 
     .date-edit-input {
@@ -465,6 +587,20 @@
       max-width: 142px;
     }
 
+    .mask-toggle-btn {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 7px;
+      padding: 3px 8px;
+      font-size: 0.71rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .mask-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
     .avatar {
       width: 44px;
       height: 44px;
@@ -473,6 +609,16 @@
       border: 2px solid var(--accent);
       background: #071426;
       display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .avatar-lg {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      background: #071426;
     }
 
     .mark-btn {
@@ -499,6 +645,18 @@
       background: rgba(239, 68, 68, 0.28);
       border-color: var(--danger);
       color: #fca5a5;
+    }
+
+    .justif-mini-btn {
+      margin-left: 4px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.14);
+      color: #fcd34d;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .student-row {
@@ -556,6 +714,88 @@
       color: #fcd34d;
     }
 
+    /* ANNONCES & COMMENTAIRES TYPE WHATSAPP */
+    .announcement-card {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .announcement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .announcement-body {
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+    }
+
+    .comment-bubble {
+      background: #08162b;
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      border-radius: 12px;
+      padding: 8px 11px;
+      margin-top: 7px;
+      cursor: pointer;
+    }
+    .comment-bubble:hover {
+      border-color: var(--accent);
+    }
+
+    .reply-quote {
+      border-left: 3px solid var(--accent);
+      background: rgba(0, 210, 184, 0.08);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-bottom: 5px;
+    }
+
+    /* MESSAGERIE DIRECTE */
+    .chat-box {
+      background: #071324;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      max-height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .msg-bubble {
+      max-width: 82%;
+      padding: 9px 12px;
+      border-radius: 13px;
+      font-size: 0.86rem;
+    }
+
+    .msg-mine {
+      align-self: flex-end;
+      background: rgba(0, 210, 184, 0.22);
+      border: 1px solid rgba(0, 210, 184, 0.45);
+      color: #f8fafc;
+    }
+
+    .msg-theirs {
+      align-self: flex-start;
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+    }
+
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
@@ -600,7 +840,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 100;
+      z-index: 110;
       padding: 16px;
     }
 
@@ -614,22 +854,26 @@
       border-radius: 18px;
       padding: 18px;
       width: 100%;
-      max-width: 540px;
+      max-width: 550px;
       max-height: 88vh;
       overflow-y: auto;
       box-shadow: var(--shadow);
     }
 
     .crop-stage {
-      width: 220px;
-      height: 220px;
+      width: 240px;
+      height: 240px;
       margin: 12px auto;
-      border-radius: 50%;
+      border-radius: 18px;
       overflow: hidden;
       border: 3px solid var(--accent);
       background: #040b16;
       position: relative;
       touch-action: none;
+    }
+
+    .crop-stage.round {
+      border-radius: 50%;
     }
 
     .crop-stage canvas {
@@ -672,14 +916,14 @@
       gap: 10px;
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 640px) {
       .two-col {
         grid-template-columns: 1fr;
       }
     }
 
     @media print {
-      header, .nav-tabs, .no-print, .drawer-panel, .modal-backdrop, .toast {
+      header, .nav-tabs, .no-print, .drawer-panel, .modal-backdrop, .toast, .side-menu, .drawer-overlay {
         display: none !important;
       }
       body {
@@ -706,7 +950,7 @@
     <div class="header-inner">
       <!-- Clic = ouvre la fenêtre code Admin Général (Chico899), Double-clic = ferme -->
       <div class="brand-box" id="brandAdminTrigger" title="Accès Admin Général">
-        <div class="brand-logo" aria-label="Logo EduAppel">
+        <div class="brand-logo" id="headerBrandLogo" aria-label="Logo EduAppel">
           <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="6" y="8" width="40" height="48" rx="8" fill="#071529" stroke="#00d2b8" stroke-width="3.5"/>
             <line x1="15" y1="21" x2="35" y2="21" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
@@ -723,18 +967,32 @@
       </div>
 
       <div class="header-actions">
-        <button class="btn btn-secondary btn-sm hidden" id="btnToggleCoursesDrawer">📚 Cours par cours</button>
-        <button class="btn btn-secondary btn-sm" id="btnToggleInfoDrawer">☰ Menu & Infos</button>
-        <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
-          💬 Joindre l'équipe CBK
-        </a>
+        <button class="btn btn-primary btn-sm hidden" id="btnInstallPwaHeader">📲 Installer l'app</button>
+        <button class="btn btn-secondary btn-sm hidden" id="btnHeaderNotif" onclick="openTabFromMenu('tab-notifications')">
+          🔔 <span class="notif-pill" id="headerNotifBadge">0</span>
+        </button>
+        <button class="btn btn-secondary btn-sm hidden" id="btnHeaderMsg" onclick="openTabFromMenu('tab-messages')">
+          ✉️ Messages
+        </button>
+        <button class="btn btn-secondary btn-sm hidden" id="btnToggleCoursesDrawer">📚 Cours</button>
+        <button class="btn btn-secondary btn-sm" id="btnOpenSideMenu">☰ Menu</button>
         <button class="btn btn-danger btn-sm hidden" id="btnLockApp">🔒 Déconnexion</button>
       </div>
     </div>
   </header>
 
+  <!-- MENU LATÉRAL COMPLET (PROFESSEUR & ADMIN GÉNÉRAL) -->
+  <div class="drawer-overlay" id="sideMenuOverlay" onclick="closeSideMenu()"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="card-title">
+      <span id="sideMenuHeaderTitle">☰ Menu EduAppel</span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeSideMenu()">✕</button>
+    </div>
+    <div id="sideMenuContent"></div>
+  </aside>
+
   <div class="container">
-    <!-- Menu Cours par cours (uniquement réservé à l'Admin Général) -->
+    <!-- Menu Cours par cours (Admin Général) -->
     <div class="drawer-panel" id="coursesDrawer">
       <div class="card-title">
         <span>📚 Tous les Cours & Cahiers d'Appel (Admin Général)</span>
@@ -743,30 +1001,15 @@
       <div id="coursesMenuGrid" class="courses-menu-grid"></div>
     </div>
 
-    <!-- Menu Infos / FAQ / À propos -->
-    <div class="drawer-panel" id="infoDrawer">
-      <div class="card-title">
-        <span>☰ Navigation & Aide</span>
-        <button class="btn btn-secondary btn-sm" onclick="closeDrawers()">Fermer ✕</button>
-      </div>
-      <div class="courses-menu-grid">
-        <button class="btn btn-secondary" onclick="scrollToEl('section-login')">🔐 Connexion Professeur</button>
-        <button class="btn btn-secondary" onclick="scrollToEl('section-faq')">❓ FAQ & Aide</button>
-        <button class="btn btn-secondary" onclick="scrollToEl('section-about')">ℹ️ À propos & CBK</button>
-        <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
-          📲 WhatsApp Équipe CBK
-        </a>
-      </div>
-    </div>
-
     <!-- ================= VUE ACCUEIL / CONNEXION PROFESSEUR ================= -->
     <div id="publicView">
       <div class="hero-grid" id="section-login">
         <div class="card">
+          <img id="publicHomeImg" class="section-banner-img hidden" alt="Visuel Accueil EduAppel" />
           <div class="hero-badge">🎓 Registre Académique • Équipe CBK</div>
           <h1 class="hero-title">EduAppel — Cahier d'Appel par Cours</h1>
           <p class="hero-desc">
-            Chaque professeur accède uniquement à son propre cours et aux informations de son cours. L'Admin Général supervise l'ensemble des cours en temps réel.
+            Chaque professeur accède uniquement à son propre cours, gère son profil, ses présences, ses justifications et ses messages. L'Admin Général supervise l'ensemble en temps réel.
           </p>
 
           <div class="credits-box">
@@ -775,11 +1018,11 @@
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap;" class="no-print">
+            <button type="button" class="btn btn-primary" id="btnInstallPwaHero">📲 Installer App / Version PC</button>
+            <a class="btn btn-secondary" id="btnDownloadApkPublic" href="#section-apk">📦 Télécharger APK Android</a>
             <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
               💬 Joindre l'équipe CBK
             </a>
-            <button class="btn btn-secondary" onclick="scrollToEl('section-faq')">FAQ & Aide</button>
-            <button class="btn btn-secondary" onclick="scrollToEl('section-about')">À propos</button>
           </div>
         </div>
 
@@ -807,32 +1050,61 @@
         </div>
       </div>
 
+      <!-- SECTION TÉLÉCHARGEMENT APK & VERSION PC -->
+      <div class="card" id="section-apk">
+        <div class="card-title"><span>📱 Télécharger l'APK Android & 💻 Version PC</span></div>
+        <p class="student-meta" style="font-size:0.88rem; color:#cbd5e1; margin-bottom:12px;">
+          Installez <strong>EduAppel</strong> directement sur votre téléphone Android (fichier APK ou PWA) ou sur votre ordinateur Windows/Mac en mode application plein écran.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a id="apkDownloadAnchor" class="btn btn-primary" href="#" target="_blank" rel="noopener">📦 Télécharger le fichier APK (.apk)</a>
+          <button type="button" class="btn btn-secondary" id="btnInstallDesktopPwa">💻 Installer la version PC / Navigateur</button>
+        </div>
+        <p class="student-meta" id="apkLinkStatusNote" style="margin-top:8px;"></p>
+      </div>
+
+      <!-- SECTION FAQ -->
       <div class="card" id="section-faq">
-        <div class="card-title"><span>❓ FAQ & Aide</span></div>
+        <div class="card-title"><span>❓ FAQ & Questions Fréquentes</span></div>
+        <img id="publicFaqImg" class="section-banner-img hidden" alt="Visuel FAQ EduAppel" />
         <div class="student-row">
           <div>
-            <div class="student-name">1. Comment fonctionne le cahier d'appel de chaque cours ?</div>
-            <div class="student-meta">Après connexion, vous accédez uniquement à votre cours, à ses informations, aux étudiants de votre cours, aux dates modifiables, aux cases PRÉSENT / ABSENT et aux % de présence.</div>
+            <div class="student-name">1. Comment protéger une journée d'appel terminée contre les clics accidentels ?</div>
+            <div class="student-meta">Cliquez sur <strong>👁️ Masquer</strong> en haut de la colonne de date : la colonne affiche <em>Masqué</em> et devient non modifiable. Cliquez sur <strong>🔓 Démasquer</strong> si vous devez corriger.</div>
           </div>
         </div>
         <div class="student-row">
           <div>
-            <div class="student-name">2. Comment ajouter des étudiants à mon cours ?</div>
-            <div class="student-meta">Dans l'onglet <strong>Étudiants</strong> ou via <strong>+ Ajouter au cahier</strong>, vous gérez les étudiants de votre cours et les marquez PRÉSENT ou ABSENT en direct.</div>
+            <div class="student-name">2. Comment justifier un retard ou une absence ?</div>
+            <div class="student-meta">Cliquez sur le bouton <strong>📝</strong> à côté d'une case d'appel pour choisir un motif rapide (Malade, Autorisé, Transport...) ou écrire une note courte.</div>
           </div>
         </div>
         <div class="student-row">
           <div>
             <div class="student-name">3. Comment fonctionne la synchronisation en direct ?</div>
-            <div class="student-meta">Chaque validation d'appel ou modification de date est envoyée automatiquement sur Firebase Realtime Database et apparaît en temps réel sur l'écran de suivi.</div>
+            <div class="student-meta">Chaque validation d'appel, annonce, message ou modification est synchronisé en temps réel via Firebase.</div>
           </div>
         </div>
       </div>
 
+      <!-- SECTION AIDE -->
+      <div class="card" id="section-aide">
+        <div class="card-title"><span>🆘 Guide d'Aide Rapide</span></div>
+        <img id="publicHelpImg" class="section-banner-img hidden" alt="Visuel Aide EduAppel" />
+        <div class="student-row">
+          <div>
+            <div class="student-name">Navigation par Menu Rapide (☰ Menu)</div>
+            <div class="student-meta">Utilisez le bouton <strong>☰ Menu</strong> en haut à droite pour accéder directement à votre profil, vos notifications, vos messages, le cahier d'appel ou les réglages sans faire défiler la page.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION À PROPOS -->
       <div class="card" id="section-about">
         <div class="card-title"><span>ℹ️ À propos & Équipe CBK</span></div>
+        <img id="publicAboutImg" class="section-banner-img hidden" alt="Visuel À propos EduAppel" />
         <p class="student-meta" style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">
-          <strong>EduAppel</strong> est développé par <strong>CHEKINAT MOFONGA</strong> au sein de <strong>l'équipe CBK</strong> pour simplifier le suivi des présences académiques.
+          <strong>EduAppel</strong> est développé par <strong>CHEKINAT MOFONGA</strong> au sein de <strong>l'équipe CBK</strong> pour moderniser et sécuriser le suivi des présences académiques.
         </p>
         <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
           💬 Contacter l'équipe CBK sur WhatsApp
@@ -843,11 +1115,14 @@
     <!-- ================= VUE CONNECTÉE (PROFESSEUR OU ADMIN GÉNÉRAL) ================= -->
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
-        <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier du Cours</button>
-        <button class="nav-tab hidden" id="navTabCours" data-tab="tab-cours">📚 Tous les Cours</button>
-        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants du Cours</button>
+        <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier</button>
+        <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
+        <button class="nav-tab" data-tab="tab-annonces">📢 Annonces</button>
+        <button class="nav-tab" data-tab="tab-messages">✉️ Messages</button>
+        <button class="nav-tab" data-tab="tab-notifications">🔔 Notifications <span class="notif-pill" id="tabNotifBadge">0</span></button>
         <button class="nav-tab" data-tab="tab-evolution">📈 Évolution & %</button>
-        <button class="nav-tab" data-tab="tab-sauvegarde">💾 Sauvegarde & Réglages</button>
+        <button class="nav-tab" data-tab="tab-profil">👤 Mon Compte</button>
+        <button class="nav-tab hidden" id="navTabCours" data-tab="tab-cours">📚 Tous les Cours</button>
         <button class="nav-tab hidden" id="navTabAdmin" data-tab="tab-admin">🛡️ Admin Général</button>
       </div>
 
@@ -880,9 +1155,10 @@
             </div>
             <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
               <button class="btn btn-primary btn-sm" id="btnOpenEnrollModal">+ Ajouter au cahier</button>
-              <button class="btn btn-secondary btn-sm" id="btnAddDateCol">+ Ajouter date / case</button>
-              <button class="btn btn-secondary btn-sm" id="btnExportCourseCsv">📊 Export CSV</button>
-              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ PDF / Imprimer</button>
+              <button class="btn btn-secondary btn-sm" id="btnAddDateCol">+ Ajouter date</button>
+              <button class="btn btn-whatsapp btn-sm" id="btnCopyWhatsappSummary">📲 Résumé WhatsApp</button>
+              <button class="btn btn-secondary btn-sm" id="btnExportCourseCsv">📊 CSV</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ PDF</button>
             </div>
           </div>
 
@@ -892,7 +1168,7 @@
           </div>
 
           <div class="two-col no-print" style="margin-bottom:12px;">
-            <input type="text" id="cahierSearchInput" placeholder="🔎 Filtrer par nom ou n° matricule..." />
+            <input type="text" id="cahierSearchInput" placeholder="🔎 Filtrer rapidement par nom ou n° matricule..." />
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               <button type="button" class="btn btn-success-soft btn-sm" id="btnBulkPresentLastDate">✅ Présents (dernière date)</button>
               <button type="button" class="btn btn-danger btn-sm" id="btnBulkAbsentLastDate">🚫 Absents (dernière date)</button>
@@ -908,20 +1184,12 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span>⏰ Retardataires du Cours (détection automatique)</span></div>
+          <div class="card-title"><span>⏰ Retardataires & Justifications du Cours</span></div>
           <div id="cahierLateList"></div>
         </div>
       </div>
 
-      <!-- ONGLET 2 : COURS PAR COURS (ADMIN GÉNÉRAL UNIQUEMENT) -->
-      <div id="tab-cours" class="tab-panel hidden">
-        <div class="card">
-          <div class="card-title"><span>📚 Liste de Tous les Cours & Informations (Admin Général)</span></div>
-          <div id="allCoursesCardsContainer"></div>
-        </div>
-      </div>
-
-      <!-- ONGLET 3 : ÉTUDIANTS (ISOLÉS PAR COURS POUR LES PROFESSEURS) -->
+      <!-- ONGLET 2 : ÉTUDIANTS (ISOLÉS PAR COURS POUR LES PROFESSEURS) -->
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -942,7 +1210,7 @@
             </div>
             <div class="form-group">
               <label for="stuPromotionInput">Promotion / Option</label>
-              <input type="text" id="stuPromotionInput" placeholder="Ex: L1 RTM" />
+              <select id="stuPromotionInput"></select>
             </div>
             <div class="form-group">
               <label>Photo de profil (Caméra ou Galerie + Recadrage & Compression)</label>
@@ -966,7 +1234,7 @@
         <div class="card">
           <div class="card-title"><span>⚡ Ajout Rapide de Plusieurs Étudiants</span></div>
           <p class="student-meta" style="margin-bottom:8px;">
-            Un étudiant par ligne au format : <code>Nom complet ; N° Matricule ; Promotion</code> (ex. <code>Marie KABAMBA ; ISIPA/2025/002 ; L1 RTM</code>).
+            Un étudiant par ligne au format : <code>Nom complet ; N° Matricule ; Promotion</code>
           </p>
           <textarea id="bulkStudentsTextarea" placeholder="Marie KABAMBA ; ISIPA/2025/002 ; L1 RTM&#10;Jean-Luc MPUTU ; ISIPA/2025/003 ; L1 RTM"></textarea>
           <div style="margin-top:10px;">
@@ -983,13 +1251,57 @@
         </div>
       </div>
 
-      <!-- ONGLET 4 : ÉVOLUTION & % -->
+      <!-- ONGLET 3 : ANNONCES DE L'ADMIN GÉNÉRAL (J'AIME + COMMENTAIRES + RÉPONSES TYPE WHATSAPP) -->
+      <div id="tab-annonces" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>📢 Annonces & Changements Officiels (Admin Général)</span></div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Aimez les annonces, publiez un commentaire ou cliquez directement sur le commentaire d'une personne pour lui répondre comme sur WhatsApp.
+          </p>
+          <div id="announcementsFeedContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 4 : MESSAGERIE PRIVÉE & RÉPERTOIRE -->
+      <div id="tab-messages" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>✉️ Messagerie Directe (Professeurs & Admin Général)</span></div>
+          <div class="two-col" style="align-items:start;">
+            <div>
+              <div class="menu-section-title" style="margin-top:0;">Contacts disponibles</div>
+              <div id="messageContactsList"></div>
+            </div>
+            <div>
+              <div class="card-title" style="margin-bottom:8px;">
+                <span id="activeChatPartnerTitle">Sélectionnez un contact</span>
+              </div>
+              <div class="chat-box" id="chatMessagesBox">
+                <p class="student-meta">Choisissez un professeur ou l'Admin Général à gauche pour démarrer une discussion.</p>
+              </div>
+              <form id="sendDirectMessageForm" style="display:flex; gap:8px;">
+                <input type="text" id="directMessageInput" placeholder="Écrire un message..." required />
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGLET 5 : NOTIFICATIONS + BOUTON SUPPRIMER TOUT -->
+      <div id="tab-notifications" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title">
+            <span>🔔 Mes Notifications</span>
+            <button type="button" class="btn btn-danger btn-sm" id="btnClearAllNotifications">🗑️ Supprimer toutes les notifications</button>
+          </div>
+          <div id="notificationsListContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 6 : ÉVOLUTION & % -->
       <div id="tab-evolution" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>📈 Évolution & Assiduité (%) sur le Cours</span></div>
-          <p class="student-meta" style="margin-bottom:12px;">
-            Classement des étudiants selon leur taux de présence (%) sur ce cours pour repérer ceux qui viennent régulièrement et ceux qui ne fuient pas les cours.
-          </p>
           <div id="evolutionListContainer"></div>
         </div>
 
@@ -999,8 +1311,65 @@
         </div>
       </div>
 
-      <!-- ONGLET 5 : SAUVEGARDE & RÉGLAGES -->
-      <div id="tab-sauvegarde" class="tab-panel hidden">
+      <!-- ONGLET 7 : MON COMPTE PROFESSEUR / RÉGLAGES & SAUVEGARDE -->
+      <div id="tab-profil" class="tab-panel hidden">
+        <div class="card" id="teacherProfileCard">
+          <div class="card-title"><span>👤 Mon Profil & Coordonnées Personnelles</span></div>
+          <form id="teacherProfileForm">
+            <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+              <img id="profileAvatarPreview" class="avatar-lg" src="" alt="Photo profil" />
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
+                  📷 Caméra
+                  <input type="file" id="profCamInput" accept="image/*" capture="user" class="hidden" />
+                </label>
+                <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
+                  🖼️ Galerie
+                  <input type="file" id="profGalInput" accept="image/*" class="hidden" />
+                </label>
+                <button type="button" class="btn btn-warning btn-sm" id="btnCropProfPhoto">✂️ Ajuster</button>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label for="profDisplayNameInput">Nom affiché</label>
+                <input type="text" id="profDisplayNameInput" required />
+              </div>
+              <div class="form-group">
+                <label for="profPhoneInput">Téléphone / WhatsApp</label>
+                <input type="tel" id="profPhoneInput" placeholder="Ex: +243 81 000 0000" />
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label for="profEmailInput">Adresse Email</label>
+                <input type="email" id="profEmailInput" placeholder="professeur@exemple.com" />
+              </div>
+              <div class="form-group">
+                <label for="profPhotoUrlInput">Ou lien URL de photo de profil</label>
+                <input type="url" id="profPhotoUrlInput" placeholder="https://..." />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profBioInput">Note / Coordonnées complémentaires (Bureau, disponibilité...)</label>
+              <textarea id="profBioInput" placeholder="Ex: Disponible mardi et jeudi au département informatique..."></textarea>
+            </div>
+
+            <div class="student-row" style="margin-bottom:12px;">
+              <div>
+                <div class="student-name">🔕 Bloquer la réception des messages</div>
+                <div class="student-meta">Si activé, personne ne pourra vous envoyer de message privé tant que vous ne réactivez pas.</div>
+              </div>
+              <input type="checkbox" id="profBlockMessagesInput" style="width:20px; height:20px; cursor:pointer;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">💾 Enregistrer mon profil</button>
+          </form>
+        </div>
+
         <div class="card">
           <div class="card-title"><span>🔑 Modifier Mon Mot de Passe</span></div>
           <form id="changeTeacherPwdForm" class="two-col" style="align-items:end;">
@@ -1013,7 +1382,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span>💾 Sauvegarde JSON & Export CSV</span></div>
+          <div class="card-title"><span>💾 Sauvegarde JSON, Export CSV & Application</span></div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <button type="button" class="btn btn-primary" id="btnExportJson">⬇️ Exporter sauvegarde (.json)</button>
             <label class="btn btn-secondary" style="cursor:pointer; margin:0;">
@@ -1021,25 +1390,157 @@
               <input type="file" id="importJsonInput" accept="application/json,.json" class="hidden" />
             </label>
             <button type="button" class="btn btn-secondary" id="btnExportCsvSettings">📊 Exporter CSV</button>
+            <button type="button" class="btn btn-secondary" id="btnInstallPwaProfile">📲 Installer sur téléphone / PC</button>
           </div>
         </div>
       </div>
 
-      <!-- ONGLET 6 : ADMIN GÉNÉRAL (CHICO899) -->
+      <!-- ONGLET 8 : COURS PAR COURS (ADMIN GÉNÉRAL) -->
+      <div id="tab-cours" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>📚 Liste de Tous les Cours & Informations (Admin Général)</span></div>
+          <div id="allCoursesCardsContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 9 : ADMIN GÉNÉRAL (CHICO899) -->
       <div id="tab-admin" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
-            <span>🛡️ Admin Général — Vue Globale Temps Réel</span>
+            <span>🛡️ Espace Admin Général — Contrôle Complet</span>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="btn btn-primary btn-sm" id="btnAdminSyncNow">🔄 Synchroniser maintenant</button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Imprimer / PDF global</button>
+              <button type="button" class="btn btn-primary btn-sm" id="btnAdminSyncNow">🔄 Synchroniser</button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ PDF Global</button>
             </div>
           </div>
-          <p class="student-meta" style="margin-bottom:12px;">
-            Visualisez tous les cours, les points de présence de chaque étudiant par cours, les étudiants assidus ("qui ne fuient pas les cours") et les mots de passe des professeurs.
-          </p>
-          <div id="adminGlobalContainer"></div>
+
+          <!-- Sous-navigation Admin Général pour éviter le long défilement -->
+          <div class="nav-tabs" style="margin-bottom:14px;">
+            <button type="button" class="nav-tab active" data-admin-sub="admin-sub-annonces">📢 Publier Annonce</button>
+            <button type="button" class="nav-tab" data-admin-sub="admin-sub-profs">👨‍🏫 Professeurs & Cours</button>
+            <button type="button" class="nav-tab" data-admin-sub="admin-sub-promos">🎓 Promotions</button>
+            <button type="button" class="nav-tab" data-admin-sub="admin-sub-branding">🖼️ Logo, Photos & APK</button>
+            <button type="button" class="nav-tab" data-admin-sub="admin-sub-suivi">📊 Suivi Global</button>
+          </div>
+
+          <!-- SOUS-SECTION ADMIN 1 : PUBLIER ANNONCE -->
+          <div id="admin-sub-annonces" class="admin-sub-panel">
+            <form id="adminPublishAnnouncementForm" class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>📢 Publier une annonce à tous les professeurs</span></div>
+              <div class="form-group">
+                <label for="annTitleInput">Titre de l'annonce</label>
+                <input type="text" id="annTitleInput" placeholder="Ex: Réunion pédagogique ou nouvelle consigne d'appel" required />
+              </div>
+              <div class="form-group">
+                <label for="annBodyInput">Contenu du message</label>
+                <textarea id="annBodyInput" placeholder="Rédigez votre annonce ou les changements apportés..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">📤 Publier et notifier tous les professeurs</button>
+            </form>
+            <div id="adminAnnouncementsPreview"></div>
+          </div>
+
+          <!-- SOUS-SECTION ADMIN 2 : AJOUTER / BLOQUER / SUPPRIMER PROFESSEUR & COURS -->
+          <div id="admin-sub-profs" class="admin-sub-panel hidden">
+            <form id="adminAddCourseTeacherForm" class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>➕ Ajouter un Professeur et son Cours</span></div>
+              <div class="two-col">
+                <div class="form-group">
+                  <label for="newCourseTitleInput">Intitulé du cours *</label>
+                  <input type="text" id="newCourseTitleInput" placeholder="Ex: Réseaux Informatiques 1" required />
+                </div>
+                <div class="form-group">
+                  <label for="newTeacherNameInput">Nom du professeur *</label>
+                  <input type="text" id="newTeacherNameInput" placeholder="Ex: Ct Kabongo" required />
+                </div>
+              </div>
+              <div class="two-col">
+                <div class="form-group">
+                  <label for="newTeacherLoginInput">Nom de connexion *</label>
+                  <input type="text" id="newTeacherLoginInput" placeholder="Ex: Ct Kabongo (Réseaux)" required />
+                </div>
+                <div class="form-group">
+                  <label for="newTeacherPwdAdminInput">Mot de passe *</label>
+                  <input type="text" id="newTeacherPwdAdminInput" placeholder="Ex: CBK-RES-112" required />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">💾 Créer le professeur & son cours</button>
+            </form>
+
+            <div id="adminTeachersManageList"></div>
+          </div>
+
+          <!-- SOUS-SECTION ADMIN 3 : AJOUTER DES PROMOTIONS -->
+          <div id="admin-sub-promos" class="admin-sub-panel hidden">
+            <form id="adminAddPromotionForm" class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>🎓 Ajouter une Nouvelle Promotion</span></div>
+              <div class="two-col" style="align-items:end;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="newPromotionNameInput">Nom de la promotion / filière</label>
+                  <input type="text" id="newPromotionNameInput" placeholder="Ex: L2 RTM, L1 Informatique de Gestion..." required />
+                </div>
+                <button type="submit" class="btn btn-primary">➕ Ajouter la promotion</button>
+              </div>
+            </form>
+            <div id="adminPromotionsList"></div>
+          </div>
+
+          <!-- SOUS-SECTION ADMIN 4 : LOGO, PHOTOS (ACCUEIL, FAQ, AIDE, À PROPOS) & LIEN APK -->
+          <div id="admin-sub-branding" class="admin-sub-panel hidden">
+            <div class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>🖼️ Logo de l'APK & Photos des Sections (Admin Général uniquement)</span></div>
+              <p class="student-meta" style="margin-bottom:12px;">
+                Pour chaque emplacement, importez une image locale (ajustée/recadrée avant validation) ou collez un lien URL hébergé sur internet.
+              </p>
+              <div id="adminBrandingSlotsContainer"></div>
+            </div>
+
+            <div class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>📦 Lien de téléchargement direct du fichier APK (.apk)</span></div>
+              <form id="adminApkLinkForm" class="two-col" style="align-items:end;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="adminApkUrlInput">URL du fichier APK hébergé (GitHub Releases, Drive, etc.)</label>
+                  <input type="url" id="adminApkUrlInput" placeholder="https://.../EduAppel.apk" />
+                </div>
+                <button type="submit" class="btn btn-primary">💾 Enregistrer le lien APK</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- SOUS-SECTION ADMIN 5 : SUIVI GLOBAL DES COURS & ÉTUDIANTS -->
+          <div id="admin-sub-suivi" class="admin-sub-panel hidden">
+            <div id="adminGlobalContainer"></div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL : JUSTIFICATION ABSENCE / RETARD -->
+  <div class="modal-backdrop" id="justifModal">
+    <div class="modal-box">
+      <div class="card-title">
+        <span>📝 Justification d'Absence / Retard</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeJustifModal()">✕</button>
+      </div>
+      <p class="student-meta" id="justifTargetLabel" style="margin-bottom:10px;"></p>
+      <div class="form-group">
+        <label>Choix rapide en 1 clic</label>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="setQuickJustif('Malade')">🏥 Malade</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="setQuickJustif('Autorisé')">✅ Autorisé</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="setQuickJustif('Transport / Embouteillage')">🚌 Transport</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="setQuickJustif('Raison familiale')">🏠 Familial</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="setQuickJustif('Non justifié')">⚠️ Non justifié</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="justifNoteInput">Motif / Note courte</label>
+        <input type="text" id="justifNoteInput" placeholder="Ex: Billet médical déposé ou arrivé à 8h25" />
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn btn-primary" style="flex:1;" id="btnSaveJustif">💾 Enregistrer</button>
+        <button type="button" class="btn btn-danger" id="btnClearJustif">Effacer</button>
       </div>
     </div>
   </div>
@@ -1085,15 +1586,15 @@
     </div>
   </div>
 
-  <!-- MODAL : RECADRAGE & COMPRESSION PHOTO -->
+  <!-- MODAL : RECADRAGE & COMPRESSION PHOTO (ÉTUDIANT, PROFIL OU BRANDING ADMIN) -->
   <div class="modal-backdrop" id="cropModal">
     <div class="modal-box">
       <div class="card-title">
-        <span>✂️ Ajuster & Compresser la photo</span>
+        <span id="cropModalTitle">✂️ Ajuster & Compresser l'image</span>
         <button type="button" class="btn btn-secondary btn-sm" id="btnCloseCropModal">✕</button>
       </div>
-      <div class="crop-stage">
-        <canvas id="cropCanvas" width="220" height="220"></canvas>
+      <div class="crop-stage round" id="cropStageBox">
+        <canvas id="cropCanvas" width="240" height="240"></canvas>
       </div>
       <div class="form-group">
         <label for="cropZoom">Zoom : <span id="cropZoomLabel">100%</span></label>
@@ -1104,7 +1605,7 @@
         <button type="button" class="btn btn-secondary btn-sm" id="btnRotRight" style="flex:1;">↻ +90°</button>
         <button type="button" class="btn btn-secondary btn-sm" id="btnRotReset" style="flex:1;">Reset</button>
       </div>
-      <button type="button" class="btn btn-primary" id="btnApplyCrop" style="width:100%;">✅ Valider la photo</button>
+      <button type="button" class="btn btn-primary" id="btnApplyCrop" style="width:100%;">✅ Valider l'image</button>
     </div>
   </div>
 
@@ -1112,14 +1613,17 @@
 
   <script>
     const ADMIN_GENERAL_CODE = "Chico899";
+    const ADMIN_ACCOUNT_ID = "admin_general";
     const STORAGE_KEY = "eduappel_cbk_courses_v2";
+
+    const DEFAULT_PROMOTIONS = ["L1 RTM", "L2 RTM", "L1 Informatique de Gestion", "Général"];
 
     const DEFAULT_COURSES = [
       { id: "c_win", course: "Système d'Exploitation Windows", teacher: "Ass Nembalemba", loginName: "Ass Nembalemba", password: "CBK-WIN-101" },
       { id: "c_alg", course: "Algorithmique 1", teacher: "Ass Luvumbu", loginName: "Ass Luvumbu", password: "CBK-ALG-102" },
       { id: "c_val", course: "Valeurs, principes et Symboles de la République", teacher: "Ct Usumba", loginName: "Ct Usumba", password: "CBK-VAL-103" },
       { id: "c_tec", course: "Technologie des Composants", teacher: "Ct Bofando", loginName: "Ct Bofando", password: "CBK-TEC-104" },
-      { id: "c_prg", course: "Langage de programmation 1", teacher: "Ct Yumisa", loginName: "Ct Yumisa", password: "CBK-PRG-105" },
+      { id: "c_prg", course: "Langage de programmation 1", teacher: "Ct Vumisa", loginName: "Ct Vumisa", password: "CBK-PRG-105" },
       { id: "c_mth", course: "Math pour Ingénieur Informaticien", teacher: "Ct Nzita", loginName: "Ct Nzita (Math)", password: "CBK-MTH-106" },
       { id: "c_rch_nep", course: "Introduction à la recherche", teacher: "Prof Nepanepa", loginName: "Prof Nepanepa", password: "CBK-RCH-107" },
       { id: "c_mes", course: "Mesures électriques", teacher: "Ct Nzita", loginName: "Ct Nzita (Mesures)", password: "CBK-MES-108" },
@@ -1127,6 +1631,19 @@
       { id: "c_rch_pal", course: "Introduction à la recherche", teacher: "Ct Paluku", loginName: "Ct Paluku", password: "CBK-RCH-110" },
       { id: "c_inf_kat", course: "Informatique Générale", teacher: "Ct Katsongo", loginName: "Ct Katsongo", password: "CBK-INF-111" }
     ];
+
+    function normalizeTeacherVumisa(coursesList) {
+      return coursesList.map((c) => {
+        if (c.id === "c_prg" || /yumisa/i.test(c.teacher || "") || /yumisa/i.test(c.loginName || "")) {
+          return {
+            ...c,
+            teacher: "Ct Vumisa",
+            loginName: "Ct Vumisa"
+          };
+        }
+        return c;
+      });
+    }
 
     function todayISO() {
       const d = new Date();
@@ -1156,6 +1673,7 @@
     function createEmptyCourseNotebook(dateStr) {
       return {
         dates: [dateStr || todayISO()],
+        maskedCols: {},
         enrolledIds: [],
         marks: {}
       };
@@ -1170,11 +1688,30 @@
       return {
         session: {
           loggedIn: false,
-          role: "teacher", // 'teacher' | 'admin'
+          role: "teacher",
           courseId: DEFAULT_COURSES[0].id
         },
-        courses: DEFAULT_COURSES.map((c) => ({ ...c })),
-        // Chaque étudiant a un courseId pour qu'un professeur ne voie que les étudiants de son propre cours
+        courses: DEFAULT_COURSES.map((c) => ({
+          ...c,
+          blocked: false,
+          phone: "",
+          email: "",
+          bio: "",
+          photo: "",
+          blockMessages: false
+        })),
+        promotions: [...DEFAULT_PROMOTIONS],
+        branding: {
+          logo: "",
+          homeImg: "",
+          faqImg: "",
+          helpImg: "",
+          aboutImg: "",
+          apkUrl: ""
+        },
+        announcements: [],
+        messages: [],
+        notifications: [],
         students: [],
         notebooks,
         updatedAt: Date.now()
@@ -1183,12 +1720,53 @@
 
     let state = loadState();
     let activeCourseId = state.session.courseId || DEFAULT_COURSES[0].id;
-    let activeSlot = "before"; // 'before' | 'after'
+    let activeSlot = "before";
     let draftPhoto = makeDefaultAvatar();
+    let draftProfPhoto = "";
     let isApplyingRemoteSnapshot = false;
+    let activeChatPartnerId = "";
+    let replyContext = null; // { annId, commentId, authorName, text }
+    let activeJustifTarget = null; // { colIdx, studentId }
+    let deferredInstallPrompt = null;
+
+    // Gestion installation PWA / PC
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      ["btnInstallPwaHeader", "btnInstallPwaHero", "btnInstallDesktopPwa", "btnInstallPwaProfile"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove("hidden");
+      });
+    });
+
+    async function triggerPwaInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        showToast("Installation lancée !");
+      } else {
+        showToast("Sur Chrome/Edge PC : cliquez sur l'icône ⊕ dans la barre d'adresse. Sur mobile : Menu → Ajouter à l'écran d'accueil.");
+      }
+    }
+
+    ["btnInstallPwaHeader", "btnInstallPwaHero", "btnInstallDesktopPwa", "btnInstallPwaProfile"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener("click", triggerPwaInstall);
+    });
 
     function isAdminGeneral() {
       return Boolean(state.session.loggedIn && state.session.role === "admin");
+    }
+
+    function getCurrentActorId() {
+      return isAdminGeneral() ? ADMIN_ACCOUNT_ID : activeCourseId;
+    }
+
+    function getCurrentActorName() {
+      if (isAdminGeneral()) return "Admin Général (Chico899)";
+      const c = getCurrentCourse();
+      return c ? c.teacher : "Professeur";
     }
 
     function loadState() {
@@ -1197,15 +1775,26 @@
         if (!raw) return createInitialState();
         const parsed = JSON.parse(raw);
         const init = createInitialState();
-        const mergedCourses = Array.isArray(parsed.courses) && parsed.courses.length
+        const rawCourses = Array.isArray(parsed.courses) && parsed.courses.length
           ? parsed.courses
           : init.courses;
+
+        const mergedCourses = normalizeTeacherVumisa(rawCourses).map((c) => ({
+          blocked: false,
+          phone: "",
+          email: "",
+          bio: "",
+          photo: "",
+          blockMessages: false,
+          ...c
+        }));
 
         const mergedNotebooks = { ...init.notebooks };
         mergedCourses.forEach((c) => {
           const nb = parsed.notebooks?.[c.id];
           mergedNotebooks[c.id] = {
             dates: Array.isArray(nb?.dates) && nb.dates.length ? nb.dates : [todayISO()],
+            maskedCols: nb?.maskedCols && typeof nb.maskedCols === "object" ? nb.maskedCols : {},
             enrolledIds: Array.isArray(nb?.enrolledIds) ? nb.enrolledIds : [],
             marks: nb?.marks && typeof nb.marks === "object" ? nb.marks : {}
           };
@@ -1221,6 +1810,11 @@
           ...parsed,
           session: { ...init.session, ...(parsed.session || {}) },
           courses: mergedCourses,
+          promotions: Array.isArray(parsed.promotions) && parsed.promotions.length ? parsed.promotions : [...DEFAULT_PROMOTIONS],
+          branding: { ...init.branding, ...(parsed.branding || {}) },
+          announcements: Array.isArray(parsed.announcements) ? parsed.announcements : [],
+          messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+          notifications: Array.isArray(parsed.notifications) ? parsed.notifications : [],
           students: normalizedStudents,
           notebooks: mergedNotebooks,
           updatedAt: parsed.updatedAt || Date.now()
@@ -1235,10 +1829,17 @@
       state.updatedAt = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchronisé";
+      applyPublicBranding();
+      updateNotificationBadges();
 
       if (pushToFirebase && !isApplyingRemoteSnapshot && typeof window.envoyerDonneesEduAppel === "function") {
         window.envoyerDonneesEduAppel("global_state", {
           courses: state.courses,
+          promotions: state.promotions,
+          branding: state.branding,
+          announcements: state.announcements,
+          messages: state.messages,
+          notifications: state.notifications,
           students: state.students,
           notebooks: state.notebooks,
           activeCourseId: activeCourseId
@@ -1251,7 +1852,7 @@
       el.textContent = msg;
       el.classList.add("show");
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2700);
     }
 
     function escapeHtml(str) {
@@ -1262,9 +1863,164 @@
         .replace(/"/g, "&quot;");
     }
 
+    function pushNotification(targetId, title, body, targetTab = "tab-notifications") {
+      state.notifications.unshift({
+        id: "notif_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+        targetId, // 'ALL' ou id du cours ou ADMIN_ACCOUNT_ID
+        title,
+        body,
+        targetTab,
+        createdAt: new Date().toLocaleString("fr-FR")
+      });
+      if (state.notifications.length > 150) {
+        state.notifications = state.notifications.slice(0, 150);
+      }
+    }
+
+    function getMyNotifications() {
+      const me = getCurrentActorId();
+      return state.notifications.filter((n) => n.targetId === "ALL" || n.targetId === me);
+    }
+
+    function updateNotificationBadges() {
+      const count = state.session.loggedIn ? getMyNotifications().length : 0;
+      const b1 = document.getElementById("headerNotifBadge");
+      const b2 = document.getElementById("tabNotifBadge");
+      if (b1) b1.textContent = count;
+      if (b2) b2.textContent = count;
+    }
+
+    // Application des visuels globaux gérés uniquement par l'Admin Général
+    function applyPublicBranding() {
+      const b = state.branding || {};
+      const logoBox = document.getElementById("headerBrandLogo");
+      if (b.logo) {
+        logoBox.innerHTML = `<img src="${escapeHtml(b.logo)}" alt="Logo EduAppel" />`;
+      }
+
+      const mapImg = [
+        ["publicHomeImg", b.homeImg],
+        ["publicFaqImg", b.faqImg],
+        ["publicHelpImg", b.helpImg],
+        ["publicAboutImg", b.aboutImg]
+      ];
+      mapImg.forEach(([elId, src]) => {
+        const img = document.getElementById(elId);
+        if (!img) return;
+        if (src) {
+          img.src = src;
+          img.classList.remove("hidden");
+        } else {
+          img.classList.add("hidden");
+        }
+      });
+
+      const apkAnchor = document.getElementById("apkDownloadAnchor");
+      const apkNote = document.getElementById("apkLinkStatusNote");
+      if (b.apkUrl) {
+        apkAnchor.href = b.apkUrl;
+        apkNote.textContent = "Lien APK officiel configuré par l'Admin Général.";
+      } else {
+        apkAnchor.href = "https://www.pwabuilder.com/";
+        apkNote.textContent = "Astuce : cliquez sur « Installer App / Version PC » pour installer directement depuis le navigateur, ou configurez le lien direct .apk dans l'espace Admin Général.";
+      }
+    }
+
+    // MENU LATÉRAL RAPIDE (ZÉRO DÉFILEMENT)
+    function openSideMenu() {
+      renderSideMenu();
+      document.getElementById("sideMenuOverlay").classList.add("open");
+      document.getElementById("sideMenu").classList.add("open");
+    }
+
+    function closeSideMenu() {
+      document.getElementById("sideMenuOverlay").classList.remove("open");
+      document.getElementById("sideMenu").classList.remove("open");
+    }
+
+    function openTabFromMenu(tabId) {
+      closeSideMenu();
+      openTab(tabId);
+    }
+
+    function openAdminSubFromMenu(subId) {
+      closeSideMenu();
+      openTab("tab-admin");
+      openAdminSubTab(subId);
+    }
+
+    function renderSideMenu() {
+      const box = document.getElementById("sideMenuContent");
+      const titleEl = document.getElementById("sideMenuHeaderTitle");
+
+      if (!state.session.loggedIn) {
+        titleEl.textContent = "☰ Navigation Accueil";
+        box.innerHTML = `
+          <div class="menu-section-title">Accès rapide</div>
+          <div class="menu-list">
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-login')">🔐 Connexion Professeur</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-apk')">📦 Télécharger APK & Version PC</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-faq')">❓ FAQ & Questions</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-aide')">🆘 Guide d'Aide</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-about')">ℹ️ À propos & CBK</button>
+            <a class="menu-item-btn" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">💬 WhatsApp Équipe CBK</a>
+          </div>
+        `;
+        return;
+      }
+
+      if (isAdminGeneral()) {
+        titleEl.textContent = "🛡️ Menu Admin Général";
+        box.innerHTML = `
+          <div class="menu-section-title">Administration Générale</div>
+          <div class="menu-list">
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-annonces')">📢 Publier une Annonce</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Ajouter / Bloquer / Supprimer)</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-promos')">🎓 Gérer les Promotions</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-branding')">🖼️ Logo APK, Photos & Lien APK</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-suivi')">📊 Suivi Global des Cours</button>
+          </div>
+          <div class="menu-section-title">Communication & Cahiers</div>
+          <div class="menu-list">
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-cours')">📚 Tous les Cours</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-cahier')">📒 Cahier d'appel actif</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">💬 Fil d'Annonces & Réponses</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-messages')">✉️ Boîte de Messages</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-notifications')">🔔 Notifications (${getMyNotifications().length})</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-profil')">💾 Sauvegarde & Export</button>
+          </div>
+        `;
+        return;
+      }
+
+      const c = getCurrentCourse();
+      titleEl.textContent = `☰ Menu — ${c.teacher}`;
+      box.innerHTML = `
+        <div class="credits-box" style="margin-bottom:10px;">
+          <div style="font-weight:800;">${escapeHtml(c.teacher)}</div>
+          <div class="student-meta">${escapeHtml(c.course)}</div>
+        </div>
+        <div class="menu-section-title">Services du Cours</div>
+        <div class="menu-list">
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-cahier')">📒 Cahier d'Appel du Cours</button>
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-etudiants')">👨‍🎓 Étudiants du Cours</button>
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-evolution')">📈 Évolution & Assiduité (%)</button>
+        </div>
+        <div class="menu-section-title">Communication & Compte</div>
+        <div class="menu-list">
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">📢 Annonces de l'Admin</button>
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-messages')">✉️ Ma Boîte de Messages</button>
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-notifications')">🔔 Notifications (${getMyNotifications().length})</button>
+          <button class="menu-item-btn" onclick="openTabFromMenu('tab-profil')">👤 Mon Profil, Photo & Blocage Msg</button>
+          <button class="menu-item-btn" onclick="closeSideMenu(); triggerPwaInstall()">📲 Installer l'Application</button>
+        </div>
+      `;
+    }
+
+    document.getElementById("btnOpenSideMenu").addEventListener("click", openSideMenu);
+
     function closeDrawers() {
       document.getElementById("coursesDrawer").classList.remove("open");
-      document.getElementById("infoDrawer").classList.remove("open");
     }
 
     function scrollToEl(id) {
@@ -1281,10 +2037,12 @@
       if (!state.notebooks[activeCourseId]) {
         state.notebooks[activeCourseId] = createEmptyCourseNotebook(todayISO());
       }
+      if (!state.notebooks[activeCourseId].maskedCols) {
+        state.notebooks[activeCourseId].maskedCols = {};
+      }
       return state.notebooks[activeCourseId];
     }
 
-    // Étudiants visibles pour la session courante (isolés par cours pour un professeur)
     function getScopedStudents() {
       if (isAdminGeneral()) return state.students;
       return state.students.filter((s) => s.courseId === activeCourseId);
@@ -1293,7 +2051,15 @@
     function populateTeacherLoginSelect() {
       const sel = document.getElementById("teacherSelectInput");
       sel.innerHTML = state.courses
-        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}</option>`)
+        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
+        .join("");
+    }
+
+    function populatePromotionSelect() {
+      const sel = document.getElementById("stuPromotionInput");
+      if (!sel) return;
+      sel.innerHTML = state.promotions
+        .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
         .join("");
     }
 
@@ -1304,29 +2070,32 @@
       const courseObj = state.courses.find((c) => c.id === courseId);
       if (!courseObj) return;
 
+      if (courseObj.blocked) {
+        showToast("Ce compte professeur a été bloqué par l'Admin Général.");
+        return;
+      }
+
       if (pwd === courseObj.password) {
         activeCourseId = courseObj.id;
         state.session = { loggedIn: true, role: "teacher", courseId: courseObj.id };
         saveState(false);
         document.getElementById("teacherPasswordInput").value = "";
-        showToast(`Connecté sur votre cours : ${courseObj.course}`);
+        showToast(`Bienvenue ${courseObj.teacher} — ${courseObj.course}`);
         renderSessionView();
       } else {
         showToast("Mot de passe incorrect pour ce cours.");
       }
     });
 
-    // Accès Admin Général sur le logo/titre (clic ouvre, double-clic ferme)
+    // Accès Admin Général sur le logo/titre
     const adminModal = document.getElementById("adminCodeModal");
     document.getElementById("brandAdminTrigger").addEventListener("click", () => {
       adminModal.classList.add("open");
       setTimeout(() => document.getElementById("adminCodeInput").focus(), 60);
     });
-
     document.getElementById("brandAdminTrigger").addEventListener("dblclick", () => {
       adminModal.classList.remove("open");
     });
-
     document.getElementById("btnCloseAdminModal").addEventListener("click", () => {
       adminModal.classList.remove("open");
     });
@@ -1353,37 +2122,53 @@
       state.session.role = "teacher";
       saveState(false);
       closeDrawers();
+      closeSideMenu();
       renderSessionView();
       showToast("Déconnecté.");
     });
 
     document.getElementById("btnToggleCoursesDrawer").addEventListener("click", () => {
       if (!isAdminGeneral()) return;
-      document.getElementById("infoDrawer").classList.remove("open");
       document.getElementById("coursesDrawer").classList.toggle("open");
       renderCoursesDrawer();
-    });
-
-    document.getElementById("btnToggleInfoDrawer").addEventListener("click", () => {
-      document.getElementById("coursesDrawer").classList.remove("open");
-      document.getElementById("infoDrawer").classList.toggle("open");
     });
 
     function openTab(tabId) {
       if ((tabId === "tab-admin" || tabId === "tab-cours") && !isAdminGeneral()) {
         tabId = "tab-cahier";
       }
-      document.querySelectorAll(".nav-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === tabId));
-      document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("hidden", p.id !== tabId));
+      document.querySelectorAll(".nav-tabs > .nav-tab[data-tab]").forEach((t) => {
+        t.classList.toggle("active", t.dataset.tab === tabId);
+      });
+      document.querySelectorAll(".tab-panel").forEach((p) => {
+        p.classList.toggle("hidden", p.id !== tabId);
+      });
       if (tabId === "tab-cahier") renderCahierTab();
       if (tabId === "tab-cours") renderCoursesTab();
       if (tabId === "tab-etudiants") renderStudentsTab();
+      if (tabId === "tab-annonces") renderAnnouncementsTab();
+      if (tabId === "tab-messages") renderMessagesTab();
+      if (tabId === "tab-notifications") renderNotificationsTab();
       if (tabId === "tab-evolution") renderEvolutionTab();
+      if (tabId === "tab-profil") renderProfileTab();
       if (tabId === "tab-admin") renderAdminTab();
     }
 
-    document.querySelectorAll(".nav-tab").forEach((tab) => {
+    document.querySelectorAll(".nav-tabs > .nav-tab[data-tab]").forEach((tab) => {
       tab.addEventListener("click", () => openTab(tab.dataset.tab));
+    });
+
+    function openAdminSubTab(subId) {
+      document.querySelectorAll("[data-admin-sub]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.adminSub === subId);
+      });
+      document.querySelectorAll(".admin-sub-panel").forEach((panel) => {
+        panel.classList.toggle("hidden", panel.id !== subId);
+      });
+    }
+
+    document.querySelectorAll("[data-admin-sub]").forEach((btn) => {
+      btn.addEventListener("click", () => openAdminSubTab(btn.dataset.adminSub));
     });
 
     function renderSessionView() {
@@ -1393,15 +2178,21 @@
       document.getElementById("publicView").classList.toggle("hidden", logged);
       document.getElementById("appView").classList.toggle("hidden", !logged);
       document.getElementById("btnLockApp").classList.toggle("hidden", !logged);
+      document.getElementById("btnHeaderNotif").classList.toggle("hidden", !logged);
+      document.getElementById("btnHeaderMsg").classList.toggle("hidden", !logged);
 
-      // Seul l'Admin Général voit tous les cours et l'onglet Admin Général
       document.getElementById("btnToggleCoursesDrawer").classList.toggle("hidden", !admin);
       document.getElementById("navTabCours").classList.toggle("hidden", !admin);
       document.getElementById("navTabAdmin").classList.toggle("hidden", !admin);
 
+      populateTeacherLoginSelect();
+      populatePromotionSelect();
+      applyPublicBranding();
+      updateNotificationBadges();
+
       if (!admin) {
         document.getElementById("coursesDrawer").classList.remove("open");
-        const activeTabEl = document.querySelector(".nav-tab.active");
+        const activeTabEl = document.querySelector(".nav-tabs > .nav-tab.active");
         if (activeTabEl && (activeTabEl.dataset.tab === "tab-admin" || activeTabEl.dataset.tab === "tab-cours")) {
           openTab("tab-cahier");
         }
@@ -1455,9 +2246,12 @@
             <div>
               <div class="student-name">${escapeHtml(c.course)}</div>
               <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
-              <div class="student-meta">${nb.enrolledIds.length} étudiant(s) dans le cahier • ${nb.dates.length} date(s)/colonne(s)</div>
+              <div class="student-meta">${nb.enrolledIds.length} étudiant(s) • ${nb.dates.length} date(s)</div>
             </div>
-            <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">📒 Ouvrir le cahier</button>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">📒 Ouvrir</button>
+            </div>
           </div>
         `;
       }).join("");
@@ -1465,7 +2259,9 @@
 
     function getCell(nb, colIdx, studentId) {
       if (!nb.marks[colIdx]) nb.marks[colIdx] = {};
-      if (!nb.marks[colIdx][studentId]) nb.marks[colIdx][studentId] = { before: "", after: "" };
+      if (!nb.marks[colIdx][studentId]) {
+        nb.marks[colIdx][studentId] = { before: "", after: "", justif: "" };
+      }
       return nb.marks[colIdx][studentId];
     }
 
@@ -1492,8 +2288,20 @@
       return total === 0 ? 0 : Math.round((presentScore / total) * 100);
     }
 
+    function toggleColMask(colIdx) {
+      const nb = getCurrentNotebook();
+      nb.maskedCols[colIdx] = !nb.maskedCols[colIdx];
+      saveState(true);
+      renderCahierTab();
+      showToast(nb.maskedCols[colIdx] ? "Colonne masquée et verrouillée contre les modifications." : "Colonne démasquée : vous pouvez modifier.");
+    }
+
     function toggleCellMark(colIdx, studentId, status) {
       const nb = getCurrentNotebook();
+      if (nb.maskedCols[colIdx]) {
+        showToast("Cette colonne est masquée. Désactivez « Masqué » pour la modifier.");
+        return;
+      }
       const cell = getCell(nb, colIdx, studentId);
       cell[activeSlot] = cell[activeSlot] === status ? "" : status;
       saveState(true);
@@ -1501,13 +2309,65 @@
     }
 
     function updateNotebookDate(colIdx, newDateVal) {
-      if (!newDateVal) return;
       const nb = getCurrentNotebook();
+      if (nb.maskedCols[colIdx]) {
+        showToast("Démasquez la colonne avant de modifier sa date.");
+        return;
+      }
+      if (!newDateVal) return;
       nb.dates[colIdx] = newDateVal;
       saveState(true);
       renderCahierTab();
       showToast("Date mise à jour sur le cahier.");
     }
+
+    // Justification rapide d'absence / retard
+    function openJustifModal(colIdx, studentId) {
+      const nb = getCurrentNotebook();
+      if (nb.maskedCols[colIdx]) {
+        showToast("Démasquez cette colonne avant de modifier une justification.");
+        return;
+      }
+      const st = getScopedStudents().find((s) => s.id === studentId);
+      if (!st) return;
+      activeJustifTarget = { colIdx, studentId };
+      const cell = getCell(nb, colIdx, studentId);
+      document.getElementById("justifTargetLabel").textContent =
+        `Étudiant : ${st.name} (${st.matricule}) • Date : ${nb.dates[colIdx]}`;
+      document.getElementById("justifNoteInput").value = cell.justif || "";
+      document.getElementById("justifModal").classList.add("open");
+    }
+
+    function closeJustifModal() {
+      document.getElementById("justifModal").classList.remove("open");
+      activeJustifTarget = null;
+    }
+
+    function setQuickJustif(label) {
+      document.getElementById("justifNoteInput").value = label;
+    }
+
+    document.getElementById("btnSaveJustif").addEventListener("click", () => {
+      if (!activeJustifTarget) return;
+      const nb = getCurrentNotebook();
+      const cell = getCell(nb, activeJustifTarget.colIdx, activeJustifTarget.studentId);
+      cell.justif = document.getElementById("justifNoteInput").value.trim();
+      saveState(true);
+      closeJustifModal();
+      renderCahierTab();
+      showToast("Justification enregistrée.");
+    });
+
+    document.getElementById("btnClearJustif").addEventListener("click", () => {
+      if (!activeJustifTarget) return;
+      const nb = getCurrentNotebook();
+      const cell = getCell(nb, activeJustifTarget.colIdx, activeJustifTarget.studentId);
+      cell.justif = "";
+      saveState(true);
+      closeJustifModal();
+      renderCahierTab();
+      showToast("Justification effacée.");
+    });
 
     document.getElementById("btnAddDateCol").addEventListener("click", () => {
       const nb = getCurrentNotebook();
@@ -1538,6 +2398,10 @@
     document.getElementById("btnBulkPresentLastDate").addEventListener("click", () => {
       const nb = getCurrentNotebook();
       const colIdx = nb.dates.length - 1;
+      if (nb.maskedCols[colIdx]) {
+        showToast("La dernière colonne est masquée. Démasquez-la d'abord.");
+        return;
+      }
       nb.enrolledIds.forEach((sid) => {
         getCell(nb, colIdx, sid)[activeSlot] = "present";
       });
@@ -1549,12 +2413,50 @@
     document.getElementById("btnBulkAbsentLastDate").addEventListener("click", () => {
       const nb = getCurrentNotebook();
       const colIdx = nb.dates.length - 1;
+      if (nb.maskedCols[colIdx]) {
+        showToast("La dernière colonne est masquée. Démasquez-la d'abord.");
+        return;
+      }
       nb.enrolledIds.forEach((sid) => {
         getCell(nb, colIdx, sid)[activeSlot] = "absent";
       });
       saveState(true);
       renderCahierTab();
       showToast("Tous marqués ABSENT sur la dernière date.");
+    });
+
+    // Résumé WhatsApp en 1 clic
+    document.getElementById("btnCopyWhatsappSummary").addEventListener("click", async () => {
+      const course = getCurrentCourse();
+      const nb = getCurrentNotebook();
+      const colIdx = nb.dates.length - 1;
+      const dateLabel = nb.dates[colIdx] || todayISO();
+      const pool = getScopedStudents();
+      const enrolled = nb.enrolledIds.map((id) => pool.find((s) => s.id === id)).filter(Boolean);
+
+      let pres = 0, abs = 0, lates = [];
+      enrolled.forEach((st) => {
+        const cell = nb.marks[colIdx]?.[st.id] || {};
+        if (cell[activeSlot] === "present") pres++;
+        if (cell[activeSlot] === "absent") abs++;
+        if (isCellLate(cell)) lates.push(st.name);
+      });
+
+      const summary = [
+        `📋 *BILAN D'APPEL — EDUAPPEL (Équipe CBK)*`,
+        `📚 Cours : *${course.course}*`,
+        `👨‍🏫 Professeur : *${course.teacher}*`,
+        `📅 Date : *${dateLabel}* (${activeSlot === "before" ? "Avant cours" : "Après cours"})`,
+        `✅ Présents : *${pres}* | ❌ Absents : *${abs}* | 👥 Total : *${enrolled.length}*`,
+        lates.length ? `⏰ Retardataires : ${lates.join(", ")}` : `⏰ Retardataires : Aucun`
+      ].join("\n");
+
+      try {
+        await navigator.clipboard.writeText(summary);
+        showToast("Résumé WhatsApp copié ! Collez-le dans WhatsApp.");
+      } catch {
+        prompt("Copiez ce résumé WhatsApp :", summary);
+      }
     });
 
     document.getElementById("cahierSearchInput").addEventListener("input", renderCahierTab);
@@ -1565,7 +2467,7 @@
 
       document.getElementById("activeCourseTitle").textContent = course.course;
       document.getElementById("activeCourseInfo").textContent =
-        `Professeur : ${course.teacher} • Cours isolé • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
+        `Professeur : ${course.teacher} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
 
       const scopedPool = getScopedStudents();
       const enrolledStudents = nb.enrolledIds
@@ -1600,10 +2502,21 @@
       let subRow = `<tr>`;
 
       nb.dates.forEach((dVal, idx) => {
-        topRow += `<th colspan="2" class="date-col">
-          <input type="date" class="date-edit-input" value="${escapeHtml(dVal)}" onchange="updateNotebookDate(${idx}, this.value)" />
+        const isMasked = Boolean(nb.maskedCols?.[idx]);
+        topRow += `<th colspan="2" class="${isMasked ? "date-col-masked" : "date-col"}">
+          <div class="date-header-wrap">
+            ${isMasked
+              ? `<span style="font-size:0.78rem;">${escapeHtml(dVal)}</span>`
+              : `<input type="date" class="date-edit-input" value="${escapeHtml(dVal)}" onchange="updateNotebookDate(${idx}, this.value)" />`
+            }
+            <button type="button" class="mask-toggle-btn" onclick="toggleColMask(${idx})">
+              ${isMasked ? "🔓 Démasquer" : "👁️ Masquer"}
+            </button>
+          </div>
         </th>`;
-        subRow += `<th class="sub-col">PRÉSENT</th><th class="sub-col">ABSENT</th>`;
+        subRow += isMasked
+          ? `<th colspan="2" class="sub-col">VERROUILLÉ</th>`
+          : `<th class="sub-col">PRÉSENT</th><th class="sub-col">ABSENT / MOTIF</th>`;
       });
 
       topRow += `<th rowspan="2" class="main-col">% PRÉSENCE</th></tr>`;
@@ -1614,21 +2527,30 @@
       if (visibleStudents.length === 0) {
         const colSpan = 4 + nb.dates.length * 2;
         tbody.innerHTML = `<tr><td colspan="${colSpan}" style="padding:18px; color:#94a3b8;">
-          Aucun étudiant dans le cahier de ce cours. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants.
+          Aucun étudiant affiché. Cliquez sur <strong>+ Ajouter au cahier</strong> pour inscrire vos étudiants.
         </td></tr>`;
       } else {
         tbody.innerHTML = visibleStudents.map((st) => {
           const pct = computeStudentCoursePct(nb, st.id);
           let dateCellsHtml = "";
           nb.dates.forEach((_, idx) => {
-            const cell = nb.marks[idx]?.[st.id] || { before: "", after: "" };
+            const isMasked = Boolean(nb.maskedCols?.[idx]);
+            if (isMasked) {
+              dateCellsHtml += `<td colspan="2" class="masked-cell-box">Masqué</td>`;
+              return;
+            }
+            const cell = nb.marks[idx]?.[st.id] || { before: "", after: "", justif: "" };
             const val = cell[activeSlot] || "";
+            const hasJustif = Boolean(cell.justif);
             dateCellsHtml += `
               <td>
                 <button type="button" class="mark-btn ${val === "present" ? "checked-present" : ""}" onclick="toggleCellMark(${idx}, '${st.id}', 'present')" title="Présent">✓</button>
               </td>
               <td>
                 <button type="button" class="mark-btn ${val === "absent" ? "checked-absent" : ""}" onclick="toggleCellMark(${idx}, '${st.id}', 'absent')" title="Absent">✕</button>
+                <button type="button" class="justif-mini-btn" onclick="openJustifModal(${idx}, '${st.id}')" title="${hasJustif ? escapeHtml(cell.justif) : "Ajouter une justification"}">
+                  ${hasJustif ? "📝✓" : "📝"}
+                </button>
               </td>
             `;
           });
@@ -1646,39 +2568,46 @@
       }
 
       const lateEl = document.getElementById("cahierLateList");
-      const lateItems = [];
+      const specialItems = [];
       enrolledStudents.forEach((st) => {
         nb.dates.forEach((dVal, idx) => {
-          if (isCellLate(nb.marks[idx]?.[st.id])) {
-            lateItems.push({ st, date: dVal });
+          const cell = nb.marks[idx]?.[st.id];
+          if (!cell) return;
+          const late = isCellLate(cell);
+          if (late || cell.justif) {
+            specialItems.push({ st, date: dVal, late, justif: cell.justif || "", colIdx: idx });
           }
         });
       });
 
-      if (lateItems.length === 0) {
-        lateEl.innerHTML = `<p class="student-meta">Aucun retardataire détecté sur ce cahier.</p>`;
+      if (specialItems.length === 0) {
+        lateEl.innerHTML = `<p class="student-meta">Aucun retardataire ni justification enregistrée sur ce cahier.</p>`;
       } else {
-        lateEl.innerHTML = lateItems.map((item) => `
+        lateEl.innerHTML = specialItems.map((item) => `
           <div class="student-row">
             <div class="student-info">
               <img class="avatar" src="${item.st.photo || makeDefaultAvatar()}" alt="${escapeHtml(item.st.name)}" />
               <div>
-                <div class="student-name">${escapeHtml(item.st.name)} <span class="badge badge-late">⏰ Retardataire</span></div>
-                <div class="student-meta">Matricule : <strong>${escapeHtml(item.st.matricule)}</strong> • Date : <strong>${escapeHtml(item.date)}</strong> (Absent/non présent Avant → Présent Après)</div>
+                <div class="student-name">
+                  ${escapeHtml(item.st.name)}
+                  ${item.late ? `<span class="badge badge-late">⏰ Retardataire</span>` : ""}
+                  ${item.justif ? `<span class="badge badge-pct">📝 ${escapeHtml(item.justif)}</span>` : ""}
+                </div>
+                <div class="student-meta">Matricule : <strong>${escapeHtml(item.st.matricule)}</strong> • Date : <strong>${escapeHtml(item.date)}</strong></div>
               </div>
             </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openJustifModal(${item.colIdx}, '${item.st.id}')">📝 Motif</button>
           </div>
         `).join("");
       }
     }
 
-    // Modal sélection des étudiants de ce cours vers le cahier
+    // Modal sélection des étudiants vers le cahier
     const enrollModal = document.getElementById("enrollModal");
     document.getElementById("btnOpenEnrollModal").addEventListener("click", () => {
       renderEnrollChecklist();
       enrollModal.classList.add("open");
     });
-
     document.getElementById("btnCloseEnrollModal").addEventListener("click", () => {
       enrollModal.classList.remove("open");
     });
@@ -1694,7 +2623,7 @@
       const pool = getScopedStudents();
 
       if (pool.length === 0) {
-        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours. Ajoutez-en d'abord dans l'onglet <strong>Étudiants du Cours</strong>.</p>`;
+        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré pour ce cours. Ajoutez-en d'abord dans l'onglet <strong>Étudiants</strong>.</p>`;
         return;
       }
 
@@ -1718,7 +2647,6 @@
     document.getElementById("btnSelectAllEnroll").addEventListener("click", () => {
       document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = true));
     });
-
     document.getElementById("btnUnselectAllEnroll").addEventListener("click", () => {
       document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = false));
     });
@@ -1739,7 +2667,7 @@
       const editId = document.getElementById("editingStudentId").value;
       const name = document.getElementById("stuNameInput").value.trim();
       const matricule = document.getElementById("stuMatriculeInput").value.trim();
-      const promotion = document.getElementById("stuPromotionInput").value.trim() || "Général";
+      const promotion = document.getElementById("stuPromotionInput").value || "Général";
       if (!name || !matricule) return;
 
       if (editId) {
@@ -1782,7 +2710,7 @@
         const name = parts[0] || "";
         if (!name) return;
         const matricule = parts[1] || `MAT-${String(state.students.length + added + 1).padStart(3, "0")}`;
-        const promotion = parts[2] || "Général";
+        const promotion = parts[2] || state.promotions[0] || "Général";
         const newId = "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 5);
         state.students.push({
           id: newId,
@@ -1815,7 +2743,7 @@
       document.getElementById("editingStudentId").value = st.id;
       document.getElementById("stuNameInput").value = st.name;
       document.getElementById("stuMatriculeInput").value = st.matricule;
-      document.getElementById("stuPromotionInput").value = st.promotion || "";
+      document.getElementById("stuPromotionInput").value = st.promotion || state.promotions[0];
       draftPhoto = st.photo || makeDefaultAvatar();
       document.getElementById("stuPhotoPreview").src = draftPhoto;
       document.getElementById("studentFormTitle").textContent = "✏️ Modifier l'Étudiant";
@@ -1875,21 +2803,356 @@
       `).join("");
     }
 
-    // Recadrage & compression photo
+    // ============ ANNONCES (J'AIME + COMMENTAIRES + RÉPONSES TYPE WHATSAPP) ============
+    function toggleLikeAnnouncement(annId) {
+      const ann = state.announcements.find((a) => a.id === annId);
+      if (!ann) return;
+      if (!Array.isArray(ann.likes)) ann.likes = [];
+      const me = getCurrentActorId();
+      const idx = ann.likes.indexOf(me);
+      if (idx === -1) ann.likes.push(me);
+      else ann.likes.splice(idx, 1);
+      saveState(true);
+      renderAnnouncementsTab();
+    }
+
+    function setReplyToComment(annId, commentId, authorName, text) {
+      replyContext = { annId, commentId, authorName, text };
+      renderAnnouncementsTab();
+      const inp = document.getElementById(`commentInput_${annId}`);
+      if (inp) inp.focus();
+    }
+
+    function cancelReplyContext() {
+      replyContext = null;
+      renderAnnouncementsTab();
+    }
+
+    function submitAnnouncementComment(e, annId) {
+      e.preventDefault();
+      const ann = state.announcements.find((a) => a.id === annId);
+      if (!ann) return;
+      const inp = document.getElementById(`commentInput_${annId}`);
+      const txt = (inp?.value || "").trim();
+      if (!txt) return;
+      if (!Array.isArray(ann.comments)) ann.comments = [];
+
+      const activeReply = replyContext && replyContext.annId === annId ? { ...replyContext } : null;
+      ann.comments.push({
+        id: "cmt_" + Date.now() + "_" + Math.random().toString(36).slice(2, 5),
+        authorId: getCurrentActorId(),
+        authorName: getCurrentActorName(),
+        text: txt,
+        replyTo: activeReply ? { authorName: activeReply.authorName, text: activeReply.text } : null,
+        createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+      });
+
+      replyContext = null;
+      saveState(true);
+      renderAnnouncementsTab();
+      showToast("Commentaire envoyé.");
+    }
+
+    function renderAnnouncementsTab() {
+      const box = document.getElementById("announcementsFeedContainer");
+      if (!state.announcements.length) {
+        box.innerHTML = `<p class="student-meta">Aucune annonce publiée par l'Admin Général pour le moment.</p>`;
+        return;
+      }
+
+      const me = getCurrentActorId();
+      box.innerHTML = state.announcements.map((ann) => {
+        const likes = Array.isArray(ann.likes) ? ann.likes : [];
+        const likedByMe = likes.includes(me);
+        const comments = Array.isArray(ann.comments) ? ann.comments : [];
+        const activeReply = replyContext && replyContext.annId === ann.id ? replyContext : null;
+
+        const commentsHtml = comments.map((c) => `
+          <div class="comment-bubble" onclick="setReplyToComment('${ann.id}', '${c.id}', '${escapeHtml(c.authorName).replace(/'/g, "\\'")}', '${escapeHtml(c.text).replace(/'/g, "\\'")}')" title="Cliquez pour répondre à ce commentaire">
+            ${c.replyTo ? `
+              <div class="reply-quote">
+                ↩️ <strong>${escapeHtml(c.replyTo.authorName)}</strong> : ${escapeHtml(c.replyTo.text)}
+              </div>
+            ` : ""}
+            <div style="display:flex; justify-content:space-between; gap:8px;">
+              <strong style="font-size:0.8rem; color:var(--accent);">${escapeHtml(c.authorName)}</strong>
+              <span class="student-meta">${escapeHtml(c.createdAt || "")} • ↩️ Répondre</span>
+            </div>
+            <div style="font-size:0.85rem; margin-top:2px;">${escapeHtml(c.text)}</div>
+          </div>
+        `).join("");
+
+        return `
+          <div class="announcement-card">
+            <div class="announcement-header">
+              <div>
+                <div style="font-weight:800; font-size:1rem;">📢 ${escapeHtml(ann.title)}</div>
+                <div class="student-meta">Publié par Admin Général • ${escapeHtml(ann.createdAt || "")}</div>
+              </div>
+              <button type="button" class="btn ${likedByMe ? "btn-primary" : "btn-secondary"} btn-sm" onclick="toggleLikeAnnouncement('${ann.id}')">
+                ${likedByMe ? "❤️ Aimé" : "🤍 J'aime"} (${likes.length})
+              </button>
+            </div>
+            <div class="announcement-body">${escapeHtml(ann.body)}</div>
+
+            <div style="border-top:1px solid var(--border); padding-top:10px;">
+              <div class="student-meta" style="margin-bottom:6px;">💬 Commentaires (${comments.length}) — cliquez sur un message pour y répondre :</div>
+              ${commentsHtml}
+
+              ${activeReply ? `
+                <div class="reply-quote" style="margin-top:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Réponse à <strong>${escapeHtml(activeReply.authorName)}</strong> : "${escapeHtml(activeReply.text)}"</span>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="cancelReplyContext()">✕</button>
+                </div>
+              ` : ""}
+
+              <form onsubmit="submitAnnouncementComment(event, '${ann.id}')" style="display:flex; gap:8px; margin-top:8px;">
+                <input type="text" id="commentInput_${ann.id}" placeholder="${activeReply ? `Répondre à ${escapeHtml(activeReply.authorName)}...` : "Écrire un commentaire..."}" required />
+                <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+              </form>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // ============ MESSAGERIE DIRECTE & BLOCAGE DES MESSAGES ============
+    function getAllMessageTargets() {
+      const me = getCurrentActorId();
+      const list = [];
+      if (me !== ADMIN_ACCOUNT_ID) {
+        list.push({
+          id: ADMIN_ACCOUNT_ID,
+          name: "Admin Général (Chico899)",
+          sub: "Administration Générale",
+          photo: state.branding?.logo || "",
+          blockMessages: false
+        });
+      }
+      state.courses.forEach((c) => {
+        if (c.id === me) return;
+        list.push({
+          id: c.id,
+          name: c.teacher,
+          sub: c.course,
+          photo: c.photo || "",
+          blockMessages: Boolean(c.blockMessages)
+        });
+      });
+      return list;
+    }
+
+    function openDirectChatWith(targetId) {
+      activeChatPartnerId = targetId;
+      openTab("tab-messages");
+    }
+
+    function renderMessagesTab() {
+      const contactsBox = document.getElementById("messageContactsList");
+      const targets = getAllMessageTargets();
+      if (!activeChatPartnerId && targets.length) {
+        activeChatPartnerId = targets[0].id;
+      }
+
+      contactsBox.innerHTML = targets.map((t) => `
+        <button type="button" class="menu-item-btn ${t.id === activeChatPartnerId ? "active" : ""}" style="margin-bottom:7px;" onclick="activeChatPartnerId='${t.id}'; renderMessagesTab();">
+          <div style="display:flex; align-items:center; gap:9px;">
+            <img class="avatar" style="width:34px; height:34px;" src="${t.photo || makeDefaultAvatar()}" alt="" />
+            <div>
+              <div>${escapeHtml(t.name)}</div>
+              <div class="student-meta">${escapeHtml(t.sub)}</div>
+            </div>
+          </div>
+          <span>${t.blockMessages ? "🔕" : "✉️"}</span>
+        </button>
+      `).join("");
+
+      const partner = targets.find((t) => t.id === activeChatPartnerId);
+      const chatBox = document.getElementById("chatMessagesBox");
+      const titleEl = document.getElementById("activeChatPartnerTitle");
+      const msgInput = document.getElementById("directMessageInput");
+
+      if (!partner) {
+        titleEl.textContent = "Aucun contact";
+        return;
+      }
+
+      titleEl.textContent = `Discussion avec ${partner.name}${partner.blockMessages ? " (Messages bloqués)" : ""}`;
+      msgInput.disabled = partner.blockMessages && !isAdminGeneral();
+      msgInput.placeholder = msgInput.disabled
+        ? "Ce compte a bloqué la réception des messages."
+        : `Écrire un message à ${partner.name}...`;
+
+      const me = getCurrentActorId();
+      const convo = state.messages.filter((m) =>
+        (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me)
+      );
+
+      if (convo.length === 0) {
+        chatBox.innerHTML = `<p class="student-meta">Aucun message échangé pour l'instant.</p>`;
+      } else {
+        chatBox.innerHTML = convo.map((m) => {
+          const mine = m.fromId === me;
+          return `
+            <div class="msg-bubble ${mine ? "msg-mine" : "msg-theirs"}">
+              <div style="font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:2px;">
+                ${mine ? "Moi" : escapeHtml(m.fromName)} • ${escapeHtml(m.createdAt || "")}
+              </div>
+              <div>${escapeHtml(m.text)}</div>
+            </div>
+          `;
+        }).join("");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    document.getElementById("sendDirectMessageForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!activeChatPartnerId) return;
+      const targets = getAllMessageTargets();
+      const partner = targets.find((t) => t.id === activeChatPartnerId);
+      if (!partner) return;
+
+      if (partner.blockMessages && !isAdminGeneral()) {
+        showToast("Impossible d'envoyer : ce professeur a bloqué ses messages.");
+        return;
+      }
+
+      const inp = document.getElementById("directMessageInput");
+      const text = inp.value.trim();
+      if (!text) return;
+
+      const meId = getCurrentActorId();
+      const meName = getCurrentActorName();
+      state.messages.push({
+        id: "msg_" + Date.now(),
+        fromId: meId,
+        fromName: meName,
+        toId: partner.id,
+        text,
+        createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+      });
+
+      pushNotification(
+        partner.id,
+        `✉️ Nouveau message de ${meName}`,
+        text.slice(0, 90),
+        "tab-messages"
+      );
+
+      inp.value = "";
+      saveState(true);
+      renderMessagesTab();
+    });
+
+    // ============ NOTIFICATIONS + SUPPRESSION ============
+    function renderNotificationsTab() {
+      const box = document.getElementById("notificationsListContainer");
+      const list = getMyNotifications();
+      if (list.length === 0) {
+        box.innerHTML = `<p class="student-meta">Aucune notification pour le moment.</p>`;
+        return;
+      }
+      box.innerHTML = list.map((n) => `
+        <div class="student-row">
+          <div>
+            <div class="student-name">${escapeHtml(n.title)}</div>
+            <div class="student-meta">${escapeHtml(n.body)}</div>
+            <div class="student-meta" style="margin-top:3px;">🕒 ${escapeHtml(n.createdAt || "")}</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openTab('${escapeHtml(n.targetTab || "tab-annonces")}')">Ouvrir</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteOneNotification('${n.id}')">✕</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function deleteOneNotification(id) {
+      state.notifications = state.notifications.filter((n) => n.id !== id);
+      saveState(true);
+      renderNotificationsTab();
+    }
+
+    document.getElementById("btnClearAllNotifications").addEventListener("click", () => {
+      const me = getCurrentActorId();
+      state.notifications = state.notifications.filter((n) => n.targetId !== me && n.targetId !== "ALL");
+      saveState(true);
+      renderNotificationsTab();
+      showToast("Toutes les notifications ont été supprimées.");
+    });
+
+    // ============ PROFIL DU PROFESSEUR (PHOTO, COORDONNÉES, BLOCAGE MESSAGES) ============
+    function renderProfileTab() {
+      const admin = isAdminGeneral();
+      document.getElementById("teacherProfileCard").classList.toggle("hidden", admin);
+      if (admin) return;
+
+      const c = getCurrentCourse();
+      draftProfPhoto = c.photo || "";
+      document.getElementById("profileAvatarPreview").src = c.photo || makeDefaultAvatar();
+      document.getElementById("profDisplayNameInput").value = c.teacher || "";
+      document.getElementById("profPhoneInput").value = c.phone || "";
+      document.getElementById("profEmailInput").value = c.email || "";
+      document.getElementById("profPhotoUrlInput").value = (c.photo && c.photo.startsWith("http")) ? c.photo : "";
+      document.getElementById("profBioInput").value = c.bio || "";
+      document.getElementById("profBlockMessagesInput").checked = Boolean(c.blockMessages);
+    }
+
+    document.getElementById("teacherProfileForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (isAdminGeneral()) return;
+      const c = getCurrentCourse();
+      const urlVal = document.getElementById("profPhotoUrlInput").value.trim();
+      c.teacher = document.getElementById("profDisplayNameInput").value.trim() || c.teacher;
+      c.phone = document.getElementById("profPhoneInput").value.trim();
+      c.email = document.getElementById("profEmailInput").value.trim();
+      c.bio = document.getElementById("profBioInput").value.trim();
+      c.blockMessages = document.getElementById("profBlockMessagesInput").checked;
+      if (urlVal) {
+        c.photo = urlVal;
+      } else if (draftProfPhoto) {
+        c.photo = draftProfPhoto;
+      }
+      saveState(true);
+      renderProfileTab();
+      showToast("Profil et préférences enregistrés.");
+    });
+
+    // ============ RECADRAGE & COMPRESSION UNIVERSELLE (ÉTUDIANT, PROFIL, BRANDING ADMIN) ============
     const cropModal = document.getElementById("cropModal");
     const cropCanvas = document.getElementById("cropCanvas");
     const cropCtx = cropCanvas.getContext("2d");
     let cropImg = new Image();
     let cropScale = 1, cropOffsetX = 0, cropOffsetY = 0, cropRot = 0, isDragging = false, dragX = 0, dragY = 0;
+    let currentCropTarget = { type: "student", key: "" }; // 'student' | 'prof' | 'branding'
 
-    function openCropWithSrc(src) {
+    function openCropWithSrc(src, target = { type: "student", key: "" }) {
+      currentCropTarget = target;
+      const stage = document.getElementById("cropStageBox");
+      const isRound = target.type === "student" || target.type === "prof" || target.key === "logo";
+      stage.classList.toggle("round", isRound);
+      document.getElementById("cropModalTitle").textContent =
+        target.type === "branding" ? "✂️ Ajuster le visuel avant publication" : "✂️ Ajuster & Compresser la photo";
+
       cropImg = new Image();
+      cropImg.crossOrigin = "anonymous";
       cropImg.onload = () => {
         cropScale = 1; cropOffsetX = 0; cropOffsetY = 0; cropRot = 0;
         document.getElementById("cropZoom").value = 1;
         document.getElementById("cropZoomLabel").textContent = "100%";
         drawCrop();
         cropModal.classList.add("open");
+      };
+      cropImg.onerror = () => {
+        if (target.type === "branding" && src.startsWith("http")) {
+          state.branding[target.key] = src;
+          saveState(true);
+          renderAdminBrandingSlots();
+          showToast("Lien URL enregistré directement.");
+        } else {
+          showToast("Impossible de charger cette image.");
+        }
       };
       cropImg.src = src;
     }
@@ -1909,18 +3172,25 @@
       cropCtx.restore();
     }
 
-    function onPhotoFile(e) {
+    function onPhotoFile(e, target) {
       const f = e.target.files?.[0];
       if (!f) return;
       const r = new FileReader();
-      r.onload = (ev) => openCropWithSrc(ev.target.result);
+      r.onload = (ev) => openCropWithSrc(ev.target.result, target);
       r.readAsDataURL(f);
       e.target.value = "";
     }
 
-    document.getElementById("camInput").addEventListener("change", onPhotoFile);
-    document.getElementById("galInput").addEventListener("change", onPhotoFile);
-    document.getElementById("btnCropDraft").addEventListener("click", () => openCropWithSrc(draftPhoto));
+    document.getElementById("camInput").addEventListener("change", (e) => onPhotoFile(e, { type: "student" }));
+    document.getElementById("galInput").addEventListener("change", (e) => onPhotoFile(e, { type: "student" }));
+    document.getElementById("btnCropDraft").addEventListener("click", () => openCropWithSrc(draftPhoto, { type: "student" }));
+
+    document.getElementById("profCamInput").addEventListener("change", (e) => onPhotoFile(e, { type: "prof" }));
+    document.getElementById("profGalInput").addEventListener("change", (e) => onPhotoFile(e, { type: "prof" }));
+    document.getElementById("btnCropProfPhoto").addEventListener("click", () => {
+      openCropWithSrc(draftProfPhoto || makeDefaultAvatar(), { type: "prof" });
+    });
+
     document.getElementById("btnCloseCropModal").addEventListener("click", () => cropModal.classList.remove("open"));
 
     cropCanvas.addEventListener("pointerdown", (e) => {
@@ -1951,28 +3221,43 @@
     });
 
     document.getElementById("btnApplyCrop").addEventListener("click", () => {
+      const isBanner = currentCropTarget.type === "branding" && currentCropTarget.key !== "logo";
+      const outW = isBanner ? 480 : 200;
+      const outH = isBanner ? 240 : 200;
       const out = document.createElement("canvas");
-      const outSize = 180;
-      out.width = outSize;
-      out.height = outSize;
+      out.width = outW;
+      out.height = outH;
       const ctx = out.getContext("2d");
-      const ratio = outSize / cropCanvas.width;
+      const ratioX = outW / cropCanvas.width;
+      const ratioY = outH / cropCanvas.height;
       ctx.fillStyle = "#081529";
-      ctx.fillRect(0, 0, outSize, outSize);
+      ctx.fillRect(0, 0, outW, outH);
       ctx.save();
-      ctx.translate(outSize / 2 + cropOffsetX * ratio, outSize / 2 + cropOffsetY * ratio);
+      ctx.translate(outW / 2 + cropOffsetX * ratioX, outH / 2 + cropOffsetY * ratioY);
       ctx.rotate((cropRot * Math.PI) / 180);
-      const base = Math.max(outSize / cropImg.width, outSize / cropImg.height);
+      const base = Math.max(outW / cropImg.width, outH / cropImg.height);
       const w = cropImg.width * base * cropScale;
       const h = cropImg.height * base * cropScale;
       ctx.drawImage(cropImg, -w / 2, -h / 2, w, h);
       ctx.restore();
-      draftPhoto = out.toDataURL("image/jpeg", 0.65);
-      document.getElementById("stuPhotoPreview").src = draftPhoto;
+
+      const dataUrl = out.toDataURL("image/jpeg", 0.72);
+      if (currentCropTarget.type === "student") {
+        draftPhoto = dataUrl;
+        document.getElementById("stuPhotoPreview").src = draftPhoto;
+      } else if (currentCropTarget.type === "prof") {
+        draftProfPhoto = dataUrl;
+        document.getElementById("profileAvatarPreview").src = draftProfPhoto;
+      } else if (currentCropTarget.type === "branding" && isAdminGeneral()) {
+        state.branding[currentCropTarget.key] = dataUrl;
+        saveState(true);
+        renderAdminBrandingSlots();
+      }
       cropModal.classList.remove("open");
-      showToast("Photo recadrée et compressée.");
+      showToast("Image ajustée et enregistrée.");
     });
 
+    // ============ ÉVOLUTION & % ============
     function renderEvolutionTab() {
       const nb = getCurrentNotebook();
       const pool = getScopedStudents();
@@ -2037,7 +3322,7 @@
       const enrolled = nb.enrolledIds.map((id) => pool.find((s) => s.id === id)).filter(Boolean);
       const header = ["Cours", "Professeur", "N° Matricule", "Nom"];
       nb.dates.forEach((d) => {
-        header.push(`${d} (Avant)`, `${d} (Après)`);
+        header.push(`${d} (Avant)`, `${d} (Après)`, `${d} (Justification)`);
       });
       header.push("% Présence");
 
@@ -2046,7 +3331,7 @@
         const row = [course.course, course.teacher, st.matricule, st.name];
         nb.dates.forEach((_, idx) => {
           const cell = nb.marks[idx]?.[st.id] || {};
-          row.push(cell.before || "", cell.after || "");
+          row.push(cell.before || "", cell.after || "", cell.justif || "");
         });
         row.push(computeStudentCoursePct(nb, st.id) + "%");
         rows.push(row);
@@ -2073,6 +3358,9 @@
         team: "Équipe CBK",
         exportedAt: new Date().toISOString(),
         courses: isAdmin ? state.courses : [getCurrentCourse()],
+        promotions: state.promotions,
+        branding: isAdmin ? state.branding : undefined,
+        announcements: isAdmin ? state.announcements : undefined,
         students: getScopedStudents(),
         notebooks: isAdmin ? state.notebooks : { [activeCourseId]: getCurrentNotebook() }
       };
@@ -2097,7 +3385,10 @@
           if (isAdminGeneral()) {
             state.students = d.students.map((s) => ({ ...s, courseId: s.courseId || activeCourseId }));
             state.notebooks = { ...state.notebooks, ...d.notebooks };
-            if (Array.isArray(d.courses) && d.courses.length) state.courses = d.courses;
+            if (Array.isArray(d.courses) && d.courses.length) state.courses = normalizeTeacherVumisa(d.courses);
+            if (Array.isArray(d.promotions) && d.promotions.length) state.promotions = d.promotions;
+            if (d.branding) state.branding = { ...state.branding, ...d.branding };
+            if (Array.isArray(d.announcements)) state.announcements = d.announcements;
           } else {
             const scopedImported = d.students
               .filter((s) => !s.courseId || s.courseId === activeCourseId)
@@ -2119,14 +3410,254 @@
       e.target.value = "";
     });
 
+    // ============ FONCTIONS ADMIN GÉNÉRAL (CHICO899) ============
     document.getElementById("btnAdminSyncNow").addEventListener("click", () => {
       saveState(true);
       renderAdminTab();
       showToast("Données synchronisées en temps réel.");
     });
 
+    // 1. Annonces Admin
+    document.getElementById("adminPublishAnnouncementForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!isAdminGeneral()) return;
+      const title = document.getElementById("annTitleInput").value.trim();
+      const body = document.getElementById("annBodyInput").value.trim();
+      if (!title || !body) return;
+
+      state.announcements.unshift({
+        id: "ann_" + Date.now(),
+        title,
+        body,
+        likes: [],
+        comments: [],
+        createdAt: new Date().toLocaleString("fr-FR")
+      });
+
+      pushNotification("ALL", `📢 Annonce : ${title}`, body.slice(0, 100), "tab-annonces");
+      document.getElementById("annTitleInput").value = "";
+      document.getElementById("annBodyInput").value = "";
+      saveState(true);
+      renderAdminTab();
+      showToast("Annonce publiée à tous les professeurs !");
+    });
+
+    function deleteAnnouncement(annId) {
+      if (!isAdminGeneral()) return;
+      if (!confirm("Supprimer cette annonce ?")) return;
+      state.announcements = state.announcements.filter((a) => a.id !== annId);
+      saveState(true);
+      renderAdminTab();
+      showToast("Annonce supprimée.");
+    }
+
+    // 2. Ajouter / Bloquer / Supprimer Professeur & Cours
+    document.getElementById("adminAddCourseTeacherForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!isAdminGeneral()) return;
+      const courseTitle = document.getElementById("newCourseTitleInput").value.trim();
+      const teacherName = document.getElementById("newTeacherNameInput").value.trim();
+      const loginName = document.getElementById("newTeacherLoginInput").value.trim();
+      const password = document.getElementById("newTeacherPwdAdminInput").value.trim();
+      if (!courseTitle || !teacherName || !loginName || !password) return;
+
+      const newId = "c_" + Date.now().toString(36);
+      state.courses.push({
+        id: newId,
+        course: courseTitle,
+        teacher: teacherName,
+        loginName,
+        password,
+        blocked: false,
+        phone: "",
+        email: "",
+        bio: "",
+        photo: "",
+        blockMessages: false
+      });
+      state.notebooks[newId] = createEmptyCourseNotebook(todayISO());
+
+      document.getElementById("adminAddCourseTeacherForm").reset();
+      populateTeacherLoginSelect();
+      saveState(true);
+      renderAdminTab();
+      showToast(`Professeur ${teacherName} et cours ajoutés.`);
+    });
+
+    function toggleBlockTeacher(courseId) {
+      if (!isAdminGeneral()) return;
+      const c = state.courses.find((x) => x.id === courseId);
+      if (!c) return;
+      c.blocked = !c.blocked;
+      saveState(true);
+      renderAdminTab();
+      showToast(c.blocked ? `Compte de ${c.teacher} bloqué.` : `Compte de ${c.teacher} réactivé.`);
+    }
+
+    function deleteTeacherCourse(courseId) {
+      if (!isAdminGeneral()) return;
+      if (state.courses.length <= 1) {
+        showToast("Impossible de supprimer le dernier cours.");
+        return;
+      }
+      if (!confirm("Supprimer définitivement ce professeur et son cours ?")) return;
+      state.courses = state.courses.filter((x) => x.id !== courseId);
+      delete state.notebooks[courseId];
+      state.students = state.students.filter((s) => s.courseId !== courseId);
+      if (activeCourseId === courseId) {
+        activeCourseId = state.courses[0].id;
+      }
+      populateTeacherLoginSelect();
+      saveState(true);
+      renderAdminTab();
+      showToast("Professeur et cours supprimés.");
+    }
+
+    // 3. Promotions
+    document.getElementById("adminAddPromotionForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!isAdminGeneral()) return;
+      const val = document.getElementById("newPromotionNameInput").value.trim();
+      if (!val) return;
+      if (!state.promotions.includes(val)) {
+        state.promotions.push(val);
+        saveState(true);
+        populatePromotionSelect();
+        renderAdminTab();
+        showToast(`Promotion « ${val} » ajoutée.`);
+      } else {
+        showToast("Cette promotion existe déjà.");
+      }
+      document.getElementById("newPromotionNameInput").value = "";
+    });
+
+    function deletePromotion(idx) {
+      if (!isAdminGeneral()) return;
+      state.promotions.splice(idx, 1);
+      saveState(true);
+      populatePromotionSelect();
+      renderAdminTab();
+    }
+
+    // 4. Branding (Logo APK + Photos Accueil, FAQ, Aide, À propos + URL APK)
+    function applyBrandingUrl(key) {
+      if (!isAdminGeneral()) return;
+      const inp = document.getElementById(`brandingUrl_${key}`);
+      const url = (inp?.value || "").trim();
+      if (!url) {
+        showToast("Collez d'abord un lien URL d'image valide.");
+        return;
+      }
+      openCropWithSrc(url, { type: "branding", key });
+    }
+
+    function clearBrandingSlot(key) {
+      if (!isAdminGeneral()) return;
+      state.branding[key] = "";
+      saveState(true);
+      renderAdminBrandingSlots();
+      showToast("Visuel retiré.");
+    }
+
+    function renderAdminBrandingSlots() {
+      const box = document.getElementById("adminBrandingSlotsContainer");
+      if (!box) return;
+      const slots = [
+        { key: "logo", label: "Logo de l'application & APK" },
+        { key: "homeImg", label: "Photo de la Page d'Accueil" },
+        { key: "faqImg", label: "Photo de la section FAQ" },
+        { key: "helpImg", label: "Photo de la section Aide" },
+        { key: "aboutImg", label: "Photo de la section À propos" }
+      ];
+
+      box.innerHTML = slots.map((s) => {
+        const currentSrc = state.branding?.[s.key] || "";
+        return `
+          <div class="student-row" style="align-items:flex-start;">
+            <div style="flex:1; min-width:240px;">
+              <div class="student-name">${escapeHtml(s.label)}</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+                <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
+                  📁 Choisir photo & recadrer
+                  <input type="file" accept="image/*" class="hidden" onchange="onPhotoFile(event, { type: 'branding', key: '${s.key}' })" />
+                </label>
+                ${currentSrc ? `<button type="button" class="btn btn-warning btn-sm" onclick="openCropWithSrc('${escapeHtml(currentSrc)}', { type: 'branding', key: '${s.key}' })">✂️ Réajuster</button>` : ""}
+                ${currentSrc ? `<button type="button" class="btn btn-danger btn-sm" onclick="clearBrandingSlot('${s.key}')">🗑️ Retirer</button>` : ""}
+              </div>
+              <div style="display:flex; gap:6px; margin-top:8px;">
+                <input type="url" id="brandingUrl_${s.key}" placeholder="Ou coller un lien URL image (https://...)" value="${currentSrc.startsWith("http") ? escapeHtml(currentSrc) : ""}" />
+                <button type="button" class="btn btn-primary btn-sm" onclick="applyBrandingUrl('${s.key}')">Appliquer URL</button>
+              </div>
+            </div>
+            ${currentSrc ? `<img src="${escapeHtml(currentSrc)}" alt="" style="width:90px; height:64px; object-fit:cover; border-radius:10px; border:1px solid var(--accent);" />` : ""}
+          </div>
+        `;
+      }).join("");
+
+      const apkInput = document.getElementById("adminApkUrlInput");
+      if (apkInput) apkInput.value = state.branding?.apkUrl || "";
+    }
+
+    document.getElementById("adminApkLinkForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!isAdminGeneral()) return;
+      state.branding.apkUrl = document.getElementById("adminApkUrlInput").value.trim();
+      saveState(true);
+      showToast("Lien de téléchargement APK enregistré.");
+    });
+
     function renderAdminTab() {
       if (!isAdminGeneral()) return;
+
+      // Aperçu annonces
+      const annPreview = document.getElementById("adminAnnouncementsPreview");
+      annPreview.innerHTML = state.announcements.map((ann) => `
+        <div class="student-row">
+          <div>
+            <div class="student-name">${escapeHtml(ann.title)}</div>
+            <div class="student-meta">${escapeHtml(ann.body)}</div>
+            <div class="student-meta">❤️ ${(ann.likes || []).length} • 💬 ${(ann.comments || []).length} • ${escapeHtml(ann.createdAt || "")}</div>
+          </div>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${ann.id}')">🗑️ Supprimer</button>
+        </div>
+      `).join("");
+
+      // Liste gestion professeurs
+      const profList = document.getElementById("adminTeachersManageList");
+      profList.innerHTML = state.courses.map((c) => `
+        <div class="student-row">
+          <div class="student-info">
+            <img class="avatar" src="${c.photo || makeDefaultAvatar()}" alt="" />
+            <div>
+              <div class="student-name">
+                ${escapeHtml(c.teacher)} — ${escapeHtml(c.course)}
+                ${c.blocked ? `<span class="badge badge-warn">🚫 Bloqué</span>` : `<span class="badge badge-pct">✅ Actif</span>`}
+              </div>
+              <div class="student-meta">Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
+              ${c.phone || c.email ? `<div class="student-meta">📞 ${escapeHtml(c.phone || "-")} • ✉️ ${escapeHtml(c.email || "-")}</div>` : ""}
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')" title="Envoyer un message">✉️ Message</button>
+            <button type="button" class="btn btn-warning btn-sm" onclick="toggleBlockTeacher('${c.id}')">${c.blocked ? "🔓 Débloquer" : "🚫 Bloquer"}</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTeacherCourse('${c.id}')">🗑️ Supprimer</button>
+          </div>
+        </div>
+      `).join("");
+
+      // Promotions
+      const promoList = document.getElementById("adminPromotionsList");
+      promoList.innerHTML = state.promotions.map((p, idx) => `
+        <div class="student-row">
+          <div class="student-name">🎓 ${escapeHtml(p)}</div>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deletePromotion(${idx})">🗑️</button>
+        </div>
+      `).join("");
+
+      // Branding
+      renderAdminBrandingSlots();
+
+      // Suivi Global
       const container = document.getElementById("adminGlobalContainer");
       container.innerHTML = state.courses.map((c) => {
         const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
@@ -2162,7 +3693,10 @@
                 <div>${escapeHtml(c.course)}</div>
                 <div class="student-meta">Prof : <strong>${escapeHtml(c.teacher)}</strong> • Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
               </div>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir cahier</button>
+              <div style="display:flex; gap:6px;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir cahier</button>
+              </div>
             </div>
             ${rowsHtml}
           </div>
@@ -2170,9 +3704,15 @@
       }).join("");
     }
 
-    // Démarrage initial
+    // Démarrage initial & Service Worker PWA
     populateTeacherLoginSelect();
+    populatePromotionSelect();
+    applyPublicBranding();
     renderSessionView();
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    }
   </script>
 
   <script type="module">
@@ -2197,7 +3737,6 @@
       });
     };
 
-    // Connexion automatique en temps réel entre Firebase et l'interface EduAppel
     window.ecouterEduAppelEnDirect((remoteData) => {
       const globalPayload = remoteData?.global_state;
       if (!globalPayload || typeof globalPayload !== "object") return;
@@ -2208,7 +3747,22 @@
       if (remoteUpdatedAt > localUpdatedAt) {
         isApplyingRemoteSnapshot = true;
         if (Array.isArray(globalPayload.courses) && globalPayload.courses.length) {
-          state.courses = globalPayload.courses;
+          state.courses = normalizeTeacherVumisa(globalPayload.courses);
+        }
+        if (Array.isArray(globalPayload.promotions) && globalPayload.promotions.length) {
+          state.promotions = globalPayload.promotions;
+        }
+        if (globalPayload.branding && typeof globalPayload.branding === "object") {
+          state.branding = { ...state.branding, ...globalPayload.branding };
+        }
+        if (Array.isArray(globalPayload.announcements)) {
+          state.announcements = globalPayload.announcements;
+        }
+        if (Array.isArray(globalPayload.messages)) {
+          state.messages = globalPayload.messages;
+        }
+        if (Array.isArray(globalPayload.notifications)) {
+          state.notifications = globalPayload.notifications;
         }
         if (Array.isArray(globalPayload.students)) {
           state.students = globalPayload.students;
@@ -2219,9 +3773,12 @@
         state.updatedAt = remoteUpdatedAt;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
+        applyPublicBranding();
+        updateNotificationBadges();
+
         if (state.session.loggedIn) {
           renderSessionView();
-          const activeTab = document.querySelector(".nav-tab.active")?.dataset?.tab || "tab-cahier";
+          const activeTab = document.querySelector(".nav-tabs > .nav-tab.active")?.dataset?.tab || "tab-cahier";
           openTab(activeTab);
         }
         document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Live Firebase actif";
