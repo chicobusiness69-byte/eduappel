@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="EduAppel" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='8' width='40' height='48' rx='8' fill='%23071529' stroke='%2300d2b8' stroke-width='4'/><circle cx='45' cy='43' r='13' fill='%2300d2b8'/></svg>" />
   <link rel="manifest" href="manifest.json" />
   <title>EduAppel — Équipe CBK</title>
   <style>
@@ -319,7 +320,6 @@
       border-color: var(--accent);
     }
 
-    /* MENU LATÉRAL / TIROIR DE NAVIGATION RAPIDE (ZÉRO DÉFILEMENT FATIGANT) */
     .drawer-overlay {
       position: fixed;
       inset: 0;
@@ -559,7 +559,6 @@
       font-size: 0.74rem;
     }
 
-    /* Colonne masquée : clair, lisible, pas noir */
     td.masked-cell-box {
       background: rgba(56, 189, 248, 0.10);
       color: #bae6fd;
@@ -714,7 +713,6 @@
       color: #fcd34d;
     }
 
-    /* ANNONCES & COMMENTAIRES TYPE WHATSAPP */
     .announcement-card {
       background: var(--bg-card-2);
       border: 1px solid var(--border);
@@ -761,7 +759,6 @@
       margin-bottom: 5px;
     }
 
-    /* MESSAGERIE DIRECTE */
     .chat-box {
       background: #071324;
       border: 1px solid var(--border);
@@ -948,7 +945,6 @@
 
   <header>
     <div class="header-inner">
-      <!-- Clic = ouvre la fenêtre code Admin Général (Chico899), Double-clic = ferme -->
       <div class="brand-box" id="brandAdminTrigger" title="Accès Admin Général">
         <div class="brand-logo" id="headerBrandLogo" aria-label="Logo EduAppel">
           <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -981,7 +977,6 @@
     </div>
   </header>
 
-  <!-- MENU LATÉRAL COMPLET (PROFESSEUR & ADMIN GÉNÉRAL) -->
   <div class="drawer-overlay" id="sideMenuOverlay" onclick="closeSideMenu()"></div>
   <aside class="side-menu" id="sideMenu">
     <div class="card-title">
@@ -992,7 +987,6 @@
   </aside>
 
   <div class="container">
-    <!-- Menu Cours par cours (Admin Général) -->
     <div class="drawer-panel" id="coursesDrawer">
       <div class="card-title">
         <span>📚 Tous les Cours & Cahiers d'Appel (Admin Général)</span>
@@ -1050,11 +1044,10 @@
         </div>
       </div>
 
-      <!-- SECTION TÉLÉCHARGEMENT APK & VERSION PC -->
       <div class="card" id="section-apk">
         <div class="card-title"><span>📱 Télécharger l'APK Android & 💻 Version PC</span></div>
         <p class="student-meta" style="font-size:0.88rem; color:#cbd5e1; margin-bottom:12px;">
-          Installez <strong>EduAppel</strong> directement sur votre téléphone Android (fichier APK ou PWA) ou sur votre ordinateur Windows/Mac en mode application plein écran.
+          Installez <strong>EduAppel</strong> directement sur votre téléphone Android (fichier APK ou PWA) ou sur votre ordinateur Windows/Mac/Chromebook en mode application plein écran.
         </p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <a id="apkDownloadAnchor" class="btn btn-primary" href="#" target="_blank" rel="noopener">📦 Télécharger le fichier APK (.apk)</a>
@@ -1063,7 +1056,6 @@
         <p class="student-meta" id="apkLinkStatusNote" style="margin-top:8px;"></p>
       </div>
 
-      <!-- SECTION FAQ -->
       <div class="card" id="section-faq">
         <div class="card-title"><span>❓ FAQ & Questions Fréquentes</span></div>
         <img id="publicFaqImg" class="section-banner-img hidden" alt="Visuel FAQ EduAppel" />
@@ -1087,7 +1079,6 @@
         </div>
       </div>
 
-      <!-- SECTION AIDE -->
       <div class="card" id="section-aide">
         <div class="card-title"><span>🆘 Guide d'Aide Rapide</span></div>
         <img id="publicHelpImg" class="section-banner-img hidden" alt="Visuel Aide EduAppel" />
@@ -1099,7 +1090,6 @@
         </div>
       </div>
 
-      <!-- SECTION À PROPOS -->
       <div class="card" id="section-about">
         <div class="card-title"><span>ℹ️ À propos & Équipe CBK</span></div>
         <img id="publicAboutImg" class="section-banner-img hidden" alt="Visuel À propos EduAppel" />
@@ -1145,7 +1135,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 1 : CAHIER D'APPEL DU COURS -->
       <div id="tab-cahier" class="tab-panel">
         <div class="card">
           <div class="course-banner">
@@ -1189,7 +1178,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 2 : ÉTUDIANTS (ISOLÉS PAR COURS POUR LES PROFESSEURS) -->
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -1251,7 +1239,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 3 : ANNONCES DE L'ADMIN GÉNÉRAL (J'AIME + COMMENTAIRES + RÉPONSES TYPE WHATSAPP) -->
       <div id="tab-annonces" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>📢 Annonces & Changements Officiels (Admin Général)</span></div>
@@ -1262,7 +1249,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 4 : MESSAGERIE PRIVÉE & RÉPERTOIRE -->
       <div id="tab-messages" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>✉️ Messagerie Directe (Professeurs & Admin Général)</span></div>
@@ -1287,7 +1273,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 5 : NOTIFICATIONS + BOUTON SUPPRIMER TOUT -->
       <div id="tab-notifications" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -1298,7 +1283,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 6 : ÉVOLUTION & % -->
       <div id="tab-evolution" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>📈 Évolution & Assiduité (%) sur le Cours</span></div>
@@ -1311,7 +1295,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 7 : MON COMPTE PROFESSEUR / RÉGLAGES & SAUVEGARDE -->
       <div id="tab-profil" class="tab-panel hidden">
         <div class="card" id="teacherProfileCard">
           <div class="card-title"><span>👤 Mon Profil & Coordonnées Personnelles</span></div>
@@ -1395,7 +1378,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 8 : COURS PAR COURS (ADMIN GÉNÉRAL) -->
       <div id="tab-cours" class="tab-panel hidden">
         <div class="card">
           <div class="card-title"><span>📚 Liste de Tous les Cours & Informations (Admin Général)</span></div>
@@ -1403,7 +1385,6 @@
         </div>
       </div>
 
-      <!-- ONGLET 9 : ADMIN GÉNÉRAL (CHICO899) -->
       <div id="tab-admin" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
@@ -1414,7 +1395,6 @@
             </div>
           </div>
 
-          <!-- Sous-navigation Admin Général pour éviter le long défilement -->
           <div class="nav-tabs" style="margin-bottom:14px;">
             <button type="button" class="nav-tab active" data-admin-sub="admin-sub-annonces">📢 Publier Annonce</button>
             <button type="button" class="nav-tab" data-admin-sub="admin-sub-profs">👨‍🏫 Professeurs & Cours</button>
@@ -1423,7 +1403,6 @@
             <button type="button" class="nav-tab" data-admin-sub="admin-sub-suivi">📊 Suivi Global</button>
           </div>
 
-          <!-- SOUS-SECTION ADMIN 1 : PUBLIER ANNONCE -->
           <div id="admin-sub-annonces" class="admin-sub-panel">
             <form id="adminPublishAnnouncementForm" class="card" style="background:var(--bg-card-2);">
               <div class="card-title"><span>📢 Publier une annonce à tous les professeurs</span></div>
@@ -1440,7 +1419,6 @@
             <div id="adminAnnouncementsPreview"></div>
           </div>
 
-          <!-- SOUS-SECTION ADMIN 2 : AJOUTER / BLOQUER / SUPPRIMER PROFESSEUR & COURS -->
           <div id="admin-sub-profs" class="admin-sub-panel hidden">
             <form id="adminAddCourseTeacherForm" class="card" style="background:var(--bg-card-2);">
               <div class="card-title"><span>➕ Ajouter un Professeur et son Cours</span></div>
@@ -1470,7 +1448,6 @@
             <div id="adminTeachersManageList"></div>
           </div>
 
-          <!-- SOUS-SECTION ADMIN 3 : AJOUTER DES PROMOTIONS -->
           <div id="admin-sub-promos" class="admin-sub-panel hidden">
             <form id="adminAddPromotionForm" class="card" style="background:var(--bg-card-2);">
               <div class="card-title"><span>🎓 Ajouter une Nouvelle Promotion</span></div>
@@ -1485,7 +1462,6 @@
             <div id="adminPromotionsList"></div>
           </div>
 
-          <!-- SOUS-SECTION ADMIN 4 : LOGO, PHOTOS (ACCUEIL, FAQ, AIDE, À PROPOS) & LIEN APK -->
           <div id="admin-sub-branding" class="admin-sub-panel hidden">
             <div class="card" style="background:var(--bg-card-2);">
               <div class="card-title"><span>🖼️ Logo de l'APK & Photos des Sections (Admin Général uniquement)</span></div>
@@ -1507,7 +1483,6 @@
             </div>
           </div>
 
-          <!-- SOUS-SECTION ADMIN 5 : SUIVI GLOBAL DES COURS & ÉTUDIANTS -->
           <div id="admin-sub-suivi" class="admin-sub-panel hidden">
             <div id="adminGlobalContainer"></div>
           </div>
@@ -1586,7 +1561,7 @@
     </div>
   </div>
 
-  <!-- MODAL : RECADRAGE & COMPRESSION PHOTO (ÉTUDIANT, PROFIL OU BRANDING ADMIN) -->
+  <!-- MODAL : RECADRAGE & COMPRESSION PHOTO -->
   <div class="modal-backdrop" id="cropModal">
     <div class="modal-box">
       <div class="card-title">
@@ -1633,7 +1608,9 @@
     ];
 
     function normalizeTeacherVumisa(coursesList) {
+      if (!Array.isArray(coursesList)) return [...DEFAULT_COURSES];
       return coursesList.map((c) => {
+        if (!c || typeof c !== "object") return c;
         if (c.id === "c_prg" || /yumisa/i.test(c.teacher || "") || /yumisa/i.test(c.loginName || "")) {
           return {
             ...c,
@@ -1679,6 +1656,43 @@
       };
     }
 
+    // Normalisation sécurisée des cahiers (Firebase supprime les tableaux vides [])
+    function normalizeSingleNotebook(nb) {
+      const safeNb = nb && typeof nb === "object" ? nb : {};
+      const dates = Array.isArray(safeNb.dates) && safeNb.dates.length
+        ? safeNb.dates
+        : (safeNb.dates && typeof safeNb.dates === "object" ? Object.values(safeNb.dates) : [todayISO()]);
+      const enrolledIds = Array.isArray(safeNb.enrolledIds)
+        ? safeNb.enrolledIds
+        : (safeNb.enrolledIds && typeof safeNb.enrolledIds === "object" ? Object.values(safeNb.enrolledIds) : []);
+      return {
+        dates: dates.length ? dates : [todayISO()],
+        maskedCols: safeNb.maskedCols && typeof safeNb.maskedCols === "object" ? safeNb.maskedCols : {},
+        enrolledIds: enrolledIds.filter(Boolean),
+        marks: safeNb.marks && typeof safeNb.marks === "object" ? safeNb.marks : {}
+      };
+    }
+
+    function normalizeNotebooksMap(rawNotebooks, coursesList) {
+      const source = rawNotebooks && typeof rawNotebooks === "object" ? rawNotebooks : {};
+      const out = {};
+      (Array.isArray(coursesList) ? coursesList : DEFAULT_COURSES).forEach((c) => {
+        out[c.id] = normalizeSingleNotebook(source[c.id]);
+      });
+      Object.keys(source).forEach((cid) => {
+        if (!out[cid]) {
+          out[cid] = normalizeSingleNotebook(source[cid]);
+        }
+      });
+      return out;
+    }
+
+    function toArraySafe(val, fallback = []) {
+      if (Array.isArray(val)) return val;
+      if (val && typeof val === "object") return Object.values(val);
+      return fallback;
+    }
+
     function createInitialState() {
       const d0 = todayISO();
       const notebooks = {};
@@ -1714,7 +1728,7 @@
         notifications: [],
         students: [],
         notebooks,
-        updatedAt: Date.now()
+        updatedAt: 0
       };
     }
 
@@ -1724,12 +1738,12 @@
     let draftPhoto = makeDefaultAvatar();
     let draftProfPhoto = "";
     let isApplyingRemoteSnapshot = false;
+    let hasInitialFirebaseSync = false;
     let activeChatPartnerId = "";
-    let replyContext = null; // { annId, commentId, authorName, text }
-    let activeJustifTarget = null; // { colIdx, studentId }
+    let replyContext = null;
+    let activeJustifTarget = null;
     let deferredInstallPrompt = null;
 
-    // Gestion installation PWA / PC
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
       deferredInstallPrompt = e;
@@ -1775,11 +1789,9 @@
         if (!raw) return createInitialState();
         const parsed = JSON.parse(raw);
         const init = createInitialState();
-        const rawCourses = Array.isArray(parsed.courses) && parsed.courses.length
-          ? parsed.courses
-          : init.courses;
+        const rawCourses = toArraySafe(parsed.courses, init.courses);
 
-        const mergedCourses = normalizeTeacherVumisa(rawCourses).map((c) => ({
+        const mergedCourses = normalizeTeacherVumisa(rawCourses.length ? rawCourses : init.courses).map((c) => ({
           blocked: false,
           phone: "",
           email: "",
@@ -1789,35 +1801,28 @@
           ...c
         }));
 
-        const mergedNotebooks = { ...init.notebooks };
-        mergedCourses.forEach((c) => {
-          const nb = parsed.notebooks?.[c.id];
-          mergedNotebooks[c.id] = {
-            dates: Array.isArray(nb?.dates) && nb.dates.length ? nb.dates : [todayISO()],
-            maskedCols: nb?.maskedCols && typeof nb.maskedCols === "object" ? nb.maskedCols : {},
-            enrolledIds: Array.isArray(nb?.enrolledIds) ? nb.enrolledIds : [],
-            marks: nb?.marks && typeof nb.marks === "object" ? nb.marks : {}
-          };
-        });
+        const mergedNotebooks = normalizeNotebooksMap(parsed.notebooks, mergedCourses);
 
-        const normalizedStudents = (Array.isArray(parsed.students) ? parsed.students : []).map((st) => ({
+        const normalizedStudents = toArraySafe(parsed.students, []).map((st) => ({
           ...st,
           courseId: st.courseId || mergedCourses[0].id
         }));
+
+        const promos = toArraySafe(parsed.promotions, [...DEFAULT_PROMOTIONS]);
 
         return {
           ...init,
           ...parsed,
           session: { ...init.session, ...(parsed.session || {}) },
           courses: mergedCourses,
-          promotions: Array.isArray(parsed.promotions) && parsed.promotions.length ? parsed.promotions : [...DEFAULT_PROMOTIONS],
+          promotions: promos.length ? promos : [...DEFAULT_PROMOTIONS],
           branding: { ...init.branding, ...(parsed.branding || {}) },
-          announcements: Array.isArray(parsed.announcements) ? parsed.announcements : [],
-          messages: Array.isArray(parsed.messages) ? parsed.messages : [],
-          notifications: Array.isArray(parsed.notifications) ? parsed.notifications : [],
+          announcements: toArraySafe(parsed.announcements, []),
+          messages: toArraySafe(parsed.messages, []),
+          notifications: toArraySafe(parsed.notifications, []),
           students: normalizedStudents,
           notebooks: mergedNotebooks,
-          updatedAt: parsed.updatedAt || Date.now()
+          updatedAt: Number(parsed.updatedAt || 0)
         };
       } catch {
         return createInitialState();
@@ -1826,7 +1831,9 @@
 
     function saveState(pushToFirebase = true) {
       state.session.courseId = activeCourseId;
-      state.updatedAt = Date.now();
+      if (pushToFirebase) {
+        state.updatedAt = Date.now();
+      }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchronisé";
       applyPublicBranding();
@@ -1866,7 +1873,7 @@
     function pushNotification(targetId, title, body, targetTab = "tab-notifications") {
       state.notifications.unshift({
         id: "notif_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
-        targetId, // 'ALL' ou id du cours ou ADMIN_ACCOUNT_ID
+        targetId,
         title,
         body,
         targetTab,
@@ -1879,7 +1886,9 @@
 
     function getMyNotifications() {
       const me = getCurrentActorId();
-      return state.notifications.filter((n) => n.targetId === "ALL" || n.targetId === me);
+      return (Array.isArray(state.notifications) ? state.notifications : []).filter(
+        (n) => n.targetId === "ALL" || n.targetId === me
+      );
     }
 
     function updateNotificationBadges() {
@@ -1890,7 +1899,6 @@
       if (b2) b2.textContent = count;
     }
 
-    // Application des visuels globaux gérés uniquement par l'Admin Général
     function applyPublicBranding() {
       const b = state.branding || {};
       const logoBox = document.getElementById("headerBrandLogo");
@@ -1926,7 +1934,6 @@
       }
     }
 
-    // MENU LATÉRAL RAPIDE (ZÉRO DÉFILEMENT)
     function openSideMenu() {
       renderSideMenu();
       document.getElementById("sideMenuOverlay").classList.add("open");
@@ -2034,23 +2041,21 @@
     }
 
     function getCurrentNotebook() {
-      if (!state.notebooks[activeCourseId]) {
-        state.notebooks[activeCourseId] = createEmptyCourseNotebook(todayISO());
-      }
-      if (!state.notebooks[activeCourseId].maskedCols) {
-        state.notebooks[activeCourseId].maskedCols = {};
-      }
+      state.notebooks[activeCourseId] = normalizeSingleNotebook(state.notebooks[activeCourseId]);
       return state.notebooks[activeCourseId];
     }
 
     function getScopedStudents() {
-      if (isAdminGeneral()) return state.students;
-      return state.students.filter((s) => s.courseId === activeCourseId);
+      const all = Array.isArray(state.students) ? state.students : [];
+      if (isAdminGeneral()) return all;
+      return all.filter((s) => s.courseId === activeCourseId);
     }
 
     function populateTeacherLoginSelect() {
       const sel = document.getElementById("teacherSelectInput");
-      sel.innerHTML = state.courses
+      if (!sel) return;
+      const courses = Array.isArray(state.courses) ? state.courses : DEFAULT_COURSES;
+      sel.innerHTML = courses
         .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
         .join("");
     }
@@ -2058,7 +2063,8 @@
     function populatePromotionSelect() {
       const sel = document.getElementById("stuPromotionInput");
       if (!sel) return;
-      sel.innerHTML = state.promotions
+      const promos = Array.isArray(state.promotions) && state.promotions.length ? state.promotions : DEFAULT_PROMOTIONS;
+      sel.innerHTML = promos
         .map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`)
         .join("");
     }
@@ -2087,7 +2093,6 @@
       }
     });
 
-    // Accès Admin Général sur le logo/titre
     const adminModal = document.getElementById("adminCodeModal");
     document.getElementById("brandAdminTrigger").addEventListener("click", () => {
       adminModal.classList.add("open");
@@ -2225,8 +2230,9 @@
     function renderCoursesDrawer() {
       if (!isAdminGeneral()) return;
       const grid = document.getElementById("coursesMenuGrid");
-      grid.innerHTML = state.courses.map((c) => {
-        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
+      const courses = Array.isArray(state.courses) ? state.courses : [];
+      grid.innerHTML = courses.map((c) => {
+        const nb = normalizeSingleNotebook(state.notebooks[c.id]);
         return `
           <button type="button" class="course-menu-item ${c.id === activeCourseId ? "active" : ""}" onclick="selectCourse('${c.id}')">
             <div style="font-weight:800; font-size:0.88rem;">${escapeHtml(c.course)}</div>
@@ -2239,8 +2245,9 @@
     function renderCoursesTab() {
       if (!isAdminGeneral()) return;
       const container = document.getElementById("allCoursesCardsContainer");
-      container.innerHTML = state.courses.map((c) => {
-        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
+      const courses = Array.isArray(state.courses) ? state.courses : [];
+      container.innerHTML = courses.map((c) => {
+        const nb = normalizeSingleNotebook(state.notebooks[c.id]);
         return `
           <div class="student-row">
             <div>
@@ -2321,7 +2328,6 @@
       showToast("Date mise à jour sur le cahier.");
     }
 
-    // Justification rapide d'absence / retard
     function openJustifModal(colIdx, studentId) {
       const nb = getCurrentNotebook();
       if (nb.maskedCols[colIdx]) {
@@ -2425,7 +2431,6 @@
       showToast("Tous marqués ABSENT sur la dernière date.");
     });
 
-    // Résumé WhatsApp en 1 clic
     document.getElementById("btnCopyWhatsappSummary").addEventListener("click", async () => {
       const course = getCurrentCourse();
       const nb = getCurrentNotebook();
@@ -2602,7 +2607,6 @@
       }
     }
 
-    // Modal sélection des étudiants vers le cahier
     const enrollModal = document.getElementById("enrollModal");
     document.getElementById("btnOpenEnrollModal").addEventListener("click", () => {
       renderEnrollChecklist();
@@ -2661,7 +2665,6 @@
       showToast(`${selected.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
-    // Gestion des étudiants liés au cours actif
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const editId = document.getElementById("editingStudentId").value;
@@ -2754,7 +2757,9 @@
       if (!confirm("Supprimer cet étudiant ?")) return;
       state.students = state.students.filter((s) => s.id !== id);
       Object.keys(state.notebooks).forEach((cid) => {
-        state.notebooks[cid].enrolledIds = (state.notebooks[cid].enrolledIds || []).filter((x) => x !== id);
+        const nb = normalizeSingleNotebook(state.notebooks[cid]);
+        nb.enrolledIds = nb.enrolledIds.filter((x) => x !== id);
+        state.notebooks[cid] = nb;
       });
       saveState(true);
       renderStudentsTab();
@@ -2803,11 +2808,10 @@
       `).join("");
     }
 
-    // ============ ANNONCES (J'AIME + COMMENTAIRES + RÉPONSES TYPE WHATSAPP) ============
     function toggleLikeAnnouncement(annId) {
       const ann = state.announcements.find((a) => a.id === annId);
       if (!ann) return;
-      if (!Array.isArray(ann.likes)) ann.likes = [];
+      ann.likes = toArraySafe(ann.likes, []);
       const me = getCurrentActorId();
       const idx = ann.likes.indexOf(me);
       if (idx === -1) ann.likes.push(me);
@@ -2835,7 +2839,7 @@
       const inp = document.getElementById(`commentInput_${annId}`);
       const txt = (inp?.value || "").trim();
       if (!txt) return;
-      if (!Array.isArray(ann.comments)) ann.comments = [];
+      ann.comments = toArraySafe(ann.comments, []);
 
       const activeReply = replyContext && replyContext.annId === annId ? { ...replyContext } : null;
       ann.comments.push({
@@ -2855,16 +2859,17 @@
 
     function renderAnnouncementsTab() {
       const box = document.getElementById("announcementsFeedContainer");
-      if (!state.announcements.length) {
+      const announcements = Array.isArray(state.announcements) ? state.announcements : [];
+      if (!announcements.length) {
         box.innerHTML = `<p class="student-meta">Aucune annonce publiée par l'Admin Général pour le moment.</p>`;
         return;
       }
 
       const me = getCurrentActorId();
-      box.innerHTML = state.announcements.map((ann) => {
-        const likes = Array.isArray(ann.likes) ? ann.likes : [];
+      box.innerHTML = announcements.map((ann) => {
+        const likes = toArraySafe(ann.likes, []);
         const likedByMe = likes.includes(me);
-        const comments = Array.isArray(ann.comments) ? ann.comments : [];
+        const comments = toArraySafe(ann.comments, []);
         const activeReply = replyContext && replyContext.annId === ann.id ? replyContext : null;
 
         const commentsHtml = comments.map((c) => `
@@ -2916,7 +2921,6 @@
       }).join("");
     }
 
-    // ============ MESSAGERIE DIRECTE & BLOCAGE DES MESSAGES ============
     function getAllMessageTargets() {
       const me = getCurrentActorId();
       const list = [];
@@ -2929,7 +2933,7 @@
           blockMessages: false
         });
       }
-      state.courses.forEach((c) => {
+      (Array.isArray(state.courses) ? state.courses : []).forEach((c) => {
         if (c.id === me) return;
         list.push({
           id: c.id,
@@ -2984,7 +2988,8 @@
         : `Écrire un message à ${partner.name}...`;
 
       const me = getCurrentActorId();
-      const convo = state.messages.filter((m) =>
+      const messages = Array.isArray(state.messages) ? state.messages : [];
+      const convo = messages.filter((m) =>
         (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me)
       );
 
@@ -3045,7 +3050,6 @@
       renderMessagesTab();
     });
 
-    // ============ NOTIFICATIONS + SUPPRESSION ============
     function renderNotificationsTab() {
       const box = document.getElementById("notificationsListContainer");
       const list = getMyNotifications();
@@ -3082,7 +3086,6 @@
       showToast("Toutes les notifications ont été supprimées.");
     });
 
-    // ============ PROFIL DU PROFESSEUR (PHOTO, COORDONNÉES, BLOCAGE MESSAGES) ============
     function renderProfileTab() {
       const admin = isAdminGeneral();
       document.getElementById("teacherProfileCard").classList.toggle("hidden", admin);
@@ -3119,13 +3122,12 @@
       showToast("Profil et préférences enregistrés.");
     });
 
-    // ============ RECADRAGE & COMPRESSION UNIVERSELLE (ÉTUDIANT, PROFIL, BRANDING ADMIN) ============
     const cropModal = document.getElementById("cropModal");
     const cropCanvas = document.getElementById("cropCanvas");
     const cropCtx = cropCanvas.getContext("2d");
     let cropImg = new Image();
     let cropScale = 1, cropOffsetX = 0, cropOffsetY = 0, cropRot = 0, isDragging = false, dragX = 0, dragY = 0;
-    let currentCropTarget = { type: "student", key: "" }; // 'student' | 'prof' | 'branding'
+    let currentCropTarget = { type: "student", key: "" };
 
     function openCropWithSrc(src, target = { type: "student", key: "" }) {
       currentCropTarget = target;
@@ -3257,7 +3259,6 @@
       showToast("Image ajustée et enregistrée.");
     });
 
-    // ============ ÉVOLUTION & % ============
     function renderEvolutionTab() {
       const nb = getCurrentNotebook();
       const pool = getScopedStudents();
@@ -3384,8 +3385,8 @@
           if (!Array.isArray(d.students) || typeof d.notebooks !== "object") throw new Error("Invalide");
           if (isAdminGeneral()) {
             state.students = d.students.map((s) => ({ ...s, courseId: s.courseId || activeCourseId }));
-            state.notebooks = { ...state.notebooks, ...d.notebooks };
             if (Array.isArray(d.courses) && d.courses.length) state.courses = normalizeTeacherVumisa(d.courses);
+            state.notebooks = normalizeNotebooksMap({ ...state.notebooks, ...d.notebooks }, state.courses);
             if (Array.isArray(d.promotions) && d.promotions.length) state.promotions = d.promotions;
             if (d.branding) state.branding = { ...state.branding, ...d.branding };
             if (Array.isArray(d.announcements)) state.announcements = d.announcements;
@@ -3396,7 +3397,7 @@
             const others = state.students.filter((s) => s.courseId !== activeCourseId);
             state.students = [...others, ...scopedImported];
             if (d.notebooks[activeCourseId]) {
-              state.notebooks[activeCourseId] = d.notebooks[activeCourseId];
+              state.notebooks[activeCourseId] = normalizeSingleNotebook(d.notebooks[activeCourseId]);
             }
           }
           saveState(true);
@@ -3410,14 +3411,13 @@
       e.target.value = "";
     });
 
-    // ============ FONCTIONS ADMIN GÉNÉRAL (CHICO899) ============
+    // ============ FONCTIONS ADMIN GÉNÉRAL ============
     document.getElementById("btnAdminSyncNow").addEventListener("click", () => {
       saveState(true);
       renderAdminTab();
       showToast("Données synchronisées en temps réel.");
     });
 
-    // 1. Annonces Admin
     document.getElementById("adminPublishAnnouncementForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdminGeneral()) return;
@@ -3451,7 +3451,6 @@
       showToast("Annonce supprimée.");
     }
 
-    // 2. Ajouter / Bloquer / Supprimer Professeur & Cours
     document.getElementById("adminAddCourseTeacherForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdminGeneral()) return;
@@ -3513,12 +3512,12 @@
       showToast("Professeur et cours supprimés.");
     }
 
-    // 3. Promotions
     document.getElementById("adminAddPromotionForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdminGeneral()) return;
       const val = document.getElementById("newPromotionNameInput").value.trim();
       if (!val) return;
+      if (!Array.isArray(state.promotions)) state.promotions = [...DEFAULT_PROMOTIONS];
       if (!state.promotions.includes(val)) {
         state.promotions.push(val);
         saveState(true);
@@ -3533,13 +3532,13 @@
 
     function deletePromotion(idx) {
       if (!isAdminGeneral()) return;
+      if (!Array.isArray(state.promotions)) return;
       state.promotions.splice(idx, 1);
       saveState(true);
       populatePromotionSelect();
       renderAdminTab();
     }
 
-    // 4. Branding (Logo APK + Photos Accueil, FAQ, Aide, À propos + URL APK)
     function applyBrandingUrl(key) {
       if (!isAdminGeneral()) return;
       const inp = document.getElementById(`brandingUrl_${key}`);
@@ -3609,22 +3608,22 @@
     function renderAdminTab() {
       if (!isAdminGeneral()) return;
 
-      // Aperçu annonces
+      const announcements = Array.isArray(state.announcements) ? state.announcements : [];
       const annPreview = document.getElementById("adminAnnouncementsPreview");
-      annPreview.innerHTML = state.announcements.map((ann) => `
+      annPreview.innerHTML = announcements.map((ann) => `
         <div class="student-row">
           <div>
             <div class="student-name">${escapeHtml(ann.title)}</div>
             <div class="student-meta">${escapeHtml(ann.body)}</div>
-            <div class="student-meta">❤️ ${(ann.likes || []).length} • 💬 ${(ann.comments || []).length} • ${escapeHtml(ann.createdAt || "")}</div>
+            <div class="student-meta">❤️ ${toArraySafe(ann.likes, []).length} • 💬 ${toArraySafe(ann.comments, []).length} • ${escapeHtml(ann.createdAt || "")}</div>
           </div>
           <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${ann.id}')">🗑️ Supprimer</button>
         </div>
       `).join("");
 
-      // Liste gestion professeurs
+      const courses = Array.isArray(state.courses) ? state.courses : [];
       const profList = document.getElementById("adminTeachersManageList");
-      profList.innerHTML = state.courses.map((c) => `
+      profList.innerHTML = courses.map((c) => `
         <div class="student-row">
           <div class="student-info">
             <img class="avatar" src="${c.photo || makeDefaultAvatar()}" alt="" />
@@ -3645,23 +3644,22 @@
         </div>
       `).join("");
 
-      // Promotions
+      const promotions = Array.isArray(state.promotions) ? state.promotions : DEFAULT_PROMOTIONS;
       const promoList = document.getElementById("adminPromotionsList");
-      promoList.innerHTML = state.promotions.map((p, idx) => `
+      promoList.innerHTML = promotions.map((p, idx) => `
         <div class="student-row">
           <div class="student-name">🎓 ${escapeHtml(p)}</div>
           <button type="button" class="btn btn-danger btn-sm" onclick="deletePromotion(${idx})">🗑️</button>
         </div>
       `).join("");
 
-      // Branding
       renderAdminBrandingSlots();
 
-      // Suivi Global
+      const allStudents = Array.isArray(state.students) ? state.students : [];
       const container = document.getElementById("adminGlobalContainer");
-      container.innerHTML = state.courses.map((c) => {
-        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
-        const courseStudents = state.students.filter((s) => s.courseId === c.id);
+      container.innerHTML = courses.map((c) => {
+        const nb = normalizeSingleNotebook(state.notebooks[c.id]);
+        const courseStudents = allStudents.filter((s) => s.courseId === c.id);
         const enrolled = nb.enrolledIds.map((id) => courseStudents.find((s) => s.id === id)).filter(Boolean);
 
         const rowsHtml = enrolled.length === 0
@@ -3704,7 +3702,6 @@
       }).join("");
     }
 
-    // Démarrage initial & Service Worker PWA
     populateTeacherLoginSelect();
     populatePromotionSelect();
     applyPublicBranding();
@@ -3744,37 +3741,52 @@
       const remoteUpdatedAt = Number(globalPayload.updatedAt || 0);
       const localUpdatedAt = Number(state.updatedAt || 0);
 
-      if (remoteUpdatedAt > localUpdatedAt) {
+      if (!hasInitialFirebaseSync || remoteUpdatedAt >= localUpdatedAt) {
+        hasInitialFirebaseSync = true;
         isApplyingRemoteSnapshot = true;
-        if (Array.isArray(globalPayload.courses) && globalPayload.courses.length) {
-          state.courses = normalizeTeacherVumisa(globalPayload.courses);
+
+        const remoteCourses = toArraySafe(globalPayload.courses, []);
+        if (remoteCourses.length) {
+          state.courses = normalizeTeacherVumisa(remoteCourses).map((c) => ({
+            blocked: false,
+            phone: "",
+            email: "",
+            bio: "",
+            photo: "",
+            blockMessages: false,
+            ...c
+          }));
         }
-        if (Array.isArray(globalPayload.promotions) && globalPayload.promotions.length) {
-          state.promotions = globalPayload.promotions;
+
+        const remotePromos = toArraySafe(globalPayload.promotions, []);
+        if (remotePromos.length) {
+          state.promotions = remotePromos;
         }
+
         if (globalPayload.branding && typeof globalPayload.branding === "object") {
           state.branding = { ...state.branding, ...globalPayload.branding };
         }
-        if (Array.isArray(globalPayload.announcements)) {
-          state.announcements = globalPayload.announcements;
+
+        state.announcements = toArraySafe(globalPayload.announcements, []).map((a) => ({
+          ...a,
+          likes: toArraySafe(a?.likes, []),
+          comments: toArraySafe(a?.comments, [])
+        }));
+
+        state.messages = toArraySafe(globalPayload.messages, []);
+        state.notifications = toArraySafe(globalPayload.notifications, []);
+        state.students = toArraySafe(globalPayload.students, []);
+        state.notebooks = normalizeNotebooksMap(globalPayload.notebooks, state.courses);
+
+        if (remoteUpdatedAt > 0) {
+          state.updatedAt = remoteUpdatedAt;
         }
-        if (Array.isArray(globalPayload.messages)) {
-          state.messages = globalPayload.messages;
-        }
-        if (Array.isArray(globalPayload.notifications)) {
-          state.notifications = globalPayload.notifications;
-        }
-        if (Array.isArray(globalPayload.students)) {
-          state.students = globalPayload.students;
-        }
-        if (globalPayload.notebooks && typeof globalPayload.notebooks === "object") {
-          state.notebooks = globalPayload.notebooks;
-        }
-        state.updatedAt = remoteUpdatedAt;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
         applyPublicBranding();
         updateNotificationBadges();
+        populateTeacherLoginSelect();
+        populatePromotionSelect();
 
         if (state.session.loggedIn) {
           renderSessionView();
