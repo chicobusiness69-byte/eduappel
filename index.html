@@ -42,8 +42,8 @@
       background: radial-gradient(circle at top right, #0e294d 0%, var(--bg-main) 55%);
       color: var(--text-main);
       min-height: 100vh;
-      line-height: 1.5;
-      padding-bottom: 40px;
+      line-height: 1.45;
+      padding-bottom: 44px;
     }
 
     .flag-bar {
@@ -59,14 +59,14 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 40;
-      background: rgba(6, 15, 29, 0.92);
+      z-index: 45;
+      background: rgba(6, 15, 29, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
-      max-width: 1120px;
+      max-width: 1220px;
       margin: 0 auto;
       padding: 12px 16px;
       display: flex;
@@ -80,6 +80,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .brand-logo {
@@ -98,7 +100,7 @@
 
     .brand-title {
       font-weight: 800;
-      font-size: 1.05rem;
+      font-size: 1.06rem;
       letter-spacing: 0.3px;
     }
 
@@ -116,7 +118,7 @@
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1220px;
       margin: 0 auto;
       padding: 18px 16px;
     }
@@ -124,9 +126,9 @@
     .btn {
       border: none;
       border-radius: 12px;
-      padding: 10px 15px;
+      padding: 10px 14px;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -176,7 +178,7 @@
 
     .btn-sm {
       padding: 7px 11px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       border-radius: 10px;
     }
 
@@ -202,12 +204,12 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 18px;
       align-items: start;
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 840px) {
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -228,7 +230,7 @@
     }
 
     .hero-title {
-      font-size: 1.75rem;
+      font-size: 1.7rem;
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 10px;
@@ -236,8 +238,8 @@
 
     .hero-desc {
       color: var(--text-muted);
-      font-size: 0.94rem;
-      margin-bottom: 16px;
+      font-size: 0.92rem;
+      margin-bottom: 14px;
     }
 
     .credits-box {
@@ -245,12 +247,8 @@
       border-left: 4px solid var(--accent);
       border-radius: 12px;
       padding: 12px 14px;
-      margin-bottom: 16px;
-      font-size: 0.88rem;
-    }
-
-    .credits-box strong {
-      color: #ffffff;
+      margin-bottom: 14px;
+      font-size: 0.87rem;
     }
 
     .form-group {
@@ -259,7 +257,7 @@
 
     label {
       display: block;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: #cbd5e1;
       margin-bottom: 5px;
@@ -270,60 +268,63 @@
     input[type="date"],
     input[type="url"],
     input[type="range"],
-    select {
+    select,
+    textarea {
       width: 100%;
       background: var(--bg-input);
       border: 1px solid rgba(148, 163, 184, 0.25);
       color: var(--text-main);
       border-radius: 11px;
       padding: 10px 12px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       outline: none;
     }
 
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
     input:focus,
-    select:focus {
+    select:focus,
+    textarea:focus {
       border-color: var(--accent);
     }
 
-    .rubriques-drawer {
+    .drawer-panel {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 14px 16px;
+      padding: 15px 16px;
       margin-bottom: 18px;
       display: none;
     }
 
-    .rubriques-drawer.open {
+    .drawer-panel.open {
       display: block;
     }
 
-    .rubriques-grid {
+    .courses-menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
       gap: 10px;
       margin-top: 10px;
     }
 
-    .accordion-item {
+    .course-menu-item {
       background: var(--bg-card-2);
-      border: 1px solid rgba(148, 163, 184, 0.14);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
+      padding: 11px 12px;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text-main);
     }
 
-    .accordion-q {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .accordion-a {
-      font-size: 0.86rem;
-      color: var(--text-muted);
+    .course-menu-item:hover,
+    .course-menu-item.active {
+      border-color: var(--accent);
+      background: rgba(0, 210, 184, 0.12);
     }
 
     .nav-tabs {
@@ -341,7 +342,7 @@
       padding: 10px 14px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -367,7 +368,7 @@
     }
 
     .stat-val {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--accent);
     }
@@ -375,6 +376,19 @@
     .stat-lbl {
       font-size: 0.78rem;
       color: var(--text-muted);
+    }
+
+    .course-banner {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .slot-switch {
@@ -385,7 +399,7 @@
     }
 
     .slot-btn {
-      padding: 12px;
+      padding: 11px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--bg-card-2);
@@ -399,6 +413,94 @@
       background: rgba(0, 210, 184, 0.18);
       border-color: var(--accent);
       color: #ffffff;
+    }
+
+    /* Tableau style fiche d'appel multi-dates */
+    .sheet-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-input);
+    }
+
+    table.appel-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 0.84rem;
+    }
+
+    table.appel-table th,
+    table.appel-table td {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table.appel-table thead th.main-col {
+      background: #143663;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    table.appel-table thead th.date-col {
+      background: #1d4ed8;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    table.appel-table thead th.sub-col {
+      background: #0f294a;
+      color: #e2e8f0;
+      font-size: 0.74rem;
+    }
+
+    .date-edit-input {
+      background: #071426 !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      border-radius: 8px !important;
+      padding: 4px 6px !important;
+      font-size: 0.78rem !important;
+      width: auto !important;
+      max-width: 142px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      background: #071426;
+      display: inline-block;
+    }
+
+    .mark-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mark-btn.checked-present {
+      background: rgba(16, 185, 129, 0.28);
+      border-color: var(--success);
+      color: #6ee7b7;
+    }
+
+    .mark-btn.checked-absent {
+      background: rgba(239, 68, 68, 0.28);
+      border-color: var(--danger);
+      color: #fca5a5;
     }
 
     .student-row {
@@ -422,19 +524,9 @@
       flex: 1;
     }
 
-    .avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent);
-      background: #071426;
-      flex-shrink: 0;
-    }
-
     .student-name {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .student-meta {
@@ -456,49 +548,19 @@
       color: #7dd3fc;
     }
 
+    .badge-warn {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+
     .badge-late {
       background: rgba(245, 158, 11, 0.2);
       color: #fcd34d;
     }
 
-    .status-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .status-btn {
-      padding: 7px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: var(--bg-input);
-      color: var(--text-muted);
-      font-weight: 700;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .status-btn.active-present {
-      background: rgba(16, 185, 129, 0.25);
-      color: #6ee7b7;
-      border-color: var(--success);
-    }
-
-    .status-btn.active-absent {
-      background: rgba(239, 68, 68, 0.25);
-      color: #fca5a5;
-      border-color: var(--danger);
-    }
-
-    .status-btn.active-late {
-      background: rgba(245, 158, 11, 0.25);
-      color: #fcd34d;
-      border-color: var(--warning);
-    }
-
     .calendar-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: 10px;
       margin-top: 10px;
     }
@@ -509,7 +571,6 @@
       border-radius: 12px;
       padding: 10px;
       cursor: pointer;
-      transition: border-color 0.15s ease;
     }
 
     .cal-day-card:hover {
@@ -555,13 +616,15 @@
       border-radius: 18px;
       padding: 18px;
       width: 100%;
-      max-width: 420px;
+      max-width: 540px;
+      max-height: 88vh;
+      overflow-y: auto;
       box-shadow: var(--shadow);
     }
 
     .crop-stage {
-      width: 240px;
-      height: 240px;
+      width: 220px;
+      height: 220px;
       margin: 12px auto;
       border-radius: 50%;
       overflow: hidden;
@@ -611,25 +674,29 @@
       gap: 10px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 620px) {
       .two-col {
         grid-template-columns: 1fr;
       }
     }
 
     @media print {
-      header, .nav-tabs, .no-print, .rubriques-drawer {
+      header, .nav-tabs, .no-print, .drawer-panel, .modal-backdrop, .toast {
         display: none !important;
       }
       body {
         background: #ffffff;
         color: #000000;
       }
-      .card, .student-row, .stat-box, .cal-day-card {
+      .card, .student-row, .stat-box, .cal-day-card, .course-banner {
         background: #ffffff;
         color: #000000;
         border: 1px solid #cbd5e1;
         box-shadow: none;
+      }
+      table.appel-table th, table.appel-table td {
+        color: #000000;
+        border: 1px solid #64748b;
       }
     }
   </style>
@@ -639,19 +706,18 @@
 
   <header>
     <div class="header-inner">
-      <div class="brand-box">
+      <!-- Clic = ouvre la fenêtre code Admin Général (Chico899), Double-clic = ferme -->
+      <div class="brand-box" id="brandAdminTrigger" title="Accès réservé">
         <div class="brand-logo">EA</div>
         <div>
           <div class="brand-title">EduAppel</div>
-          <div class="brand-sub">Équipe CBK • Registre Intelligent</div>
+          <div class="brand-sub" id="syncStatusLabel">Équipe CBK • Registre Intelligent</div>
         </div>
       </div>
 
       <div class="header-actions">
-        <button class="btn btn-primary btn-sm hidden" id="btnQuickAddStudent" onclick="goToTab('tab-etudiants')">
-          ➕ Étudiants
-        </button>
-        <button class="btn btn-secondary btn-sm" id="btnToggleRubriques">☰ Rubriques</button>
+        <button class="btn btn-secondary btn-sm hidden" id="btnToggleCoursesDrawer">📚 Cours par cours</button>
+        <button class="btn btn-secondary btn-sm" id="btnToggleInfoDrawer">☰ Menu & Infos</button>
         <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
           💬 Joindre l'équipe CBK
         </a>
@@ -661,371 +727,418 @@
   </header>
 
   <div class="container">
-    <div class="rubriques-drawer" id="rubriquesDrawer">
+    <!-- Menu Cours par cours (visible une fois connecté) -->
+    <div class="drawer-panel" id="coursesDrawer">
       <div class="card-title">
-        <span>Rubriques d'EduAppel</span>
-        <button class="btn btn-secondary btn-sm" id="btnCloseRubriques">Fermer ✕</button>
+        <span>📚 Tous les Cours & Cahiers d'Appel</span>
+        <button class="btn btn-secondary btn-sm" onclick="closeDrawers()">Fermer ✕</button>
       </div>
-      <div class="rubriques-grid">
-        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-appel', 'section-auth')">📋 Appel & Connexion</button>
-        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-etudiants', 'section-auth')">👨‍🎓 Étudiants</button>
-        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-calendrier', 'section-faq')">📅 Calendrier & FAQ</button>
-        <button class="btn btn-secondary" onclick="handleRubriqueNav('tab-sauvegarde', 'section-about')">💾 Sauvegarde & À propos</button>
+      <div id="coursesMenuGrid" class="courses-menu-grid"></div>
+    </div>
+
+    <!-- Menu Infos / FAQ / À propos -->
+    <div class="drawer-panel" id="infoDrawer">
+      <div class="card-title">
+        <span>☰ Navigation & Aide</span>
+        <button class="btn btn-secondary btn-sm" onclick="closeDrawers()">Fermer ✕</button>
+      </div>
+      <div class="courses-menu-grid">
+        <button class="btn btn-secondary" onclick="scrollToEl('section-login')">🔐 Connexion Professeur</button>
+        <button class="btn btn-secondary" onclick="scrollToEl('section-faq')">❓ FAQ & Aide</button>
+        <button class="btn btn-secondary" onclick="scrollToEl('section-about')">ℹ️ À propos & CBK</button>
         <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
-          📲 Contacter Équipe CBK
+          📲 WhatsApp Équipe CBK
         </a>
       </div>
     </div>
 
+    <!-- ================= VUE ACCUEIL / CONNEXION PROFESSEUR ================= -->
     <div id="publicView">
-      <div class="hero-grid" id="section-auth">
+      <div class="hero-grid" id="section-login">
         <div class="card">
-          <div class="hero-badge">🎓 Cadeau Académique • Double Appel (+100 Jours)</div>
-          <h1 class="hero-title">EduAppel — Registre d'appel complet & sécurisé</h1>
+          <div class="hero-badge">🎓 Registre Académique • Équipe CBK</div>
+          <h1 class="hero-title">EduAppel — Cahier d'Appel par Cours</h1>
           <p class="hero-desc">
-            Application conçue pour le suivi rigoureux des présences en classe avec double contrôle
-            (<strong>Avant le cours</strong> et <strong>Après le cours</strong>), détection automatique des retardataires,
-            calendrier en pourcentages (%), photos recadrées et compressées, et persistance des données.
+            Chaque cours dispose de son propre cahier d'appel, de ses informations, de ses dates modifiables et du suivi des présences en pourcentage (%) ainsi que des retardataires.
           </p>
 
           <div class="credits-box">
             <div><strong>Créé par :</strong> l’équipe CBK</div>
             <div><strong>Développeur :</strong> CHEKINAT MOFONGA</div>
-            <div><strong>Code d’accès par défaut :</strong> <code>CT VUMISA 69@</code> (modifiable après connexion)</div>
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap;" class="no-print">
             <a class="btn btn-whatsapp" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
               💬 Joindre l'équipe CBK
             </a>
-            <button class="btn btn-secondary" onclick="scrollToSection('section-faq')">Voir la FAQ</button>
-            <button class="btn btn-secondary" onclick="scrollToSection('section-about')">À propos</button>
+            <button class="btn btn-secondary" onclick="scrollToEl('section-faq')">FAQ & Aide</button>
+            <button class="btn btn-secondary" onclick="scrollToEl('section-about')">À propos</button>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">
-            <span>🔐 Accès au Registre</span>
-          </div>
-          <p class="student-meta" style="margin-bottom:12px;">
-            Entrez le code d'accès pour ouvrir le registre. Toutes vos modifications restent enregistrées même après déconnexion.
-          </p>
-          <form id="loginForm">
+          <div class="card-title"><span>🔐 Connexion Professeur</span></div>
+          <form id="teacherLoginForm">
             <div class="form-group">
-              <label for="accessCodeInput">Code d'accès</label>
+              <label for="teacherSelectInput">Nom du professeur / Cours</label>
+              <select id="teacherSelectInput" required></select>
+            </div>
+            <div class="form-group">
+              <label for="teacherPasswordInput">Mot de passe</label>
               <input
                 type="password"
-                id="accessCodeInput"
-                placeholder="Ex: CT VUMISA 69@"
+                id="teacherPasswordInput"
+                placeholder="Entrez votre mot de passe"
                 autocomplete="current-password"
                 required
               />
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;">
-              🔓 Déverrouiller EduAppel
+              🔓 Ouvrir mon cahier d'appel
             </button>
           </form>
-          <p class="student-meta" style="margin-top:10px;">
-            Astuce : Si vous avez oublié un code personnalisé, saisissez <strong>CT VUMISA 69@</strong> ou réinitialisez-le dans les réglages après connexion.
-          </p>
         </div>
       </div>
 
       <div class="card" id="section-faq">
-        <div class="card-title"><span>❓ Foire Aux Questions (FAQ)</span></div>
-
-        <div class="accordion-item">
-          <div class="accordion-q">1. Comment fonctionne le double appel « Avant le cours » et « Après le cours » ?</div>
-          <div class="accordion-a">
-            Chaque journée d'appel possède deux moments : <strong>Avant le cours</strong> et <strong>Après le cours</strong>. Si un étudiant est Absent (ou non présent) avant le cours mais Présent après le cours, il est automatiquement repéré comme <strong>Retardataire</strong> et affiché dans la liste des retardataires.
+        <div class="card-title"><span>❓ FAQ & Aide</span></div>
+        <div class="student-row">
+          <div>
+            <div class="student-name">1. Comment fonctionne le cahier d'appel de chaque cours ?</div>
+            <div class="student-meta">Après connexion, vous accédez à votre cours, ses informations, la liste des étudiants ajoutés au cahier, les dates modifiables, les cases PRÉSENT / ABSENT (+ colonnes supplémentaires) et les % de présence.</div>
           </div>
         </div>
-
-        <div class="accordion-item">
-          <div class="accordion-q">2. Les données restent-elles après déconnexion et sur plus de 100 jours ?</div>
-          <div class="accordion-a">
-            Oui. La déconnexion verrouille uniquement l'écran. Les étudiants, photos compressées, dates, pourcentages (%) et listes de retardataires restent enregistrés sans limite bloquée à 50 ou 100 jours, avec export CSV, sauvegarde JSON et synchronisation Cloud optionnelle.
+        <div class="student-row">
+          <div>
+            <div class="student-name">2. Comment ajouter des étudiants à un cahier d'appel ?</div>
+            <div class="student-meta">Enregistrez vos étudiants dans l'onglet <strong>Étudiants</strong> (un ou plusieurs), puis dans le cahier de votre cours, cliquez sur <strong>+ Ajouter au cahier</strong> pour cocher <strong>Tout sélectionner</strong> ou choisir un par un.</div>
           </div>
         </div>
-
-        <div class="accordion-item">
-          <div class="accordion-q">3. Comment fonctionne la photo de profil et la compression ?</div>
-          <div class="accordion-a">
-            Vous pouvez prendre une photo directement avec la caméra ou importer depuis la galerie, ajuster/zoomer/centrer le cadrage, puis valider : l'application compresse automatiquement l'image pour garder l'application rapide et légère.
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-q">4. Comment installer EduAppel sur Android ?</div>
-          <div class="accordion-a">
-            Ouvrez la page dans Chrome sur Android puis choisissez <strong>Installer l'application</strong> / <strong>Ajouter à l'écran d'accueil</strong> (PWA), ou générez un fichier <code>.apk</code> via un outil d'empaquetage web une fois l'application hébergée en ligne.
+        <div class="student-row">
+          <div>
+            <div class="student-name">3. Puis-je modifier les dates et exporter mes données ?</div>
+            <div class="student-meta">Oui, chaque date d'appel sur le cahier est modifiable directement, vous pouvez ajouter d'autres colonnes/cases, exporter en CSV/PDF ou faire une sauvegarde JSON complète.</div>
           </div>
         </div>
       </div>
 
       <div class="card" id="section-about">
-        <div class="card-title"><span>ℹ️ À propos d'EduAppel</span></div>
-        <p style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">
-          <strong>EduAppel</strong> est une application web progressive (PWA) dédiée à la gestion académique des présences,
-          pensée pour offrir rapidité, fiabilité et clarté au quotidien.
+        <div class="card-title"><span>ℹ️ À propos & Équipe CBK</span></div>
+        <p class="student-meta" style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">
+          <strong>EduAppel</strong> est développé par <strong>CHEKINAT MOFONGA</strong> au sein de <strong>l'équipe CBK</strong> pour simplifier le suivi des présences académiques.
         </p>
-        <ul style="margin-left:18px; color:var(--text-muted); font-size:0.88rem; margin-bottom:14px;">
-          <li><strong>Créé par :</strong> l’équipe CBK</li>
-          <li><strong>Développeur :</strong> CHEKINAT MOFONGA</li>
-          <li><strong>Contact officiel :</strong> <a href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener" style="color:var(--accent);">https://wa.me/message/2DFDG7JRKVQQL1</a></li>
-        </ul>
         <a class="btn btn-whatsapp btn-sm" href="https://wa.me/message/2DFDG7JRKVQQL1" target="_blank" rel="noopener">
-          💬 Joindre le développeur / l'équipe CBK
+          💬 Contacter l'équipe CBK sur WhatsApp
         </a>
       </div>
     </div>
 
+    <!-- ================= VUE CONNECTÉE (PROFESSEUR OU ADMIN GÉNÉRAL) ================= -->
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
-        <button class="nav-tab active" data-tab="tab-appel">📋 Appel & Retardataires</button>
-        <button class="nav-tab" data-tab="tab-calendrier">📅 Calendrier (%)</button>
+        <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier du Cours</button>
+        <button class="nav-tab" data-tab="tab-cours">📚 Cours par Cours</button>
         <button class="nav-tab" data-tab="tab-etudiants">👨‍🎓 Étudiants</button>
+        <button class="nav-tab" data-tab="tab-evolution">📈 Évolution & %</button>
         <button class="nav-tab" data-tab="tab-sauvegarde">💾 Sauvegarde & Réglages</button>
+        <button class="nav-tab hidden" id="navTabAdmin" data-tab="tab-admin">🛡️ Admin Général</button>
       </div>
 
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="stat-val" id="statStudentsCount">0</div>
-          <div class="stat-lbl">Étudiants enregistrés</div>
+          <div class="stat-val" id="statEnrolledCount">0</div>
+          <div class="stat-lbl">Étudiants dans le cahier</div>
         </div>
         <div class="stat-box">
-          <div class="stat-val" id="statDaysCount">0</div>
-          <div class="stat-lbl">Jours d'appel enregistrés</div>
+          <div class="stat-val" id="statDatesCount">0</div>
+          <div class="stat-lbl">Dates / Colonnes d'appel</div>
         </div>
         <div class="stat-box">
-          <div class="stat-val" id="statDayPct">0%</div>
-          <div class="stat-lbl">Présence du jour (%)</div>
+          <div class="stat-val" id="statCoursePct">0%</div>
+          <div class="stat-lbl">Taux de présence moyen (%)</div>
         </div>
         <div class="stat-box">
-          <div class="stat-val" id="statLateCount" style="color:var(--warning);">0</div>
-          <div class="stat-lbl">Retardataires (jour / total)</div>
+          <div class="stat-val" id="statLateTotal" style="color:var(--warning);">0</div>
+          <div class="stat-lbl">Retardataires détectés</div>
         </div>
       </div>
 
-      <div id="tab-appel" class="tab-panel">
+      <!-- ONGLET 1 : CAHIER D'APPEL DU COURS -->
+      <div id="tab-cahier" class="tab-panel">
         <div class="card">
-          <div class="card-title">
-            <span>📋 Prise d'Appel Quotidienne</span>
+          <div class="course-banner">
+            <div>
+              <div style="font-size:1.1rem; font-weight:800;" id="activeCourseTitle">Cours</div>
+              <div class="student-meta" id="activeCourseInfo">Professeur • Informations du cours</div>
+            </div>
             <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button class="btn btn-secondary btn-sm" id="btnExportCsv">📊 Export CSV / Excel</button>
-              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Imprimer / PDF</button>
-            </div>
-          </div>
-
-          <div class="two-col">
-            <div class="form-group">
-              <label for="callDateInput">Date de l'appel</label>
-              <input type="date" id="callDateInput" />
-            </div>
-            <div class="form-group">
-              <label for="callCourseFilter">Cours / Promotion</label>
-              <select id="callCourseFilter">
-                <option value="ALL">Tous les cours / promotions</option>
-              </select>
+              <button class="btn btn-primary btn-sm" id="btnOpenEnrollModal">+ Ajouter au cahier</button>
+              <button class="btn btn-secondary btn-sm" id="btnAddDateCol">+ Ajouter date / case</button>
+              <button class="btn btn-secondary btn-sm" id="btnExportCourseCsv">📊 Export CSV</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ PDF / Imprimer</button>
             </div>
           </div>
 
           <div class="slot-switch no-print">
-            <button type="button" class="slot-btn active" id="slotBeforeBtn" data-slot="before">
-              🌅 1. Appel AVANT le cours
-            </button>
-            <button type="button" class="slot-btn" id="slotAfterBtn" data-slot="after">
-              🌇 2. Appel APRÈS le cours
-            </button>
+            <button type="button" class="slot-btn active" id="slotBeforeBtn">🌅 Moment : AVANT le cours</button>
+            <button type="button" class="slot-btn" id="slotAfterBtn">🌇 Moment : APRÈS le cours</button>
           </div>
 
           <div class="two-col no-print" style="margin-bottom:12px;">
-            <input type="text" id="searchAttendanceInput" placeholder="🔎 Rechercher par nom ou compte/matricule..." />
-            <div style="display:flex; gap:8px;">
-              <button type="button" class="btn btn-success-soft btn-sm" id="btnMarkAllPresent" style="flex:1;">
-                ✅ Tous Présents (créneau)
-              </button>
-              <button type="button" class="btn btn-danger btn-sm" id="btnMarkAllAbsent" style="flex:1;">
-                🚫 Tous Absents (créneau)
-              </button>
+            <input type="text" id="cahierSearchInput" placeholder="🔎 Filtrer par nom ou n° matricule..." />
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-success-soft btn-sm" id="btnBulkPresentLastDate">✅ Présents (dernière date)</button>
+              <button type="button" class="btn btn-danger btn-sm" id="btnBulkAbsentLastDate">🚫 Absents (dernière date)</button>
             </div>
           </div>
 
-          <div id="attendanceListContainer"></div>
-        </div>
-
-        <div class="card" id="lateSectionCard">
-          <div class="card-title">
-            <span>⏰ Liste des Retardataires</span>
-            <select id="lateScopeSelect" style="width:auto; padding:6px 10px; font-size:0.82rem;">
-              <option value="day">Date sélectionnée</option>
-              <option value="all">Tout l'historique</option>
-            </select>
+          <div class="sheet-scroll">
+            <table class="appel-table" id="appelSheetTable">
+              <thead id="appelSheetHead"></thead>
+              <tbody id="appelSheetBody"></tbody>
+            </table>
           </div>
-          <p class="student-meta" style="margin-bottom:10px;">
-            Inclut les étudiants marqués <strong>Retard</strong> ou détectés automatiquement (Absent/non présent <strong>Avant le cours</strong> puis Présent <strong>Après le cours</strong>).
-          </p>
-          <div id="lateListContainer"></div>
         </div>
-      </div>
 
-      <div id="tab-calendrier" class="tab-panel hidden">
         <div class="card">
-          <div class="card-title">
-            <span>📅 Calendrier des Jours d'Appel & Pourcentages (%)</span>
-            <span class="student-meta">Cliquez sur un jour pour ouvrir son appel</span>
-          </div>
-          <div id="calendarGridContainer" class="calendar-grid"></div>
+          <div class="card-title"><span>⏰ Retardataires du Cours (détection automatique)</span></div>
+          <div id="cahierLateList"></div>
         </div>
       </div>
 
+      <!-- ONGLET 2 : COURS PAR COURS -->
+      <div id="tab-cours" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>📚 Liste de Tous les Cours & Informations</span></div>
+          <div id="allCoursesCardsContainer"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : ÉTUDIANTS (AJOUT INDIVIDUEL + GROUPÉ + RECADRAGE PHOTO) -->
       <div id="tab-etudiants" class="tab-panel hidden">
         <div class="card">
           <div class="card-title">
-            <span id="studentFormTitle">➕ Ajouter / Modifier un Étudiant</span>
-            <button type="button" class="btn btn-secondary btn-sm hidden" id="btnCancelEditStudent">Annuler édition</button>
+            <span id="studentFormTitle">➕ Ajouter un Étudiant</span>
+            <button type="button" class="btn btn-secondary btn-sm hidden" id="btnCancelStudentEdit">Annuler</button>
           </div>
-
           <form id="studentForm">
             <input type="hidden" id="editingStudentId" />
             <div class="two-col">
               <div class="form-group">
-                <label for="studentNameInput">Nom complet *</label>
-                <input type="text" id="studentNameInput" placeholder="Ex: Kabeya Jean" required />
+                <label for="stuNameInput">Nom & Post-nom / Prénom *</label>
+                <input type="text" id="stuNameInput" placeholder="Ex: Kevin NGA" required />
               </div>
               <div class="form-group">
-                <label for="studentAccountInput">Numéro de compte / Matricule *</label>
-                <input type="text" id="studentAccountInput" placeholder="Ex: MAT-2026-014" required />
+                <label for="stuMatriculeInput">N° Matricule *</label>
+                <input type="text" id="stuMatriculeInput" placeholder="Ex: ISIPA/2025/001" required />
               </div>
             </div>
-
             <div class="form-group">
-              <label for="studentCourseInput">Cours / Promotion *</label>
-              <input type="text" id="studentCourseInput" placeholder="Ex: L1 Informatique / Python" required />
+              <label for="stuPromotionInput">Promotion / Option</label>
+              <input type="text" id="stuPromotionInput" placeholder="Ex: L1 RTM" />
             </div>
-
             <div class="form-group">
-              <label>Photo de profil (Capture directe ou Galerie + Ajustement & Compression auto)</label>
+              <label>Photo de profil (Caméra ou Galerie + Recadrage & Compression)</label>
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                <img id="studentPreviewImg" class="avatar" src="" alt="Aperçu photo" />
+                <img id="stuPhotoPreview" class="avatar" src="" alt="Aperçu" />
                 <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
-                  📷 Caméra directe
-                  <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" />
+                  📷 Caméra
+                  <input type="file" id="camInput" accept="image/*" capture="environment" class="hidden" />
                 </label>
                 <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;">
-                  🖼️ Importer galerie
-                  <input type="file" id="galleryInput" accept="image/*" class="hidden" />
+                  🖼️ Galerie
+                  <input type="file" id="galInput" accept="image/*" class="hidden" />
                 </label>
-                <button type="button" class="btn btn-warning btn-sm hidden" id="btnReCropCurrent">✂️ Réajuster photo</button>
+                <button type="button" class="btn btn-warning btn-sm" id="btnCropDraft">✂️ Ajuster photo</button>
               </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" id="btnSaveStudent">
-              💾 Enregistrer l'étudiant
-            </button>
+            <button type="submit" class="btn btn-primary">💾 Enregistrer l'étudiant</button>
           </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>⚡ Ajout Rapide de Plusieurs Étudiants</span></div>
+          <p class="student-meta" style="margin-bottom:8px;">
+            Un étudiant par ligne au format : <code>Nom complet ; N° Matricule ; Promotion</code> (ex. <code>Marie KABAMBA ; ISIPA/2025/002 ; L1 RTM</code>).
+          </p>
+          <textarea id="bulkStudentsTextarea" placeholder="Marie KABAMBA ; ISIPA/2025/002 ; L1 RTM&#10;Jean-Luc MPUTU ; ISIPA/2025/003 ; L1 RTM"></textarea>
+          <div style="margin-top:10px;">
+            <button type="button" class="btn btn-secondary" id="btnImportBulkStudents">📥 Ajouter tous ces étudiants</button>
+          </div>
         </div>
 
         <div class="card">
           <div class="card-title">
-            <span>👨‍🎓 Répertoire des Étudiants & Taux de Présence (%)</span>
-            <input type="text" id="searchRosterInput" placeholder="Filtrer..." style="max-width:220px; padding:7px 11px; font-size:0.84rem;" />
+            <span>👨‍🎓 Tous les Étudiants Enregistrés</span>
+            <input type="text" id="rosterSearchInput" placeholder="Rechercher..." style="max-width:220px; padding:7px 11px; font-size:0.84rem;" />
           </div>
-          <div id="rosterListContainer"></div>
+          <div id="rosterContainer"></div>
         </div>
       </div>
 
+      <!-- ONGLET 4 : ÉVOLUTION & % -->
+      <div id="tab-evolution" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title"><span>📈 Évolution & Assiduité (%) sur le Cours</span></div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Classement des étudiants selon leur taux de présence (%) sur ce cours pour repérer ceux qui viennent régulièrement et ceux qui ne fuient pas les cours.
+          </p>
+          <div id="evolutionListContainer"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>📅 Historique par Date (%)</span></div>
+          <div id="courseCalendarContainer" class="calendar-grid"></div>
+        </div>
+      </div>
+
+      <!-- ONGLET 5 : SAUVEGARDE & RÉGLAGES -->
       <div id="tab-sauvegarde" class="tab-panel hidden">
         <div class="card">
-          <div class="card-title"><span>🔑 Modifier le Code d'Accès</span></div>
-          <form id="changePinForm" class="two-col" style="align-items:end;">
+          <div class="card-title"><span>🔑 Modifier Mon Mot de Passe</span></div>
+          <form id="changeTeacherPwdForm" class="two-col" style="align-items:end;">
             <div class="form-group" style="margin-bottom:0;">
-              <label for="newPinInput">Nouveau code d'accès</label>
-              <input type="text" id="newPinInput" placeholder="Entrez un nouveau code" required />
+              <label for="newTeacherPwdInput">Nouveau mot de passe</label>
+              <input type="text" id="newTeacherPwdInput" placeholder="Nouveau mot de passe" required />
             </div>
-            <div style="display:flex; gap:8px;">
-              <button type="submit" class="btn btn-primary" style="flex:1;">Mettre à jour le code</button>
-              <button type="button" class="btn btn-secondary" id="btnResetDefaultPin">Défaut</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer le mot de passe</button>
           </form>
         </div>
 
         <div class="card">
-          <div class="card-title"><span>💾 Sauvegarde Locale, Export & Transfert (Nouveau Téléphone)</span></div>
-          <p class="student-meta" style="margin-bottom:12px;">
-            Téléchargez une sauvegarde complète (JSON) pour l'envoyer sur WhatsApp/Drive et la restaurer sur un autre téléphone, ou exportez en CSV/Excel.
-          </p>
+          <div class="card-title"><span>💾 Sauvegarde JSON & Export CSV</span></div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-primary" id="btnDownloadJson">⬇️ Télécharger sauvegarde (.json)</button>
+            <button type="button" class="btn btn-primary" id="btnExportJson">⬇️ Exporter sauvegarde (.json)</button>
             <label class="btn btn-secondary" style="cursor:pointer; margin:0;">
-              ⬆️ Restaurer une sauvegarde (.json)
+              ⬆️ Importer sauvegarde (.json)
               <input type="file" id="importJsonInput" accept="application/json,.json" class="hidden" />
             </label>
-            <button type="button" class="btn btn-secondary" id="btnExportCsv2">📊 Exporter présences (CSV)</button>
+            <button type="button" class="btn btn-secondary" id="btnExportCsvSettings">📊 Exporter CSV</button>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title"><span>☁️ Synchronisation Cloud (Supabase — Optionnel)</span></div>
-          <p class="student-meta" style="margin-bottom:12px;">
-            Si vous configurez une table <code>eduappel_sync</code> (colonnes <code>id</code> texte primaire et <code>payload</code> jsonb) dans votre projet Supabase, vos données peuvent aussi être poussées ou récupérées à distance.
-          </p>
+          <div class="card-title"><span>☁️ Cloud Supabase (Optionnel)</span></div>
           <div class="two-col">
             <div class="form-group">
               <label for="sbUrlInput">URL Supabase</label>
               <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
             </div>
             <div class="form-group">
-              <label for="sbKeyInput">Clé API (anon public)</label>
+              <label for="sbKeyInput">Clé API (anon)</label>
               <input type="password" id="sbKeyInput" placeholder="eyJ..." />
             </div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-secondary" id="btnSaveCloudConfig">💾 Enregistrer config Cloud</button>
-            <button type="button" class="btn btn-primary" id="btnPushCloud">☁️ Envoyer vers le Cloud</button>
-            <button type="button" class="btn btn-secondary" id="btnPullCloud">⬇️ Récupérer depuis le Cloud</button>
+            <button type="button" class="btn btn-secondary" id="btnSaveCloud">💾 Sauver config</button>
+            <button type="button" class="btn btn-primary" id="btnPushCloud">☁️ Envoyer Cloud</button>
+            <button type="button" class="btn btn-secondary" id="btnPullCloud">⬇️ Récupérer Cloud</button>
           </div>
+        </div>
+      </div>
+
+      <!-- ONGLET 6 : ADMIN GÉNÉRAL (CHICO899) -->
+      <div id="tab-admin" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-title">
+            <span>🛡️ Admin Général — Vue Globale Temps Réel</span>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary btn-sm" id="btnAdminSyncNow">🔄 Synchroniser maintenant</button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Imprimer / PDF global</button>
+            </div>
+          </div>
+          <p class="student-meta" style="margin-bottom:12px;">
+            Visualisez tous les cours, les points de présence de chaque étudiant par cours, les étudiants assidus ("qui ne fuient pas les cours") et les mots de passe des professeurs.
+          </p>
+          <div id="adminGlobalContainer"></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- MODAL : AJOUTER DES ÉTUDIANTS DEPUIS LA LISTE ENREGISTRÉE AU CAHIER DU COURS -->
+  <div class="modal-backdrop" id="enrollModal">
+    <div class="modal-box">
+      <div class="card-title">
+        <span>📋 Ajouter des étudiants au cahier du cours</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseEnrollModal">✕</button>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAllEnroll">☑️ Tout sélectionner</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnUnselectAllEnroll">⬜ Tout décocher</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeEnrollAndGoStudents()">+ Nouvel étudiant</button>
+      </div>
+      <div id="enrollChecklistContainer"></div>
+      <div style="margin-top:14px;">
+        <button type="button" class="btn btn-primary" id="btnConfirmEnroll" style="width:100%;">
+          ✅ Valider dans le cahier d'appel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL : CODE ADMIN GÉNÉRAL (CHICO899) -->
+  <div class="modal-backdrop" id="adminCodeModal">
+    <div class="modal-box">
+      <div class="card-title">
+        <span>🛡️ Accès Admin Général</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseAdminModal">✕</button>
+      </div>
+      <p class="student-meta" style="margin-bottom:10px;">
+        Double-cliquez sur le nom de l'application en haut pour fermer cette fenêtre.
+      </p>
+      <form id="adminCodeForm">
+        <div class="form-group">
+          <label for="adminCodeInput">Code d'accès Admin Général</label>
+          <input type="password" id="adminCodeInput" placeholder="Code d'accès" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Valider</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL : RECADRAGE & COMPRESSION PHOTO -->
   <div class="modal-backdrop" id="cropModal">
     <div class="modal-box">
       <div class="card-title">
-        <span>✂️ Ajuster la photo de profil</span>
-        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseCrop">✕</button>
+        <span>✂️ Ajuster & Compresser la photo</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCloseCropModal">✕</button>
       </div>
-      <p class="student-meta" style="text-align:center;">
-        Glissez l'image pour centrer le visage, ajustez le zoom ou la rotation.
-      </p>
-
       <div class="crop-stage">
-        <canvas id="cropCanvas" width="240" height="240"></canvas>
+        <canvas id="cropCanvas" width="220" height="220"></canvas>
       </div>
-
       <div class="form-group">
-        <label for="cropZoomRange">Zoom : <span id="cropZoomVal">100%</span></label>
-        <input type="range" id="cropZoomRange" min="1" max="3" step="0.05" value="1" />
+        <label for="cropZoom">Zoom : <span id="cropZoomLabel">100%</span></label>
+        <input type="range" id="cropZoom" min="1" max="3" step="0.05" value="1" />
       </div>
-
       <div style="display:flex; gap:8px; margin-bottom:12px;">
-        <button type="button" class="btn btn-secondary btn-sm" id="btnRotateLeft" style="flex:1;">↺ -90°</button>
-        <button type="button" class="btn btn-secondary btn-sm" id="btnRotateRight" style="flex:1;">↻ +90°</button>
-        <button type="button" class="btn btn-secondary btn-sm" id="btnResetCrop" style="flex:1;">Réinitialiser</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnRotLeft" style="flex:1;">↺ -90°</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnRotRight" style="flex:1;">↻ +90°</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnRotReset" style="flex:1;">Reset</button>
       </div>
-
-      <button type="button" class="btn btn-primary" id="btnConfirmCrop" style="width:100%;">
-        ✅ Valider & Compresser la photo
-      </button>
+      <button type="button" class="btn btn-primary" id="btnApplyCrop" style="width:100%;">✅ Valider la photo</button>
     </div>
   </div>
 
   <div class="toast" id="toastBox"></div>
 
   <script>
-    const DEFAULT_PIN = "CT VUMISA 69@";
-    const STORAGE_KEY = "eduappel_cbk_data_v1";
+    const ADMIN_GENERAL_CODE = "Chico899";
+    const STORAGE_KEY = "eduappel_cbk_courses_v1";
+
+    const DEFAULT_COURSES = [
+      { id: "c_win", course: "Système d'Exploitation Windows", teacher: "Ass Nembalemba", loginName: "Ass Nembalemba", password: "CBK-WIN-101" },
+      { id: "c_alg", course: "Algorithmique 1", teacher: "Ass Luvumbu", loginName: "Ass Luvumbu", password: "CBK-ALG-102" },
+      { id: "c_val", course: "Valeurs, principes et Symboles de la République", teacher: "Ct Usumba", loginName: "Ct Usumba", password: "CBK-VAL-103" },
+      { id: "c_tec", course: "Technologie des Composants", teacher: "Ct Bofando", loginName: "Ct Bofando", password: "CBK-TEC-104" },
+      { id: "c_prg", course: "Langage de programmation 1", teacher: "Ct Yumisa", loginName: "Ct Yumisa", password: "CBK-PRG-105" },
+      { id: "c_mth", course: "Math pour Ingénieur Informaticien", teacher: "Ct Nzita", loginName: "Ct Nzita (Math)", password: "CBK-MTH-106" },
+      { id: "c_rch_nep", course: "Introduction à la recherche", teacher: "Prof Nepanepa", loginName: "Prof Nepanepa", password: "CBK-RCH-107" },
+      { id: "c_mes", course: "Mesures électriques", teacher: "Ct Nzita", loginName: "Ct Nzita (Mesures)", password: "CBK-MES-108" },
+      { id: "c_inf_cia", course: "Informatique Générale", teacher: "Ass Ciany", loginName: "Ass Ciany", password: "CBK-INF-109" },
+      { id: "c_rch_pal", course: "Introduction à la recherche", teacher: "Ct Paluku", loginName: "Ct Paluku", password: "CBK-RCH-110" },
+      { id: "c_inf_kat", course: "Informatique Générale", teacher: "Ct Katsongo", loginName: "Ct Katsongo", password: "CBK-INF-111" }
+    ];
 
     function todayISO() {
       const d = new Date();
@@ -1035,7 +1148,7 @@
       return `${y}-${m}-${day}`;
     }
 
-    function defaultAvatarDataUrl() {
+    function makeDefaultAvatar() {
       const c = document.createElement("canvas");
       c.width = 160;
       c.height = 160;
@@ -1052,54 +1165,79 @@
       return c.toDataURL("image/jpeg", 0.72);
     }
 
-    function createInitialState() {
+    function createEmptyCourseNotebook(dateStr) {
       return {
-        pin: DEFAULT_PIN,
-        unlocked: false,
+        // dates : liste ordonnée des dates / colonnes de la fiche (modifiables directement)
+        dates: [dateStr || todayISO()],
+        // enrolledIds : étudiants sélectionnés dans ce cahier
+        enrolledIds: [],
+        // marks[colIndex][studentId] = { before: 'present'|'absent'|'', after: 'present'|'absent'|'' }
+        marks: {}
+      };
+    }
+
+    function createInitialState() {
+      const d0 = todayISO();
+      const notebooks = {};
+      DEFAULT_COURSES.forEach((c) => {
+        notebooks[c.id] = createEmptyCourseNotebook(d0);
+      });
+      return {
+        session: {
+          loggedIn: false,
+          role: "teacher", // 'teacher' | 'admin'
+          courseId: DEFAULT_COURSES[0].id
+        },
+        courses: DEFAULT_COURSES.map((c) => ({ ...c })),
         students: [],
-        attendance: {},
-        cloud: {
-          url: "",
-          key: "",
-          recordId: "prof_principal"
-        }
+        notebooks,
+        cloud: { url: "", key: "", recordId: "eduappel_cbk_global" }
       };
     }
 
     let state = loadState();
-    let currentDate = todayISO();
-    let currentSlot = "before";
-    let currentCourseFilter = "ALL";
-    let draftStudentPhoto = defaultAvatarDataUrl();
-
-    let cropImg = new Image();
-    let cropScale = 1;
-    let cropOffsetX = 0;
-    let cropOffsetY = 0;
-    let cropRotation = 0;
-    let isDraggingCrop = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
+    let activeCourseId = state.session.courseId || DEFAULT_COURSES[0].id;
+    let activeSlot = "before"; // 'before' | 'after'
+    let draftPhoto = makeDefaultAvatar();
 
     function loadState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return createInitialState();
         const parsed = JSON.parse(raw);
+        const init = createInitialState();
+        const mergedCourses = Array.isArray(parsed.courses) && parsed.courses.length
+          ? parsed.courses
+          : init.courses;
+
+        const mergedNotebooks = { ...init.notebooks };
+        mergedCourses.forEach((c) => {
+          const nb = parsed.notebooks?.[c.id];
+          mergedNotebooks[c.id] = {
+            dates: Array.isArray(nb?.dates) && nb.dates.length ? nb.dates : [todayISO()],
+            enrolledIds: Array.isArray(nb?.enrolledIds) ? nb.enrolledIds : [],
+            marks: nb?.marks && typeof nb.marks === "object" ? nb.marks : {}
+          };
+        });
+
         return {
-          ...createInitialState(),
+          ...init,
           ...parsed,
+          session: { ...init.session, ...(parsed.session || {}) },
+          courses: mergedCourses,
           students: Array.isArray(parsed.students) ? parsed.students : [],
-          attendance: parsed.attendance && typeof parsed.attendance === "object" ? parsed.attendance : {},
-          cloud: { ...createInitialState().cloud, ...(parsed.cloud || {}) }
+          notebooks: mergedNotebooks,
+          cloud: { ...init.cloud, ...(parsed.cloud || {}) }
         };
-      } catch (e) {
+      } catch {
         return createInitialState();
       }
     }
 
     function saveState() {
+      state.session.courseId = activeCourseId;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Enregistré localement";
     }
 
     function showToast(msg) {
@@ -1107,30 +1245,7 @@
       el.textContent = msg;
       el.classList.add("show");
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2800);
-    }
-
-    function scrollToSection(id) {
-      document.getElementById("rubriquesDrawer").classList.remove("open");
-      const target = document.getElementById(id);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function goToTab(tabId) {
-      const targetTab = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
-      if (targetTab) {
-        targetTab.click();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    }
-
-    function handleRubriqueNav(tabId, fallbackSectionId) {
-      document.getElementById("rubriquesDrawer").classList.remove("open");
-      if (state.unlocked) {
-        goToTab(tabId);
-      } else {
-        scrollToSection(fallbackSectionId);
-      }
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
     }
 
     function escapeHtml(str) {
@@ -1141,710 +1256,828 @@
         .replace(/"/g, "&quot;");
     }
 
-    function renderAuthView() {
-      const publicView = document.getElementById("publicView");
-      const appView = document.getElementById("appView");
-      const btnLock = document.getElementById("btnLockApp");
-      const btnQuickAdd = document.getElementById("btnQuickAddStudent");
-
-      if (state.unlocked) {
-        publicView.classList.add("hidden");
-        appView.classList.remove("hidden");
-        btnLock.classList.remove("hidden");
-        btnQuickAdd.classList.remove("hidden");
-        refreshAllAppUI();
-      } else {
-        publicView.classList.remove("hidden");
-        appView.classList.add("hidden");
-        btnLock.classList.add("hidden");
-        btnQuickAdd.classList.add("hidden");
-      }
+    function closeDrawers() {
+      document.getElementById("coursesDrawer").classList.remove("open");
+      document.getElementById("infoDrawer").classList.remove("open");
     }
 
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
+    function scrollToEl(id) {
+      closeDrawers();
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function getCurrentCourse() {
+      return state.courses.find((c) => c.id === activeCourseId) || state.courses[0];
+    }
+
+    function getCurrentNotebook() {
+      if (!state.notebooks[activeCourseId]) {
+        state.notebooks[activeCourseId] = createEmptyCourseNotebook(todayISO());
+      }
+      return state.notebooks[activeCourseId];
+    }
+
+    // Remplir le sélecteur de connexion professeur
+    function populateTeacherLoginSelect() {
+      const sel = document.getElementById("teacherSelectInput");
+      sel.innerHTML = state.courses
+        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}</option>`)
+        .join("");
+    }
+
+    document.getElementById("teacherLoginForm").addEventListener("submit", (e) => {
       e.preventDefault();
-      const entered = document.getElementById("accessCodeInput").value.trim();
-      const validPin = state.pin || DEFAULT_PIN;
-      if (entered === validPin || entered === DEFAULT_PIN) {
-        state.unlocked = true;
+      const courseId = document.getElementById("teacherSelectInput").value;
+      const pwd = document.getElementById("teacherPasswordInput").value.trim();
+      const courseObj = state.courses.find((c) => c.id === courseId);
+      if (!courseObj) return;
+
+      if (pwd === courseObj.password) {
+        activeCourseId = courseObj.id;
+        state.session = { loggedIn: true, role: "teacher", courseId: courseObj.id };
         saveState();
-        document.getElementById("accessCodeInput").value = "";
-        showToast("Bienvenue sur EduAppel !");
-        renderAuthView();
+        document.getElementById("teacherPasswordInput").value = "";
+        showToast(`Connecté : ${courseObj.teacher} (${courseObj.course})`);
+        renderSessionView();
       } else {
-        showToast("Code d'accès incorrect.");
+        showToast("Mot de passe incorrect pour ce cours.");
+      }
+    });
+
+    // Accès Admin Général sur le nom de l'application (clic ouvre, double-clic ferme)
+    const adminModal = document.getElementById("adminCodeModal");
+    document.getElementById("brandAdminTrigger").addEventListener("click", () => {
+      adminModal.classList.add("open");
+      setTimeout(() => document.getElementById("adminCodeInput").focus(), 60);
+    });
+
+    document.getElementById("brandAdminTrigger").addEventListener("dblclick", () => {
+      adminModal.classList.remove("open");
+    });
+
+    document.getElementById("btnCloseAdminModal").addEventListener("click", () => {
+      adminModal.classList.remove("open");
+    });
+
+    document.getElementById("adminCodeForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const code = document.getElementById("adminCodeInput").value.trim();
+      if (code === ADMIN_GENERAL_CODE) {
+        state.session.loggedIn = true;
+        state.session.role = "admin";
+        saveState();
+        document.getElementById("adminCodeInput").value = "";
+        adminModal.classList.remove("open");
+        showToast("Accès Admin Général activé.");
+        renderSessionView();
+        openTab("tab-admin");
+      } else {
+        showToast("Code Admin Général incorrect.");
       }
     });
 
     document.getElementById("btnLockApp").addEventListener("click", () => {
-      state.unlocked = false;
+      state.session.loggedIn = false;
+      state.session.role = "teacher";
       saveState();
-      showToast("Session verrouillée. Données conservées.");
-      renderAuthView();
+      closeDrawers();
+      renderSessionView();
+      showToast("Déconnecté.");
     });
 
-    document.getElementById("btnToggleRubriques").addEventListener("click", () => {
-      document.getElementById("rubriquesDrawer").classList.toggle("open");
+    document.getElementById("btnToggleCoursesDrawer").addEventListener("click", () => {
+      document.getElementById("infoDrawer").classList.remove("open");
+      document.getElementById("coursesDrawer").classList.toggle("open");
+      renderCoursesDrawer();
     });
 
-    document.getElementById("btnCloseRubriques").addEventListener("click", () => {
-      document.getElementById("rubriquesDrawer").classList.remove("open");
+    document.getElementById("btnToggleInfoDrawer").addEventListener("click", () => {
+      document.getElementById("coursesDrawer").classList.remove("open");
+      document.getElementById("infoDrawer").classList.toggle("open");
     });
+
+    function openTab(tabId) {
+      document.querySelectorAll(".nav-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === tabId));
+      document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("hidden", p.id !== tabId));
+      if (tabId === "tab-cahier") renderCahierTab();
+      if (tabId === "tab-cours") renderCoursesTab();
+      if (tabId === "tab-etudiants") renderStudentsTab();
+      if (tabId === "tab-evolution") renderEvolutionTab();
+      if (tabId === "tab-admin") renderAdminTab();
+    }
 
     document.querySelectorAll(".nav-tab").forEach((tab) => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".nav-tab").forEach((t) => t.classList.remove("active"));
-        tab.classList.add("active");
-        const targetId = tab.getAttribute("data-tab");
-        document.querySelectorAll(".tab-panel").forEach((panel) => {
-          panel.classList.toggle("hidden", panel.id !== targetId);
-        });
-      });
+      tab.addEventListener("click", () => openTab(tab.dataset.tab));
     });
 
-    function getRecord(dateStr, studentId) {
-      if (!state.attendance[dateStr]) state.attendance[dateStr] = {};
-      if (!state.attendance[dateStr][studentId]) {
-        state.attendance[dateStr][studentId] = { before: "", after: "" };
+    function renderSessionView() {
+      const logged = Boolean(state.session.loggedIn);
+      document.getElementById("publicView").classList.toggle("hidden", logged);
+      document.getElementById("appView").classList.toggle("hidden", !logged);
+      document.getElementById("btnLockApp").classList.toggle("hidden", !logged);
+      document.getElementById("btnToggleCoursesDrawer").classList.toggle("hidden", !logged);
+      document.getElementById("navTabAdmin").classList.toggle("hidden", !(logged && state.session.role === "admin"));
+
+      if (logged) {
+        document.getElementById("stuPhotoPreview").src = draftPhoto;
+        document.getElementById("sbUrlInput").value = state.cloud.url || "";
+        document.getElementById("sbKeyInput").value = state.cloud.key || "";
+        renderCoursesDrawer();
+        renderCahierTab();
       }
-      return state.attendance[dateStr][studentId];
     }
 
-    function isLateOnDate(dateStr, studentId) {
-      const rec = state.attendance[dateStr]?.[studentId];
-      if (!rec) return false;
-      if (rec.before === "late" || rec.after === "late") return true;
-      if (rec.before !== "present" && rec.after === "present") return true;
-      return false;
-    }
-
-    function computeStudentAttendancePct(studentId) {
-      let totalSlots = 0;
-      let earned = 0;
-
-      Object.keys(state.attendance).forEach((dateStr) => {
-        const rec = state.attendance[dateStr]?.[studentId];
-        if (!rec) return;
-        if (rec.before) {
-          totalSlots += 1;
-          if (rec.before === "present") earned += 1;
-          else if (rec.before === "late") earned += 0.5;
-        }
-        if (rec.after) {
-          totalSlots += 1;
-          if (rec.after === "present") earned += 1;
-          else if (rec.after === "late") earned += 0.5;
-        }
-      });
-
-      if (totalSlots === 0) return 0;
-      return Math.round((earned / totalSlots) * 100);
-    }
-
-    function computeDateAttendancePct(dateStr, filteredStudentIds) {
-      const dayData = state.attendance[dateStr];
-      if (!dayData || filteredStudentIds.length === 0) return 0;
-
-      let totalSlots = 0;
-      let earned = 0;
-
-      filteredStudentIds.forEach((sid) => {
-        const rec = dayData[sid];
-        if (!rec) return;
-        if (rec.before) {
-          totalSlots += 1;
-          if (rec.before === "present") earned += 1;
-          else if (rec.before === "late") earned += 0.5;
-        }
-        if (rec.after) {
-          totalSlots += 1;
-          if (rec.after === "present") earned += 1;
-          else if (rec.after === "late") earned += 0.5;
-        }
-      });
-
-      if (totalSlots === 0) return 0;
-      return Math.round((earned / totalSlots) * 100);
-    }
-
-    function getFilteredStudents() {
-      const query = (document.getElementById("searchAttendanceInput").value || "").trim().toLowerCase();
-      return state.students.filter((st) => {
-        const matchCourse = currentCourseFilter === "ALL" || st.course === currentCourseFilter;
-        const matchQuery =
-          !query ||
-          st.name.toLowerCase().includes(query) ||
-          st.account.toLowerCase().includes(query) ||
-          st.course.toLowerCase().includes(query);
-        return matchCourse && matchQuery;
-      });
-    }
-
-    function setStudentStatus(studentId, status) {
-      const rec = getRecord(currentDate, studentId);
-      rec[currentSlot] = rec[currentSlot] === status ? "" : status;
+    function selectCourse(courseId) {
+      activeCourseId = courseId;
       saveState();
-      refreshAttendanceAndStats();
+      closeDrawers();
+      renderCoursesDrawer();
+      openTab("tab-cahier");
+      const c = getCurrentCourse();
+      showToast(`Cahier ouvert : ${c.course}`);
     }
 
-    function renderCourseFilterOptions() {
-      const sel = document.getElementById("callCourseFilter");
-      const courses = [...new Set(state.students.map((s) => s.course).filter(Boolean))];
-      sel.innerHTML = `<option value="ALL">Tous les cours / promotions</option>` +
-        courses.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
-      if (courses.includes(currentCourseFilter)) {
-        sel.value = currentCourseFilter;
-      } else {
-        currentCourseFilter = "ALL";
-        sel.value = "ALL";
-      }
-    }
-
-    function renderAttendanceList() {
-      const container = document.getElementById("attendanceListContainer");
-      const list = getFilteredStudents();
-
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div style="padding:12px 0;">
-            <p class="student-meta" style="margin-bottom:10px;">
-              Aucun étudiant trouvé. Ajoutez des étudiants dans l'onglet <strong>Étudiants</strong>.
-            </p>
-            <button type="button" class="btn btn-primary btn-sm" onclick="goToTab('tab-etudiants')">
-              ➕ Aller à l'onglet Étudiants
-            </button>
-          </div>
+    function renderCoursesDrawer() {
+      const grid = document.getElementById("coursesMenuGrid");
+      grid.innerHTML = state.courses.map((c) => {
+        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
+        return `
+          <button type="button" class="course-menu-item ${c.id === activeCourseId ? "active" : ""}" onclick="selectCourse('${c.id}')">
+            <div style="font-weight:800; font-size:0.88rem;">${escapeHtml(c.course)}</div>
+            <div class="student-meta">${escapeHtml(c.teacher)} • ${nb.enrolledIds.length} étudiant(s)</div>
+          </button>
         `;
-        return;
-      }
+      }).join("");
+    }
 
-      container.innerHTML = list.map((st) => {
-        const rec = getRecord(currentDate, st.id);
-        const activeVal = rec[currentSlot] || "";
-        const pct = computeStudentAttendancePct(st.id);
-        const lateNow = isLateOnDate(currentDate, st.id);
-
+    function renderCoursesTab() {
+      const container = document.getElementById("allCoursesCardsContainer");
+      container.innerHTML = state.courses.map((c) => {
+        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
         return `
           <div class="student-row">
-            <div class="student-info">
-              <img class="avatar" src="${st.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(st.name)}" />
-              <div>
-                <div class="student-name">${escapeHtml(st.name)}</div>
-                <div class="student-meta">Compte : <strong>${escapeHtml(st.account)}</strong> • ${escapeHtml(st.course)}</div>
-                <div class="student-meta">Avant: <strong>${rec.before || "—"}</strong> | Après: <strong>${rec.after || "—"}</strong></div>
-                <span class="badge badge-pct">Présence : ${pct}%</span>
-                ${lateNow ? `<span class="badge badge-late">⏰ Retardataire</span>` : ""}
-              </div>
+            <div>
+              <div class="student-name">${escapeHtml(c.course)}</div>
+              <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
+              <div class="student-meta">${nb.enrolledIds.length} étudiant(s) dans le cahier • ${nb.dates.length} date(s)/colonne(s)</div>
             </div>
-            <div class="status-actions no-print">
-              <button type="button" class="status-btn ${activeVal === "present" ? "active-present" : ""}" onclick="setStudentStatus('${st.id}', 'present')">✅ Présent</button>
-              <button type="button" class="status-btn ${activeVal === "absent" ? "active-absent" : ""}" onclick="setStudentStatus('${st.id}', 'absent')">🚫 Absent</button>
-              <button type="button" class="status-btn ${activeVal === "late" ? "active-late" : ""}" onclick="setStudentStatus('${st.id}', 'late')">⏰ Retard</button>
-            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">📒 Ouvrir le cahier</button>
           </div>
         `;
       }).join("");
     }
 
-    function renderLateList() {
-      const container = document.getElementById("lateListContainer");
-      const scope = document.getElementById("lateScopeSelect").value;
-      const dates = scope === "day" ? [currentDate] : Object.keys(state.attendance).sort().reverse();
+    // Calculs présence (%) et retardataires sur un cours
+    function getCell(nb, colIdx, studentId) {
+      if (!nb.marks[colIdx]) nb.marks[colIdx] = {};
+      if (!nb.marks[colIdx][studentId]) nb.marks[colIdx][studentId] = { before: "", after: "" };
+      return nb.marks[colIdx][studentId];
+    }
 
-      const items = [];
-      dates.forEach((dStr) => {
-        state.students.forEach((st) => {
-          if (currentCourseFilter !== "ALL" && st.course !== currentCourseFilter) return;
-          if (isLateOnDate(dStr, st.id)) {
-            const rec = state.attendance[dStr]?.[st.id] || {};
-            let reason = "Retard signalé";
-            if (rec.before !== "present" && rec.after === "present") {
-              reason = "Absent/non présent Avant cours → Présent Après cours";
-            } else if (rec.before === "late") {
-              reason = "Retard Avant le cours";
-            } else if (rec.after === "late") {
-              reason = "Retard Après le cours";
-            }
-            items.push({ date: dStr, student: st, reason });
+    function isCellLate(cell) {
+      if (!cell) return false;
+      return cell.before !== "present" && cell.after === "present";
+    }
+
+    function computeStudentCoursePct(nb, studentId) {
+      let total = 0;
+      let presentScore = 0;
+      nb.dates.forEach((_, idx) => {
+        const cell = nb.marks[idx]?.[studentId];
+        if (!cell) return;
+        if (cell.before) {
+          total += 1;
+          if (cell.before === "present") presentScore += 1;
+        }
+        if (cell.after) {
+          total += 1;
+          if (cell.after === "present") presentScore += 1;
+        }
+      });
+      return total === 0 ? 0 : Math.round((presentScore / total) * 100);
+    }
+
+    function toggleCellMark(colIdx, studentId, status) {
+      const nb = getCurrentNotebook();
+      const cell = getCell(nb, colIdx, studentId);
+      cell[activeSlot] = cell[activeSlot] === status ? "" : status;
+      saveState();
+      renderCahierTab();
+    }
+
+    function updateNotebookDate(colIdx, newDateVal) {
+      if (!newDateVal) return;
+      const nb = getCurrentNotebook();
+      nb.dates[colIdx] = newDateVal;
+      saveState();
+      renderCahierTab();
+      showToast("Date mise à jour sur le cahier.");
+    }
+
+    document.getElementById("btnAddDateCol").addEventListener("click", () => {
+      const nb = getCurrentNotebook();
+      const lastDate = nb.dates[nb.dates.length - 1] || todayISO();
+      const next = new Date(lastDate + "T12:00:00");
+      next.setDate(next.getDate() + 1);
+      const isoNext = Number.isNaN(next.getTime()) ? todayISO() : next.toISOString().slice(0, 10);
+      nb.dates.push(isoNext);
+      saveState();
+      renderCahierTab();
+      showToast("Nouvelle colonne/date ajoutée au cahier.");
+    });
+
+    document.getElementById("slotBeforeBtn").addEventListener("click", () => {
+      activeSlot = "before";
+      document.getElementById("slotBeforeBtn").classList.add("active");
+      document.getElementById("slotAfterBtn").classList.remove("active");
+      renderCahierTab();
+    });
+
+    document.getElementById("slotAfterBtn").addEventListener("click", () => {
+      activeSlot = "after";
+      document.getElementById("slotAfterBtn").classList.add("active");
+      document.getElementById("slotBeforeBtn").classList.remove("active");
+      renderCahierTab();
+    });
+
+    document.getElementById("btnBulkPresentLastDate").addEventListener("click", () => {
+      const nb = getCurrentNotebook();
+      const colIdx = nb.dates.length - 1;
+      nb.enrolledIds.forEach((sid) => {
+        getCell(nb, colIdx, sid)[activeSlot] = "present";
+      });
+      saveState();
+      renderCahierTab();
+      showToast("Tous marqués PRÉSENT sur la dernière date.");
+    });
+
+    document.getElementById("btnBulkAbsentLastDate").addEventListener("click", () => {
+      const nb = getCurrentNotebook();
+      const colIdx = nb.dates.length - 1;
+      nb.enrolledIds.forEach((sid) => {
+        getCell(nb, colIdx, sid)[activeSlot] = "absent";
+      });
+      saveState();
+      renderCahierTab();
+      showToast("Tous marqués ABSENT sur la dernière date.");
+    });
+
+    document.getElementById("cahierSearchInput").addEventListener("input", renderCahierTab);
+
+    function renderCahierTab() {
+      const course = getCurrentCourse();
+      const nb = getCurrentNotebook();
+
+      document.getElementById("activeCourseTitle").textContent = course.course;
+      document.getElementById("activeCourseInfo").textContent =
+        `Professeur : ${course.teacher} • Compte : ${course.loginName} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
+
+      const enrolledStudents = nb.enrolledIds
+        .map((id) => state.students.find((s) => s.id === id))
+        .filter(Boolean);
+
+      const q = (document.getElementById("cahierSearchInput").value || "").trim().toLowerCase();
+      const visibleStudents = enrolledStudents.filter((s) =>
+        !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q)
+      );
+
+      // Stats du cours
+      let lateCount = 0;
+      let sumPct = 0;
+      enrolledStudents.forEach((s) => {
+        sumPct += computeStudentCoursePct(nb, s.id);
+        nb.dates.forEach((_, cIdx) => {
+          if (isCellLate(nb.marks[cIdx]?.[s.id])) lateCount++;
+        });
+      });
+      const avgPct = enrolledStudents.length ? Math.round(sumPct / enrolledStudents.length) : 0;
+
+      document.getElementById("statEnrolledCount").textContent = enrolledStudents.length;
+      document.getElementById("statDatesCount").textContent = nb.dates.length;
+      document.getElementById("statCoursePct").textContent = `${avgPct}%`;
+      document.getElementById("statLateTotal").textContent = lateCount;
+
+      // En-tête tableau : PHOTO | NOM | N° MATRICULE | [Dates modifiables avec PRÉSENT / ABSENT] | %
+      const thead = document.getElementById("appelSheetHead");
+      let topRow = `<tr>
+        <th rowspan="2" class="main-col">PHOTO</th>
+        <th rowspan="2" class="main-col">NOM</th>
+        <th rowspan="2" class="main-col">N° MATRICULE</th>`;
+      let subRow = `<tr>`;
+
+      nb.dates.forEach((dVal, idx) => {
+        topRow += `<th colspan="2" class="date-col">
+          <input type="date" class="date-edit-input" value="${escapeHtml(dVal)}" onchange="updateNotebookDate(${idx}, this.value)" />
+        </th>`;
+        subRow += `<th class="sub-col">PRÉSENT</th><th class="sub-col">ABSENT</th>`;
+      });
+
+      topRow += `<th rowspan="2" class="main-col">% PRÉSENCE</th></tr>`;
+      subRow += `</tr>`;
+      thead.innerHTML = topRow + subRow;
+
+      // Corps du tableau
+      const tbody = document.getElementById("appelSheetBody");
+      if (visibleStudents.length === 0) {
+        const colSpan = 4 + nb.dates.length * 2;
+        tbody.innerHTML = `<tr><td colspan="${colSpan}" style="padding:18px; color:#94a3b8;">
+          Aucun étudiant dans ce cahier. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants.
+        </td></tr>`;
+      } else {
+        tbody.innerHTML = visibleStudents.map((st) => {
+          const pct = computeStudentCoursePct(nb, st.id);
+          let dateCellsHtml = "";
+          nb.dates.forEach((_, idx) => {
+            const cell = nb.marks[idx]?.[st.id] || { before: "", after: "" };
+            const val = cell[activeSlot] || "";
+            dateCellsHtml += `
+              <td>
+                <button type="button" class="mark-btn ${val === "present" ? "checked-present" : ""}" onclick="toggleCellMark(${idx}, '${st.id}', 'present')" title="Présent">✓</button>
+              </td>
+              <td>
+                <button type="button" class="mark-btn ${val === "absent" ? "checked-absent" : ""}" onclick="toggleCellMark(${idx}, '${st.id}', 'absent')" title="Absent">✕</button>
+              </td>
+            `;
+          });
+
+          return `
+            <tr>
+              <td><img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" /></td>
+              <td style="text-align:left; font-weight:700;">${escapeHtml(st.name)}</td>
+              <td>${escapeHtml(st.matricule)}</td>
+              ${dateCellsHtml}
+              <td style="font-weight:800; color:${pct >= 75 ? "#6ee7b7" : "#fcd34d"};">${pct}%</td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      // Liste des retardataires du cours
+      const lateEl = document.getElementById("cahierLateList");
+      const lateItems = [];
+      enrolledStudents.forEach((st) => {
+        nb.dates.forEach((dVal, idx) => {
+          if (isCellLate(nb.marks[idx]?.[st.id])) {
+            lateItems.push({ st, date: dVal });
           }
         });
       });
 
-      document.getElementById("statLateCount").textContent = items.length;
+      if (lateItems.length === 0) {
+        lateEl.innerHTML = `<p class="student-meta">Aucun retardataire détecté sur ce cahier.</p>`;
+      } else {
+        lateEl.innerHTML = lateItems.map((item) => `
+          <div class="student-row">
+            <div class="student-info">
+              <img class="avatar" src="${item.st.photo || makeDefaultAvatar()}" alt="${escapeHtml(item.st.name)}" />
+              <div>
+                <div class="student-name">${escapeHtml(item.st.name)} <span class="badge badge-late">⏰ Retardataire</span></div>
+                <div class="student-meta">Matricule : <strong>${escapeHtml(item.st.matricule)}</strong> • Date : <strong>${escapeHtml(item.date)}</strong> (Absent/non présent Avant → Présent Après)</div>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+    }
 
-      if (items.length === 0) {
-        container.innerHTML = `<p class="student-meta">Aucun retardataire enregistré pour cette sélection.</p>`;
+    // Modal sélection des étudiants enregistrés vers le cahier d'appel
+    const enrollModal = document.getElementById("enrollModal");
+    document.getElementById("btnOpenEnrollModal").addEventListener("click", () => {
+      renderEnrollChecklist();
+      enrollModal.classList.add("open");
+    });
+
+    document.getElementById("btnCloseEnrollModal").addEventListener("click", () => {
+      enrollModal.classList.remove("open");
+    });
+
+    function closeEnrollAndGoStudents() {
+      enrollModal.classList.remove("open");
+      openTab("tab-etudiants");
+    }
+
+    function renderEnrollChecklist() {
+      const nb = getCurrentNotebook();
+      const box = document.getElementById("enrollChecklistContainer");
+      if (state.students.length === 0) {
+        box.innerHTML = `<p class="student-meta">Aucun étudiant enregistré dans le répertoire. Ajoutez-en d'abord dans l'onglet <strong>Étudiants</strong>.</p>`;
         return;
       }
 
-      container.innerHTML = items.map((item) => `
-        <div class="student-row">
-          <div class="student-info">
-            <img class="avatar" src="${item.student.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(item.student.name)}" />
-            <div>
-              <div class="student-name">${escapeHtml(item.student.name)} <span class="badge badge-late">⏰ Retardataire</span></div>
-              <div class="student-meta">Compte : <strong>${escapeHtml(item.student.account)}</strong> • Date : <strong>${item.date}</strong></div>
-              <div class="student-meta">${escapeHtml(item.reason)} • Taux global : <strong>${computeStudentAttendancePct(item.student.id)}%</strong></div>
-            </div>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function renderCalendar() {
-      const grid = document.getElementById("calendarGridContainer");
-      const datesSet = new Set(Object.keys(state.attendance));
-      datesSet.add(currentDate);
-      const sortedDates = [...datesSet].sort().reverse();
-
-      const studentIds = state.students
-        .filter((s) => currentCourseFilter === "ALL" || s.course === currentCourseFilter)
-        .map((s) => s.id);
-
-      grid.innerHTML = sortedDates.map((dStr) => {
-        const pct = computeDateAttendancePct(dStr, studentIds);
-        const dayObj = state.attendance[dStr] || {};
-        const countRecorded = Object.keys(dayObj).length;
+      box.innerHTML = state.students.map((st) => {
+        const checked = nb.enrolledIds.includes(st.id) ? "checked" : "";
         return `
-          <div class="cal-day-card" onclick="selectDateFromCalendar('${dStr}')">
-            <div class="cal-date">${dStr}</div>
-            <div class="cal-pct">${pct}%</div>
-            <div class="cal-sub">${countRecorded} fiche(s) pointée(s)</div>
-          </div>
+          <label class="student-row" style="cursor:pointer;">
+            <div class="student-info">
+              <input type="checkbox" class="enroll-checkbox" value="${st.id}" ${checked} style="width:auto;" />
+              <img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" />
+              <div>
+                <div class="student-name">${escapeHtml(st.name)}</div>
+                <div class="student-meta">${escapeHtml(st.matricule)} • ${escapeHtml(st.promotion || "")}</div>
+              </div>
+            </div>
+          </label>
         `;
       }).join("");
     }
 
-    function selectDateFromCalendar(dStr) {
-      currentDate = dStr;
-      document.getElementById("callDateInput").value = dStr;
-      goToTab("tab-appel");
-      refreshAttendanceAndStats();
-      showToast(`Appel du ${dStr} ouvert.`);
-    }
-
-    function renderRoster() {
-      const container = document.getElementById("rosterListContainer");
-      const q = (document.getElementById("searchRosterInput").value || "").trim().toLowerCase();
-      const filtered = state.students.filter((s) =>
-        !q || s.name.toLowerCase().includes(q) || s.account.toLowerCase().includes(q) || s.course.toLowerCase().includes(q)
-      );
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<p class="student-meta">Aucun étudiant dans le répertoire.</p>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map((st) => `
-        <div class="student-row">
-          <div class="student-info">
-            <img class="avatar" src="${st.photo || defaultAvatarDataUrl()}" alt="${escapeHtml(st.name)}" />
-            <div>
-              <div class="student-name">${escapeHtml(st.name)}</div>
-              <div class="student-meta">Compte : <strong>${escapeHtml(st.account)}</strong> • ${escapeHtml(st.course)}</div>
-              <span class="badge badge-pct">Présence globale : ${computeStudentAttendancePct(st.id)}%</span>
-            </div>
-          </div>
-          <div class="status-actions">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="editStudent('${st.id}')">✏️ Modifier</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteStudent('${st.id}')">🗑️ Supprimer</button>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function refreshAttendanceAndStats() {
-      const studentIds = state.students
-        .filter((s) => currentCourseFilter === "ALL" || s.course === currentCourseFilter)
-        .map((s) => s.id);
-
-      document.getElementById("statStudentsCount").textContent = state.students.length;
-      document.getElementById("statDaysCount").textContent = Object.keys(state.attendance).length;
-      document.getElementById("statDayPct").textContent = `${computeDateAttendancePct(currentDate, studentIds)}%`;
-
-      renderAttendanceList();
-      renderLateList();
-      renderCalendar();
-      renderRoster();
-    }
-
-    function refreshAllAppUI() {
-      document.getElementById("callDateInput").value = currentDate;
-      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
-      document.getElementById("sbUrlInput").value = state.cloud.url || "";
-      document.getElementById("sbKeyInput").value = state.cloud.key || "";
-      renderCourseFilterOptions();
-      refreshAttendanceAndStats();
-    }
-
-    document.getElementById("callDateInput").addEventListener("change", (e) => {
-      if (e.target.value) {
-        currentDate = e.target.value;
-        refreshAttendanceAndStats();
-      }
+    document.getElementById("btnSelectAllEnroll").addEventListener("click", () => {
+      document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = true));
     });
 
-    document.getElementById("callCourseFilter").addEventListener("change", (e) => {
-      currentCourseFilter = e.target.value;
-      refreshAttendanceAndStats();
+    document.getElementById("btnUnselectAllEnroll").addEventListener("click", () => {
+      document.querySelectorAll(".enroll-checkbox").forEach((cb) => (cb.checked = false));
     });
 
-    document.getElementById("slotBeforeBtn").addEventListener("click", () => {
-      currentSlot = "before";
-      document.getElementById("slotBeforeBtn").classList.add("active");
-      document.getElementById("slotAfterBtn").classList.remove("active");
-      renderAttendanceList();
-    });
-
-    document.getElementById("slotAfterBtn").addEventListener("click", () => {
-      currentSlot = "after";
-      document.getElementById("slotAfterBtn").classList.add("active");
-      document.getElementById("slotBeforeBtn").classList.remove("active");
-      renderAttendanceList();
-    });
-
-    document.getElementById("searchAttendanceInput").addEventListener("input", renderAttendanceList);
-    document.getElementById("searchRosterInput").addEventListener("input", renderRoster);
-    document.getElementById("lateScopeSelect").addEventListener("change", renderLateList);
-
-    document.getElementById("btnMarkAllPresent").addEventListener("click", () => {
-      getFilteredStudents().forEach((st) => {
-        const rec = getRecord(currentDate, st.id);
-        rec[currentSlot] = "present";
-      });
+    document.getElementById("btnConfirmEnroll").addEventListener("click", () => {
+      const nb = getCurrentNotebook();
+      const selected = [...document.querySelectorAll(".enroll-checkbox:checked")].map((cb) => cb.value);
+      nb.enrolledIds = selected;
       saveState();
-      refreshAttendanceAndStats();
-      showToast("Tous les étudiants filtrés marqués Présents.");
+      enrollModal.classList.remove("open");
+      renderCahierTab();
+      showToast(`${selected.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
-    document.getElementById("btnMarkAllAbsent").addEventListener("click", () => {
-      getFilteredStudents().forEach((st) => {
-        const rec = getRecord(currentDate, st.id);
-        rec[currentSlot] = "absent";
-      });
-      saveState();
-      refreshAttendanceAndStats();
-      showToast("Tous les étudiants filtrés marqués Absents.");
-    });
-
+    // Gestion des étudiants (individuel + rapide groupé)
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const editId = document.getElementById("editingStudentId").value;
-      const name = document.getElementById("studentNameInput").value.trim();
-      const account = document.getElementById("studentAccountInput").value.trim();
-      const course = document.getElementById("studentCourseInput").value.trim();
-
-      if (!name || !account || !course) return;
+      const name = document.getElementById("stuNameInput").value.trim();
+      const matricule = document.getElementById("stuMatriculeInput").value.trim();
+      const promotion = document.getElementById("stuPromotionInput").value.trim() || "Général";
+      if (!name || !matricule) return;
 
       if (editId) {
         const idx = state.students.findIndex((s) => s.id === editId);
         if (idx !== -1) {
-          state.students[idx] = {
-            ...state.students[idx],
-            name,
-            account,
-            course,
-            photo: draftStudentPhoto
-          };
+          state.students[idx] = { ...state.students[idx], name, matricule, promotion, photo: draftPhoto };
         }
         showToast("Étudiant modifié.");
       } else {
         state.students.push({
           id: "stu_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
           name,
-          account,
-          course,
-          photo: draftStudentPhoto
+          matricule,
+          promotion,
+          photo: draftPhoto
         });
         showToast("Étudiant enregistré.");
       }
 
       saveState();
       resetStudentForm();
-      renderCourseFilterOptions();
-      refreshAttendanceAndStats();
+      renderStudentsTab();
+      renderCahierTab();
+    });
+
+    document.getElementById("btnImportBulkStudents").addEventListener("click", () => {
+      const rawLines = document.getElementById("bulkStudentsTextarea").value.split(/\r?\n/);
+      let added = 0;
+      rawLines.forEach((line) => {
+        const clean = line.trim();
+        if (!clean) return;
+        const parts = clean.split(/[;|]/).map((p) => p.trim());
+        const name = parts[0] || "";
+        if (!name) return;
+        const matricule = parts[1] || `MAT-${String(state.students.length + added + 1).padStart(3, "0")}`;
+        const promotion = parts[2] || "Général";
+        state.students.push({
+          id: "stu_" + Date.now() + "_" + added + "_" + Math.random().toString(36).slice(2, 5),
+          name,
+          matricule,
+          promotion,
+          photo: makeDefaultAvatar()
+        });
+        added++;
+      });
+
+      if (added > 0) {
+        document.getElementById("bulkStudentsTextarea").value = "";
+        saveState();
+        renderStudentsTab();
+        showToast(`${added} étudiant(s) ajouté(s).`);
+      } else {
+        showToast("Aucune ligne valide détectée.");
+      }
     });
 
     function editStudent(id) {
       const st = state.students.find((s) => s.id === id);
       if (!st) return;
       document.getElementById("editingStudentId").value = st.id;
-      document.getElementById("studentNameInput").value = st.name;
-      document.getElementById("studentAccountInput").value = st.account;
-      document.getElementById("studentCourseInput").value = st.course;
-      draftStudentPhoto = st.photo || defaultAvatarDataUrl();
-      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
+      document.getElementById("stuNameInput").value = st.name;
+      document.getElementById("stuMatriculeInput").value = st.matricule;
+      document.getElementById("stuPromotionInput").value = st.promotion || "";
+      draftPhoto = st.photo || makeDefaultAvatar();
+      document.getElementById("stuPhotoPreview").src = draftPhoto;
       document.getElementById("studentFormTitle").textContent = "✏️ Modifier l'Étudiant";
-      document.getElementById("btnCancelEditStudent").classList.remove("hidden");
-      document.getElementById("btnReCropCurrent").classList.remove("hidden");
-      document.getElementById("studentForm").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("btnCancelStudentEdit").classList.remove("hidden");
     }
 
     function deleteStudent(id) {
-      if (!confirm("Supprimer cet étudiant du répertoire ?")) return;
+      if (!confirm("Supprimer cet étudiant ?")) return;
       state.students = state.students.filter((s) => s.id !== id);
+      Object.keys(state.notebooks).forEach((cid) => {
+        state.notebooks[cid].enrolledIds = (state.notebooks[cid].enrolledIds || []).filter((x) => x !== id);
+      });
       saveState();
-      renderCourseFilterOptions();
-      refreshAttendanceAndStats();
+      renderStudentsTab();
+      renderCahierTab();
       showToast("Étudiant supprimé.");
     }
 
     function resetStudentForm() {
       document.getElementById("editingStudentId").value = "";
       document.getElementById("studentForm").reset();
-      draftStudentPhoto = defaultAvatarDataUrl();
-      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
-      document.getElementById("studentFormTitle").textContent = "➕ Ajouter / Modifier un Étudiant";
-      document.getElementById("btnCancelEditStudent").classList.add("hidden");
-      document.getElementById("btnReCropCurrent").classList.add("hidden");
+      draftPhoto = makeDefaultAvatar();
+      document.getElementById("stuPhotoPreview").src = draftPhoto;
+      document.getElementById("studentFormTitle").textContent = "➕ Ajouter un Étudiant";
+      document.getElementById("btnCancelStudentEdit").classList.add("hidden");
     }
 
-    document.getElementById("btnCancelEditStudent").addEventListener("click", resetStudentForm);
+    document.getElementById("btnCancelStudentEdit").addEventListener("click", resetStudentForm);
+    document.getElementById("rosterSearchInput").addEventListener("input", renderStudentsTab);
 
+    function renderStudentsTab() {
+      const container = document.getElementById("rosterContainer");
+      const q = (document.getElementById("rosterSearchInput").value || "").trim().toLowerCase();
+      const list = state.students.filter((s) =>
+        !q || s.name.toLowerCase().includes(q) || s.matricule.toLowerCase().includes(q) || (s.promotion || "").toLowerCase().includes(q)
+      );
+
+      if (list.length === 0) {
+        container.innerHTML = `<p class="student-meta">Aucun étudiant enregistré.</p>`;
+        return;
+      }
+
+      container.innerHTML = list.map((st) => `
+        <div class="student-row">
+          <div class="student-info">
+            <img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" />
+            <div>
+              <div class="student-name">${escapeHtml(st.name)}</div>
+              <div class="student-meta">Matricule : <strong>${escapeHtml(st.matricule)}</strong> • ${escapeHtml(st.promotion || "")}</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="editStudent('${st.id}')">✏️</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteStudent('${st.id}')">🗑️</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Recadrage & compression photo
     const cropModal = document.getElementById("cropModal");
     const cropCanvas = document.getElementById("cropCanvas");
     const cropCtx = cropCanvas.getContext("2d");
+    let cropImg = new Image();
+    let cropScale = 1, cropOffsetX = 0, cropOffsetY = 0, cropRot = 0, isDragging = false, dragX = 0, dragY = 0;
 
-    function openCropModalWithSrc(src) {
+    function openCropWithSrc(src) {
       cropImg = new Image();
       cropImg.onload = () => {
-        cropScale = 1;
-        cropOffsetX = 0;
-        cropOffsetY = 0;
-        cropRotation = 0;
-        document.getElementById("cropZoomRange").value = 1;
-        document.getElementById("cropZoomVal").textContent = "100%";
-        drawCropPreview();
+        cropScale = 1; cropOffsetX = 0; cropOffsetY = 0; cropRot = 0;
+        document.getElementById("cropZoom").value = 1;
+        document.getElementById("cropZoomLabel").textContent = "100%";
+        drawCrop();
         cropModal.classList.add("open");
       };
       cropImg.src = src;
     }
 
-    function drawCropPreview() {
-      const size = cropCanvas.width;
-      cropCtx.clearRect(0, 0, size, size);
+    function drawCrop() {
+      const s = cropCanvas.width;
+      cropCtx.clearRect(0, 0, s, s);
       cropCtx.fillStyle = "#040b16";
-      cropCtx.fillRect(0, 0, size, size);
-
+      cropCtx.fillRect(0, 0, s, s);
       cropCtx.save();
-      cropCtx.translate(size / 2 + cropOffsetX, size / 2 + cropOffsetY);
-      cropCtx.rotate((cropRotation * Math.PI) / 180);
-
-      const baseScale = Math.max(size / cropImg.width, size / cropImg.height);
-      const finalW = cropImg.width * baseScale * cropScale;
-      const finalH = cropImg.height * baseScale * cropScale;
-
-      cropCtx.drawImage(cropImg, -finalW / 2, -finalH / 2, finalW, finalH);
+      cropCtx.translate(s / 2 + cropOffsetX, s / 2 + cropOffsetY);
+      cropCtx.rotate((cropRot * Math.PI) / 180);
+      const base = Math.max(s / cropImg.width, s / cropImg.height);
+      const w = cropImg.width * base * cropScale;
+      const h = cropImg.height * base * cropScale;
+      cropCtx.drawImage(cropImg, -w / 2, -h / 2, w, h);
       cropCtx.restore();
     }
 
-    function handleImageFileSelected(e) {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => openCropModalWithSrc(ev.target.result);
-      reader.readAsDataURL(file);
+    function onPhotoFile(e) {
+      const f = e.target.files?.[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = (ev) => openCropWithSrc(ev.target.result);
+      r.readAsDataURL(f);
       e.target.value = "";
     }
 
-    document.getElementById("cameraInput").addEventListener("change", handleImageFileSelected);
-    document.getElementById("galleryInput").addEventListener("change", handleImageFileSelected);
-    document.getElementById("btnReCropCurrent").addEventListener("click", () => {
-      openCropModalWithSrc(draftStudentPhoto);
-    });
+    document.getElementById("camInput").addEventListener("change", onPhotoFile);
+    document.getElementById("galInput").addEventListener("change", onPhotoFile);
+    document.getElementById("btnCropDraft").addEventListener("click", () => openCropWithSrc(draftPhoto));
+    document.getElementById("btnCloseCropModal").addEventListener("click", () => cropModal.classList.remove("open"));
 
     cropCanvas.addEventListener("pointerdown", (e) => {
-      isDraggingCrop = true;
-      dragStartX = e.clientX - cropOffsetX;
-      dragStartY = e.clientY - cropOffsetY;
+      isDragging = true;
+      dragX = e.clientX - cropOffsetX;
+      dragY = e.clientY - cropOffsetY;
     });
-
     window.addEventListener("pointermove", (e) => {
-      if (!isDraggingCrop) return;
-      cropOffsetX = e.clientX - dragStartX;
-      cropOffsetY = e.clientY - dragStartY;
-      drawCropPreview();
+      if (!isDragging) return;
+      cropOffsetX = e.clientX - dragX;
+      cropOffsetY = e.clientY - dragY;
+      drawCrop();
     });
+    window.addEventListener("pointerup", () => { isDragging = false; });
 
-    window.addEventListener("pointerup", () => {
-      isDraggingCrop = false;
-    });
-
-    document.getElementById("cropZoomRange").addEventListener("input", (e) => {
+    document.getElementById("cropZoom").addEventListener("input", (e) => {
       cropScale = parseFloat(e.target.value);
-      document.getElementById("cropZoomVal").textContent = `${Math.round(cropScale * 100)}%`;
-      drawCropPreview();
+      document.getElementById("cropZoomLabel").textContent = `${Math.round(cropScale * 100)}%`;
+      drawCrop();
+    });
+    document.getElementById("btnRotLeft").addEventListener("click", () => { cropRot = (cropRot - 90) % 360; drawCrop(); });
+    document.getElementById("btnRotRight").addEventListener("click", () => { cropRot = (cropRot + 90) % 360; drawCrop(); });
+    document.getElementById("btnRotReset").addEventListener("click", () => {
+      cropScale = 1; cropOffsetX = 0; cropOffsetY = 0; cropRot = 0;
+      document.getElementById("cropZoom").value = 1;
+      document.getElementById("cropZoomLabel").textContent = "100%";
+      drawCrop();
     });
 
-    document.getElementById("btnRotateLeft").addEventListener("click", () => {
-      cropRotation = (cropRotation - 90) % 360;
-      drawCropPreview();
-    });
-
-    document.getElementById("btnRotateRight").addEventListener("click", () => {
-      cropRotation = (cropRotation + 90) % 360;
-      drawCropPreview();
-    });
-
-    document.getElementById("btnResetCrop").addEventListener("click", () => {
-      cropScale = 1;
-      cropOffsetX = 0;
-      cropOffsetY = 0;
-      cropRotation = 0;
-      document.getElementById("cropZoomRange").value = 1;
-      document.getElementById("cropZoomVal").textContent = "100%";
-      drawCropPreview();
-    });
-
-    document.getElementById("btnCloseCrop").addEventListener("click", () => {
-      cropModal.classList.remove("open");
-    });
-
-    document.getElementById("btnConfirmCrop").addEventListener("click", () => {
-      const outCanvas = document.createElement("canvas");
-      const outSize = 200;
-      outCanvas.width = outSize;
-      outCanvas.height = outSize;
-      const outCtx = outCanvas.getContext("2d");
-
+    document.getElementById("btnApplyCrop").addEventListener("click", () => {
+      const out = document.createElement("canvas");
+      const outSize = 180;
+      out.width = outSize;
+      out.height = outSize;
+      const ctx = out.getContext("2d");
       const ratio = outSize / cropCanvas.width;
-      outCtx.fillStyle = "#081529";
-      outCtx.fillRect(0, 0, outSize, outSize);
-
-      outCtx.save();
-      outCtx.translate(outSize / 2 + cropOffsetX * ratio, outSize / 2 + cropOffsetY * ratio);
-      outCtx.rotate((cropRotation * Math.PI) / 180);
-
-      const baseScale = Math.max(outSize / cropImg.width, outSize / cropImg.height);
-      const finalW = cropImg.width * baseScale * cropScale;
-      const finalH = cropImg.height * baseScale * cropScale;
-
-      outCtx.drawImage(cropImg, -finalW / 2, -finalH / 2, finalW, finalH);
-      outCtx.restore();
-
-      draftStudentPhoto = outCanvas.toDataURL("image/jpeg", 0.65);
-      document.getElementById("studentPreviewImg").src = draftStudentPhoto;
-      document.getElementById("btnReCropCurrent").classList.remove("hidden");
+      ctx.fillStyle = "#081529";
+      ctx.fillRect(0, 0, outSize, outSize);
+      ctx.save();
+      ctx.translate(outSize / 2 + cropOffsetX * ratio, outSize / 2 + cropOffsetY * ratio);
+      ctx.rotate((cropRot * Math.PI) / 180);
+      const base = Math.max(outSize / cropImg.width, outSize / cropImg.height);
+      const w = cropImg.width * base * cropScale;
+      const h = cropImg.height * base * cropScale;
+      ctx.drawImage(cropImg, -w / 2, -h / 2, w, h);
+      ctx.restore();
+      draftPhoto = out.toDataURL("image/jpeg", 0.65);
+      document.getElementById("stuPhotoPreview").src = draftPhoto;
       cropModal.classList.remove("open");
-      showToast("Photo ajustée et compressée.");
+      showToast("Photo recadrée et compressée.");
     });
 
-    document.getElementById("changePinForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const val = document.getElementById("newPinInput").value.trim();
-      if (!val) return;
-      state.pin = val;
-      saveState();
-      document.getElementById("newPinInput").value = "";
-      showToast("Nouveau code d'accès enregistré.");
-    });
+    // Évolution & % sur le cours
+    function renderEvolutionTab() {
+      const nb = getCurrentNotebook();
+      const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+      const ranked = enrolled
+        .map((st) => ({ st, pct: computeStudentCoursePct(nb, st.id) }))
+        .sort((a, b) => b.pct - a.pct);
 
-    document.getElementById("btnResetDefaultPin").addEventListener("click", () => {
-      state.pin = DEFAULT_PIN;
-      saveState();
-      showToast(`Code réinitialisé sur ${DEFAULT_PIN}`);
-    });
+      const listEl = document.getElementById("evolutionListContainer");
+      if (ranked.length === 0) {
+        listEl.innerHTML = `<p class="student-meta">Aucun étudiant dans le cahier de ce cours.</p>`;
+      } else {
+        listEl.innerHTML = ranked.map(({ st, pct }) => `
+          <div class="student-row">
+            <div class="student-info">
+              <img class="avatar" src="${st.photo || makeDefaultAvatar()}" alt="${escapeHtml(st.name)}" />
+              <div>
+                <div class="student-name">${escapeHtml(st.name)}</div>
+                <div class="student-meta">${escapeHtml(st.matricule)}</div>
+                <span class="badge ${pct >= 75 ? "badge-pct" : "badge-warn"}">Assiduité : ${pct}% ${pct >= 80 ? "• Régulier" : ""}</span>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
 
-    function exportAttendanceCsv() {
-      const rows = [["Date", "Cours", "Compte/Matricule", "Nom complet", "Avant le cours", "Après le cours", "Retardataire", "Taux global (%)"]];
-      const dates = Object.keys(state.attendance).sort();
-
-      dates.forEach((dStr) => {
-        state.students.forEach((st) => {
-          const rec = state.attendance[dStr]?.[st.id];
-          if (!rec) return;
-          rows.push([
-            dStr,
-            st.course,
-            st.account,
-            st.name,
-            rec.before || "",
-            rec.after || "",
-            isLateOnDate(dStr, st.id) ? "Oui" : "Non",
-            computeStudentAttendancePct(st.id) + "%"
-          ]);
+      const calEl = document.getElementById("courseCalendarContainer");
+      calEl.innerHTML = nb.dates.map((dVal, idx) => {
+        let total = 0, ok = 0;
+        enrolled.forEach((st) => {
+          const cell = nb.marks[idx]?.[st.id];
+          if (!cell) return;
+          if (cell.before) { total++; if (cell.before === "present") ok++; }
+          if (cell.after) { total++; if (cell.after === "present") ok++; }
         });
-      });
-
-      const csvContent = "\uFEFF" + rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `EduAppel_Registre_${todayISO()}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast("Export CSV / Excel généré.");
+        const dayPct = total ? Math.round((ok / total) * 100) : 0;
+        return `
+          <div class="cal-day-card" onclick="openTab('tab-cahier')">
+            <div class="cal-date">${escapeHtml(dVal)}</div>
+            <div class="cal-pct">${dayPct}%</div>
+            <div class="cal-sub">Colonne #${idx + 1}</div>
+          </div>
+        `;
+      }).join("");
     }
 
-    document.getElementById("btnExportCsv").addEventListener("click", exportAttendanceCsv);
-    document.getElementById("btnExportCsv2").addEventListener("click", exportAttendanceCsv);
+    // Mot de passe professeur, JSON, CSV et Cloud
+    document.getElementById("changeTeacherPwdForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nextPwd = document.getElementById("newTeacherPwdInput").value.trim();
+      if (!nextPwd) return;
+      const c = getCurrentCourse();
+      c.password = nextPwd;
+      saveState();
+      document.getElementById("newTeacherPwdInput").value = "";
+      showToast("Mot de passe mis à jour.");
+    });
 
-    document.getElementById("btnDownloadJson").addEventListener("click", () => {
-      const backupObj = {
-        app: "EduAppel",
-        author: "CHEKINAT MOFONGA - Équipe CBK",
-        exportedAt: new Date().toISOString(),
-        data: {
-          pin: state.pin,
-          students: state.students,
-          attendance: state.attendance
-        }
-      };
-      const blob = new Blob([JSON.stringify(backupObj)], { type: "application/json" });
+    function exportCourseCsv() {
+      const course = getCurrentCourse();
+      const nb = getCurrentNotebook();
+      const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+      const header = ["Cours", "Professeur", "N° Matricule", "Nom"];
+      nb.dates.forEach((d) => {
+        header.push(`${d} (Avant)`, `${d} (Après)`);
+      });
+      header.push("% Présence");
+
+      const rows = [header];
+      enrolled.forEach((st) => {
+        const row = [course.course, course.teacher, st.matricule, st.name];
+        nb.dates.forEach((_, idx) => {
+          const cell = nb.marks[idx]?.[st.id] || {};
+          row.push(cell.before || "", cell.after || "");
+        });
+        row.push(computeStudentCoursePct(nb, st.id) + "%");
+        rows.push(row);
+      });
+
+      const csv = "\uFEFF" + rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `EduAppel_Sauvegarde_${todayISO()}.json`;
+      a.download = `EduAppel_${course.course.replace(/\s+/g, "_")}_${todayISO()}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast("Sauvegarde JSON téléchargée.");
+      showToast("Export CSV téléchargé.");
+    }
+
+    document.getElementById("btnExportCourseCsv").addEventListener("click", exportCourseCsv);
+    document.getElementById("btnExportCsvSettings").addEventListener("click", exportCourseCsv);
+
+    document.getElementById("btnExportJson").addEventListener("click", () => {
+      const payload = {
+        app: "EduAppel",
+        team: "Équipe CBK",
+        exportedAt: new Date().toISOString(),
+        courses: state.courses,
+        students: state.students,
+        notebooks: state.notebooks
+      };
+      const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `EduAppel_Complet_${todayISO()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Sauvegarde JSON exportée.");
     });
 
     document.getElementById("importJsonInput").addEventListener("change", (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
+      const f = e.target.files?.[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = (ev) => {
         try {
-          const parsed = JSON.parse(ev.target.result);
-          const payload = parsed.data || parsed;
-          if (!Array.isArray(payload.students) || typeof payload.attendance !== "object") {
-            throw new Error("Format invalide");
-          }
-          state.students = payload.students;
-          state.attendance = payload.attendance;
-          if (payload.pin) state.pin = payload.pin;
+          const d = JSON.parse(ev.target.result);
+          if (!Array.isArray(d.students) || typeof d.notebooks !== "object") throw new Error("Invalide");
+          state.students = d.students;
+          state.notebooks = d.notebooks;
+          if (Array.isArray(d.courses) && d.courses.length) state.courses = d.courses;
           saveState();
-          renderCourseFilterOptions();
-          refreshAttendanceAndStats();
-          showToast("Sauvegarde restaurée avec succès !");
-        } catch (err) {
-          showToast("Fichier de sauvegarde invalide.");
+          renderSessionView();
+          showToast("Sauvegarde JSON restaurée.");
+        } catch {
+          showToast("Fichier JSON invalide.");
         }
       };
-      reader.readAsText(file);
+      r.readAsText(f);
       e.target.value = "";
     });
 
-    document.getElementById("btnSaveCloudConfig").addEventListener("click", () => {
+    document.getElementById("btnSaveCloud").addEventListener("click", () => {
       state.cloud.url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
       state.cloud.key = document.getElementById("sbKeyInput").value.trim();
       saveState();
       showToast("Configuration Cloud enregistrée.");
     });
 
-    document.getElementById("btnPushCloud").addEventListener("click", async () => {
-      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
-      const key = document.getElementById("sbKeyInput").value.trim();
+    async function pushCloudNow() {
+      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "") || state.cloud.url;
+      const key = document.getElementById("sbKeyInput").value.trim() || state.cloud.key;
       if (!url || !key) {
-        showToast("Renseignez l'URL et la clé API Supabase.");
+        showToast("Renseignez URL et clé API Supabase.");
         return;
       }
       state.cloud.url = url;
       state.cloud.key = key;
       saveState();
-
       try {
         const res = await fetch(`${url}/rest/v1/eduappel_sync`, {
           method: "POST",
@@ -1857,58 +2090,103 @@
           body: JSON.stringify({
             id: state.cloud.recordId,
             payload: {
-              pin: state.pin,
+              courses: state.courses,
               students: state.students,
-              attendance: state.attendance,
+              notebooks: state.notebooks,
               updatedAt: new Date().toISOString()
             }
           })
         });
-        if (!res.ok) throw new Error("Erreur HTTP");
-        showToast("Données synchronisées sur Supabase !");
-      } catch (e) {
-        showToast("Échec de l'envoi Cloud (vérifiez la table eduappel_sync).");
+        if (!res.ok) throw new Error("Erreur");
+        showToast("Synchronisation Cloud réussie.");
+      } catch {
+        showToast("Échec de synchro Cloud.");
       }
+    }
+
+    document.getElementById("btnPushCloud").addEventListener("click", pushCloudNow);
+    document.getElementById("btnAdminSyncNow").addEventListener("click", () => {
+      saveState();
+      renderAdminTab();
+      showToast("Données synchronisées en temps réel.");
     });
 
     document.getElementById("btnPullCloud").addEventListener("click", async () => {
-      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "");
-      const key = document.getElementById("sbKeyInput").value.trim();
+      const url = document.getElementById("sbUrlInput").value.trim().replace(/\/+$/, "") || state.cloud.url;
+      const key = document.getElementById("sbKeyInput").value.trim() || state.cloud.key;
       if (!url || !key) {
-        showToast("Renseignez l'URL et la clé API Supabase.");
+        showToast("Renseignez URL et clé API Supabase.");
         return;
       }
-      state.cloud.url = url;
-      state.cloud.key = key;
-      saveState();
-
       try {
         const res = await fetch(`${url}/rest/v1/eduappel_sync?id=eq.${encodeURIComponent(state.cloud.recordId)}&select=payload`, {
-          headers: {
-            "apikey": key,
-            "Authorization": `Bearer ${key}`
-          }
+          headers: { "apikey": key, "Authorization": `Bearer ${key}` }
         });
-        if (!res.ok) throw new Error("Erreur HTTP");
+        if (!res.ok) throw new Error("Erreur");
         const rows = await res.json();
-        if (rows && rows[0] && rows[0].payload) {
+        if (rows?.[0]?.payload) {
           const p = rows[0].payload;
-          state.students = Array.isArray(p.students) ? p.students : state.students;
-          state.attendance = p.attendance || state.attendance;
-          if (p.pin) state.pin = p.pin;
+          if (Array.isArray(p.courses)) state.courses = p.courses;
+          if (Array.isArray(p.students)) state.students = p.students;
+          if (p.notebooks) state.notebooks = p.notebooks;
           saveState();
-          renderCourseFilterOptions();
-          refreshAttendanceAndStats();
-          showToast("Données récupérées depuis le Cloud !");
+          renderSessionView();
+          showToast("Données récupérées depuis le Cloud.");
         } else {
-          showToast("Aucune donnée trouvée sur le Cloud.");
+          showToast("Aucune donnée distante.");
         }
-      } catch (e) {
-        showToast("Impossible de récupérer les données Cloud.");
+      } catch {
+        showToast("Erreur de récupération Cloud.");
       }
     });
 
-    renderAuthView();
+    // Vue Admin Général : tous les cours, points de chaque étudiant par cours et mots de passe
+    function renderAdminTab() {
+      const container = document.getElementById("adminGlobalContainer");
+      container.innerHTML = state.courses.map((c) => {
+        const nb = state.notebooks[c.id] || createEmptyCourseNotebook(todayISO());
+        const enrolled = nb.enrolledIds.map((id) => state.students.find((s) => s.id === id)).filter(Boolean);
+
+        const rowsHtml = enrolled.length === 0
+          ? `<p class="student-meta">Aucun étudiant inscrit dans ce cahier.</p>`
+          : enrolled.map((st) => {
+              const pct = computeStudentCoursePct(nb, st.id);
+              let presentPts = 0, latePts = 0;
+              nb.dates.forEach((_, idx) => {
+                const cell = nb.marks[idx]?.[st.id];
+                if (cell?.before === "present") presentPts++;
+                if (cell?.after === "present") presentPts++;
+                if (isCellLate(cell)) latePts++;
+              });
+              return `
+                <div class="student-row" style="margin-bottom:6px;">
+                  <div>
+                    <div class="student-name">${escapeHtml(st.name)} <span class="student-meta">(${escapeHtml(st.matricule)})</span></div>
+                    <div class="student-meta">Points présence : <strong>${presentPts}</strong> • Retards : <strong>${latePts}</strong></div>
+                  </div>
+                  <span class="badge ${pct >= 75 ? "badge-pct" : "badge-warn"}">${pct}%</span>
+                </div>
+              `;
+            }).join("");
+
+        return `
+          <div class="card" style="background:var(--bg-card-2); margin-bottom:12px;">
+            <div class="card-title">
+              <div>
+                <div>${escapeHtml(c.course)}</div>
+                <div class="student-meta">Prof : <strong>${escapeHtml(c.teacher)}</strong> • Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir cahier</button>
+            </div>
+            ${rowsHtml}
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Démarrage
+    populateTeacherLoginSelect();
+    renderSessionView();
   </script>
 </body>
 </html>
