@@ -1,0 +1,10 @@
+{
+  "name": "EduAppel — Équipe CBK",
+  "short_name": "EduAppel",
+  "description": "Registre d'appel CBK — Développeur : CHEKINAT MOFONGA.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#060f1d",
+  "theme_color": "#071324",
+  "orientation": "portrait-primary"
+}
