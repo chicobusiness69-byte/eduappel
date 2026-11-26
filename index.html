@@ -47,6 +47,175 @@
       padding-bottom: 48px;
     }
 
+    /* ================= SPLASH ZOOM D'ENTRÉE ================= */
+    #cbkSplashOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: radial-gradient(circle at center, #0f2c52 0%, #060f1d 75%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #cbkSplashOverlay.done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cbk-splash-logo {
+      width: 104px;
+      height: 104px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(0, 210, 184, 0.24), rgba(14, 165, 233, 0.28));
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.25);
+      opacity: 0;
+      animation: cbkZoomEntry 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards, cbkPulseRing 2s infinite 1.1s;
+    }
+
+    .cbk-splash-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: cbkTextAppear 0.65s ease 0.4s forwards;
+    }
+
+    .cbk-splash-sub {
+      font-size: 0.85rem;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: cbkTextAppear 0.65s ease 0.6s forwards;
+    }
+
+    @keyframes cbkZoomEntry {
+      0% { transform: scale(0.25) rotate(-6deg); opacity: 0; }
+      70% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    @keyframes cbkPulseRing {
+      0%, 100% { box-shadow: 0 0 24px rgba(0, 210, 184, 0.4); }
+      50% { box-shadow: 0 0 46px rgba(14, 165, 233, 0.55); }
+    }
+
+    @keyframes cbkTextAppear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================= BANDE DE DATES & CLASSEMENT CAHIER ================= */
+    .cbk-date-band {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 6px 2px;
+    }
+
+    .cbk-date-pill {
+      min-width: 56px;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      text-align: center;
+      font-size: 0.75rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .cbk-date-pill.P { border-color: var(--success); background: rgba(16, 185, 129, 0.18); color: #6ee7b7; }
+    .cbk-date-pill.A { border-color: var(--danger); background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .cbk-date-pill.R { border-color: var(--warning); background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+
+    .cbk-rank-chip {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.78rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .cbk-rank-chip.top1 {
+      background: var(--rdc-yellow);
+      color: #060f1d;
+      border-color: var(--rdc-yellow);
+    }
+
+    /* ================= CHAT PLEIN ÉCRAN & VIDÉO 9:16 TIKTOK ================= */
+    #cbkChat916Modal {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      background: #050c17;
+      display: none;
+      flex-direction: column;
+    }
+
+    #cbkChat916Modal.open {
+      display: flex;
+    }
+
+    .cbk-chat916-top {
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .cbk-chat916-feed {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cbk-video-916 {
+      width: 100%;
+      max-width: 250px;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(0, 210, 184, 0.35);
+      margin-top: 6px;
+    }
+
+    .cbk-video-916 video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cbk-chat916-bar {
+      padding: 10px 12px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
     .flag-bar {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -208,14 +377,6 @@
       font-weight: 800;
       padding: 1px 6px;
       border-radius: 999px;
-    }
-
-    .verified-badge-svg {
-      display: inline-flex;
-      align-items: center;
-      vertical-align: -2px;
-      margin-left: 4px;
-      flex-shrink: 0;
     }
 
     .card {
@@ -771,329 +932,45 @@
     .reply-quote {
       border-left: 3px solid var(--accent);
       background: rgba(0, 210, 184, 0.08);
-      padding: 5px 8px;
-      border-radius: 7px;
+      padding: 4px 8px;
+      border-radius: 6px;
       font-size: 0.75rem;
       color: #cbd5e1;
-      margin-bottom: 6px;
-    }
-
-    /* ================= MESSAGERIE MODERNE & THÈME DE DISCUSSION ================= */
-    .pinned-banner {
-      background: rgba(245, 158, 11, 0.14);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #fde68a;
-      border-radius: 10px;
-      padding: 7px 11px;
-      font-size: 0.78rem;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      margin-bottom: 5px;
     }
 
     .chat-box {
-      --chat-bg: #07141d;
-      --chat-wallpaper: radial-gradient(circle at 25% 20%, rgba(0, 168, 132, 0.24), transparent 55%), radial-gradient(circle at 80% 75%, rgba(24, 119, 242, 0.22), transparent 55%);
-      --bubble-in: #1b2b34;
-      --bubble-out: #005c4b;
-      --lum: 1;
-      background-color: var(--chat-bg);
-      background-image: var(--chat-wallpaper);
-      background-size: cover;
-      background-position: center;
-      filter: brightness(var(--lum));
+      background: #071324;
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
-      max-height: 360px;
-      min-height: 190px;
+      max-height: 340px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 8px;
       margin-bottom: 10px;
     }
 
     .msg-bubble {
-      max-width: 84%;
+      max-width: 82%;
       padding: 9px 12px;
-      border-radius: 12px;
+      border-radius: 13px;
       font-size: 0.86rem;
-      line-height: 1.4;
-      color: #e9edef;
     }
 
     .msg-mine {
       align-self: flex-end;
-      background: var(--bubble-out);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-top-right-radius: 4px;
+      background: rgba(0, 210, 184, 0.22);
+      border: 1px solid rgba(0, 210, 184, 0.45);
+      color: #f8fafc;
     }
 
     .msg-theirs {
       align-self: flex-start;
-      background: var(--bubble-in);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-top-left-radius: 4px;
-    }
-
-    .msg-actions-bar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 5px;
-      font-size: 0.72rem;
-    }
-
-    .msg-action-link {
-      background: rgba(0, 0, 0, 0.25);
-      color: #e2e8f0;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 6px;
-      padding: 2px 6px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-    .msg-action-link:hover {
-      border-color: var(--accent);
-    }
-
-    .reaction-pills {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-      margin-top: 5px;
-    }
-
-    .reaction-pill {
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-      padding: 1px 7px;
-      font-size: 0.73rem;
-      cursor: pointer;
-    }
-
-    .composer-box {
       background: var(--bg-card-2);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px;
-    }
-
-    .composer-textarea {
-      width: 100%;
-      min-height: 44px;
-      max-height: 220px;
-      resize: none;
-      overflow-y: auto;
-      background: var(--bg-input);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      color: var(--text-main);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      transition: min-height 0.16s ease, border-color 0.16s ease;
-    }
-
-    .composer-textarea.expanded {
-      min-height: 105px;
-      border-color: var(--accent);
-    }
-
-    .composer-textarea.fullscreen-edit {
-      min-height: 175px;
-      border-color: var(--accent);
-    }
-
-    .composer-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .attachment-preview-chip {
-      background: rgba(0, 210, 184, 0.12);
-      border: 1px solid rgba(0, 210, 184, 0.35);
-      color: #d1fae5;
-      border-radius: 10px;
-      padding: 6px 10px;
-      font-size: 0.78rem;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .day-chip {
-      align-self: center;
-      background: #202c33;
-      color: #8696a0;
-      font-size: 11.5px;
-      padding: 4px 11px;
-      border-radius: 8px;
-      margin: 4px 0;
-    }
-
-    .msg-meta {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 4px;
-      font-size: 10.5px;
-      color: rgba(233, 237, 239, 0.72);
-      margin-top: 3px;
-    }
-
-    #theme-preview-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 600;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: var(--preview-bg, #070d14);
-      filter: brightness(var(--preview-lum, 1));
-      color: #e9edef;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .preview-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: rgba(11, 20, 26, 0.72);
-      backdrop-filter: blur(8px);
-    }
-
-    .preview-cancel {
-      font-size: 15px;
-      color: #e9edef;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px 4px;
-    }
-
-    .preview-heading {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .preview-set {
-      background: #ffffff;
-      color: #0b141a;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 7px 15px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .preview-stage {
-      flex: 1;
-      padding: 18px 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 10px;
-      background-image: var(--preview-wallpaper, none);
-      background-size: cover;
-      background-position: center;
-    }
-
-    .preview-bottom-controls {
-      padding: 12px 16px 22px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
-    }
-
-    .color-cycle-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid #ffffff;
-      background: var(--preview-swatch, #202c33);
-      cursor: pointer;
-    }
-
-    .dots-pill {
-      background: rgba(32, 44, 51, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 9px 14px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .dot-btn {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.35);
-      border: none;
-      padding: 0;
-      cursor: pointer;
-    }
-
-    .dot-btn.active {
-      background: #ffffff;
-      transform: scale(1.2);
-    }
-
-    .lum-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .lum-slider-wrap {
-      width: 34px;
-      height: 118px;
-      background: rgba(32, 44, 51, 0.85);
-      border-radius: 999px;
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    input.lum-vertical {
-      writing-mode: vertical-lr;
-      direction: rtl;
-      width: 24px;
-      height: 96px;
-      accent-color: #ffffff;
-      cursor: pointer;
-    }
-
-    .sun-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(32, 44, 51, 0.9);
-      color: #ffffff;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      cursor: pointer;
+      color: #e2e8f0;
     }
 
     .calendar-grid {
@@ -1227,7 +1104,7 @@
     }
 
     @media print {
-      header, .nav-tabs, .no-print, .drawer-panel, .modal-backdrop, .toast, .side-menu, .drawer-overlay, #theme-preview-screen {
+      header, .nav-tabs, .no-print, .drawer-panel, .modal-backdrop, .toast, .side-menu, .drawer-overlay, #cbkSplashOverlay, #cbkChat916Modal {
         display: none !important;
       }
       body {
@@ -1248,6 +1125,22 @@
   </style>
 </head>
 <body>
+  <!-- ÉCRAN D'OUVERTURE / ANIMATION ZOOM AVANT LA CONNEXION -->
+  <div id="cbkSplashOverlay" onclick="dismissSplashScreen()" title="Toucher pour continuer">
+    <div class="cbk-splash-logo">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="8" width="40" height="48" rx="8" fill="#071529" stroke="#ffffff" stroke-width="3.5"/>
+        <line x1="15" y1="21" x2="35" y2="21" stroke="#00d2b8" stroke-width="3" stroke-linecap="round"/>
+        <line x1="15" y1="31" x2="33" y2="31" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+        <line x1="15" y1="41" x2="29" y2="41" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="45" cy="43" r="13" fill="#00d2b8" stroke="#060f1d" stroke-width="3"/>
+        <path d="M39.5 43.5L43.5 47.5L51 39.5" stroke="#04101f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="cbk-splash-title">EduAppel — CBK</div>
+    <div class="cbk-splash-sub">Multi-Écoles • Cahier d'Appel • Messagerie 9:16</div>
+  </div>
+
   <div class="flag-bar"><span></span><span></span><span></span></div>
 
   <header>
@@ -1264,13 +1157,14 @@
           </svg>
         </div>
         <div>
-          <div class="brand-title">EduAppel</div>
+          <div class="brand-title">EduAppel <span class="badge badge-pct" id="headerSchoolIdBadge" style="margin-top:0;">ETB-001</span></div>
           <div class="brand-sub" id="syncStatusLabel">Équipe CBK • Temps Réel Firebase</div>
         </div>
       </div>
 
       <div class="header-actions">
         <button class="btn btn-primary btn-sm hidden" id="btnHeaderSyncNow" onclick="manualSyncNow()">🔄 Synchroniser</button>
+        <button class="btn btn-secondary btn-sm hidden" id="btnOpenChat916Header" onclick="openChat916Modal()">📱 Chat 9:16</button>
         <button class="btn btn-primary btn-sm hidden" id="btnInstallPwaHeader">📲 Installer l'app</button>
         <button class="btn btn-secondary btn-sm hidden" id="btnHeaderNotif" onclick="openTabFromMenu('tab-notifications')">
           🔔 <span class="notif-pill" id="headerNotifBadge">0</span>
@@ -1303,7 +1197,7 @@
       <div id="coursesMenuGrid" class="courses-menu-grid"></div>
     </div>
 
-    <!-- ================= VUE ACCUEIL / CONNEXION PROFESSEUR ================= -->
+    <!-- ================= VUE ACCUEIL / CONNEXION PROFESSEUR & VISITEUR ================= -->
     <div id="publicView">
       <div class="hero-grid" id="section-login">
         <div class="card">
@@ -1311,7 +1205,7 @@
           <div class="hero-badge">🎓 Registre Académique • Équipe CBK</div>
           <h1 class="hero-title">EduAppel — Cahier d'Appel par Cours</h1>
           <p class="hero-desc">
-            Chaque professeur accède uniquement à son propre cours, gère son profil, ses présences, ses justifications et ses messages. L'Admin Général supervise l'ensemble en temps réel.
+            Chaque professeur accède uniquement à son propre cours, gère son profil, ses présences, ses justifications et ses messages. L'Admin Général supervise l'ensemble en temps réel, et tout compte créé peut consulter le Fil d'actualité.
           </p>
 
           <div class="credits-box">
@@ -1332,6 +1226,10 @@
           <div class="card-title"><span>🔐 Connexion Professeur</span></div>
           <form id="teacherLoginForm">
             <div class="form-group">
+              <label for="schoolSelectInput">Numéro d'établissement (`schoolId`)</label>
+              <select id="schoolSelectInput"></select>
+            </div>
+            <div class="form-group">
               <label for="teacherSelectInput">Nom du professeur / Cours</label>
               <select id="teacherSelectInput" required></select>
             </div>
@@ -1349,6 +1247,24 @@
               🔓 Ouvrir mon cahier d'appel
             </button>
           </form>
+
+          <!-- ACCÈS VISITEUR ILLIMITÉ (FIL D'ACTUALITÉ UNIQUEMENT) -->
+          <div style="border-top:1px solid var(--border); margin-top:16px; padding-top:14px;">
+            <div class="card-title" style="margin-bottom:8px;"><span>👀 Compte Visiteur (Fil d'actualité uniquement)</span></div>
+            <div class="two-col">
+              <div class="form-group" style="margin-bottom:8px;">
+                <label for="visitorNameInput">Votre nom / identifiant</label>
+                <input type="text" id="visitorNameInput" placeholder="Ex: Visiteur Kinshasa" />
+              </div>
+              <div class="form-group" style="margin-bottom:8px;">
+                <label for="visitorContactInput">Téléphone / Contact</label>
+                <input type="text" id="visitorContactInput" placeholder="Ex: +243 81 000 0000" />
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary" style="width:100%;" onclick="loginAsVisitor()">
+              📰 Créer / Ouvrir mon compte Visiteur (Fil d'actualité)
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1410,7 +1326,7 @@
       </div>
     </div>
 
-    <!-- ================= VUE CONNECTÉE (PROFESSEUR OU ADMIN GÉNÉRAL) ================= -->
+    <!-- ================= VUE CONNECTÉE (PROFESSEUR, VISITEUR OU ADMIN GÉNÉRAL) ================= -->
     <div id="appView" class="hidden">
       <div class="nav-tabs no-print">
         <button class="nav-tab active" data-tab="tab-cahier">📒 Cahier</button>
@@ -1424,7 +1340,7 @@
         <button class="nav-tab hidden" id="navTabAdmin" data-tab="tab-admin">🛡️ Admin Général</button>
       </div>
 
-      <div class="stats-grid">
+      <div class="stats-grid" id="courseStatsGrid">
         <div class="stat-box">
           <div class="stat-val" id="statEnrolledCount">0</div>
           <div class="stat-lbl">Étudiants dans le cahier</div>
@@ -1479,6 +1395,18 @@
               <tbody id="appelSheetBody"></tbody>
             </table>
           </div>
+        </div>
+
+        <!-- BANDE DE DATES, CALCULS AUTO (JOURS / PRÉSENCES / ABSENCES) & CLASSEMENT ASSIDUITÉ -->
+        <div class="card">
+          <div class="card-title">
+            <span>🏅 Bande de Dates, Calculs Automatiques & Classement par Assiduité</span>
+            <span class="badge badge-pct">Plus assidus en haut</span>
+          </div>
+          <p class="student-meta" style="margin-bottom:10px;">
+            Cliquez sur une date pour pointer <strong>P</strong> (Présent), <strong>A</strong> (Absent) ou <strong>R</strong> (Retard). Les totaux et le classement se mettent à jour automatiquement.
+          </p>
+          <div id="cbkAssiduityRankingBox"></div>
         </div>
 
         <div class="card">
@@ -1564,13 +1492,7 @@
 
       <div id="tab-messages" class="tab-panel hidden">
         <div class="card">
-          <div class="card-title">
-            <span>✉️ Messagerie Directe (Professeurs & Admin Général)</span>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-              <input type="text" id="chatSearchInput" placeholder="🔍 Rechercher message..." style="max-width:180px; padding:6px 10px; font-size:0.78rem;" />
-              <button type="button" class="btn btn-secondary btn-sm" id="btnOpenChatTheme">🎨 Thème de discussion</button>
-            </div>
-          </div>
+          <div class="card-title"><span>✉️ Messagerie Directe (Professeurs & Admin Général)</span></div>
           <div class="two-col" style="align-items:start;">
             <div>
               <div class="menu-section-title" style="margin-top:0;">Contacts disponibles</div>
@@ -1580,65 +1502,13 @@
               <div class="card-title" style="margin-bottom:8px;">
                 <span id="activeChatPartnerTitle">Sélectionnez un contact</span>
               </div>
-
-              <div id="pinnedMessageBox" class="pinned-banner hidden">
-                <span id="pinnedMessageText"></span>
-                <button type="button" class="btn btn-secondary btn-sm" id="btnUnpinMessage">✕</button>
-              </div>
-
               <div class="chat-box" id="chatMessagesBox">
                 <p class="student-meta">Choisissez un professeur ou l'Admin Général à gauche pour démarrer une discussion.</p>
               </div>
-
-              <div class="composer-box">
-                <div id="replyPreviewBanner" class="reply-quote hidden" style="display:flex; justify-content:space-between; align-items:center;">
-                  <span id="replyPreviewText"></span>
-                  <button type="button" class="msg-action-link" onclick="clearMessageReply()">✕</button>
-                </div>
-
-                <div id="editMessageBanner" class="pinned-banner hidden">
-                  <span>✏️ Modification du message en cours...</span>
-                  <button type="button" class="msg-action-link" onclick="cancelMessageEdit()">Annuler</button>
-                </div>
-
-                <div id="attachmentPreviewBanner" class="attachment-preview-chip hidden">
-                  <span id="attachmentPreviewLabel"></span>
-                  <button type="button" class="msg-action-link" onclick="clearPendingAttachment()">Retirer ✕</button>
-                </div>
-
-                <div id="voiceDraftBanner" class="attachment-preview-chip hidden">
-                  <span id="voiceDraftLabel"></span>
-                  <div style="display:flex; gap:6px;">
-                    <button type="button" class="btn btn-primary btn-sm" id="btnSendVoiceDraft">Envoyer vocal</button>
-                    <button type="button" class="msg-action-link" onclick="clearVoiceDraft()">✕</button>
-                  </div>
-                </div>
-
-                <form id="sendDirectMessageForm">
-                  <textarea
-                    id="directMessageInput"
-                    class="composer-textarea"
-                    placeholder="Cliquez ici pour écrire un message..."
-                    rows="1"
-                  ></textarea>
-
-                  <div class="composer-toolbar">
-                    <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
-                      <button type="button" class="btn btn-secondary btn-sm" id="btnExpandComposer" title="Agrandir ou réduire la zone d'écriture">⤢ Agrandir</button>
-                      <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;" title="Envoyer une photo">
-                        🖼️ Photo
-                        <input type="file" id="chatPhotoInput" accept="image/*" class="hidden" />
-                      </label>
-                      <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;" title="Envoyer un document">
-                        📎 Document
-                        <input type="file" id="chatDocInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.ppt,.pptx,.zip" class="hidden" />
-                      </label>
-                      <button type="button" class="btn btn-warning btn-sm" id="btnRecordVoice" title="Enregistrer un vocal compressé">🎙️ Vocal</button>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm" id="btnSubmitDirectMsg">➤ Envoyer</button>
-                  </div>
-                </form>
-              </div>
+              <form id="sendDirectMessageForm" style="display:flex; gap:8px;">
+                <input type="text" id="directMessageInput" placeholder="Écrire un message..." required />
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+              </form>
             </div>
           </div>
         </div>
@@ -1724,7 +1594,7 @@
           </form>
         </div>
 
-        <div class="card">
+        <div class="card" id="changeTeacherPwdCard">
           <div class="card-title"><span>🔑 Modifier Mon Mot de Passe</span></div>
           <form id="changeTeacherPwdForm" class="two-col" style="align-items:end;">
             <div class="form-group" style="margin-bottom:0;">
@@ -1735,7 +1605,7 @@
           </form>
         </div>
 
-        <div class="card">
+        <div class="card" id="backupExportCard">
           <div class="card-title"><span>💾 Sauvegarde JSON, Export CSV & Application</span></div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <button type="button" class="btn btn-primary" onclick="manualSyncNow()">🔄 Synchroniser maintenant</button>
@@ -1770,7 +1640,7 @@
           <div class="nav-tabs" style="margin-bottom:14px;">
             <button type="button" class="nav-tab active" data-admin-sub="admin-sub-annonces">📢 Publier Annonce</button>
             <button type="button" class="nav-tab" data-admin-sub="admin-sub-profs">👨‍🏫 Professeurs & Cours</button>
-            <button type="button" class="nav-tab" data-admin-sub="admin-sub-promos">🎓 Promotions</button>
+            <button type="button" class="nav-tab" data-admin-sub="admin-sub-promos">🎓 Promotions & Écoles</button>
             <button type="button" class="nav-tab" data-admin-sub="admin-sub-branding">🖼️ Logo, Photos & APK</button>
             <button type="button" class="nav-tab" data-admin-sub="admin-sub-suivi">📊 Suivi Global</button>
           </div>
@@ -1821,6 +1691,33 @@
           </div>
 
           <div id="admin-sub-promos" class="admin-sub-panel hidden">
+            <!-- GESTION DES ÉTABLISSEMENTS PAR NUMÉRO D'ÉTABLISSEMENT (`schoolId`) -->
+            <div class="card" style="background:var(--bg-card-2);">
+              <div class="card-title"><span>🏫 Établissements (Numéro d'établissement `schoolId`) & Délégation Admin d'école</span></div>
+              <div class="two-col">
+                <div class="form-group">
+                  <label for="newSchoolIdInput">Numéro d'établissement (`schoolId`)</label>
+                  <input type="text" id="newSchoolIdInput" placeholder="Ex: ETB-002" />
+                </div>
+                <div class="form-group">
+                  <label for="newSchoolNameInput">Nom de l'école / établissement</label>
+                  <input type="text" id="newSchoolNameInput" placeholder="Ex: Institut de Kinshasa" />
+                </div>
+              </div>
+              <div class="two-col">
+                <div class="form-group">
+                  <label for="newSchoolDelegateInput">Admin d'école délégué</label>
+                  <input type="text" id="newSchoolDelegateInput" placeholder="Ex: Directeur / Responsable local" />
+                </div>
+                <div class="form-group">
+                  <label for="newSchoolPlanInput">Licence / Statut (USD $ / FC)</label>
+                  <input type="text" id="newSchoolPlanInput" placeholder="Ex: Actif • 25$ / 70 000 FC" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="addOrUpdateSchool()">💾 Enregistrer l'établissement</button>
+              <div id="adminSchoolsListBox" style="margin-top:12px;"></div>
+            </div>
+
             <form id="adminAddPromotionForm" class="card" style="background:var(--bg-card-2);">
               <div class="card-title"><span>🎓 Ajouter une Nouvelle Promotion</span></div>
               <div class="two-col" style="align-items:end;">
@@ -1863,44 +1760,27 @@
     </div>
   </div>
 
-  <!-- ÉCRAN APERÇU THÈME DE DISCUSSION -->
-  <section id="theme-preview-screen" class="hidden" aria-label="Aperçu du thème">
-    <div class="preview-top">
-      <button id="btn-preview-cancel" class="preview-cancel" type="button">Annuler</button>
-      <div class="preview-heading">Aperçu</div>
-      <button id="btn-preview-apply" class="preview-set" type="button">Définir</button>
-    </div>
-
-    <div id="preview-stage" class="preview-stage">
-      <div class="day-chip">Aujourd'hui</div>
-
-      <div id="preview-bubble-in" class="msg-bubble msg-theirs">
-        <div>Balayez vers la gauche ou la droite pour voir d'autres thèmes 🎨✨</div>
-        <div class="msg-meta"><span>00:18</span></div>
-      </div>
-
-      <div id="preview-bubble-out" class="msg-bubble msg-mine">
+  <!-- MESSAGERIE PLEIN ÉCRAN STYLE WHATSAPP + VIDÉO 9:16 TIKTOK -->
+  <div id="cbkChat916Modal">
+    <div class="cbk-chat916-top">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeChat916Modal()">← Retour</button>
         <div>
-          Seule la discussion "<span id="preview-contact-name">Contact</span>" changera. Seulement vous pouvez voir vos thèmes de discussion.
-        </div>
-        <div class="msg-meta">
-          <span>00:18</span>
-          <span style="color:#1877f2;">✓✓</span>
+          <div style="font-weight:800; font-size:0.95rem;">📱 Canal 9:16 WhatsApp / TikTok</div>
+          <div class="student-meta" id="cbkChat916Subtitle">Synchronisé en direct</div>
         </div>
       </div>
+      <label class="btn btn-primary btn-sm" style="cursor:pointer; margin:0;">
+        🎬 Vidéo 9:16 / Photo
+        <input type="file" id="cbkChat916MediaInput" accept="video/*,image/*" class="hidden" onchange="sendChat916Media(event)" />
+      </label>
     </div>
-
-    <div class="preview-bottom-controls">
-      <button id="btn-cycle-bubble-color" class="color-cycle-btn" type="button" title="Changer la couleur des bulles"></button>
-      <div id="preview-dots" class="dots-pill" role="tablist" aria-label="Thèmes"></div>
-      <div class="lum-box">
-        <div class="lum-slider-wrap">
-          <input id="preview-lum-slider" class="lum-vertical" type="range" min="0.6" max="1.2" step="0.05" value="1" aria-label="Luminosité" />
-        </div>
-        <button id="btn-reset-lum" class="sun-btn" type="button" title="Réinitialiser la luminosité">☀️</button>
-      </div>
+    <div class="cbk-chat916-feed" id="cbkChat916Feed"></div>
+    <div class="cbk-chat916-bar">
+      <textarea id="cbkChat916Input" rows="1" placeholder="Écrire un message..." style="min-height:40px; max-height:120px; resize:none;" oninput="this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,120)+'px';"></textarea>
+      <button type="button" class="btn btn-primary" onclick="sendChat916Text()">Envoyer</button>
     </div>
-  </section>
+  </div>
 
   <!-- MODAL : JUSTIFICATION ABSENCE / RETARD -->
   <div class="modal-backdrop" id="justifModal">
@@ -1957,7 +1837,7 @@
     </div>
   </div>
 
-  <!-- MODAL : CODE ADMIN GÉNÉRAL -->
+  <!-- MODAL : CODE ADMIN GÉNÉRAL (Chico899) -->
   <div class="modal-backdrop" id="adminCodeModal">
     <div class="modal-box">
       <div class="card-title">
@@ -2027,6 +1907,9 @@
     const SAFETY_BACKUP_KEY = "eduappel_cbk_safety_backup_v1";
 
     const DEFAULT_PROMOTIONS = ["L1 RTM", "L2 RTM", "L1 Informatique de Gestion", "Général"];
+    const DEFAULT_SCHOOLS = [
+      { schoolId: "ETB-001", name: "Établissement CBK Principal", delegateAdmin: "Direction CBK", plan: "Actif • 25$ / 70 000 FC" }
+    ];
 
     const DEFAULT_COURSES = [
       { id: "c_win", course: "Système d'Exploitation Windows", teacher: "Ass Nembalemba", loginName: "Ass Nembalemba", password: "CBK-WIN-101" },
@@ -2409,17 +2292,11 @@
 
     const LIGHT_DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><rect width='80' height='80' rx='40' fill='%2313294b'/><circle cx='40' cy='31' r='14' fill='%2300d2b8'/><ellipse cx='40' cy='64' rx='23' ry='14' fill='%2300d2b8'/></svg>";
 
-    const META_VERIFIED_BADGE_SVG = `<span class="verified-badge-svg" title="Compte vérifié"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.8L14.6 3.7L17.8 3.5L19.1 6.4L21.9 8.1L21.3 11.3L22.6 14.3L20.3 16.5L20 19.7L16.8 20.4L14.8 22.8L12 21.5L9.2 22.8L7.2 20.4L4 19.7L3.7 16.5L1.4 14.3L2.7 11.3L2.1 8.1L4.9 6.4L6.2 3.5L9.4 3.7L12 1.8Z" fill="#0084ff"/><path d="M8.3 12.2L10.8 14.7L16 9.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
-
-    function isAccountVerified(actorId) {
-      if (actorId === ADMIN_ACCOUNT_ID) return true;
-      const c = (Array.isArray(state.courses) ? state.courses : []).find((x) => x.id === actorId);
-      return Boolean(c && c.verified);
+    function dismissSplashScreen() {
+      const el = document.getElementById("cbkSplashOverlay");
+      if (el) el.classList.add("done");
     }
-
-    function renderVerifiedBadge(actorId) {
-      return isAccountVerified(actorId) ? META_VERIFIED_BADGE_SVG : "";
-    }
+    setTimeout(dismissSplashScreen, 1800);
 
     function normalizeTeacherVumisa(coursesList) {
       if (!Array.isArray(coursesList)) return [...DEFAULT_COURSES];
@@ -2536,12 +2413,15 @@
         session: {
           loggedIn: false,
           role: "teacher",
-          courseId: DEFAULT_COURSES[0].id
+          courseId: DEFAULT_COURSES[0].id,
+          schoolId: "ETB-001",
+          visitorName: "",
+          visitorContact: ""
         },
+        schools: [...DEFAULT_SCHOOLS],
         courses: DEFAULT_COURSES.map((c) => ({
           ...c,
           blocked: false,
-          verified: false,
           phone: "",
           email: "",
           bio: "",
@@ -2557,14 +2437,9 @@
           aboutImg: "",
           apkUrl: ""
         },
-        chatTheme: {
-          themeId: "cbc-wave",
-          bubbleOut: "#005c4b",
-          luminosity: 1
-        },
-        pinnedMessages: {},
         announcements: [],
         messages: [],
+        chat916: [],
         notifications: [],
         students: buildSeedStudents(DEFAULT_COURSES[0].id),
         notebooks,
@@ -2584,15 +2459,6 @@
     let activeJustifTarget = null;
     let deferredInstallPrompt = null;
     let pendingDeleteCallback = null;
-
-    // États messagerie avancée
-    let msgReplyTarget = null;
-    let editingMessageId = null;
-    let pendingAttachment = null;
-    let pendingVoiceDraft = null;
-    let mediaRecorderInstance = null;
-    let voiceChunks = [];
-    let voiceStartTime = 0;
 
     function openDeleteConfirm(question, detail, onConfirm) {
       pendingDeleteCallback = onConfirm;
@@ -2656,12 +2522,19 @@
       return Boolean(state.session.loggedIn && state.session.role === "admin");
     }
 
+    function isVisitorRole() {
+      return Boolean(state.session.loggedIn && state.session.role === "visitor");
+    }
+
     function getCurrentActorId() {
-      return isAdminGeneral() ? ADMIN_ACCOUNT_ID : activeCourseId;
+      if (isAdminGeneral()) return ADMIN_ACCOUNT_ID;
+      if (isVisitorRole()) return "visitor_" + (state.session.visitorName || "guest");
+      return activeCourseId;
     }
 
     function getCurrentActorName() {
       if (isAdminGeneral()) return "Admin Général (Chico899)";
+      if (isVisitorRole()) return state.session.visitorName || "Visiteur";
       const c = getCurrentCourse();
       return c ? c.teacher : "Professeur";
     }
@@ -2676,7 +2549,6 @@
 
         const mergedCourses = normalizeTeacherVumisa(rawCourses.length ? rawCourses : init.courses).map((c) => ({
           blocked: false,
-          verified: false,
           phone: "",
           email: "",
           bio: "",
@@ -2700,17 +2572,19 @@
         const promos = toArraySafe(parsed.promotions, [...DEFAULT_PROMOTIONS]);
         if (!promos.includes("L1 RTM")) promos.unshift("L1 RTM");
 
+        const schools = toArraySafe(parsed.schools, [...DEFAULT_SCHOOLS]);
+
         return {
           ...init,
           ...parsed,
           session: { ...init.session, ...(parsed.session || {}) },
+          schools: schools.length ? schools : [...DEFAULT_SCHOOLS],
           courses: mergedCourses,
           promotions: promos.length ? promos : [...DEFAULT_PROMOTIONS],
           branding: { ...init.branding, ...(parsed.branding || {}) },
-          chatTheme: { ...init.chatTheme, ...(parsed.chatTheme || {}) },
-          pinnedMessages: parsed.pinnedMessages && typeof parsed.pinnedMessages === "object" ? parsed.pinnedMessages : {},
           announcements: toArraySafe(parsed.announcements, []),
           messages: toArraySafe(parsed.messages, []),
+          chat916: toArraySafe(parsed.chat916, []),
           notifications: toArraySafe(parsed.notifications, []),
           students: finalStudents,
           notebooks: mergedNotebooks,
@@ -2738,13 +2612,13 @@
       if (pushToFirebase && !isApplyingRemoteSnapshot && typeof window.envoyerDonneesEduAppel === "function") {
         document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Synchro en cours...";
         window.envoyerDonneesEduAppel("global_state", {
+          schools: state.schools,
           courses: state.courses,
           promotions: state.promotions,
           branding: state.branding,
-          chatTheme: state.chatTheme,
-          pinnedMessages: state.pinnedMessages,
           announcements: state.announcements,
           messages: state.messages,
+          chat916: state.chat916,
           notifications: state.notifications,
           students: state.students,
           notebooks: state.notebooks,
@@ -2818,6 +2692,11 @@
         logoBox.innerHTML = `<img src="${escapeHtml(b.logo)}" alt="Logo EduAppel" />`;
       }
 
+      const schoolBadge = document.getElementById("headerSchoolIdBadge");
+      if (schoolBadge) {
+        schoolBadge.textContent = state.session.schoolId || "ETB-001";
+      }
+
       const mapImg = [
         ["publicHomeImg", b.homeImg],
         ["publicFaqImg", b.faqImg],
@@ -2877,7 +2756,7 @@
         box.innerHTML = `
           <div class="menu-section-title">Accès rapide</div>
           <div class="menu-list">
-            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-login')">🔐 Connexion Professeur</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-login')">🔐 Connexion Professeur / Visiteur</button>
             <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-apk')">📦 Télécharger APK & Version PC</button>
             <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-faq')">❓ FAQ & Questions</button>
             <button class="menu-item-btn" onclick="closeSideMenu(); scrollToEl('section-aide')">🆘 Guide d'Aide</button>
@@ -2888,21 +2767,35 @@
         return;
       }
 
+      if (isVisitorRole()) {
+        titleEl.textContent = `☰ Visiteur — ${state.session.visitorName || "Invité"}`;
+        box.innerHTML = `
+          <div class="menu-section-title">Espace Visiteur</div>
+          <div class="menu-list">
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">📢 Fil d'Actualité & Annonces</button>
+            <button class="menu-item-btn" onclick="openTabFromMenu('tab-notifications')">🔔 Notifications (${getMyNotifications().length})</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); triggerPwaInstall()">📲 Installer l'Application</button>
+          </div>
+        `;
+        return;
+      }
+
       if (isAdminGeneral()) {
-        titleEl.textContent = `🛡️ Admin Général ${META_VERIFIED_BADGE_SVG}`;
+        titleEl.textContent = "🛡️ Menu Admin Général";
         box.innerHTML = `
           <div class="menu-section-title">Administration Générale</div>
           <div class="menu-list">
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-etudiants')">👨‍🎓 Base Étudiants (${state.students.length})</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-annonces')">📢 Publier une Annonce</button>
-            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Badge / Bloquer / Supprimer)</button>
-            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-promos')">🎓 Gérer les Promotions</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Ajouter / Bloquer / Supprimer)</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-promos')">🎓 Promotions & Écoles</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-branding')">🖼️ Logo APK, Photos & Lien APK</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-suivi')">📊 Suivi Global des Cours</button>
           </div>
           <div class="menu-section-title">Communication & Cahiers</div>
           <div class="menu-list">
             <button class="menu-item-btn" onclick="manualSyncNow()">🔄 Synchroniser maintenant</button>
+            <button class="menu-item-btn" onclick="closeSideMenu(); openChat916Modal()">📱 Chat 9:16 WhatsApp / TikTok</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-cours')">📚 Tous les Cours</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-cahier')">📒 Cahier d'appel actif</button>
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">💬 Fil d'Annonces & Réponses</button>
@@ -2915,10 +2808,10 @@
       }
 
       const c = getCurrentCourse();
-      titleEl.innerHTML = `☰ Menu — ${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)}`;
+      titleEl.textContent = `☰ Menu — ${c.teacher}`;
       box.innerHTML = `
         <div class="credits-box" style="margin-bottom:10px;">
-          <div style="font-weight:800;">${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)}</div>
+          <div style="font-weight:800;">${escapeHtml(c.teacher)}</div>
           <div class="student-meta">${escapeHtml(c.course)}</div>
         </div>
         <div class="menu-section-title">Services du Cours</div>
@@ -2929,6 +2822,7 @@
         </div>
         <div class="menu-section-title">Communication & Compte</div>
         <div class="menu-list">
+          <button class="menu-item-btn" onclick="closeSideMenu(); openChat916Modal()">📱 Chat 9:16 WhatsApp / TikTok</button>
           <button class="menu-item-btn" onclick="openTabFromMenu('tab-annonces')">📢 Annonces de l'Admin</button>
           <button class="menu-item-btn" onclick="openTabFromMenu('tab-messages')">✉️ Ma Boîte de Messages</button>
           <button class="menu-item-btn" onclick="openTabFromMenu('tab-notifications')">🔔 Notifications (${getMyNotifications().length})</button>
@@ -2963,12 +2857,22 @@
       return Array.isArray(state.students) ? state.students : [];
     }
 
+    function populateSchoolSelect() {
+      const sel = document.getElementById("schoolSelectInput");
+      if (!sel) return;
+      const schools = Array.isArray(state.schools) && state.schools.length ? state.schools : DEFAULT_SCHOOLS;
+      sel.innerHTML = schools
+        .map((s) => `<option value="${escapeHtml(s.schoolId)}">${escapeHtml(s.schoolId)} — ${escapeHtml(s.name)}</option>`)
+        .join("");
+      sel.value = state.session.schoolId || schools[0].schoolId;
+    }
+
     function populateTeacherLoginSelect() {
       const sel = document.getElementById("teacherSelectInput");
       if (!sel) return;
       const courses = Array.isArray(state.courses) ? state.courses : DEFAULT_COURSES;
       sel.innerHTML = courses
-        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.verified ? " ✓" : ""}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
+        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
         .join("");
     }
 
@@ -3000,8 +2904,27 @@
       }
     }
 
+    function loginAsVisitor() {
+      const vName = document.getElementById("visitorNameInput").value.trim() || "Visiteur";
+      const vContact = document.getElementById("visitorContactInput").value.trim();
+      const sId = document.getElementById("schoolSelectInput")?.value || "ETB-001";
+      state.session = {
+        loggedIn: true,
+        role: "visitor",
+        courseId: activeCourseId,
+        schoolId: sId,
+        visitorName: vName,
+        visitorContact: vContact
+      };
+      saveState(false);
+      showToast(`Bienvenue ${vName} — Fil d'actualité actif.`);
+      renderSessionView();
+      openTab("tab-annonces");
+    }
+
     document.getElementById("teacherLoginForm").addEventListener("submit", (e) => {
       e.preventDefault();
+      const schoolId = document.getElementById("schoolSelectInput")?.value || "ETB-001";
       const courseId = document.getElementById("teacherSelectInput").value;
       const pwd = document.getElementById("teacherPasswordInput").value.trim();
       const courseObj = state.courses.find((c) => c.id === courseId);
@@ -3014,7 +2937,7 @@
 
       if (pwd === courseObj.password) {
         activeCourseId = courseObj.id;
-        state.session = { loggedIn: true, role: "teacher", courseId: courseObj.id };
+        state.session = { loggedIn: true, role: "teacher", courseId: courseObj.id, schoolId };
         saveState(false);
         document.getElementById("teacherPasswordInput").value = "";
         showToast(`Bienvenue ${courseObj.teacher} — ${courseObj.course}`);
@@ -3059,6 +2982,7 @@
       saveState(false);
       closeDrawers();
       closeSideMenu();
+      closeChat916Modal();
       renderSessionView();
       showToast("Déconnecté.");
     });
@@ -3070,8 +2994,11 @@
     });
 
     function openTab(tabId) {
+      if (isVisitorRole() && tabId !== "tab-annonces" && tabId !== "tab-notifications") {
+        tabId = "tab-annonces";
+      }
       if ((tabId === "tab-admin" || tabId === "tab-cours" || tabId === "tab-etudiants") && !isAdminGeneral()) {
-        tabId = "tab-cahier";
+        tabId = isVisitorRole() ? "tab-annonces" : "tab-cahier";
       }
       document.querySelectorAll(".nav-tabs > .nav-tab[data-tab]").forEach((t) => {
         t.classList.toggle("active", t.dataset.tab === tabId);
@@ -3110,13 +3037,22 @@
     function renderSessionView() {
       const logged = Boolean(state.session.loggedIn);
       const admin = isAdminGeneral();
+      const visitor = isVisitorRole();
 
       document.getElementById("publicView").classList.toggle("hidden", logged);
       document.getElementById("appView").classList.toggle("hidden", !logged);
       document.getElementById("btnLockApp").classList.toggle("hidden", !logged);
       document.getElementById("btnHeaderSyncNow").classList.toggle("hidden", !logged);
+      document.getElementById("btnOpenChat916Header").classList.toggle("hidden", !logged || visitor);
       document.getElementById("btnHeaderNotif").classList.toggle("hidden", !logged);
-      document.getElementById("btnHeaderMsg").classList.toggle("hidden", !logged);
+      document.getElementById("btnHeaderMsg").classList.toggle("hidden", !logged || visitor);
+
+      // Tout compte créé voit le Fil d'actualité (tab-annonces) ; Visiteur n'a pas accès au cahier d'appel ni aux messages/profil/admin
+      document.querySelector('.nav-tabs > .nav-tab[data-tab="tab-cahier"]').classList.toggle("hidden", visitor);
+      document.querySelector('.nav-tabs > .nav-tab[data-tab="tab-messages"]').classList.toggle("hidden", visitor);
+      document.querySelector('.nav-tabs > .nav-tab[data-tab="tab-evolution"]').classList.toggle("hidden", visitor);
+      document.querySelector('.nav-tabs > .nav-tab[data-tab="tab-profil"]').classList.toggle("hidden", visitor);
+      document.getElementById("courseStatsGrid").classList.toggle("hidden", visitor);
 
       document.getElementById("navTabEtudiants").classList.toggle("hidden", !admin);
       document.getElementById("btnEnrollGoStudents").classList.toggle("hidden", !admin);
@@ -3124,6 +3060,7 @@
       document.getElementById("navTabCours").classList.toggle("hidden", !admin);
       document.getElementById("navTabAdmin").classList.toggle("hidden", !admin);
 
+      populateSchoolSelect();
       populateTeacherLoginSelect();
       populatePromotionSelect();
       applyPublicBranding();
@@ -3138,7 +3075,7 @@
             activeTabEl.dataset.tab === "tab-cours" ||
             activeTabEl.dataset.tab === "tab-etudiants")
         ) {
-          openTab("tab-cahier");
+          openTab(visitor ? "tab-annonces" : "tab-cahier");
         }
       }
 
@@ -3147,11 +3084,16 @@
         document.getElementById("rosterSectionTitle").textContent =
           `👨‍🎓 Liste Globale des Étudiants (${state.students.length} inscrits)`;
         if (admin) renderCoursesDrawer();
-        renderCahierTab();
+        if (visitor) openTab("tab-annonces");
+        else renderCahierTab();
       }
     }
 
     function selectCourse(courseId) {
+      if (isVisitorRole()) {
+        showToast("L'accès visiteur est limité au Fil d'actualité.");
+        return;
+      }
       if (!isAdminGeneral() && courseId !== state.session.courseId) {
         showToast("Accès limité à votre propre cours.");
         return;
@@ -3174,7 +3116,7 @@
         return `
           <button type="button" class="course-menu-item ${c.id === activeCourseId ? "active" : ""}" onclick="selectCourse('${c.id}')">
             <div style="font-weight:800; font-size:0.88rem;">${escapeHtml(c.course)}</div>
-            <div class="student-meta">${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)} • ${nb.enrolledIds.length} étudiant(s)</div>
+            <div class="student-meta">${escapeHtml(c.teacher)} • ${nb.enrolledIds.length} étudiant(s)</div>
           </button>
         `;
       }).join("");
@@ -3190,7 +3132,7 @@
           <div class="student-row">
             <div>
               <div class="student-name">${escapeHtml(c.course)}</div>
-              <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> ${renderVerifiedBadge(c.id)} • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
+              <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
               <div class="student-meta">${nb.enrolledIds.length} étudiant(s) • ${nb.dates.length} date(s)</div>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -3233,6 +3175,42 @@
       return total === 0 ? 0 : Math.round((presentScore / total) * 100);
     }
 
+    function computeStudentAssiduitySummary(nb, studentId) {
+      let days = 0;
+      let presences = 0;
+      let absences = 0;
+      nb.dates.forEach((_, idx) => {
+        const cell = nb.marks[idx]?.[studentId];
+        if (!cell) return;
+        const val = cell[activeSlot] || cell.before || cell.after || "";
+        if (val === "present") {
+          days += 1;
+          presences += 1;
+        } else if (val === "absent") {
+          days += 1;
+          absences += 1;
+        }
+      });
+      return { days, presences, absences };
+    }
+
+    function cycleAssiduityBandMark(colIdx, studentId) {
+      const nb = getCurrentNotebook();
+      if (nb.maskedCols[colIdx]) {
+        showToast("Démasquez cette colonne avant de modifier.");
+        return;
+      }
+      const cell = getCell(nb, colIdx, studentId);
+      const cur = cell[activeSlot] || "";
+      // P -> A -> R -> ""
+      if (!cur) cell[activeSlot] = "present";
+      else if (cur === "present") cell[activeSlot] = "absent";
+      else if (cur === "absent") { cell.before = ""; cell.after = "present"; }
+      else { cell.before = ""; cell.after = ""; }
+      saveState(true);
+      renderCahierTab();
+    }
+
     function toggleColMask(colIdx) {
       const nb = getCurrentNotebook();
       nb.maskedCols[colIdx] = !nb.maskedCols[colIdx];
@@ -3264,32 +3242,6 @@
       saveState(true);
       renderCahierTab();
       showToast("Date mise à jour sur le cahier.");
-    }
-
-    function removeStudentFromNotebook(studentId) {
-      const nb = getCurrentNotebook();
-      if (!nb.enrolledIds.includes(studentId)) return;
-      const st = getScopedStudents().find((s) => s.id === studentId);
-      const course = getCurrentCourse();
-
-      openDeleteConfirm(
-        "Voulez-vous vraiment retirer cet étudiant du cahier d'appel ?",
-        st
-          ? `${st.name} (${st.matricule}) sera retiré du cahier « ${course.course} » (il reste dans la liste globale).`
-          : "Cet étudiant sera retiré de ce cahier d'appel.",
-        () => {
-          saveSafetyBackup("before_remove_from_notebook");
-          nb.enrolledIds = nb.enrolledIds.filter((id) => id !== studentId);
-          Object.keys(nb.marks || {}).forEach((colKey) => {
-            if (nb.marks[colKey] && typeof nb.marks[colKey] === "object") {
-              delete nb.marks[colKey][studentId];
-            }
-          });
-          saveState(true);
-          renderCahierTab();
-          showToast("Étudiant retiré du cahier d'appel.");
-        }
-      );
     }
 
     function openJustifModal(colIdx, studentId) {
@@ -3441,8 +3393,8 @@
       const nb = getCurrentNotebook();
 
       document.getElementById("activeCourseTitle").textContent = course.course;
-      document.getElementById("activeCourseInfo").innerHTML =
-        `Professeur : <strong>${escapeHtml(course.teacher)}</strong> ${renderVerifiedBadge(course.id)} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
+      document.getElementById("activeCourseInfo").textContent =
+        `Professeur : ${course.teacher} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
 
       const scopedPool = getScopedStudents();
       const enrolledStudents = nb.enrolledIds
@@ -3494,13 +3446,13 @@
           : `<th class="sub-col">PRÉSENT</th><th class="sub-col">ABSENT / MOTIF</th>`;
       });
 
-      topRow += `<th rowspan="2" class="main-col">% PRÉSENCE</th><th rowspan="2" class="main-col no-print">RETIRER</th></tr>`;
+      topRow += `<th rowspan="2" class="main-col">% PRÉSENCE</th></tr>`;
       subRow += `</tr>`;
       thead.innerHTML = topRow + subRow;
 
       const tbody = document.getElementById("appelSheetBody");
       if (visibleStudents.length === 0) {
-        const colSpan = 5 + nb.dates.length * 2;
+        const colSpan = 4 + nb.dates.length * 2;
         tbody.innerHTML = `<tr><td colspan="${colSpan}" style="padding:18px; color:#94a3b8;">
           Aucun étudiant affiché dans ce cahier. Cliquez sur <strong>+ Ajouter au cahier</strong> pour sélectionner vos étudiants (un par un ou Tout sélectionner).
         </td></tr>`;
@@ -3537,12 +3489,50 @@
               <td>${escapeHtml(st.matricule)}</td>
               ${dateCellsHtml}
               <td style="font-weight:800; color:${pct >= 75 ? "#6ee7b7" : "#fcd34d"};">${pct}%</td>
-              <td class="no-print">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removeStudentFromNotebook('${st.id}')" title="Supprimer cet étudiant du cahier">🗑️</button>
-              </td>
             </tr>
           `;
         }).join("");
+      }
+
+      // Bande de dates + calculs automatiques + classement des plus assidus tout en haut
+      const rankBox = document.getElementById("cbkAssiduityRankingBox");
+      if (rankBox) {
+        const rankedList = visibleStudents
+          .map((st) => ({ st, summary: computeStudentAssiduitySummary(nb, st.id) }))
+          .sort((a, b) => b.summary.presences - a.summary.presences || a.summary.absences - b.summary.absences);
+
+        if (!rankedList.length) {
+          rankBox.innerHTML = `<p class="student-meta">Ajoutez des étudiants dans ce cahier pour voir la bande de dates et le classement.</p>`;
+        } else {
+          rankBox.innerHTML = rankedList.map(({ st, summary }, i) => {
+            const bandHtml = nb.dates.map((dVal, cIdx) => {
+              const cell = nb.marks[cIdx]?.[st.id] || {};
+              const rawVal = cell[activeSlot] || cell.before || cell.after || "";
+              const code = isCellLate(cell) ? "R" : rawVal === "present" ? "P" : rawVal === "absent" ? "A" : "—";
+              return `<div class="cbk-date-pill ${code}" onclick="cycleAssiduityBandMark(${cIdx}, '${st.id}')" title="Cliquer pour pointer P / A / R">
+                <div>${escapeHtml(dVal.slice(5))}</div>
+                <strong>${code}</strong>
+              </div>`;
+            }).join("");
+
+            return `
+              <div class="student-row">
+                <div style="flex:1; min-width:240px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <span class="cbk-rank-chip ${i === 0 ? "top1" : ""}">#${i + 1}</span>
+                      <strong>${escapeHtml(st.name)}</strong>
+                    </div>
+                    <span class="badge badge-pct">
+                      ${summary.days} jour(s) • ${summary.presences} présence(s) • ${summary.absences} absence(s)
+                    </span>
+                  </div>
+                  <div class="cbk-date-band">${bandHtml}</div>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
       }
 
       const lateEl = document.getElementById("cahierLateList");
@@ -3580,7 +3570,94 @@
       }
     }
 
-    // ============ MODAL AJOUTER AU CAHIER ============
+    // ============ MESSAGERIE PLEIN ÉCRAN & VIDÉO 9:16 TIKTOK ============
+    function openChat916Modal() {
+      if (isVisitorRole()) {
+        showToast("Canal réservé aux professeurs et administrateurs.");
+        return;
+      }
+      document.getElementById("cbkChat916Subtitle").textContent =
+        `${state.session.schoolId || "ETB-001"} • ${getCurrentActorName()}`;
+      document.getElementById("cbkChat916Modal").classList.add("open");
+      renderChat916Feed();
+    }
+
+    function closeChat916Modal() {
+      document.getElementById("cbkChat916Modal").classList.remove("open");
+    }
+
+    function sendChat916Text() {
+      if (isVisitorRole()) return;
+      const inp = document.getElementById("cbkChat916Input");
+      const text = inp.value.trim();
+      if (!text) return;
+      state.chat916 = toArraySafe(state.chat916, []);
+      state.chat916.push({
+        id: "c916_" + Date.now(),
+        sender: getCurrentActorName(),
+        type: "text",
+        text,
+        mediaUrl: "",
+        at: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+      });
+      inp.value = "";
+      inp.style.height = "40px";
+      saveState(true);
+      renderChat916Feed();
+    }
+
+    function sendChat916Media(event) {
+      if (isVisitorRole()) return;
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const isVideo = file.type.startsWith("video/");
+      const reader = new FileReader();
+      reader.onload = () => {
+        state.chat916 = toArraySafe(state.chat916, []);
+        state.chat916.push({
+          id: "c916_" + Date.now(),
+          sender: getCurrentActorName(),
+          type: isVideo ? "video916" : "image",
+          text: file.name,
+          mediaUrl: reader.result,
+          at: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+        });
+        event.target.value = "";
+        saveState(true);
+        renderChat916Feed();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderChat916Feed() {
+      const feed = document.getElementById("cbkChat916Feed");
+      if (!feed) return;
+      const list = toArraySafe(state.chat916, []);
+      const me = getCurrentActorName();
+      if (!list.length) {
+        feed.innerHTML = `<p class="student-meta">Aucun message ou vidéo 9:16 dans ce canal pour le moment.</p>`;
+        return;
+      }
+      feed.innerHTML = list.map((m) => {
+        const mine = m.sender === me;
+        let mediaHtml = "";
+        if (m.type === "video916" && m.mediaUrl) {
+          mediaHtml = `<div class="cbk-video-916"><video src="${m.mediaUrl}" controls playsinline loop></video></div>`;
+        } else if (m.type === "image" && m.mediaUrl) {
+          mediaHtml = `<img src="${m.mediaUrl}" alt="" style="max-width:240px; border-radius:12px; margin-top:6px;" />`;
+        }
+        return `
+          <div class="msg-bubble ${mine ? "msg-mine" : "msg-theirs"}">
+            <div style="font-size:0.72rem; color:var(--accent); font-weight:700;">${escapeHtml(m.sender)} • ${escapeHtml(m.at || "")}</div>
+            ${m.type === "text" ? `<div style="margin-top:4px;">${escapeHtml(m.text)}</div>` : ""}
+            ${mediaHtml}
+          </div>
+        `;
+      }).join("");
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    // ============ MODAL AJOUTER AU CAHIER (PROFESSEUR & ADMIN) ============
     const enrollModal = document.getElementById("enrollModal");
     let draftEnrollSet = new Set();
 
@@ -3687,7 +3764,7 @@
       showToast(`${nb.enrolledIds.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
-    // ============ GESTION GLOBALE DES ÉTUDIANTS ============
+    // ============ GESTION GLOBALE DES ÉTUDIANTS (ADMIN GÉNÉRAL) ============
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdminGeneral()) {
@@ -3950,11 +4027,11 @@
           <div class="comment-bubble" onclick="setReplyToComment('${ann.id}', '${c.id}', '${escapeHtml(c.authorName).replace(/'/g, "\\'")}', '${escapeHtml(c.text).replace(/'/g, "\\'")}')" title="Cliquez pour répondre à ce commentaire">
             ${c.replyTo ? `
               <div class="reply-quote">
-                ↩️ <strong>${escapeHtml(c.replyTo.authorName)}</strong> ${renderVerifiedBadge(c.replyTo.authorId)} : ${escapeHtml(c.replyTo.text)}
+                ↩️ <strong>${escapeHtml(c.replyTo.authorName)}</strong> : ${escapeHtml(c.replyTo.text)}
               </div>
             ` : ""}
             <div style="display:flex; justify-content:space-between; gap:8px;">
-              <strong style="font-size:0.8rem; color:var(--accent);">${escapeHtml(c.authorName)} ${renderVerifiedBadge(c.authorId)}</strong>
+              <strong style="font-size:0.8rem; color:var(--accent);">${escapeHtml(c.authorName)}</strong>
               <span class="student-meta">${escapeHtml(c.createdAt || "")} • ↩️ Répondre</span>
             </div>
             <div style="font-size:0.85rem; margin-top:2px;">${escapeHtml(c.text)}</div>
@@ -3966,7 +4043,7 @@
             <div class="announcement-header">
               <div>
                 <div style="font-weight:800; font-size:1rem;">📢 ${escapeHtml(ann.title)}</div>
-                <div class="student-meta">Publié par Admin Général ${META_VERIFIED_BADGE_SVG} • ${escapeHtml(ann.createdAt || "")}</div>
+                <div class="student-meta">Publié par Admin Général • ${escapeHtml(ann.createdAt || "")}</div>
               </div>
               <button type="button" class="btn ${likedByMe ? "btn-primary" : "btn-secondary"} btn-sm" onclick="toggleLikeAnnouncement('${ann.id}')">
                 ${likedByMe ? "❤️ Aimé" : "🤍 J'aime"} (${likes.length})
@@ -3994,471 +4071,6 @@
         `;
       }).join("");
     }
-
-    // ============ THÈME DE DISCUSSION (MESSAGERIE) ============
-    const CHAT_THEMES = [
-      {
-        id: "cbc-wave",
-        name: "CBC Nuit & Sarcelle",
-        bg: "#07141d",
-        wallpaper: "radial-gradient(circle at 25% 20%, rgba(0, 168, 132, 0.24), transparent 55%), radial-gradient(circle at 80% 75%, rgba(24, 119, 242, 0.22), transparent 55%)",
-        bubbleIn: "#1b2b34",
-        bubbleOut: "#005c4b",
-        swatch: "#00a884"
-      },
-      {
-        id: "desert-lune",
-        name: "Désert & Lune",
-        bg: "#121018",
-        wallpaper: "radial-gradient(circle at 75% 22%, rgba(251, 191, 36, 0.16), transparent 45%), linear-gradient(180deg, #121018 0%, #241916 100%)",
-        bubbleIn: "#27222b",
-        bubbleOut: "#5c3a21",
-        swatch: "#f59e0b"
-      },
-      {
-        id: "bulles-halos",
-        name: "Bulles & Halos",
-        bg: "#090d16",
-        wallpaper: "radial-gradient(circle at 18% 72%, rgba(24, 119, 242, 0.24), transparent 48%), radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.16), transparent 48%)",
-        bubbleIn: "#1e293b",
-        bubbleOut: "#0f4c5c",
-        swatch: "#1877f2"
-      },
-      {
-        id: "velvet-nuit",
-        name: "Velvet Sombre",
-        bg: "#0e0a14",
-        wallpaper: "radial-gradient(circle at 50% 45%, rgba(168, 85, 247, 0.18), transparent 60%)",
-        bubbleIn: "#221b2e",
-        bubbleOut: "#4c1d95",
-        swatch: "#a855f7"
-      }
-    ];
-
-    const BUBBLE_OUT_COLORS = ["#005c4b", "#0f4c5c", "#4c1d95", "#5c3a21", "#1877f2"];
-
-    const previewScreenEl = document.getElementById("theme-preview-screen");
-    const previewStageEl = document.getElementById("preview-stage");
-    const dotsBox = document.getElementById("preview-dots");
-    const lumSlider = document.getElementById("preview-lum-slider");
-
-    let previewIndex = 0;
-    let previewBubbleOut = CHAT_THEMES[0].bubbleOut;
-    let previewLum = 1;
-
-    function applyChatThemeToBox() {
-      const chatBox = document.getElementById("chatMessagesBox");
-      if (!chatBox) return;
-      const cfg = state.chatTheme || {};
-      const theme = CHAT_THEMES.find((t) => t.id === cfg.themeId) || CHAT_THEMES[0];
-      chatBox.style.setProperty("--chat-bg", theme.bg);
-      chatBox.style.setProperty("--chat-wallpaper", theme.wallpaper);
-      chatBox.style.setProperty("--bubble-in", theme.bubbleIn);
-      chatBox.style.setProperty("--bubble-out", cfg.bubbleOut || theme.bubbleOut);
-      chatBox.style.setProperty("--lum", String(cfg.luminosity || 1));
-    }
-
-    function renderPreviewDots() {
-      dotsBox.innerHTML = CHAT_THEMES.map(
-        (t, i) => `<button type="button" class="dot-btn ${i === previewIndex ? "active" : ""}" data-idx="${i}" aria-label="${t.name}"></button>`
-      ).join("");
-
-      dotsBox.querySelectorAll(".dot-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          previewIndex = Number(btn.dataset.idx);
-          previewBubbleOut = CHAT_THEMES[previewIndex].bubbleOut;
-          renderPreviewDots();
-          updatePreviewVisuals();
-        });
-      });
-    }
-
-    function updatePreviewVisuals() {
-      const theme = CHAT_THEMES[previewIndex];
-      previewScreenEl.style.setProperty("--preview-bg", theme.bg);
-      previewScreenEl.style.setProperty("--preview-wallpaper", theme.wallpaper);
-      previewScreenEl.style.setProperty("--preview-lum", String(previewLum));
-      previewScreenEl.style.setProperty("--preview-swatch", previewBubbleOut);
-      document.getElementById("preview-bubble-in").style.background = theme.bubbleIn;
-      document.getElementById("preview-bubble-out").style.background = previewBubbleOut;
-    }
-
-    function openChatThemePreview(contactName = "Contact") {
-      const cfg = state.chatTheme || {};
-      const idx = CHAT_THEMES.findIndex((t) => t.id === cfg.themeId);
-      previewIndex = idx >= 0 ? idx : 0;
-      previewBubbleOut = cfg.bubbleOut || CHAT_THEMES[previewIndex].bubbleOut;
-      previewLum = Number(cfg.luminosity || 1);
-
-      document.getElementById("preview-contact-name").textContent = contactName || "Contact";
-      lumSlider.value = String(previewLum);
-      renderPreviewDots();
-      updatePreviewVisuals();
-      previewScreenEl.classList.remove("hidden");
-    }
-
-    document.getElementById("btnOpenChatTheme").addEventListener("click", () => {
-      const targets = getAllMessageTargets();
-      const partner = targets.find((t) => t.id === activeChatPartnerId);
-      openChatThemePreview(partner ? partner.name : "Contact");
-    });
-
-    document.getElementById("btn-cycle-bubble-color").addEventListener("click", () => {
-      const curIdx = BUBBLE_OUT_COLORS.indexOf(previewBubbleOut);
-      previewBubbleOut = BUBBLE_OUT_COLORS[(curIdx + 1) % BUBBLE_OUT_COLORS.length];
-      updatePreviewVisuals();
-    });
-
-    lumSlider.addEventListener("input", (e) => {
-      previewLum = Number(e.target.value);
-      updatePreviewVisuals();
-    });
-
-    document.getElementById("btn-reset-lum").addEventListener("click", () => {
-      previewLum = 1;
-      lumSlider.value = "1";
-      updatePreviewVisuals();
-    });
-
-    let touchStartX = 0;
-    previewStageEl.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
-
-    previewStageEl.addEventListener("touchend", (e) => {
-      const diff = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(diff) > 40) {
-        previewIndex = diff < 0
-          ? (previewIndex + 1) % CHAT_THEMES.length
-          : (previewIndex - 1 + CHAT_THEMES.length) % CHAT_THEMES.length;
-        previewBubbleOut = CHAT_THEMES[previewIndex].bubbleOut;
-        renderPreviewDots();
-        updatePreviewVisuals();
-      }
-    }, { passive: true });
-
-    document.getElementById("btn-preview-cancel").addEventListener("click", () => {
-      previewScreenEl.classList.add("hidden");
-    });
-
-    document.getElementById("btn-preview-apply").addEventListener("click", () => {
-      state.chatTheme = {
-        themeId: CHAT_THEMES[previewIndex].id,
-        bubbleOut: previewBubbleOut,
-        luminosity: previewLum
-      };
-      previewScreenEl.classList.add("hidden");
-      applyChatThemeToBox();
-      saveState(true);
-      showToast("Thème de discussion appliqué.");
-    });
-
-    // ============ ZONE DE RÉDACTION AGRANDIE, VOCAL COMPRESSÉ, PHOTOS & DOCUMENTS ============
-    const composerTextarea = document.getElementById("directMessageInput");
-
-    function autoGrowComposer() {
-      composerTextarea.classList.add("expanded");
-      composerTextarea.style.height = "auto";
-      composerTextarea.style.height = Math.min(composerTextarea.scrollHeight, 210) + "px";
-    }
-
-    composerTextarea.addEventListener("focus", autoGrowComposer);
-    composerTextarea.addEventListener("input", autoGrowComposer);
-
-    document.getElementById("btnExpandComposer").addEventListener("click", () => {
-      composerTextarea.classList.toggle("fullscreen-edit");
-      composerTextarea.focus();
-      autoGrowComposer();
-    });
-
-    function clearMessageReply() {
-      msgReplyTarget = null;
-      document.getElementById("replyPreviewBanner").classList.add("hidden");
-    }
-
-    function setMessageReply(msgId) {
-      const msg = (state.messages || []).find((m) => m.id === msgId);
-      if (!msg) return;
-      msgReplyTarget = {
-        id: msg.id,
-        fromName: msg.fromName,
-        text: msg.text || (msg.attachment ? msg.attachment.name : "Message vocal")
-      };
-      document.getElementById("replyPreviewText").innerHTML =
-        `↩️ Réponse à <strong>${escapeHtml(msgReplyTarget.fromName)}</strong> : "${escapeHtml(msgReplyTarget.text)}"`;
-      document.getElementById("replyPreviewBanner").classList.remove("hidden");
-      composerTextarea.focus();
-      autoGrowComposer();
-    }
-
-    function startEditMessage(msgId) {
-      const msg = (state.messages || []).find((m) => m.id === msgId);
-      if (!msg || msg.fromId !== getCurrentActorId()) return;
-      editingMessageId = msg.id;
-      composerTextarea.value = msg.text || "";
-      document.getElementById("editMessageBanner").classList.remove("hidden");
-      document.getElementById("btnSubmitDirectMsg").textContent = "💾 Enregistrer";
-      composerTextarea.classList.add("fullscreen-edit");
-      composerTextarea.focus();
-      autoGrowComposer();
-    }
-
-    function cancelMessageEdit() {
-      editingMessageId = null;
-      composerTextarea.value = "";
-      composerTextarea.classList.remove("fullscreen-edit", "expanded");
-      composerTextarea.style.height = "";
-      document.getElementById("editMessageBanner").classList.add("hidden");
-      document.getElementById("btnSubmitDirectMsg").textContent = "➤ Envoyer";
-    }
-
-    function deleteDirectMessage(msgId) {
-      const msg = (state.messages || []).find((m) => m.id === msgId);
-      if (!msg || msg.fromId !== getCurrentActorId()) return;
-      openDeleteConfirm(
-        "Voulez-vous vraiment supprimer ce message ?",
-        "Le message sera retiré de la discussion.",
-        () => {
-          state.messages = state.messages.filter((m) => m.id !== msgId);
-          saveState(true);
-          renderMessagesTab();
-          showToast("Message supprimé.");
-        }
-      );
-    }
-
-    function toggleMessageReaction(msgId, emoji) {
-      const msg = (state.messages || []).find((m) => m.id === msgId);
-      if (!msg) return;
-      msg.reactions = msg.reactions && typeof msg.reactions === "object" ? msg.reactions : {};
-      const me = getCurrentActorId();
-      const users = Array.isArray(msg.reactions[emoji]) ? [...msg.reactions[emoji]] : [];
-      const idx = users.indexOf(me);
-      if (idx === -1) users.push(me);
-      else users.splice(idx, 1);
-      if (users.length) msg.reactions[emoji] = users;
-      else delete msg.reactions[emoji];
-      saveState(true);
-      renderMessagesTab();
-    }
-
-    function pinDirectMessage(msgId) {
-      const msg = (state.messages || []).find((m) => m.id === msgId);
-      if (!msg || !activeChatPartnerId) return;
-      const key = `${getCurrentActorId()}__${activeChatPartnerId}`;
-      state.pinnedMessages[key] = {
-        id: msg.id,
-        text: `${msg.fromName} : ${msg.text || (msg.attachment ? msg.attachment.name : "Vocal")}`
-      };
-      saveState(true);
-      renderMessagesTab();
-      showToast("Message épinglé en haut de la discussion.");
-    }
-
-    document.getElementById("btnUnpinMessage").addEventListener("click", () => {
-      const key = `${getCurrentActorId()}__${activeChatPartnerId}`;
-      delete state.pinnedMessages[key];
-      saveState(true);
-      renderMessagesTab();
-    });
-
-    function clearPendingAttachment() {
-      pendingAttachment = null;
-      document.getElementById("attachmentPreviewBanner").classList.add("hidden");
-    }
-
-    document.getElementById("chatPhotoInput").addEventListener("change", (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const img = new Image();
-        img.onload = () => {
-          const maxW = 720;
-          const ratio = img.width > maxW ? maxW / img.width : 1;
-          const canvas = document.createElement("canvas");
-          canvas.width = Math.round(img.width * ratio);
-          canvas.height = Math.round(img.height * ratio);
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.65);
-          const sizeKb = Math.round((compressedDataUrl.length * 3) / 4 / 1024);
-          pendingAttachment = {
-            kind: "image",
-            name: file.name || "photo.jpg",
-            sizeKb,
-            dataUrl: compressedDataUrl
-          };
-          document.getElementById("attachmentPreviewLabel").textContent =
-            `🖼️ ${pendingAttachment.name} (~${sizeKb} Ko compressé)`;
-          document.getElementById("attachmentPreviewBanner").classList.remove("hidden");
-        };
-        img.src = ev.target.result;
-      };
-      reader.readAsDataURL(file);
-      e.target.value = "";
-    });
-
-    document.getElementById("chatDocInput").addEventListener("change", (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      if (file.size > 1500 * 1024) {
-        showToast("Document trop lourd pour la synchro directe (max ~1,5 Mo).");
-        e.target.value = "";
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const sizeKb = Math.max(1, Math.round(file.size / 1024));
-        pendingAttachment = {
-          kind: "document",
-          name: file.name,
-          mime: file.type || "application/octet-stream",
-          sizeKb,
-          dataUrl: ev.target.result
-        };
-        document.getElementById("attachmentPreviewLabel").textContent =
-          `📎 ${pendingAttachment.name} (${sizeKb} Ko)`;
-        document.getElementById("attachmentPreviewBanner").classList.remove("hidden");
-      };
-      reader.readAsDataURL(file);
-      e.target.value = "";
-    });
-
-    function clearVoiceDraft() {
-      pendingVoiceDraft = null;
-      document.getElementById("voiceDraftBanner").classList.add("hidden");
-    }
-
-    async function compressAudioBlobLowBitrate(blob) {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return blob;
-        const arrayBuf = await blob.arrayBuffer();
-        const audioCtx = new AudioCtx({ sampleRate: 16000 });
-        const decoded = await audioCtx.decodeAudioData(arrayBuf);
-        const monoData = decoded.getChannelData(0);
-        const sampleRate = 16000;
-        const wavBuffer = encodeMonoWav16k(monoData, sampleRate);
-        await audioCtx.close();
-        return new Blob([wavBuffer], { type: "audio/wav" });
-      } catch {
-        return blob;
-      }
-    }
-
-    function encodeMonoWav16k(samples, sampleRate) {
-      const buffer = new ArrayBuffer(44 + samples.length * 2);
-      const view = new DataView(buffer);
-      const writeStr = (offset, str) => {
-        for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
-      };
-      writeStr(0, "RIFF");
-      view.setUint32(4, 36 + samples.length * 2, true);
-      writeStr(8, "WAVE");
-      writeStr(12, "fmt ");
-      view.setUint32(16, 16, true);
-      view.setUint16(20, 1, true);
-      view.setUint16(22, 1, true);
-      view.setUint32(24, sampleRate, true);
-      view.setUint32(28, sampleRate * 2, true);
-      view.setUint16(32, 2, true);
-      view.setUint16(34, 16, true);
-      writeStr(36, "data");
-      view.setUint32(40, samples.length * 2, true);
-      let offset = 44;
-      for (let i = 0; i < samples.length; i++) {
-        const s = Math.max(-1, Math.min(1, samples[i]));
-        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-        offset += 2;
-      }
-      return buffer;
-    }
-
-    document.getElementById("btnRecordVoice").addEventListener("click", async () => {
-      const btn = document.getElementById("btnRecordVoice");
-      if (mediaRecorderInstance && mediaRecorderInstance.state === "recording") {
-        mediaRecorderInstance.stop();
-        return;
-      }
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        showToast("Micro non disponible sur cet appareil.");
-        return;
-      }
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: { channelCount: 1, sampleRate: 16000, echoCancellation: true, noiseSuppression: true }
-        });
-        const options = { audioBitsPerSecond: 16000 };
-        mediaRecorderInstance = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-          ? new MediaRecorder(stream, { mimeType: "audio/webm;codecs=opus", ...options })
-          : new MediaRecorder(stream);
-
-        voiceChunks = [];
-        voiceStartTime = Date.now();
-        mediaRecorderInstance.ondataavailable = (ev) => {
-          if (ev.data && ev.data.size > 0) voiceChunks.push(ev.data);
-        };
-        mediaRecorderInstance.onstop = async () => {
-          stream.getTracks().forEach((t) => t.stop());
-          btn.textContent = "🎙️ Vocal";
-          const durationSec = Math.max(1, Math.round((Date.now() - voiceStartTime) / 1000));
-          const rawBlob = new Blob(voiceChunks, { type: mediaRecorderInstance.mimeType || "audio/webm" });
-          const finalBlob = rawBlob.size > 180000 ? await compressAudioBlobLowBitrate(rawBlob) : rawBlob;
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            const sizeKb = Math.max(1, Math.round(finalBlob.size / 1024));
-            pendingVoiceDraft = {
-              durationSec,
-              sizeKb,
-              audioUrl: ev.target.result
-            };
-            document.getElementById("voiceDraftLabel").textContent =
-              `🎙️ Vocal (${durationSec}s • ${sizeKb} Ko compressé)`;
-            document.getElementById("voiceDraftBanner").classList.remove("hidden");
-          };
-          reader.readAsDataURL(finalBlob);
-          mediaRecorderInstance = null;
-        };
-
-        mediaRecorderInstance.start();
-        btn.textContent = "⏹️ Stop";
-        showToast("Enregistrement vocal en cours...");
-      } catch {
-        showToast("Autorisation micro refusée ou indisponible.");
-      }
-    });
-
-    document.getElementById("btnSendVoiceDraft").addEventListener("click", () => {
-      if (!pendingVoiceDraft || !activeChatPartnerId) return;
-      const targets = getAllMessageTargets();
-      const partner = targets.find((t) => t.id === activeChatPartnerId);
-      if (!partner) return;
-      if (partner.blockMessages && !isAdminGeneral()) {
-        showToast("Impossible d'envoyer : ce professeur a bloqué ses messages.");
-        return;
-      }
-
-      const meId = getCurrentActorId();
-      const meName = getCurrentActorName();
-      state.messages.push({
-        id: "msg_" + Date.now(),
-        fromId: meId,
-        fromName: meName,
-        toId: partner.id,
-        text: "",
-        voice: { ...pendingVoiceDraft },
-        replyTo: msgReplyTarget ? { ...msgReplyTarget } : null,
-        reactions: {},
-        createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
-      });
-
-      pushNotification(partner.id, `🎙️ Message vocal de ${meName}`, `Vocal (${pendingVoiceDraft.durationSec}s)`, "tab-messages");
-      clearVoiceDraft();
-      clearMessageReply();
-      saveState(true);
-      renderMessagesTab();
-    });
 
     function getAllMessageTargets() {
       const me = getCurrentActorId();
@@ -4490,8 +4102,6 @@
       openTab("tab-messages");
     }
 
-    document.getElementById("chatSearchInput").addEventListener("input", renderMessagesTab);
-
     function renderMessagesTab() {
       const contactsBox = document.getElementById("messageContactsList");
       const targets = getAllMessageTargets();
@@ -4504,7 +4114,7 @@
           <div style="display:flex; align-items:center; gap:9px;">
             <img class="avatar" style="width:34px; height:34px;" src="${t.photo || makeDefaultAvatar()}" alt="" />
             <div>
-              <div>${escapeHtml(t.name)} ${renderVerifiedBadge(t.id)}</div>
+              <div>${escapeHtml(t.name)}</div>
               <div class="student-meta">${escapeHtml(t.sub)}</div>
             </div>
           </div>
@@ -4517,115 +4127,34 @@
       const titleEl = document.getElementById("activeChatPartnerTitle");
       const msgInput = document.getElementById("directMessageInput");
 
-      applyChatThemeToBox();
-
       if (!partner) {
         titleEl.textContent = "Aucun contact";
         return;
       }
 
-      titleEl.innerHTML = `Discussion avec ${escapeHtml(partner.name)} ${renderVerifiedBadge(partner.id)}${partner.blockMessages ? " (Messages bloqués)" : ""}`;
+      titleEl.textContent = `Discussion avec ${partner.name}${partner.blockMessages ? " (Messages bloqués)" : ""}`;
       msgInput.disabled = partner.blockMessages && !isAdminGeneral();
       msgInput.placeholder = msgInput.disabled
         ? "Ce compte a bloqué la réception des messages."
-        : `Cliquez ici pour écrire à ${partner.name}...`;
-
-      const pinKey = `${getCurrentActorId()}__${partner.id}`;
-      const pinned = state.pinnedMessages?.[pinKey];
-      const pinBox = document.getElementById("pinnedMessageBox");
-      if (pinned && pinned.text) {
-        document.getElementById("pinnedMessageText").textContent = `📌 Épinglé : ${pinned.text}`;
-        pinBox.classList.remove("hidden");
-      } else {
-        pinBox.classList.add("hidden");
-      }
+        : `Écrire un message à ${partner.name}...`;
 
       const me = getCurrentActorId();
-      const searchQ = (document.getElementById("chatSearchInput")?.value || "").trim().toLowerCase();
       const messages = Array.isArray(state.messages) ? state.messages : [];
-      const convo = messages.filter((m) => {
-        const inChat = (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me);
-        if (!inChat) return false;
-        if (!searchQ) return true;
-        const txtMatch = (m.text || "").toLowerCase().includes(searchQ);
-        const attMatch = (m.attachment?.name || "").toLowerCase().includes(searchQ);
-        return txtMatch || attMatch;
-      });
+      const convo = messages.filter((m) =>
+        (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me)
+      );
 
       if (convo.length === 0) {
         chatBox.innerHTML = `<p class="student-meta">Aucun message échangé pour l'instant.</p>`;
       } else {
         chatBox.innerHTML = convo.map((m) => {
           const mine = m.fromId === me;
-          const reactionsObj = m.reactions && typeof m.reactions === "object" ? m.reactions : {};
-          const reactionsHtml = Object.keys(reactionsObj).map((emoji) => {
-            const count = Array.isArray(reactionsObj[emoji]) ? reactionsObj[emoji].length : 0;
-            return count ? `<button type="button" class="reaction-pill" onclick="toggleMessageReaction('${m.id}', '${emoji}')">${emoji} ${count}</button>` : "";
-          }).join("");
-
-          let attachmentHtml = "";
-          if (m.attachment) {
-            if (m.attachment.kind === "image") {
-              attachmentHtml = `
-                <div style="margin-top:6px;">
-                  <img src="${m.attachment.dataUrl}" alt="${escapeHtml(m.attachment.name)}" style="max-width:210px; border-radius:10px; display:block; border:1px solid rgba(255,255,255,0.2);" />
-                  <div class="student-meta" style="margin-top:2px;">🖼️ ${escapeHtml(m.attachment.name)} • ${m.attachment.sizeKb || 0} Ko</div>
-                </div>
-              `;
-            } else {
-              attachmentHtml = `
-                <div style="margin-top:6px; background:rgba(0,0,0,0.24); padding:7px 9px; border-radius:9px;">
-                  <div style="font-weight:700; font-size:0.8rem;">📎 ${escapeHtml(m.attachment.name)}</div>
-                  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                    <span class="student-meta">${m.attachment.sizeKb || 0} Ko</span>
-                    <a href="${m.attachment.dataUrl}" download="${escapeHtml(m.attachment.name)}" class="msg-action-link" style="text-decoration:none;">⬇️ Télécharger</a>
-                  </div>
-                </div>
-              `;
-            }
-          }
-
-          let voiceHtml = "";
-          if (m.voice && m.voice.audioUrl) {
-            voiceHtml = `
-              <div style="margin-top:6px;">
-                <audio controls src="${m.voice.audioUrl}" style="max-width:220px; height:32px;"></audio>
-                <div class="student-meta">🎙️ ${m.voice.durationSec || 1}s • ${m.voice.sizeKb || 0} Ko compressé</div>
-              </div>
-            `;
-          }
-
           return `
             <div class="msg-bubble ${mine ? "msg-mine" : "msg-theirs"}">
               <div style="font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:2px;">
-                ${mine ? "Moi" : `${escapeHtml(m.fromName)} ${renderVerifiedBadge(m.fromId)}`} • ${escapeHtml(m.createdAt || "")}${m.edited ? " • modifié" : ""}
+                ${mine ? "Moi" : escapeHtml(m.fromName)} • ${escapeHtml(m.createdAt || "")}
               </div>
-
-              ${m.replyTo ? `
-                <div class="reply-quote">
-                  ↩️ <strong>${escapeHtml(m.replyTo.fromName)}</strong> : ${escapeHtml(m.replyTo.text)}
-                </div>
-              ` : ""}
-
-              ${m.text ? `<div>${escapeHtml(m.text)}</div>` : ""}
-              ${attachmentHtml}
-              ${voiceHtml}
-
-              ${reactionsHtml ? `<div class="reaction-pills">${reactionsHtml}</div>` : ""}
-
-              <div class="msg-actions-bar">
-                <button type="button" class="msg-action-link" onclick="setMessageReply('${m.id}')">↩️ Répondre</button>
-                <button type="button" class="msg-action-link" onclick="toggleMessageReaction('${m.id}', '👍')">👍</button>
-                <button type="button" class="msg-action-link" onclick="toggleMessageReaction('${m.id}', '❤️')">❤️</button>
-                <button type="button" class="msg-action-link" onclick="pinDirectMessage('${m.id}')">📌</button>
-                ${mine ? `<button type="button" class="msg-action-link" onclick="startEditMessage('${m.id}')">✏️</button>` : ""}
-                ${mine ? `<button type="button" class="msg-action-link" onclick="deleteDirectMessage('${m.id}')">🗑️</button>` : ""}
-              </div>
-
-              <div class="msg-meta">
-                <span>${escapeHtml(m.createdAt || "")}</span>
-                ${mine ? `<span style="color:#38bdf8;">✓✓</span>` : ""}
-              </div>
+              <div>${escapeHtml(m.text)}</div>
             </div>
           `;
         }).join("");
@@ -4645,29 +4174,9 @@
         return;
       }
 
-      const text = composerTextarea.value.trim();
-
-      if (editingMessageId) {
-        if (!text) {
-          showToast("Le message ne peut pas être vide.");
-          return;
-        }
-        const targetMsg = state.messages.find((m) => m.id === editingMessageId);
-        if (targetMsg) {
-          targetMsg.text = text;
-          targetMsg.edited = true;
-        }
-        cancelMessageEdit();
-        saveState(true);
-        renderMessagesTab();
-        showToast("Message modifié.");
-        return;
-      }
-
-      if (!text && !pendingAttachment) {
-        showToast("Écrivez un message ou joignez une photo / un document.");
-        return;
-      }
+      const inp = document.getElementById("directMessageInput");
+      const text = inp.value.trim();
+      if (!text) return;
 
       const meId = getCurrentActorId();
       const meName = getCurrentActorName();
@@ -4677,24 +4186,17 @@
         fromName: meName,
         toId: partner.id,
         text,
-        attachment: pendingAttachment ? { ...pendingAttachment } : null,
-        replyTo: msgReplyTarget ? { ...msgReplyTarget } : null,
-        reactions: {},
         createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
       });
 
       pushNotification(
         partner.id,
         `✉️ Nouveau message de ${meName}`,
-        text ? text.slice(0, 90) : (pendingAttachment?.name || "Pièce jointe"),
+        text.slice(0, 90),
         "tab-messages"
       );
 
-      composerTextarea.value = "";
-      composerTextarea.classList.remove("expanded", "fullscreen-edit");
-      composerTextarea.style.height = "";
-      clearPendingAttachment();
-      clearMessageReply();
+      inp.value = "";
       saveState(true);
       renderMessagesTab();
     });
@@ -5023,7 +4525,6 @@
         courses: isAdmin ? state.courses : [getCurrentCourse()],
         promotions: state.promotions,
         branding: isAdmin ? state.branding : undefined,
-        chatTheme: state.chatTheme,
         announcements: isAdmin ? state.announcements : undefined,
         students: getScopedStudents(),
         notebooks: isAdmin ? state.notebooks : { [activeCourseId]: getCurrentNotebook() }
@@ -5052,7 +4553,6 @@
             state.notebooks = normalizeNotebooksMap({ ...state.notebooks, ...d.notebooks }, state.courses);
             if (Array.isArray(d.promotions) && d.promotions.length) state.promotions = d.promotions;
             if (d.branding) state.branding = { ...state.branding, ...d.branding };
-            if (d.chatTheme) state.chatTheme = { ...state.chatTheme, ...d.chatTheme };
             if (Array.isArray(d.announcements)) state.announcements = d.announcements;
           } else {
             if (d.notebooks[activeCourseId]) {
@@ -5071,6 +4571,47 @@
     });
 
     // ============ FONCTIONS ADMIN GÉNÉRAL ============
+    function addOrUpdateSchool() {
+      if (!isAdminGeneral()) return;
+      const schoolId = document.getElementById("newSchoolIdInput").value.trim().toUpperCase();
+      const name = document.getElementById("newSchoolNameInput").value.trim();
+      const delegateAdmin = document.getElementById("newSchoolDelegateInput").value.trim() || "Admin d'école";
+      const plan = document.getElementById("newSchoolPlanInput").value.trim() || "Actif • 25$ / 70 000 FC";
+      if (!schoolId || !name) {
+        showToast("Renseignez le numéro d'établissement et le nom.");
+        return;
+      }
+      state.schools = toArraySafe(state.schools, [...DEFAULT_SCHOOLS]);
+      const idx = state.schools.findIndex((s) => s.schoolId === schoolId);
+      const item = { schoolId, name, delegateAdmin, plan };
+      if (idx >= 0) state.schools[idx] = item;
+      else state.schools.push(item);
+
+      document.getElementById("newSchoolIdInput").value = "";
+      document.getElementById("newSchoolNameInput").value = "";
+      document.getElementById("newSchoolDelegateInput").value = "";
+      document.getElementById("newSchoolPlanInput").value = "";
+      populateSchoolSelect();
+      saveState(true);
+      renderAdminSchoolsList();
+      showToast(`Établissement ${schoolId} enregistré.`);
+    }
+
+    function renderAdminSchoolsList() {
+      const box = document.getElementById("adminSchoolsListBox");
+      if (!box) return;
+      const schools = toArraySafe(state.schools, [...DEFAULT_SCHOOLS]);
+      box.innerHTML = schools.map((s) => `
+        <div class="student-row" style="margin-bottom:6px;">
+          <div>
+            <div class="student-name">${escapeHtml(s.schoolId)} — ${escapeHtml(s.name)}</div>
+            <div class="student-meta">Admin d'école délégué : <strong>${escapeHtml(s.delegateAdmin)}</strong> • ${escapeHtml(s.plan)}</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="state.session.schoolId='${escapeHtml(s.schoolId)}'; applyPublicBranding(); saveState(false); showToast('Établissement actif : ${escapeHtml(s.schoolId)}');">Activer</button>
+        </div>
+      `).join("");
+    }
+
     document.getElementById("btnAdminSyncNow").addEventListener("click", manualSyncNow);
 
     document.getElementById("adminPublishAnnouncementForm").addEventListener("submit", (e) => {
@@ -5130,7 +4671,6 @@
         loginName,
         password,
         blocked: false,
-        verified: false,
         phone: "",
         email: "",
         bio: "",
@@ -5145,16 +4685,6 @@
       renderAdminTab();
       showToast(`Professeur ${teacherName} et cours ajoutés.`);
     });
-
-    function toggleVerifyTeacher(courseId) {
-      if (!isAdminGeneral()) return;
-      const c = state.courses.find((x) => x.id === courseId);
-      if (!c) return;
-      c.verified = !c.verified;
-      saveState(true);
-      renderAdminTab();
-      showToast(c.verified ? `Badge certifié attribué à ${c.teacher}.` : `Badge certifié retiré à ${c.teacher}.`);
-    }
 
     function toggleBlockTeacher(courseId) {
       if (!isAdminGeneral()) return;
@@ -5277,20 +4807,18 @@
                 ${currentSrc ? `<button type="button" class="btn btn-warning btn-sm" onclick="openCropWithSrc('${escapeHtml(currentSrc)}', { type: 'branding', key: '${s.key}' })">✂️ Réajuster</button>` : ""}
                 ${currentSrc ? `<button type="button" class="btn btn-danger btn-sm" onclick="clearBrandingSlot('${s.key}')">🗑️ Retirer</button>` : ""}
               </div>
-              <div style="display:flex; gap:8px; margin-top:8px;">
-                <input type="url" id="brandingUrl_${s.key}" placeholder="Ou collez un lien URL d'image (https://...)" value="${currentSrc.startsWith("http") ? escapeHtml(currentSrc) : ""}" />
+              <div style="display:flex; gap:6px; margin-top:8px;">
+                <input type="url" id="brandingUrl_${s.key}" placeholder="Ou coller un lien URL image (https://...)" value="${currentSrc.startsWith("http") ? escapeHtml(currentSrc) : ""}" />
                 <button type="button" class="btn btn-primary btn-sm" onclick="applyBrandingUrl('${s.key}')">Appliquer URL</button>
               </div>
             </div>
-            <div>
-              ${currentSrc
-                ? `<img src="${escapeHtml(currentSrc)}" alt="" style="width:74px; height:74px; object-fit:cover; border-radius:12px; border:1px solid var(--border);" />`
-                : `<div class="badge badge-pct">Aucun visuel</div>`
-              }
-            </div>
+            ${currentSrc ? `<img src="${escapeHtml(currentSrc)}" alt="" style="width:90px; height:64px; object-fit:cover; border-radius:10px; border:1px solid var(--accent);" />` : ""}
           </div>
         `;
       }).join("");
+
+      const apkInput = document.getElementById("adminApkUrlInput");
+      if (apkInput) apkInput.value = state.branding?.apkUrl || "";
     }
 
     document.getElementById("adminApkLinkForm").addEventListener("submit", (e) => {
@@ -5298,104 +4826,166 @@
       if (!isAdminGeneral()) return;
       state.branding.apkUrl = document.getElementById("adminApkUrlInput").value.trim();
       saveState(true);
-      showToast("Lien APK enregistré.");
+      showToast("Lien de téléchargement APK enregistré.");
     });
 
     function renderAdminTab() {
       if (!isAdminGeneral()) return;
 
-      document.getElementById("adminApkUrlInput").value = state.branding?.apkUrl || "";
-      renderAdminBrandingSlots();
+      renderAdminSchoolsList();
 
-      const annPrev = document.getElementById("adminAnnouncementsPreview");
-      const anns = Array.isArray(state.announcements) ? state.announcements : [];
-      annPrev.innerHTML = anns.map((a) => `
+      const announcements = Array.isArray(state.announcements) ? state.announcements : [];
+      const annPreview = document.getElementById("adminAnnouncementsPreview");
+      annPreview.innerHTML = announcements.map((ann) => `
         <div class="student-row">
           <div>
-            <div class="student-name">📢 ${escapeHtml(a.title)}</div>
-            <div class="student-meta">${escapeHtml(a.body)} • ${escapeHtml(a.createdAt || "")}</div>
-            <div class="student-meta">❤️ ${(a.likes || []).length} j'aime • 💬 ${(a.comments || []).length} commentaire(s)</div>
+            <div class="student-name">${escapeHtml(ann.title)}</div>
+            <div class="student-meta">${escapeHtml(ann.body)}</div>
+            <div class="student-meta">❤️ ${toArraySafe(ann.likes, []).length} • 💬 ${toArraySafe(ann.comments, []).length} • ${escapeHtml(ann.createdAt || "")}</div>
           </div>
-          <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${a.id}')">🗑️</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${ann.id}')">🗑️ Supprimer</button>
         </div>
-      `).join("") || `<p class="student-meta">Aucune annonce publiée.</p>`;
+      `).join("");
 
-      const profBox = document.getElementById("adminTeachersManageList");
-      profBox.innerHTML = (Array.isArray(state.courses) ? state.courses : []).map((c) => `
+      const courses = Array.isArray(state.courses) ? state.courses : [];
+      const profList = document.getElementById("adminTeachersManageList");
+      profList.innerHTML = courses.map((c) => `
         <div class="student-row">
-          <div>
-            <div class="student-name">
-              ${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)} — ${escapeHtml(c.course)}
-              ${c.blocked ? `<span class="badge badge-warn">BLOQUÉ</span>` : `<span class="badge badge-pct">ACTIF</span>`}
+          <div class="student-info">
+            <img class="avatar" src="${c.photo || makeDefaultAvatar()}" alt="" />
+            <div>
+              <div class="student-name">
+                ${escapeHtml(c.teacher)} — ${escapeHtml(c.course)}
+                ${c.blocked ? `<span class="badge badge-warn">🚫 Bloqué</span>` : `<span class="badge badge-pct">✅ Actif</span>`}
+              </div>
+              <div class="student-meta">Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
+              ${c.phone || c.email ? `<div class="student-meta">📞 ${escapeHtml(c.phone || "-")} • ✉️ ${escapeHtml(c.email || "-")}</div>` : ""}
             </div>
-            <div class="student-meta">Connexion : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
           </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button type="button" class="btn ${c.verified ? "btn-primary" : "btn-secondary"} btn-sm" onclick="toggleVerifyTeacher('${c.id}')">
-              ${c.verified ? "☑️ Certifié" : "Badge Meta"}
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
-            <button type="button" class="btn btn-warning btn-sm" onclick="toggleBlockTeacher('${c.id}')">
-              ${c.blocked ? "Débloquer" : "Bloquer"}
-            </button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTeacherCourse('${c.id}')">🗑️</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')" title="Envoyer un message">✉️ Message</button>
+            <button type="button" class="btn btn-warning btn-sm" onclick="toggleBlockTeacher('${c.id}')">${c.blocked ? "🔓 Débloquer" : "🚫 Bloquer"}</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTeacherCourse('${c.id}')">🗑️ Supprimer</button>
           </div>
         </div>
       `).join("");
 
-      const promoBox = document.getElementById("adminPromotionsList");
-      const promos = Array.isArray(state.promotions) ? state.promotions : [];
-      promoBox.innerHTML = promos.map((p, idx) => `
+      const promotions = Array.isArray(state.promotions) ? state.promotions : DEFAULT_PROMOTIONS;
+      const promoList = document.getElementById("adminPromotionsList");
+      promoList.innerHTML = promotions.map((p, idx) => `
         <div class="student-row">
           <div class="student-name">🎓 ${escapeHtml(p)}</div>
           <button type="button" class="btn btn-danger btn-sm" onclick="deletePromotion(${idx})">🗑️</button>
         </div>
       `).join("");
 
-      const globalBox = document.getElementById("adminGlobalContainer");
-      const courses = Array.isArray(state.courses) ? state.courses : [];
-      const totalEnrolledAll = courses.reduce(
-        (acc, c) => acc + normalizeSingleNotebook(state.notebooks[c.id]).enrolledIds.length,
-        0
-      );
+      renderAdminBrandingSlots();
 
-      globalBox.innerHTML = `
-        <div class="stats-grid">
-          <div class="stat-box"><div class="stat-val">${courses.length}</div><div class="stat-lbl">Cours & Professeurs</div></div>
-          <div class="stat-box"><div class="stat-val">${state.students.length}</div><div class="stat-lbl">Étudiants (Base globale)</div></div>
-          <div class="stat-box"><div class="stat-val">${totalEnrolledAll}</div><div class="stat-lbl">Inscriptions cahiers</div></div>
-          <div class="stat-box"><div class="stat-val">${anns.length}</div><div class="stat-lbl">Annonces publiées</div></div>
-        </div>
-        ${courses.map((c) => {
-          const nb = normalizeSingleNotebook(state.notebooks[c.id]);
-          return `
-            <div class="student-row">
+      const allStudents = Array.isArray(state.students) ? state.students : [];
+      const container = document.getElementById("adminGlobalContainer");
+      container.innerHTML = courses.map((c) => {
+        const nb = normalizeSingleNotebook(state.notebooks[c.id]);
+        const enrolled = nb.enrolledIds.map((id) => allStudents.find((s) => s.id === id)).filter(Boolean);
+
+        const rowsHtml = enrolled.length === 0
+          ? `<p class="student-meta">Aucun étudiant inscrit dans ce cahier.</p>`
+          : enrolled.map((st) => {
+              const pct = computeStudentCoursePct(nb, st.id);
+              let presentPts = 0, latePts = 0;
+              nb.dates.forEach((_, idx) => {
+                const cell = nb.marks[idx]?.[st.id];
+                if (cell?.before === "present") presentPts++;
+                if (cell?.after === "present") presentPts++;
+                if (isCellLate(cell)) latePts++;
+              });
+              return `
+                <div class="student-row" style="margin-bottom:6px;">
+                  <div>
+                    <div class="student-name">${escapeHtml(st.name)} <span class="student-meta">(${escapeHtml(st.matricule)})</span></div>
+                    <div class="student-meta">Points présence : <strong>${presentPts}</strong> • Retards : <strong>${latePts}</strong></div>
+                  </div>
+                  <span class="badge ${pct >= 75 ? "badge-pct" : "badge-warn"}">${pct}%</span>
+                </div>
+              `;
+            }).join("");
+
+        return `
+          <div class="card" style="background:var(--bg-card-2); margin-bottom:12px;">
+            <div class="card-title">
               <div>
-                <div class="student-name">${escapeHtml(c.course)}</div>
-                <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> ${renderVerifiedBadge(c.id)} • ${nb.enrolledIds.length} étudiant(s) • ${nb.dates.length} date(s)</div>
+                <div>${escapeHtml(c.course)}</div>
+                <div class="student-meta">Prof : <strong>${escapeHtml(c.teacher)}</strong> • Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
               </div>
-              <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir le cahier</button>
+              <div style="display:flex; gap:6px;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir cahier</button>
+              </div>
             </div>
-          `;
-        }).join("")}
-      `;
+            ${rowsHtml}
+          </div>
+        `;
+      }).join("");
     }
 
-    function appliquerDonneesRecuesDepuisFirebase(payload) {
-      if (!payload || typeof payload !== "object") return;
-      const incomingUpdatedAt = Number(payload.updatedAt || 0);
+    populateSchoolSelect();
+    populateTeacherLoginSelect();
+    populatePromotionSelect();
+    applyPublicBranding();
+    renderSessionView();
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    }
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const app = initializeApp({
+      databaseURL: "https://eduappel-live-default-rtdb.firebaseio.com/"
+    });
+    const db = getDatabase(app);
+
+    window.envoyerDonneesEduAppel = async function(classeId, donnees) {
+      try {
+        await set(ref(db, `eduappel/${classeId}`), {
+          ...donnees,
+          updatedAt: Number(donnees?.updatedAt || Date.now())
+        });
+        return true;
+      } catch (err) {
+        console.error("Erreur synchro Firebase:", err);
+        return false;
+      }
+    };
+
+    window.ecouterEduAppelEnDirect = function(callback) {
+      return onValue(ref(db, "eduappel"), (snapshot) => {
+        callback(snapshot.val() || {});
+      });
+    };
+
+    window.ecouterEduAppelEnDirect((remoteData) => {
+      const globalPayload = remoteData?.global_state;
+      if (!globalPayload || typeof globalPayload !== "object") return;
+
+      const remoteUpdatedAt = Number(globalPayload.updatedAt || 0);
       const localUpdatedAt = Number(state.updatedAt || 0);
 
-      if (hasInitialFirebaseSync && incomingUpdatedAt > 0 && localUpdatedAt > incomingUpdatedAt + 1500) {
-        return;
-      }
+      if (!hasInitialFirebaseSync || remoteUpdatedAt > localUpdatedAt) {
+        hasInitialFirebaseSync = true;
+        isApplyingRemoteSnapshot = true;
 
-      isApplyingRemoteSnapshot = true;
-      try {
-        if (Array.isArray(payload.courses) && payload.courses.length) {
-          state.courses = normalizeTeacherVumisa(payload.courses).map((c) => ({
+        const remoteSchools = toArraySafe(globalPayload.schools, []);
+        if (remoteSchools.length) {
+          state.schools = remoteSchools;
+        }
+
+        const remoteCourses = toArraySafe(globalPayload.courses, []);
+        if (remoteCourses.length) {
+          state.courses = normalizeTeacherVumisa(remoteCourses).map((c) => ({
             blocked: false,
-            verified: false,
             phone: "",
             email: "",
             bio: "",
@@ -5405,107 +4995,50 @@
           }));
         }
 
-        const rawStudents = toArraySafe(payload.students, null);
-        if (rawStudents !== null) {
-          const mappedRemoteStudents = rawStudents.map((st) => ({
-            ...st,
-            courseId: st.courseId || (state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id,
-            photo: st.photo || LIGHT_DEFAULT_AVATAR
-          }));
-          state.students = mappedRemoteStudents.length > 0
-            ? mergeSeedStudentsIntoList(mappedRemoteStudents, (state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id)
-            : buildSeedStudents((state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id);
+        const remotePromos = toArraySafe(globalPayload.promotions, []);
+        if (remotePromos.length) {
+          state.promotions = remotePromos;
         }
 
-        if (payload.notebooks && typeof payload.notebooks === "object") {
-          state.notebooks = normalizeNotebooksMap(payload.notebooks, state.courses);
+        if (globalPayload.branding && typeof globalPayload.branding === "object") {
+          state.branding = { ...state.branding, ...globalPayload.branding };
         }
 
-        if (Array.isArray(payload.promotions) && payload.promotions.length) {
-          state.promotions = payload.promotions;
-        }
-        if (payload.branding && typeof payload.branding === "object") {
-          state.branding = { ...state.branding, ...payload.branding };
-        }
-        if (payload.chatTheme && typeof payload.chatTheme === "object") {
-          state.chatTheme = { ...state.chatTheme, ...payload.chatTheme };
-        }
-        if (payload.pinnedMessages && typeof payload.pinnedMessages === "object") {
-          state.pinnedMessages = payload.pinnedMessages;
-        }
-        if (Array.isArray(payload.announcements)) {
-          state.announcements = payload.announcements;
-        }
-        if (Array.isArray(payload.messages)) {
-          state.messages = payload.messages;
-        }
-        if (Array.isArray(payload.notifications)) {
-          state.notifications = payload.notifications;
-        }
-        if (incomingUpdatedAt > 0) {
-          state.updatedAt = incomingUpdatedAt;
-        }
+        state.announcements = toArraySafe(globalPayload.announcements, []).map((a) => ({
+          ...a,
+          likes: toArraySafe(a?.likes, []),
+          comments: toArraySafe(a?.comments, [])
+        }));
 
-        hasInitialFirebaseSync = true;
-        saveState(false);
+        state.messages = toArraySafe(globalPayload.messages, []);
+        state.chat916 = toArraySafe(globalPayload.chat916, []);
+        state.notifications = toArraySafe(globalPayload.notifications, []);
+
+        const remoteStudents = toArraySafe(globalPayload.students, []);
+        state.students = remoteStudents.length > 0
+          ? mergeSeedStudentsIntoList(remoteStudents, state.courses[0]?.id || DEFAULT_COURSES[0].id)
+          : mergeSeedStudentsIntoList(state.students, state.courses[0]?.id || DEFAULT_COURSES[0].id);
+
+        state.notebooks = normalizeNotebooksMap(globalPayload.notebooks, state.courses);
+
+        if (remoteUpdatedAt > 0) {
+          state.updatedAt = remoteUpdatedAt;
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+        populateSchoolSelect();
+        applyPublicBranding();
+        updateNotificationBadges();
+        populateTeacherLoginSelect();
+        populatePromotionSelect();
 
         if (state.session.loggedIn) {
           renderSessionView();
-          const activeTabBtn = document.querySelector(".nav-tabs > .nav-tab.active");
-          if (activeTabBtn && activeTabBtn.dataset.tab) {
-            const t = activeTabBtn.dataset.tab;
-            if (t === "tab-cahier") renderCahierTab();
-            if (t === "tab-etudiants") renderStudentsTab();
-            if (t === "tab-annonces") renderAnnouncementsTab();
-            if (t === "tab-messages") renderMessagesTab();
-            if (t === "tab-notifications") renderNotificationsTab();
-            if (t === "tab-evolution") renderEvolutionTab();
-            if (t === "tab-admin") renderAdminTab();
-          }
-        } else {
-          populateTeacherLoginSelect();
-          applyPublicBranding();
+          const activeTab = document.querySelector(".nav-tabs > .nav-tab.active")?.dataset?.tab || "tab-cahier";
+          openTab(activeTab);
         }
-      } finally {
+        document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Live Firebase actif";
         isApplyingRemoteSnapshot = false;
-      }
-    }
-
-    window.appliquerDonneesRecuesDepuisFirebase = appliquerDonneesRecuesDepuisFirebase;
-
-    renderSessionView();
-  </script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    const firebaseConfig = {
-      databaseURL: "https://eduappel-default-rtdb.firebaseio.com/"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const globalRef = ref(db, "eduappel_cbk/global_state");
-
-    window.envoyerDonneesEduAppel = async function (section, data) {
-      try {
-        await set(globalRef, {
-          ...data,
-          lastSection: section,
-          syncedAt: Date.now()
-        });
-        return true;
-      } catch (err) {
-        console.error("Erreur Firebase set:", err);
-        return false;
-      }
-    };
-
-    onValue(globalRef, (snapshot) => {
-      const val = snapshot.val();
-      if (val && typeof window.appliquerDonneesRecuesDepuisFirebase === "function") {
-        window.appliquerDonneesRecuesDepuisFirebase(val);
       }
     });
   </script>
