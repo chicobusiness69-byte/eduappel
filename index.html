@@ -210,6 +210,14 @@
       border-radius: 999px;
     }
 
+    .verified-badge-svg {
+      display: inline-flex;
+      align-items: center;
+      vertical-align: -2px;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
+
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -763,14 +771,28 @@
     .reply-quote {
       border-left: 3px solid var(--accent);
       background: rgba(0, 210, 184, 0.08);
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 5px 8px;
+      border-radius: 7px;
       font-size: 0.75rem;
       color: #cbd5e1;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
-    /* ================= THÈME DE DISCUSSION (BOÎTE DE MESSAGES) ================= */
+    /* ================= MESSAGERIE MODERNE & THÈME DE DISCUSSION ================= */
+    .pinned-banner {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fde68a;
+      border-radius: 10px;
+      padding: 7px 11px;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
     .chat-box {
       --chat-bg: #07141d;
       --chat-wallpaper: radial-gradient(circle at 25% 20%, rgba(0, 168, 132, 0.24), transparent 55%), radial-gradient(circle at 80% 75%, rgba(24, 119, 242, 0.22), transparent 55%);
@@ -785,20 +807,21 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
-      max-height: 340px;
+      max-height: 360px;
+      min-height: 190px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
       margin-bottom: 10px;
     }
 
     .msg-bubble {
-      max-width: 82%;
+      max-width: 84%;
       padding: 9px 12px;
       border-radius: 12px;
       font-size: 0.86rem;
-      line-height: 1.38;
+      line-height: 1.4;
       color: #e9edef;
     }
 
@@ -814,6 +837,101 @@
       background: var(--bubble-in);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-top-left-radius: 4px;
+    }
+
+    .msg-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+      font-size: 0.72rem;
+    }
+
+    .msg-action-link {
+      background: rgba(0, 0, 0, 0.25);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      padding: 2px 6px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .msg-action-link:hover {
+      border-color: var(--accent);
+    }
+
+    .reaction-pills {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+
+    .reaction-pill {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 1px 7px;
+      font-size: 0.73rem;
+      cursor: pointer;
+    }
+
+    .composer-box {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+    }
+
+    .composer-textarea {
+      width: 100%;
+      min-height: 44px;
+      max-height: 220px;
+      resize: none;
+      overflow-y: auto;
+      background: var(--bg-input);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      transition: min-height 0.16s ease, border-color 0.16s ease;
+    }
+
+    .composer-textarea.expanded {
+      min-height: 105px;
+      border-color: var(--accent);
+    }
+
+    .composer-textarea.fullscreen-edit {
+      min-height: 175px;
+      border-color: var(--accent);
+    }
+
+    .composer-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .attachment-preview-chip {
+      background: rgba(0, 210, 184, 0.12);
+      border: 1px solid rgba(0, 210, 184, 0.35);
+      color: #d1fae5;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
     }
 
     .day-chip {
@@ -1448,7 +1566,10 @@
         <div class="card">
           <div class="card-title">
             <span>✉️ Messagerie Directe (Professeurs & Admin Général)</span>
-            <button type="button" class="btn btn-secondary btn-sm" id="btnOpenChatTheme">🎨 Thème de discussion</button>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <input type="text" id="chatSearchInput" placeholder="🔍 Rechercher message..." style="max-width:180px; padding:6px 10px; font-size:0.78rem;" />
+              <button type="button" class="btn btn-secondary btn-sm" id="btnOpenChatTheme">🎨 Thème de discussion</button>
+            </div>
           </div>
           <div class="two-col" style="align-items:start;">
             <div>
@@ -1459,13 +1580,65 @@
               <div class="card-title" style="margin-bottom:8px;">
                 <span id="activeChatPartnerTitle">Sélectionnez un contact</span>
               </div>
+
+              <div id="pinnedMessageBox" class="pinned-banner hidden">
+                <span id="pinnedMessageText"></span>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnUnpinMessage">✕</button>
+              </div>
+
               <div class="chat-box" id="chatMessagesBox">
                 <p class="student-meta">Choisissez un professeur ou l'Admin Général à gauche pour démarrer une discussion.</p>
               </div>
-              <form id="sendDirectMessageForm" style="display:flex; gap:8px;">
-                <input type="text" id="directMessageInput" placeholder="Écrire un message..." required />
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-              </form>
+
+              <div class="composer-box">
+                <div id="replyPreviewBanner" class="reply-quote hidden" style="display:flex; justify-content:space-between; align-items:center;">
+                  <span id="replyPreviewText"></span>
+                  <button type="button" class="msg-action-link" onclick="clearMessageReply()">✕</button>
+                </div>
+
+                <div id="editMessageBanner" class="pinned-banner hidden">
+                  <span>✏️ Modification du message en cours...</span>
+                  <button type="button" class="msg-action-link" onclick="cancelMessageEdit()">Annuler</button>
+                </div>
+
+                <div id="attachmentPreviewBanner" class="attachment-preview-chip hidden">
+                  <span id="attachmentPreviewLabel"></span>
+                  <button type="button" class="msg-action-link" onclick="clearPendingAttachment()">Retirer ✕</button>
+                </div>
+
+                <div id="voiceDraftBanner" class="attachment-preview-chip hidden">
+                  <span id="voiceDraftLabel"></span>
+                  <div style="display:flex; gap:6px;">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnSendVoiceDraft">Envoyer vocal</button>
+                    <button type="button" class="msg-action-link" onclick="clearVoiceDraft()">✕</button>
+                  </div>
+                </div>
+
+                <form id="sendDirectMessageForm">
+                  <textarea
+                    id="directMessageInput"
+                    class="composer-textarea"
+                    placeholder="Cliquez ici pour écrire un message..."
+                    rows="1"
+                  ></textarea>
+
+                  <div class="composer-toolbar">
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnExpandComposer" title="Agrandir ou réduire la zone d'écriture">⤢ Agrandir</button>
+                      <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;" title="Envoyer une photo">
+                        🖼️ Photo
+                        <input type="file" id="chatPhotoInput" accept="image/*" class="hidden" />
+                      </label>
+                      <label class="btn btn-secondary btn-sm" style="cursor:pointer; margin:0;" title="Envoyer un document">
+                        📎 Document
+                        <input type="file" id="chatDocInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.ppt,.pptx,.zip" class="hidden" />
+                      </label>
+                      <button type="button" class="btn btn-warning btn-sm" id="btnRecordVoice" title="Enregistrer un vocal compressé">🎙️ Vocal</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" id="btnSubmitDirectMsg">➤ Envoyer</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -1784,7 +1957,7 @@
     </div>
   </div>
 
-  <!-- MODAL : CODE ADMIN GÉNÉRAL (CHICO899) -->
+  <!-- MODAL : CODE ADMIN GÉNÉRAL -->
   <div class="modal-backdrop" id="adminCodeModal">
     <div class="modal-box">
       <div class="card-title">
@@ -2236,6 +2409,18 @@
 
     const LIGHT_DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><rect width='80' height='80' rx='40' fill='%2313294b'/><circle cx='40' cy='31' r='14' fill='%2300d2b8'/><ellipse cx='40' cy='64' rx='23' ry='14' fill='%2300d2b8'/></svg>";
 
+    const META_VERIFIED_BADGE_SVG = `<span class="verified-badge-svg" title="Compte vérifié"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.8L14.6 3.7L17.8 3.5L19.1 6.4L21.9 8.1L21.3 11.3L22.6 14.3L20.3 16.5L20 19.7L16.8 20.4L14.8 22.8L12 21.5L9.2 22.8L7.2 20.4L4 19.7L3.7 16.5L1.4 14.3L2.7 11.3L2.1 8.1L4.9 6.4L6.2 3.5L9.4 3.7L12 1.8Z" fill="#0084ff"/><path d="M8.3 12.2L10.8 14.7L16 9.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+
+    function isAccountVerified(actorId) {
+      if (actorId === ADMIN_ACCOUNT_ID) return true;
+      const c = (Array.isArray(state.courses) ? state.courses : []).find((x) => x.id === actorId);
+      return Boolean(c && c.verified);
+    }
+
+    function renderVerifiedBadge(actorId) {
+      return isAccountVerified(actorId) ? META_VERIFIED_BADGE_SVG : "";
+    }
+
     function normalizeTeacherVumisa(coursesList) {
       if (!Array.isArray(coursesList)) return [...DEFAULT_COURSES];
       return coursesList.map((c) => {
@@ -2356,6 +2541,7 @@
         courses: DEFAULT_COURSES.map((c) => ({
           ...c,
           blocked: false,
+          verified: false,
           phone: "",
           email: "",
           bio: "",
@@ -2376,6 +2562,7 @@
           bubbleOut: "#005c4b",
           luminosity: 1
         },
+        pinnedMessages: {},
         announcements: [],
         messages: [],
         notifications: [],
@@ -2397,6 +2584,15 @@
     let activeJustifTarget = null;
     let deferredInstallPrompt = null;
     let pendingDeleteCallback = null;
+
+    // États messagerie avancée
+    let msgReplyTarget = null;
+    let editingMessageId = null;
+    let pendingAttachment = null;
+    let pendingVoiceDraft = null;
+    let mediaRecorderInstance = null;
+    let voiceChunks = [];
+    let voiceStartTime = 0;
 
     function openDeleteConfirm(question, detail, onConfirm) {
       pendingDeleteCallback = onConfirm;
@@ -2480,6 +2676,7 @@
 
         const mergedCourses = normalizeTeacherVumisa(rawCourses.length ? rawCourses : init.courses).map((c) => ({
           blocked: false,
+          verified: false,
           phone: "",
           email: "",
           bio: "",
@@ -2511,6 +2708,7 @@
           promotions: promos.length ? promos : [...DEFAULT_PROMOTIONS],
           branding: { ...init.branding, ...(parsed.branding || {}) },
           chatTheme: { ...init.chatTheme, ...(parsed.chatTheme || {}) },
+          pinnedMessages: parsed.pinnedMessages && typeof parsed.pinnedMessages === "object" ? parsed.pinnedMessages : {},
           announcements: toArraySafe(parsed.announcements, []),
           messages: toArraySafe(parsed.messages, []),
           notifications: toArraySafe(parsed.notifications, []),
@@ -2544,6 +2742,7 @@
           promotions: state.promotions,
           branding: state.branding,
           chatTheme: state.chatTheme,
+          pinnedMessages: state.pinnedMessages,
           announcements: state.announcements,
           messages: state.messages,
           notifications: state.notifications,
@@ -2690,13 +2889,13 @@
       }
 
       if (isAdminGeneral()) {
-        titleEl.textContent = "🛡️ Menu Admin Général";
+        titleEl.textContent = `🛡️ Admin Général ${META_VERIFIED_BADGE_SVG}`;
         box.innerHTML = `
           <div class="menu-section-title">Administration Générale</div>
           <div class="menu-list">
             <button class="menu-item-btn" onclick="openTabFromMenu('tab-etudiants')">👨‍🎓 Base Étudiants (${state.students.length})</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-annonces')">📢 Publier une Annonce</button>
-            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Ajouter / Bloquer / Supprimer)</button>
+            <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-profs')">👨‍🏫 Professeurs (Badge / Bloquer / Supprimer)</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-promos')">🎓 Gérer les Promotions</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-branding')">🖼️ Logo APK, Photos & Lien APK</button>
             <button class="menu-item-btn" onclick="openAdminSubFromMenu('admin-sub-suivi')">📊 Suivi Global des Cours</button>
@@ -2716,10 +2915,10 @@
       }
 
       const c = getCurrentCourse();
-      titleEl.textContent = `☰ Menu — ${c.teacher}`;
+      titleEl.innerHTML = `☰ Menu — ${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)}`;
       box.innerHTML = `
         <div class="credits-box" style="margin-bottom:10px;">
-          <div style="font-weight:800;">${escapeHtml(c.teacher)}</div>
+          <div style="font-weight:800;">${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)}</div>
           <div class="student-meta">${escapeHtml(c.course)}</div>
         </div>
         <div class="menu-section-title">Services du Cours</div>
@@ -2769,7 +2968,7 @@
       if (!sel) return;
       const courses = Array.isArray(state.courses) ? state.courses : DEFAULT_COURSES;
       sel.innerHTML = courses
-        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
+        .map((c) => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.loginName)} — ${escapeHtml(c.course)}${c.verified ? " ✓" : ""}${c.blocked ? " [BLOQUÉ]" : ""}</option>`)
         .join("");
     }
 
@@ -2975,7 +3174,7 @@
         return `
           <button type="button" class="course-menu-item ${c.id === activeCourseId ? "active" : ""}" onclick="selectCourse('${c.id}')">
             <div style="font-weight:800; font-size:0.88rem;">${escapeHtml(c.course)}</div>
-            <div class="student-meta">${escapeHtml(c.teacher)} • ${nb.enrolledIds.length} étudiant(s)</div>
+            <div class="student-meta">${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)} • ${nb.enrolledIds.length} étudiant(s)</div>
           </button>
         `;
       }).join("");
@@ -2991,7 +3190,7 @@
           <div class="student-row">
             <div>
               <div class="student-name">${escapeHtml(c.course)}</div>
-              <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
+              <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> ${renderVerifiedBadge(c.id)} • Connexion : <code>${escapeHtml(c.loginName)}</code></div>
               <div class="student-meta">${nb.enrolledIds.length} étudiant(s) • ${nb.dates.length} date(s)</div>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -3067,7 +3266,6 @@
       showToast("Date mise à jour sur le cahier.");
     }
 
-    // Supprimer un étudiant déjà inscrit dans le cahier d'appel actif
     function removeStudentFromNotebook(studentId) {
       const nb = getCurrentNotebook();
       if (!nb.enrolledIds.includes(studentId)) return;
@@ -3243,8 +3441,8 @@
       const nb = getCurrentNotebook();
 
       document.getElementById("activeCourseTitle").textContent = course.course;
-      document.getElementById("activeCourseInfo").textContent =
-        `Professeur : ${course.teacher} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
+      document.getElementById("activeCourseInfo").innerHTML =
+        `Professeur : <strong>${escapeHtml(course.teacher)}</strong> ${renderVerifiedBadge(course.id)} • Moment actif : ${activeSlot === "before" ? "AVANT le cours" : "APRÈS le cours"}`;
 
       const scopedPool = getScopedStudents();
       const enrolledStudents = nb.enrolledIds
@@ -3382,7 +3580,7 @@
       }
     }
 
-    // ============ MODAL AJOUTER AU CAHIER (PROFESSEUR & ADMIN) ============
+    // ============ MODAL AJOUTER AU CAHIER ============
     const enrollModal = document.getElementById("enrollModal");
     let draftEnrollSet = new Set();
 
@@ -3489,7 +3687,7 @@
       showToast(`${nb.enrolledIds.length} étudiant(s) enregistré(s) dans le cahier.`);
     });
 
-    // ============ GESTION GLOBALE DES ÉTUDIANTS (ADMIN GÉNÉRAL) ============
+    // ============ GESTION GLOBALE DES ÉTUDIANTS ============
     document.getElementById("studentForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdminGeneral()) {
@@ -3752,11 +3950,11 @@
           <div class="comment-bubble" onclick="setReplyToComment('${ann.id}', '${c.id}', '${escapeHtml(c.authorName).replace(/'/g, "\\'")}', '${escapeHtml(c.text).replace(/'/g, "\\'")}')" title="Cliquez pour répondre à ce commentaire">
             ${c.replyTo ? `
               <div class="reply-quote">
-                ↩️ <strong>${escapeHtml(c.replyTo.authorName)}</strong> : ${escapeHtml(c.replyTo.text)}
+                ↩️ <strong>${escapeHtml(c.replyTo.authorName)}</strong> ${renderVerifiedBadge(c.replyTo.authorId)} : ${escapeHtml(c.replyTo.text)}
               </div>
             ` : ""}
             <div style="display:flex; justify-content:space-between; gap:8px;">
-              <strong style="font-size:0.8rem; color:var(--accent);">${escapeHtml(c.authorName)}</strong>
+              <strong style="font-size:0.8rem; color:var(--accent);">${escapeHtml(c.authorName)} ${renderVerifiedBadge(c.authorId)}</strong>
               <span class="student-meta">${escapeHtml(c.createdAt || "")} • ↩️ Répondre</span>
             </div>
             <div style="font-size:0.85rem; margin-top:2px;">${escapeHtml(c.text)}</div>
@@ -3768,7 +3966,7 @@
             <div class="announcement-header">
               <div>
                 <div style="font-weight:800; font-size:1rem;">📢 ${escapeHtml(ann.title)}</div>
-                <div class="student-meta">Publié par Admin Général • ${escapeHtml(ann.createdAt || "")}</div>
+                <div class="student-meta">Publié par Admin Général ${META_VERIFIED_BADGE_SVG} • ${escapeHtml(ann.createdAt || "")}</div>
               </div>
               <button type="button" class="btn ${likedByMe ? "btn-primary" : "btn-secondary"} btn-sm" onclick="toggleLikeAnnouncement('${ann.id}')">
                 ${likedByMe ? "❤️ Aimé" : "🤍 J'aime"} (${likes.length})
@@ -3955,6 +4153,313 @@
       showToast("Thème de discussion appliqué.");
     });
 
+    // ============ ZONE DE RÉDACTION AGRANDIE, VOCAL COMPRESSÉ, PHOTOS & DOCUMENTS ============
+    const composerTextarea = document.getElementById("directMessageInput");
+
+    function autoGrowComposer() {
+      composerTextarea.classList.add("expanded");
+      composerTextarea.style.height = "auto";
+      composerTextarea.style.height = Math.min(composerTextarea.scrollHeight, 210) + "px";
+    }
+
+    composerTextarea.addEventListener("focus", autoGrowComposer);
+    composerTextarea.addEventListener("input", autoGrowComposer);
+
+    document.getElementById("btnExpandComposer").addEventListener("click", () => {
+      composerTextarea.classList.toggle("fullscreen-edit");
+      composerTextarea.focus();
+      autoGrowComposer();
+    });
+
+    function clearMessageReply() {
+      msgReplyTarget = null;
+      document.getElementById("replyPreviewBanner").classList.add("hidden");
+    }
+
+    function setMessageReply(msgId) {
+      const msg = (state.messages || []).find((m) => m.id === msgId);
+      if (!msg) return;
+      msgReplyTarget = {
+        id: msg.id,
+        fromName: msg.fromName,
+        text: msg.text || (msg.attachment ? msg.attachment.name : "Message vocal")
+      };
+      document.getElementById("replyPreviewText").innerHTML =
+        `↩️ Réponse à <strong>${escapeHtml(msgReplyTarget.fromName)}</strong> : "${escapeHtml(msgReplyTarget.text)}"`;
+      document.getElementById("replyPreviewBanner").classList.remove("hidden");
+      composerTextarea.focus();
+      autoGrowComposer();
+    }
+
+    function startEditMessage(msgId) {
+      const msg = (state.messages || []).find((m) => m.id === msgId);
+      if (!msg || msg.fromId !== getCurrentActorId()) return;
+      editingMessageId = msg.id;
+      composerTextarea.value = msg.text || "";
+      document.getElementById("editMessageBanner").classList.remove("hidden");
+      document.getElementById("btnSubmitDirectMsg").textContent = "💾 Enregistrer";
+      composerTextarea.classList.add("fullscreen-edit");
+      composerTextarea.focus();
+      autoGrowComposer();
+    }
+
+    function cancelMessageEdit() {
+      editingMessageId = null;
+      composerTextarea.value = "";
+      composerTextarea.classList.remove("fullscreen-edit", "expanded");
+      composerTextarea.style.height = "";
+      document.getElementById("editMessageBanner").classList.add("hidden");
+      document.getElementById("btnSubmitDirectMsg").textContent = "➤ Envoyer";
+    }
+
+    function deleteDirectMessage(msgId) {
+      const msg = (state.messages || []).find((m) => m.id === msgId);
+      if (!msg || msg.fromId !== getCurrentActorId()) return;
+      openDeleteConfirm(
+        "Voulez-vous vraiment supprimer ce message ?",
+        "Le message sera retiré de la discussion.",
+        () => {
+          state.messages = state.messages.filter((m) => m.id !== msgId);
+          saveState(true);
+          renderMessagesTab();
+          showToast("Message supprimé.");
+        }
+      );
+    }
+
+    function toggleMessageReaction(msgId, emoji) {
+      const msg = (state.messages || []).find((m) => m.id === msgId);
+      if (!msg) return;
+      msg.reactions = msg.reactions && typeof msg.reactions === "object" ? msg.reactions : {};
+      const me = getCurrentActorId();
+      const users = Array.isArray(msg.reactions[emoji]) ? [...msg.reactions[emoji]] : [];
+      const idx = users.indexOf(me);
+      if (idx === -1) users.push(me);
+      else users.splice(idx, 1);
+      if (users.length) msg.reactions[emoji] = users;
+      else delete msg.reactions[emoji];
+      saveState(true);
+      renderMessagesTab();
+    }
+
+    function pinDirectMessage(msgId) {
+      const msg = (state.messages || []).find((m) => m.id === msgId);
+      if (!msg || !activeChatPartnerId) return;
+      const key = `${getCurrentActorId()}__${activeChatPartnerId}`;
+      state.pinnedMessages[key] = {
+        id: msg.id,
+        text: `${msg.fromName} : ${msg.text || (msg.attachment ? msg.attachment.name : "Vocal")}`
+      };
+      saveState(true);
+      renderMessagesTab();
+      showToast("Message épinglé en haut de la discussion.");
+    }
+
+    document.getElementById("btnUnpinMessage").addEventListener("click", () => {
+      const key = `${getCurrentActorId()}__${activeChatPartnerId}`;
+      delete state.pinnedMessages[key];
+      saveState(true);
+      renderMessagesTab();
+    });
+
+    function clearPendingAttachment() {
+      pendingAttachment = null;
+      document.getElementById("attachmentPreviewBanner").classList.add("hidden");
+    }
+
+    document.getElementById("chatPhotoInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxW = 720;
+          const ratio = img.width > maxW ? maxW / img.width : 1;
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * ratio);
+          canvas.height = Math.round(img.height * ratio);
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.65);
+          const sizeKb = Math.round((compressedDataUrl.length * 3) / 4 / 1024);
+          pendingAttachment = {
+            kind: "image",
+            name: file.name || "photo.jpg",
+            sizeKb,
+            dataUrl: compressedDataUrl
+          };
+          document.getElementById("attachmentPreviewLabel").textContent =
+            `🖼️ ${pendingAttachment.name} (~${sizeKb} Ko compressé)`;
+          document.getElementById("attachmentPreviewBanner").classList.remove("hidden");
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    });
+
+    document.getElementById("chatDocInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (file.size > 1500 * 1024) {
+        showToast("Document trop lourd pour la synchro directe (max ~1,5 Mo).");
+        e.target.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const sizeKb = Math.max(1, Math.round(file.size / 1024));
+        pendingAttachment = {
+          kind: "document",
+          name: file.name,
+          mime: file.type || "application/octet-stream",
+          sizeKb,
+          dataUrl: ev.target.result
+        };
+        document.getElementById("attachmentPreviewLabel").textContent =
+          `📎 ${pendingAttachment.name} (${sizeKb} Ko)`;
+        document.getElementById("attachmentPreviewBanner").classList.remove("hidden");
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    });
+
+    function clearVoiceDraft() {
+      pendingVoiceDraft = null;
+      document.getElementById("voiceDraftBanner").classList.add("hidden");
+    }
+
+    async function compressAudioBlobLowBitrate(blob) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return blob;
+        const arrayBuf = await blob.arrayBuffer();
+        const audioCtx = new AudioCtx({ sampleRate: 16000 });
+        const decoded = await audioCtx.decodeAudioData(arrayBuf);
+        const monoData = decoded.getChannelData(0);
+        const sampleRate = 16000;
+        const wavBuffer = encodeMonoWav16k(monoData, sampleRate);
+        await audioCtx.close();
+        return new Blob([wavBuffer], { type: "audio/wav" });
+      } catch {
+        return blob;
+      }
+    }
+
+    function encodeMonoWav16k(samples, sampleRate) {
+      const buffer = new ArrayBuffer(44 + samples.length * 2);
+      const view = new DataView(buffer);
+      const writeStr = (offset, str) => {
+        for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+      };
+      writeStr(0, "RIFF");
+      view.setUint32(4, 36 + samples.length * 2, true);
+      writeStr(8, "WAVE");
+      writeStr(12, "fmt ");
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 1, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeStr(36, "data");
+      view.setUint32(40, samples.length * 2, true);
+      let offset = 44;
+      for (let i = 0; i < samples.length; i++) {
+        const s = Math.max(-1, Math.min(1, samples[i]));
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+        offset += 2;
+      }
+      return buffer;
+    }
+
+    document.getElementById("btnRecordVoice").addEventListener("click", async () => {
+      const btn = document.getElementById("btnRecordVoice");
+      if (mediaRecorderInstance && mediaRecorderInstance.state === "recording") {
+        mediaRecorderInstance.stop();
+        return;
+      }
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showToast("Micro non disponible sur cet appareil.");
+        return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: { channelCount: 1, sampleRate: 16000, echoCancellation: true, noiseSuppression: true }
+        });
+        const options = { audioBitsPerSecond: 16000 };
+        mediaRecorderInstance = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+          ? new MediaRecorder(stream, { mimeType: "audio/webm;codecs=opus", ...options })
+          : new MediaRecorder(stream);
+
+        voiceChunks = [];
+        voiceStartTime = Date.now();
+        mediaRecorderInstance.ondataavailable = (ev) => {
+          if (ev.data && ev.data.size > 0) voiceChunks.push(ev.data);
+        };
+        mediaRecorderInstance.onstop = async () => {
+          stream.getTracks().forEach((t) => t.stop());
+          btn.textContent = "🎙️ Vocal";
+          const durationSec = Math.max(1, Math.round((Date.now() - voiceStartTime) / 1000));
+          const rawBlob = new Blob(voiceChunks, { type: mediaRecorderInstance.mimeType || "audio/webm" });
+          const finalBlob = rawBlob.size > 180000 ? await compressAudioBlobLowBitrate(rawBlob) : rawBlob;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const sizeKb = Math.max(1, Math.round(finalBlob.size / 1024));
+            pendingVoiceDraft = {
+              durationSec,
+              sizeKb,
+              audioUrl: ev.target.result
+            };
+            document.getElementById("voiceDraftLabel").textContent =
+              `🎙️ Vocal (${durationSec}s • ${sizeKb} Ko compressé)`;
+            document.getElementById("voiceDraftBanner").classList.remove("hidden");
+          };
+          reader.readAsDataURL(finalBlob);
+          mediaRecorderInstance = null;
+        };
+
+        mediaRecorderInstance.start();
+        btn.textContent = "⏹️ Stop";
+        showToast("Enregistrement vocal en cours...");
+      } catch {
+        showToast("Autorisation micro refusée ou indisponible.");
+      }
+    });
+
+    document.getElementById("btnSendVoiceDraft").addEventListener("click", () => {
+      if (!pendingVoiceDraft || !activeChatPartnerId) return;
+      const targets = getAllMessageTargets();
+      const partner = targets.find((t) => t.id === activeChatPartnerId);
+      if (!partner) return;
+      if (partner.blockMessages && !isAdminGeneral()) {
+        showToast("Impossible d'envoyer : ce professeur a bloqué ses messages.");
+        return;
+      }
+
+      const meId = getCurrentActorId();
+      const meName = getCurrentActorName();
+      state.messages.push({
+        id: "msg_" + Date.now(),
+        fromId: meId,
+        fromName: meName,
+        toId: partner.id,
+        text: "",
+        voice: { ...pendingVoiceDraft },
+        replyTo: msgReplyTarget ? { ...msgReplyTarget } : null,
+        reactions: {},
+        createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+      });
+
+      pushNotification(partner.id, `🎙️ Message vocal de ${meName}`, `Vocal (${pendingVoiceDraft.durationSec}s)`, "tab-messages");
+      clearVoiceDraft();
+      clearMessageReply();
+      saveState(true);
+      renderMessagesTab();
+    });
+
     function getAllMessageTargets() {
       const me = getCurrentActorId();
       const list = [];
@@ -3985,6 +4490,8 @@
       openTab("tab-messages");
     }
 
+    document.getElementById("chatSearchInput").addEventListener("input", renderMessagesTab);
+
     function renderMessagesTab() {
       const contactsBox = document.getElementById("messageContactsList");
       const targets = getAllMessageTargets();
@@ -3997,7 +4504,7 @@
           <div style="display:flex; align-items:center; gap:9px;">
             <img class="avatar" style="width:34px; height:34px;" src="${t.photo || makeDefaultAvatar()}" alt="" />
             <div>
-              <div>${escapeHtml(t.name)}</div>
+              <div>${escapeHtml(t.name)} ${renderVerifiedBadge(t.id)}</div>
               <div class="student-meta">${escapeHtml(t.sub)}</div>
             </div>
           </div>
@@ -4017,29 +4524,108 @@
         return;
       }
 
-      titleEl.textContent = `Discussion avec ${partner.name}${partner.blockMessages ? " (Messages bloqués)" : ""}`;
+      titleEl.innerHTML = `Discussion avec ${escapeHtml(partner.name)} ${renderVerifiedBadge(partner.id)}${partner.blockMessages ? " (Messages bloqués)" : ""}`;
       msgInput.disabled = partner.blockMessages && !isAdminGeneral();
       msgInput.placeholder = msgInput.disabled
         ? "Ce compte a bloqué la réception des messages."
-        : `Écrire un message à ${partner.name}...`;
+        : `Cliquez ici pour écrire à ${partner.name}...`;
+
+      const pinKey = `${getCurrentActorId()}__${partner.id}`;
+      const pinned = state.pinnedMessages?.[pinKey];
+      const pinBox = document.getElementById("pinnedMessageBox");
+      if (pinned && pinned.text) {
+        document.getElementById("pinnedMessageText").textContent = `📌 Épinglé : ${pinned.text}`;
+        pinBox.classList.remove("hidden");
+      } else {
+        pinBox.classList.add("hidden");
+      }
 
       const me = getCurrentActorId();
+      const searchQ = (document.getElementById("chatSearchInput")?.value || "").trim().toLowerCase();
       const messages = Array.isArray(state.messages) ? state.messages : [];
-      const convo = messages.filter((m) =>
-        (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me)
-      );
+      const convo = messages.filter((m) => {
+        const inChat = (m.fromId === me && m.toId === partner.id) || (m.fromId === partner.id && m.toId === me);
+        if (!inChat) return false;
+        if (!searchQ) return true;
+        const txtMatch = (m.text || "").toLowerCase().includes(searchQ);
+        const attMatch = (m.attachment?.name || "").toLowerCase().includes(searchQ);
+        return txtMatch || attMatch;
+      });
 
       if (convo.length === 0) {
         chatBox.innerHTML = `<p class="student-meta">Aucun message échangé pour l'instant.</p>`;
       } else {
         chatBox.innerHTML = convo.map((m) => {
           const mine = m.fromId === me;
+          const reactionsObj = m.reactions && typeof m.reactions === "object" ? m.reactions : {};
+          const reactionsHtml = Object.keys(reactionsObj).map((emoji) => {
+            const count = Array.isArray(reactionsObj[emoji]) ? reactionsObj[emoji].length : 0;
+            return count ? `<button type="button" class="reaction-pill" onclick="toggleMessageReaction('${m.id}', '${emoji}')">${emoji} ${count}</button>` : "";
+          }).join("");
+
+          let attachmentHtml = "";
+          if (m.attachment) {
+            if (m.attachment.kind === "image") {
+              attachmentHtml = `
+                <div style="margin-top:6px;">
+                  <img src="${m.attachment.dataUrl}" alt="${escapeHtml(m.attachment.name)}" style="max-width:210px; border-radius:10px; display:block; border:1px solid rgba(255,255,255,0.2);" />
+                  <div class="student-meta" style="margin-top:2px;">🖼️ ${escapeHtml(m.attachment.name)} • ${m.attachment.sizeKb || 0} Ko</div>
+                </div>
+              `;
+            } else {
+              attachmentHtml = `
+                <div style="margin-top:6px; background:rgba(0,0,0,0.24); padding:7px 9px; border-radius:9px;">
+                  <div style="font-weight:700; font-size:0.8rem;">📎 ${escapeHtml(m.attachment.name)}</div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                    <span class="student-meta">${m.attachment.sizeKb || 0} Ko</span>
+                    <a href="${m.attachment.dataUrl}" download="${escapeHtml(m.attachment.name)}" class="msg-action-link" style="text-decoration:none;">⬇️ Télécharger</a>
+                  </div>
+                </div>
+              `;
+            }
+          }
+
+          let voiceHtml = "";
+          if (m.voice && m.voice.audioUrl) {
+            voiceHtml = `
+              <div style="margin-top:6px;">
+                <audio controls src="${m.voice.audioUrl}" style="max-width:220px; height:32px;"></audio>
+                <div class="student-meta">🎙️ ${m.voice.durationSec || 1}s • ${m.voice.sizeKb || 0} Ko compressé</div>
+              </div>
+            `;
+          }
+
           return `
             <div class="msg-bubble ${mine ? "msg-mine" : "msg-theirs"}">
               <div style="font-size:0.72rem; color:var(--accent); font-weight:700; margin-bottom:2px;">
-                ${mine ? "Moi" : escapeHtml(m.fromName)} • ${escapeHtml(m.createdAt || "")}
+                ${mine ? "Moi" : `${escapeHtml(m.fromName)} ${renderVerifiedBadge(m.fromId)}`} • ${escapeHtml(m.createdAt || "")}${m.edited ? " • modifié" : ""}
               </div>
-              <div>${escapeHtml(m.text)}</div>
+
+              ${m.replyTo ? `
+                <div class="reply-quote">
+                  ↩️ <strong>${escapeHtml(m.replyTo.fromName)}</strong> : ${escapeHtml(m.replyTo.text)}
+                </div>
+              ` : ""}
+
+              ${m.text ? `<div>${escapeHtml(m.text)}</div>` : ""}
+              ${attachmentHtml}
+              ${voiceHtml}
+
+              ${reactionsHtml ? `<div class="reaction-pills">${reactionsHtml}</div>` : ""}
+
+              <div class="msg-actions-bar">
+                <button type="button" class="msg-action-link" onclick="setMessageReply('${m.id}')">↩️ Répondre</button>
+                <button type="button" class="msg-action-link" onclick="toggleMessageReaction('${m.id}', '👍')">👍</button>
+                <button type="button" class="msg-action-link" onclick="toggleMessageReaction('${m.id}', '❤️')">❤️</button>
+                <button type="button" class="msg-action-link" onclick="pinDirectMessage('${m.id}')">📌</button>
+                ${mine ? `<button type="button" class="msg-action-link" onclick="startEditMessage('${m.id}')">✏️</button>` : ""}
+                ${mine ? `<button type="button" class="msg-action-link" onclick="deleteDirectMessage('${m.id}')">🗑️</button>` : ""}
+              </div>
+
+              <div class="msg-meta">
+                <span>${escapeHtml(m.createdAt || "")}</span>
+                ${mine ? `<span style="color:#38bdf8;">✓✓</span>` : ""}
+              </div>
             </div>
           `;
         }).join("");
@@ -4059,9 +4645,29 @@
         return;
       }
 
-      const inp = document.getElementById("directMessageInput");
-      const text = inp.value.trim();
-      if (!text) return;
+      const text = composerTextarea.value.trim();
+
+      if (editingMessageId) {
+        if (!text) {
+          showToast("Le message ne peut pas être vide.");
+          return;
+        }
+        const targetMsg = state.messages.find((m) => m.id === editingMessageId);
+        if (targetMsg) {
+          targetMsg.text = text;
+          targetMsg.edited = true;
+        }
+        cancelMessageEdit();
+        saveState(true);
+        renderMessagesTab();
+        showToast("Message modifié.");
+        return;
+      }
+
+      if (!text && !pendingAttachment) {
+        showToast("Écrivez un message ou joignez une photo / un document.");
+        return;
+      }
 
       const meId = getCurrentActorId();
       const meName = getCurrentActorName();
@@ -4071,17 +4677,24 @@
         fromName: meName,
         toId: partner.id,
         text,
+        attachment: pendingAttachment ? { ...pendingAttachment } : null,
+        replyTo: msgReplyTarget ? { ...msgReplyTarget } : null,
+        reactions: {},
         createdAt: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
       });
 
       pushNotification(
         partner.id,
         `✉️ Nouveau message de ${meName}`,
-        text.slice(0, 90),
+        text ? text.slice(0, 90) : (pendingAttachment?.name || "Pièce jointe"),
         "tab-messages"
       );
 
-      inp.value = "";
+      composerTextarea.value = "";
+      composerTextarea.classList.remove("expanded", "fullscreen-edit");
+      composerTextarea.style.height = "";
+      clearPendingAttachment();
+      clearMessageReply();
       saveState(true);
       renderMessagesTab();
     });
@@ -4517,6 +5130,7 @@
         loginName,
         password,
         blocked: false,
+        verified: false,
         phone: "",
         email: "",
         bio: "",
@@ -4531,6 +5145,16 @@
       renderAdminTab();
       showToast(`Professeur ${teacherName} et cours ajoutés.`);
     });
+
+    function toggleVerifyTeacher(courseId) {
+      if (!isAdminGeneral()) return;
+      const c = state.courses.find((x) => x.id === courseId);
+      if (!c) return;
+      c.verified = !c.verified;
+      saveState(true);
+      renderAdminTab();
+      showToast(c.verified ? `Badge certifié attribué à ${c.teacher}.` : `Badge certifié retiré à ${c.teacher}.`);
+    }
 
     function toggleBlockTeacher(courseId) {
       if (!isAdminGeneral()) return;
@@ -4653,18 +5277,20 @@
                 ${currentSrc ? `<button type="button" class="btn btn-warning btn-sm" onclick="openCropWithSrc('${escapeHtml(currentSrc)}', { type: 'branding', key: '${s.key}' })">✂️ Réajuster</button>` : ""}
                 ${currentSrc ? `<button type="button" class="btn btn-danger btn-sm" onclick="clearBrandingSlot('${s.key}')">🗑️ Retirer</button>` : ""}
               </div>
-              <div style="display:flex; gap:6px; margin-top:8px;">
-                <input type="url" id="brandingUrl_${s.key}" placeholder="Ou coller un lien URL image (https://...)" value="${currentSrc.startsWith("http") ? escapeHtml(currentSrc) : ""}" />
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <input type="url" id="brandingUrl_${s.key}" placeholder="Ou collez un lien URL d'image (https://...)" value="${currentSrc.startsWith("http") ? escapeHtml(currentSrc) : ""}" />
                 <button type="button" class="btn btn-primary btn-sm" onclick="applyBrandingUrl('${s.key}')">Appliquer URL</button>
               </div>
             </div>
-            ${currentSrc ? `<img src="${escapeHtml(currentSrc)}" alt="" style="width:90px; height:64px; object-fit:cover; border-radius:10px; border:1px solid var(--accent);" />` : ""}
+            <div>
+              ${currentSrc
+                ? `<img src="${escapeHtml(currentSrc)}" alt="" style="width:74px; height:74px; object-fit:cover; border-radius:12px; border:1px solid var(--border);" />`
+                : `<div class="badge badge-pct">Aucun visuel</div>`
+              }
+            </div>
           </div>
         `;
       }).join("");
-
-      const apkInput = document.getElementById("adminApkUrlInput");
-      if (apkInput) apkInput.value = state.branding?.apkUrl || "";
     }
 
     document.getElementById("adminApkLinkForm").addEventListener("submit", (e) => {
@@ -4672,159 +5298,104 @@
       if (!isAdminGeneral()) return;
       state.branding.apkUrl = document.getElementById("adminApkUrlInput").value.trim();
       saveState(true);
-      showToast("Lien de téléchargement APK enregistré.");
+      showToast("Lien APK enregistré.");
     });
 
     function renderAdminTab() {
       if (!isAdminGeneral()) return;
 
-      const announcements = Array.isArray(state.announcements) ? state.announcements : [];
-      const annPreview = document.getElementById("adminAnnouncementsPreview");
-      annPreview.innerHTML = announcements.map((ann) => `
+      document.getElementById("adminApkUrlInput").value = state.branding?.apkUrl || "";
+      renderAdminBrandingSlots();
+
+      const annPrev = document.getElementById("adminAnnouncementsPreview");
+      const anns = Array.isArray(state.announcements) ? state.announcements : [];
+      annPrev.innerHTML = anns.map((a) => `
         <div class="student-row">
           <div>
-            <div class="student-name">${escapeHtml(ann.title)}</div>
-            <div class="student-meta">${escapeHtml(ann.body)}</div>
-            <div class="student-meta">❤️ ${toArraySafe(ann.likes, []).length} • 💬 ${toArraySafe(ann.comments, []).length} • ${escapeHtml(ann.createdAt || "")}</div>
+            <div class="student-name">📢 ${escapeHtml(a.title)}</div>
+            <div class="student-meta">${escapeHtml(a.body)} • ${escapeHtml(a.createdAt || "")}</div>
+            <div class="student-meta">❤️ ${(a.likes || []).length} j'aime • 💬 ${(a.comments || []).length} commentaire(s)</div>
           </div>
-          <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${ann.id}')">🗑️ Supprimer</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${a.id}')">🗑️</button>
         </div>
-      `).join("");
+      `).join("") || `<p class="student-meta">Aucune annonce publiée.</p>`;
 
-      const courses = Array.isArray(state.courses) ? state.courses : [];
-      const profList = document.getElementById("adminTeachersManageList");
-      profList.innerHTML = courses.map((c) => `
+      const profBox = document.getElementById("adminTeachersManageList");
+      profBox.innerHTML = (Array.isArray(state.courses) ? state.courses : []).map((c) => `
         <div class="student-row">
-          <div class="student-info">
-            <img class="avatar" src="${c.photo || makeDefaultAvatar()}" alt="" />
-            <div>
-              <div class="student-name">
-                ${escapeHtml(c.teacher)} — ${escapeHtml(c.course)}
-                ${c.blocked ? `<span class="badge badge-warn">🚫 Bloqué</span>` : `<span class="badge badge-pct">✅ Actif</span>`}
-              </div>
-              <div class="student-meta">Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
-              ${c.phone || c.email ? `<div class="student-meta">📞 ${escapeHtml(c.phone || "-")} • ✉️ ${escapeHtml(c.email || "-")}</div>` : ""}
+          <div>
+            <div class="student-name">
+              ${escapeHtml(c.teacher)} ${renderVerifiedBadge(c.id)} — ${escapeHtml(c.course)}
+              ${c.blocked ? `<span class="badge badge-warn">BLOQUÉ</span>` : `<span class="badge badge-pct">ACTIF</span>`}
             </div>
+            <div class="student-meta">Connexion : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
           </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')" title="Envoyer un message">✉️ Message</button>
-            <button type="button" class="btn btn-warning btn-sm" onclick="toggleBlockTeacher('${c.id}')">${c.blocked ? "🔓 Débloquer" : "🚫 Bloquer"}</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTeacherCourse('${c.id}')">🗑️ Supprimer</button>
+            <button type="button" class="btn ${c.verified ? "btn-primary" : "btn-secondary"} btn-sm" onclick="toggleVerifyTeacher('${c.id}')">
+              ${c.verified ? "☑️ Certifié" : "Badge Meta"}
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
+            <button type="button" class="btn btn-warning btn-sm" onclick="toggleBlockTeacher('${c.id}')">
+              ${c.blocked ? "Débloquer" : "Bloquer"}
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTeacherCourse('${c.id}')">🗑️</button>
           </div>
         </div>
       `).join("");
 
-      const promotions = Array.isArray(state.promotions) ? state.promotions : DEFAULT_PROMOTIONS;
-      const promoList = document.getElementById("adminPromotionsList");
-      promoList.innerHTML = promotions.map((p, idx) => `
+      const promoBox = document.getElementById("adminPromotionsList");
+      const promos = Array.isArray(state.promotions) ? state.promotions : [];
+      promoBox.innerHTML = promos.map((p, idx) => `
         <div class="student-row">
           <div class="student-name">🎓 ${escapeHtml(p)}</div>
           <button type="button" class="btn btn-danger btn-sm" onclick="deletePromotion(${idx})">🗑️</button>
         </div>
       `).join("");
 
-      renderAdminBrandingSlots();
+      const globalBox = document.getElementById("adminGlobalContainer");
+      const courses = Array.isArray(state.courses) ? state.courses : [];
+      const totalEnrolledAll = courses.reduce(
+        (acc, c) => acc + normalizeSingleNotebook(state.notebooks[c.id]).enrolledIds.length,
+        0
+      );
 
-      const allStudents = Array.isArray(state.students) ? state.students : [];
-      const container = document.getElementById("adminGlobalContainer");
-      container.innerHTML = courses.map((c) => {
-        const nb = normalizeSingleNotebook(state.notebooks[c.id]);
-        const enrolled = nb.enrolledIds.map((id) => allStudents.find((s) => s.id === id)).filter(Boolean);
-
-        const rowsHtml = enrolled.length === 0
-          ? `<p class="student-meta">Aucun étudiant inscrit dans ce cahier.</p>`
-          : enrolled.map((st) => {
-              const pct = computeStudentCoursePct(nb, st.id);
-              let presentPts = 0, latePts = 0;
-              nb.dates.forEach((_, idx) => {
-                const cell = nb.marks[idx]?.[st.id];
-                if (cell?.before === "present") presentPts++;
-                if (cell?.after === "present") presentPts++;
-                if (isCellLate(cell)) latePts++;
-              });
-              return `
-                <div class="student-row" style="margin-bottom:6px;">
-                  <div>
-                    <div class="student-name">${escapeHtml(st.name)} <span class="student-meta">(${escapeHtml(st.matricule)})</span></div>
-                    <div class="student-meta">Points présence : <strong>${presentPts}</strong> • Retards : <strong>${latePts}</strong></div>
-                  </div>
-                  <span class="badge ${pct >= 75 ? "badge-pct" : "badge-warn"}">${pct}%</span>
-                </div>
-              `;
-            }).join("");
-
-        return `
-          <div class="card" style="background:var(--bg-card-2); margin-bottom:12px;">
-            <div class="card-title">
+      globalBox.innerHTML = `
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-val">${courses.length}</div><div class="stat-lbl">Cours & Professeurs</div></div>
+          <div class="stat-box"><div class="stat-val">${state.students.length}</div><div class="stat-lbl">Étudiants (Base globale)</div></div>
+          <div class="stat-box"><div class="stat-val">${totalEnrolledAll}</div><div class="stat-lbl">Inscriptions cahiers</div></div>
+          <div class="stat-box"><div class="stat-val">${anns.length}</div><div class="stat-lbl">Annonces publiées</div></div>
+        </div>
+        ${courses.map((c) => {
+          const nb = normalizeSingleNotebook(state.notebooks[c.id]);
+          return `
+            <div class="student-row">
               <div>
-                <div>${escapeHtml(c.course)}</div>
-                <div class="student-meta">Prof : <strong>${escapeHtml(c.teacher)}</strong> • Login : <code>${escapeHtml(c.loginName)}</code> • Mot de passe : <code>${escapeHtml(c.password)}</code></div>
+                <div class="student-name">${escapeHtml(c.course)}</div>
+                <div class="student-meta">Professeur : <strong>${escapeHtml(c.teacher)}</strong> ${renderVerifiedBadge(c.id)} • ${nb.enrolledIds.length} étudiant(s) • ${nb.dates.length} date(s)</div>
               </div>
-              <div style="display:flex; gap:6px;">
-                <button type="button" class="btn btn-secondary btn-sm" onclick="openDirectChatWith('${c.id}')">✉️ Message</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir cahier</button>
-              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="selectCourse('${c.id}')">Ouvrir le cahier</button>
             </div>
-            ${rowsHtml}
-          </div>
-        `;
-      }).join("");
+          `;
+        }).join("")}
+      `;
     }
 
-    populateTeacherLoginSelect();
-    populatePromotionSelect();
-    applyPublicBranding();
-    applyChatThemeToBox();
-    renderSessionView();
-
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
-    }
-  </script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    const app = initializeApp({
-      databaseURL: "https://eduappel-live-default-rtdb.firebaseio.com/"
-    });
-    const db = getDatabase(app);
-
-    window.envoyerDonneesEduAppel = async function(classeId, donnees) {
-      try {
-        await set(ref(db, `eduappel/${classeId}`), {
-          ...donnees,
-          updatedAt: Number(donnees?.updatedAt || Date.now())
-        });
-        return true;
-      } catch (err) {
-        console.error("Erreur synchro Firebase:", err);
-        return false;
-      }
-    };
-
-    window.ecouterEduAppelEnDirect = function(callback) {
-      return onValue(ref(db, "eduappel"), (snapshot) => {
-        callback(snapshot.val() || {});
-      });
-    };
-
-    window.ecouterEduAppelEnDirect((remoteData) => {
-      const globalPayload = remoteData?.global_state;
-      if (!globalPayload || typeof globalPayload !== "object") return;
-
-      const remoteUpdatedAt = Number(globalPayload.updatedAt || 0);
+    function appliquerDonneesRecuesDepuisFirebase(payload) {
+      if (!payload || typeof payload !== "object") return;
+      const incomingUpdatedAt = Number(payload.updatedAt || 0);
       const localUpdatedAt = Number(state.updatedAt || 0);
 
-      if (!hasInitialFirebaseSync || remoteUpdatedAt > localUpdatedAt) {
-        hasInitialFirebaseSync = true;
-        isApplyingRemoteSnapshot = true;
+      if (hasInitialFirebaseSync && incomingUpdatedAt > 0 && localUpdatedAt > incomingUpdatedAt + 1500) {
+        return;
+      }
 
-        const remoteCourses = toArraySafe(globalPayload.courses, []);
-        if (remoteCourses.length) {
-          state.courses = normalizeTeacherVumisa(remoteCourses).map((c) => ({
+      isApplyingRemoteSnapshot = true;
+      try {
+        if (Array.isArray(payload.courses) && payload.courses.length) {
+          state.courses = normalizeTeacherVumisa(payload.courses).map((c) => ({
             blocked: false,
+            verified: false,
             phone: "",
             email: "",
             bio: "",
@@ -4834,53 +5405,107 @@
           }));
         }
 
-        const remotePromos = toArraySafe(globalPayload.promotions, []);
-        if (remotePromos.length) {
-          state.promotions = remotePromos;
+        const rawStudents = toArraySafe(payload.students, null);
+        if (rawStudents !== null) {
+          const mappedRemoteStudents = rawStudents.map((st) => ({
+            ...st,
+            courseId: st.courseId || (state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id,
+            photo: st.photo || LIGHT_DEFAULT_AVATAR
+          }));
+          state.students = mappedRemoteStudents.length > 0
+            ? mergeSeedStudentsIntoList(mappedRemoteStudents, (state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id)
+            : buildSeedStudents((state.courses[0] && state.courses[0].id) || DEFAULT_COURSES[0].id);
         }
 
-        if (globalPayload.branding && typeof globalPayload.branding === "object") {
-          state.branding = { ...state.branding, ...globalPayload.branding };
+        if (payload.notebooks && typeof payload.notebooks === "object") {
+          state.notebooks = normalizeNotebooksMap(payload.notebooks, state.courses);
         }
 
-        if (globalPayload.chatTheme && typeof globalPayload.chatTheme === "object") {
-          state.chatTheme = { ...state.chatTheme, ...globalPayload.chatTheme };
+        if (Array.isArray(payload.promotions) && payload.promotions.length) {
+          state.promotions = payload.promotions;
+        }
+        if (payload.branding && typeof payload.branding === "object") {
+          state.branding = { ...state.branding, ...payload.branding };
+        }
+        if (payload.chatTheme && typeof payload.chatTheme === "object") {
+          state.chatTheme = { ...state.chatTheme, ...payload.chatTheme };
+        }
+        if (payload.pinnedMessages && typeof payload.pinnedMessages === "object") {
+          state.pinnedMessages = payload.pinnedMessages;
+        }
+        if (Array.isArray(payload.announcements)) {
+          state.announcements = payload.announcements;
+        }
+        if (Array.isArray(payload.messages)) {
+          state.messages = payload.messages;
+        }
+        if (Array.isArray(payload.notifications)) {
+          state.notifications = payload.notifications;
+        }
+        if (incomingUpdatedAt > 0) {
+          state.updatedAt = incomingUpdatedAt;
         }
 
-        state.announcements = toArraySafe(globalPayload.announcements, []).map((a) => ({
-          ...a,
-          likes: toArraySafe(a?.likes, []),
-          comments: toArraySafe(a?.comments, [])
-        }));
-
-        state.messages = toArraySafe(globalPayload.messages, []);
-        state.notifications = toArraySafe(globalPayload.notifications, []);
-
-        const remoteStudents = toArraySafe(globalPayload.students, []);
-        state.students = remoteStudents.length > 0
-          ? mergeSeedStudentsIntoList(remoteStudents, state.courses[0]?.id || DEFAULT_COURSES[0].id)
-          : mergeSeedStudentsIntoList(state.students, state.courses[0]?.id || DEFAULT_COURSES[0].id);
-
-        state.notebooks = normalizeNotebooksMap(globalPayload.notebooks, state.courses);
-
-        if (remoteUpdatedAt > 0) {
-          state.updatedAt = remoteUpdatedAt;
-        }
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-
-        applyPublicBranding();
-        applyChatThemeToBox();
-        updateNotificationBadges();
-        populateTeacherLoginSelect();
-        populatePromotionSelect();
+        hasInitialFirebaseSync = true;
+        saveState(false);
 
         if (state.session.loggedIn) {
           renderSessionView();
-          const activeTab = document.querySelector(".nav-tabs > .nav-tab.active")?.dataset?.tab || "tab-cahier";
-          openTab(activeTab);
+          const activeTabBtn = document.querySelector(".nav-tabs > .nav-tab.active");
+          if (activeTabBtn && activeTabBtn.dataset.tab) {
+            const t = activeTabBtn.dataset.tab;
+            if (t === "tab-cahier") renderCahierTab();
+            if (t === "tab-etudiants") renderStudentsTab();
+            if (t === "tab-annonces") renderAnnouncementsTab();
+            if (t === "tab-messages") renderMessagesTab();
+            if (t === "tab-notifications") renderNotificationsTab();
+            if (t === "tab-evolution") renderEvolutionTab();
+            if (t === "tab-admin") renderAdminTab();
+          }
+        } else {
+          populateTeacherLoginSelect();
+          applyPublicBranding();
         }
-        document.getElementById("syncStatusLabel").textContent = "Équipe CBK • Live Firebase actif";
+      } finally {
         isApplyingRemoteSnapshot = false;
+      }
+    }
+
+    window.appliquerDonneesRecuesDepuisFirebase = appliquerDonneesRecuesDepuisFirebase;
+
+    renderSessionView();
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      databaseURL: "https://eduappel-default-rtdb.firebaseio.com/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const globalRef = ref(db, "eduappel_cbk/global_state");
+
+    window.envoyerDonneesEduAppel = async function (section, data) {
+      try {
+        await set(globalRef, {
+          ...data,
+          lastSection: section,
+          syncedAt: Date.now()
+        });
+        return true;
+      } catch (err) {
+        console.error("Erreur Firebase set:", err);
+        return false;
+      }
+    };
+
+    onValue(globalRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val && typeof window.appliquerDonneesRecuesDepuisFirebase === "function") {
+        window.appliquerDonneesRecuesDepuisFirebase(val);
       }
     });
   </script>
